@@ -10,6 +10,7 @@ import Statement from '../components/Statement';
 import Gallery from '../components/Gallery';
 import Reviews from '../components/Reviews';
 import Contacts from '../components/Contacts';
+import MenuVideoIntro from '../components/menu/MenuVideoIntro';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,6 +39,7 @@ const Home = () => {
             <Gallery />
             <Chef />
             <Features />
+            <MenuVideoIntro />
             <Reviews />
             <Contacts />
         </React.Fragment>

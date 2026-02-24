@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import MenuIntro from './MenuIntro';
-import MenuVideoIntro from './MenuVideoIntro';
+
 import MenuHorizontalScroll from './MenuHorizontalScroll';
 import MenuHighlight from './MenuHighlight';
 
@@ -59,7 +59,6 @@ const MenuSection = () => {
         </>
       )}
 
-      <MenuVideoIntro />
     </div>
   );
 };

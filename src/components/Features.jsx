@@ -32,7 +32,7 @@ const Features = () => {
                     scrollTrigger: {
                         trigger: sectionRef.current,
                         start: 'top top',
-                        end: '+=2500',
+                        end: '+=1800',
                         pin: true,
                         scrub: 1,
                         anticipatePin: 1,
