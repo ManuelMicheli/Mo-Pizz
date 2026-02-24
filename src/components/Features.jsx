@@ -23,7 +23,7 @@ const Features = () => {
                     { y: 50, opacity: 0 },
                     {
                         y: 0, opacity: 1, duration: 0.8, stagger: 0.06, ease: 'power3.out',
-                        scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' },
+                        scrollTrigger: { trigger: sectionRef.current, start: 'top 75%', refreshPriority: -1 },
                     }
                 );
 
@@ -36,6 +36,7 @@ const Features = () => {
                         pin: true,
                         scrub: 1,
                         anticipatePin: 1,
+                        refreshPriority: -1,
                         onUpdate: (self) => {
                             if (progressRef.current) {
                                 progressRef.current.style.transform = `scaleX(${self.progress})`;
@@ -97,7 +98,7 @@ const Features = () => {
     const positions = ['0%', '25%', '50%', '75%', '100%'];
 
     return (
-        <section id="features" ref={sectionRef} className="py-24 sm:py-32 bg-charcoal relative overflow-hidden">
+        <section id="features" ref={sectionRef} className="py-24 sm:py-32 bg-charcoal relative overflow-hidden z-10">
             <div className="w-full flex flex-col">
                 {/* Header */}
                 <div className="flex flex-col items-center text-center mb-16 px-6 sm:px-12">
@@ -112,7 +113,7 @@ const Features = () => {
                     </p>
                 </div>
 
-                {/* 5-Card Accordion with Flip */}
+                {/* 5-Card Flip */}
                 <div className="w-full px-4 sm:px-8 md:px-12 max-w-[1400px] mx-auto">
                     <div
                         ref={trackRef}
@@ -129,25 +130,25 @@ const Features = () => {
                                     className="flip-inner absolute inset-0"
                                     style={{ transformStyle: 'preserve-3d' }}
                                 >
-                                    {/* Front — B&W */}
+                                    {/* Front — B&W spezzettata */}
                                     <div
                                         className="absolute inset-0"
                                         style={{ backfaceVisibility: 'hidden' }}
                                     >
                                         <div
-                                            className="absolute inset-0 bg-no-repeat accordion-bg"
+                                            className="absolute inset-0 bg-no-repeat accordion-front"
                                             style={{ backgroundImage: `url('/images/wmremove-transformed.png')` }}
                                             data-pos={pos}
                                         />
                                     </div>
 
-                                    {/* Back — Color */}
+                                    {/* Back — Color spezzettata */}
                                     <div
                                         className="absolute inset-0"
                                         style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
                                     >
                                         <div
-                                            className="absolute inset-0 bg-no-repeat accordion-bg"
+                                            className="absolute inset-0 bg-no-repeat accordion-back"
                                             style={{ backgroundImage: `url('/images/wmremove-transformed (43).png')` }}
                                             data-pos={pos}
                                         />
@@ -170,18 +171,18 @@ const Features = () => {
 
                     <style>{`
                         @media (min-width: 768px) {
-                            .accordion-bg[data-pos="0%"]   { background-size: 500% 100%; background-position: 0% center; }
-                            .accordion-bg[data-pos="25%"]  { background-size: 500% 100%; background-position: 25% center; }
-                            .accordion-bg[data-pos="50%"]  { background-size: 500% 100%; background-position: 50% center; }
-                            .accordion-bg[data-pos="75%"]  { background-size: 500% 100%; background-position: 75% center; }
-                            .accordion-bg[data-pos="100%"] { background-size: 500% 100%; background-position: 100% center; }
+                            .accordion-front[data-pos="0%"],   .accordion-back[data-pos="0%"]   { background-size: 500% 100%; background-position: 0% center; }
+                            .accordion-front[data-pos="25%"],  .accordion-back[data-pos="25%"]  { background-size: 500% 100%; background-position: 25% center; }
+                            .accordion-front[data-pos="50%"],  .accordion-back[data-pos="50%"]  { background-size: 500% 100%; background-position: 50% center; }
+                            .accordion-front[data-pos="75%"],  .accordion-back[data-pos="75%"]  { background-size: 500% 100%; background-position: 75% center; }
+                            .accordion-front[data-pos="100%"], .accordion-back[data-pos="100%"] { background-size: 500% 100%; background-position: 100% center; }
                         }
                         @media (max-width: 767px) {
-                            .accordion-bg[data-pos="0%"]   { background-size: 100% 500%; background-position: center 0%; }
-                            .accordion-bg[data-pos="25%"]  { background-size: 100% 500%; background-position: center 25%; }
-                            .accordion-bg[data-pos="50%"]  { background-size: 100% 500%; background-position: center 50%; }
-                            .accordion-bg[data-pos="75%"]  { background-size: 100% 500%; background-position: center 75%; }
-                            .accordion-bg[data-pos="100%"] { background-size: 100% 500%; background-position: center 100%; }
+                            .accordion-front[data-pos="0%"],   .accordion-back[data-pos="0%"]   { background-size: 100% 500%; background-position: center 0%; }
+                            .accordion-front[data-pos="25%"],  .accordion-back[data-pos="25%"]  { background-size: 100% 500%; background-position: center 25%; }
+                            .accordion-front[data-pos="50%"],  .accordion-back[data-pos="50%"]  { background-size: 100% 500%; background-position: center 50%; }
+                            .accordion-front[data-pos="75%"],  .accordion-back[data-pos="75%"]  { background-size: 100% 500%; background-position: center 75%; }
+                            .accordion-front[data-pos="100%"], .accordion-back[data-pos="100%"] { background-size: 100% 500%; background-position: center 100%; }
                         }
                     `}</style>
                 </div>

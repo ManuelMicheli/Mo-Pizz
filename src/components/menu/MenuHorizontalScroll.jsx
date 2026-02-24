@@ -109,6 +109,7 @@ const MenuHorizontalScroll = () => {
           scrub: 0.5,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          refreshPriority: 1,
           onUpdate: (self) => {
             const idx = Math.round(self.progress * (panels.length - 1));
             setActiveIndex(idx);
@@ -122,6 +123,9 @@ const MenuHorizontalScroll = () => {
       });
 
       scrollTriggerRef.current = scrollTween.scrollTrigger;
+
+      // Refresh all triggers so downstream pins account for this spacer
+      requestAnimationFrame(() => ScrollTrigger.refresh());
 
       // Parallax on hero images
       panels.forEach((panel) => {
@@ -274,7 +278,7 @@ const MenuHorizontalScroll = () => {
         )}
       </div>
 
-      <section ref={containerRef} className="relative bg-charcoal overflow-hidden">
+      <section ref={containerRef} className="relative bg-charcoal overflow-hidden z-20">
         {/* Progress bar */}
         <div className="absolute top-0 left-0 right-0 z-30 h-[3px] bg-white/5">
           <div
