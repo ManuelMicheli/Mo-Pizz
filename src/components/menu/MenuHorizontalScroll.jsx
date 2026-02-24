@@ -34,7 +34,7 @@ const MenuHorizontalScroll = () => {
   const hoverImgRef = useRef(null);
   const imgXTo = useRef(null);
   const imgYTo = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
   const scrollTriggerRef = useRef(null);
 
   // Navigate to a specific category panel

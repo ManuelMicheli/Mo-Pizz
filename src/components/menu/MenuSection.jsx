@@ -16,13 +16,14 @@ const MenuSection = () => {
 
   const handleCtaClick = useCallback(() => {
     if (menuUnlocked) {
-      // Close: kill all ScrollTriggers first to release pins, then unmount
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      // Close: cancel any scroll tween, unmount menu, then refresh triggers
       gsap.killTweensOf(window);
-      window.scrollTo({ top: heroRef.current?.offsetTop ?? 0, behavior: 'instant' });
       setMenuUnlocked(false);
       requestAnimationFrame(() => {
-        setTimeout(() => ScrollTrigger.refresh(), 50);
+        setTimeout(() => {
+          window.scrollTo({ top: heroRef.current?.offsetTop ?? 0, behavior: 'instant' });
+          ScrollTrigger.refresh();
+        }, 80);
       });
     } else {
       // Open: mount menu, then scroll into it

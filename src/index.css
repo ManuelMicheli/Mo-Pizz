@@ -82,6 +82,11 @@ html.lenis, html.lenis body {
   scroll-behavior: auto !important;
 }
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;

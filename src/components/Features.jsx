@@ -13,7 +13,7 @@ const Features = () => {
         let ctx = gsap.context(() => {
             const mm = gsap.matchMedia();
 
-            // ── Desktop: pinned horizontal scroll + flip ──
+            // ── Desktop: pinned scroll with sequential card flip + pauses ──
             mm.add('(min-width: 768px)', () => {
                 const flips = gsap.utils.toArray('.flip-inner');
                 const track = trackRef.current;
@@ -27,14 +27,14 @@ const Features = () => {
                     }
                 );
 
-                // Pinned timeline
+                // Pinned timeline — 2500px scroll for smooth sequential flips
                 const tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: sectionRef.current,
                         start: 'top top',
-                        end: '+=900',
+                        end: '+=2500',
                         pin: true,
-                        scrub: 0.5,
+                        scrub: 1,
                         anticipatePin: 1,
                         onUpdate: (self) => {
                             if (progressRef.current) {
@@ -44,20 +44,24 @@ const Features = () => {
                     },
                 });
 
-                // Subtle horizontal slide of the card group
+                // Subtle horizontal slide spanning entire timeline
                 tl.fromTo(track,
-                    { xPercent: 1.5 },
-                    { xPercent: -1.5, duration: 1, ease: 'none' },
+                    { xPercent: 1 },
+                    { xPercent: -1, duration: 1, ease: 'none' },
                     0
                 );
 
-                // Flip each card one by one across the timeline
+                // Flip cards one by one with ~0.5s perceived pause between each
+                const flipDur = 0.07;   // fast clean flip
+                const stride  = 0.17;   // spacing: flip + pause
+                const startAt = 0.08;   // initial hold showing all B&W
+
                 flips.forEach((flip, i) => {
                     tl.to(flip, {
                         rotateY: 180,
-                        duration: 0.2,
+                        duration: flipDur,
                         ease: 'power2.inOut',
-                    }, 0.05 + i * 0.16);
+                    }, startAt + i * stride);
                 });
             });
 
@@ -112,13 +116,13 @@ const Features = () => {
                 <div className="w-full px-4 sm:px-8 md:px-12 max-w-[1400px] mx-auto">
                     <div
                         ref={trackRef}
-                        className="flex flex-col md:flex-row md:h-[600px] w-full gap-1.5 sm:gap-2 md:gap-4"
+                        className="flex flex-col md:flex-row md:h-[600px] w-full gap-1 sm:gap-1.5 md:gap-4"
                         style={{ willChange: 'transform' }}
                     >
                         {positions.map((pos, i) => (
                             <div
                                 key={i}
-                                className="feature-card relative overflow-hidden rounded-2xl sm:rounded-[2rem] md:rounded-[3rem] h-28 sm:h-32 md:h-auto"
+                                className="feature-card relative overflow-hidden rounded-2xl sm:rounded-[2rem] md:rounded-[3rem] h-44 sm:h-52 md:h-auto"
                                 style={{ flex: 1, perspective: '1200px' }}
                             >
                                 <div
