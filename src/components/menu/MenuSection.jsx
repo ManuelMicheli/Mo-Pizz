@@ -58,14 +58,12 @@ const MenuSection = () => {
         </>
       )}
 
-      {/* Full-width image 46 — same height as MenuIntro, half-hero vertical padding */}
-      <div className="w-full bg-charcoal py-[25dvh]">
-        <img
-          src="/images/wmremove-transformed (46).png"
-          alt=""
-          className="w-full h-[50dvh] object-cover"
-        />
-      </div>
+      {/* Full-width image 46 — flush with MenuIntro above and video below */}
+      <img
+        src="/images/wmremove-transformed (46).png"
+        alt=""
+        className="w-full h-[50dvh] object-cover block"
+      />
 
       <MenuVideoIntro />
     </div>
