@@ -28,14 +28,17 @@ const Navbar = () => {
             savedScrollY.current = window.scrollY;
             document.body.classList.add('menu-open');
             document.body.style.top = `-${savedScrollY.current}px`;
+            document.documentElement.style.overscrollBehavior = 'none';
         } else {
             document.body.classList.remove('menu-open');
             document.body.style.top = '';
+            document.documentElement.style.overscrollBehavior = '';
             window.scrollTo(0, savedScrollY.current);
         }
         return () => {
             document.body.classList.remove('menu-open');
             document.body.style.top = '';
+            document.documentElement.style.overscrollBehavior = '';
         };
     }, [isMobileMenuOpen]);
 

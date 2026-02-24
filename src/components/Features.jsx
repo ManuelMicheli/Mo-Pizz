@@ -13,29 +13,29 @@ const Features = () => {
         let ctx = gsap.context(() => {
             const mm = gsap.matchMedia();
 
-            // ── Desktop: pinned scroll with sequential card flip + pauses ──
+            // ── Desktop: horizontal scroll with pinning + sequential card flip ──
             mm.add('(min-width: 768px)', () => {
-                const flips = gsap.utils.toArray('.flip-inner');
                 const track = trackRef.current;
+                const cards = gsap.utils.toArray('.feature-card');
+                const flips = gsap.utils.toArray('.flip-inner');
 
-                // Entrance fade
-                gsap.fromTo('.feature-card',
-                    { y: 50, opacity: 0 },
-                    {
-                        y: 0, opacity: 1, duration: 0.8, stagger: 0.06, ease: 'power3.out',
-                        scrollTrigger: { trigger: sectionRef.current, start: 'top 75%', refreshPriority: -1 },
-                    }
-                );
+                if (!track || cards.length === 0) return;
 
-                // Pinned timeline — 2500px scroll for smooth sequential flips
-                const tl = gsap.timeline({
+                // Calculate total scroll width
+                const totalScrollWidth = track.scrollWidth - window.innerWidth;
+
+                // Horizontal scroll tween — pin section and translateX the track
+                const scrollTween = gsap.to(track, {
+                    x: -totalScrollWidth,
+                    ease: 'none',
                     scrollTrigger: {
                         trigger: sectionRef.current,
                         start: 'top top',
-                        end: '+=1800',
+                        end: () => `+=${totalScrollWidth}`,
                         pin: true,
-                        scrub: 1,
+                        scrub: 0.8,
                         anticipatePin: 1,
+                        invalidateOnRefresh: true,
                         refreshPriority: -1,
                         onUpdate: (self) => {
                             if (progressRef.current) {
@@ -45,46 +45,53 @@ const Features = () => {
                     },
                 });
 
-                // Subtle horizontal slide spanning entire timeline
-                tl.fromTo(track,
-                    { xPercent: 1 },
-                    { xPercent: -1, duration: 1, ease: 'none' },
-                    0
-                );
-
-                // Flip cards one by one with ~0.5s perceived pause between each
-                const flipDur = 0.07;   // fast clean flip
-                const stride  = 0.17;   // spacing: flip + pause
-                const startAt = 0.08;   // initial hold showing all B&W
-
-                flips.forEach((flip, i) => {
-                    tl.to(flip, {
+                // Flip each card when it enters the viewport via containerAnimation
+                flips.forEach((flip) => {
+                    const card = flip.closest('.feature-card');
+                    gsap.to(flip, {
                         rotateY: 180,
-                        duration: flipDur,
+                        duration: 0.5,
                         ease: 'power2.inOut',
-                    }, startAt + i * stride);
+                        scrollTrigger: {
+                            trigger: card,
+                            containerAnimation: scrollTween,
+                            start: 'left 60%',
+                            end: 'left 30%',
+                            scrub: 0.8,
+                        },
+                    });
                 });
             });
 
-            // ── Mobile: scroll-triggered entrance + sequential flip ──
+            // ── Mobile: individual entrance + individual flip ──
             mm.add('(max-width: 767px)', () => {
-                gsap.fromTo('.feature-card',
-                    { y: 40, opacity: 0 },
-                    {
-                        y: 0, opacity: 1, duration: 0.8, stagger: 0.08, ease: 'power3.out',
-                        scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' },
-                    }
-                );
+                const cards = gsap.utils.toArray('.feature-card');
 
-                gsap.utils.toArray('.flip-inner').forEach((inner, i) => {
+                // Individual entrance animation per card
+                cards.forEach((card) => {
+                    gsap.fromTo(card,
+                        { y: 60, opacity: 0, scale: 0.92 },
+                        {
+                            y: 0, opacity: 1, scale: 1,
+                            duration: 0.8, ease: 'power3.out',
+                            scrollTrigger: {
+                                trigger: card,
+                                start: 'top 85%',
+                            },
+                        }
+                    );
+                });
+
+                // Individual flip per card with scrub
+                gsap.utils.toArray('.flip-inner').forEach((inner) => {
                     gsap.to(inner, {
                         rotateY: 180,
                         ease: 'power2.inOut',
                         duration: 0.6,
                         scrollTrigger: {
                             trigger: inner.closest('.feature-card'),
-                            start: 'top 60%',
-                            end: 'top 30%',
+                            start: 'top 55%',
+                            end: 'top 25%',
                             scrub: 0.4,
                         },
                     });
@@ -98,10 +105,10 @@ const Features = () => {
     const positions = ['0%', '25%', '50%', '75%', '100%'];
 
     return (
-        <section id="features" ref={sectionRef} className="py-24 sm:py-32 bg-charcoal relative overflow-hidden z-10">
+        <section id="features" ref={sectionRef} className="py-24 sm:py-32 md:py-0 bg-charcoal relative overflow-hidden z-10">
             <div className="w-full flex flex-col">
                 {/* Header */}
-                <div className="flex flex-col items-center text-center mb-16 px-6 sm:px-12">
+                <div className="flex flex-col items-center text-center mb-16 md:pt-24 px-6 sm:px-12">
                     <div className="font-caveat text-gold text-2xl sm:text-3xl mb-4">
                         Chi Siamo
                     </div>
@@ -114,17 +121,17 @@ const Features = () => {
                 </div>
 
                 {/* 5-Card Flip */}
-                <div className="w-full px-4 sm:px-8 md:px-12 max-w-[1400px] mx-auto">
+                <div className="w-full px-4 sm:px-8 md:px-0 max-w-[1400px] md:max-w-none mx-auto">
                     <div
                         ref={trackRef}
-                        className="flex flex-col md:flex-row md:h-[600px] w-full gap-1 sm:gap-1.5 md:gap-4"
+                        className="flex flex-col md:flex-row md:h-[70vh] w-full md:w-max gap-1 sm:gap-1.5 md:gap-6 md:px-[10vw]"
                         style={{ willChange: 'transform' }}
                     >
                         {positions.map((pos, i) => (
                             <div
                                 key={i}
-                                className="feature-card relative overflow-hidden rounded-2xl sm:rounded-[2rem] md:rounded-[3rem] h-44 sm:h-52 md:h-auto"
-                                style={{ flex: 1, perspective: '1200px' }}
+                                className="feature-card relative overflow-hidden rounded-2xl sm:rounded-[2rem] md:rounded-[3rem] h-44 sm:h-52 md:h-auto md:w-[70vw] md:max-w-[500px] md:flex-shrink-0"
+                                style={{ perspective: '1200px' }}
                             >
                                 <div
                                     className="flip-inner absolute inset-0"
@@ -159,7 +166,7 @@ const Features = () => {
                     </div>
 
                     {/* Progress bar — desktop only */}
-                    <div className="hidden md:flex justify-center mt-10">
+                    <div className="hidden md:flex justify-center mt-10 md:pb-24">
                         <div className="w-24 h-[2px] bg-cream/10 rounded-full overflow-hidden">
                             <div
                                 ref={progressRef}
@@ -171,11 +178,10 @@ const Features = () => {
 
                     <style>{`
                         @media (min-width: 768px) {
-                            .accordion-front[data-pos="0%"],   .accordion-back[data-pos="0%"]   { background-size: 500% 100%; background-position: 0% center; }
-                            .accordion-front[data-pos="25%"],  .accordion-back[data-pos="25%"]  { background-size: 500% 100%; background-position: 25% center; }
-                            .accordion-front[data-pos="50%"],  .accordion-back[data-pos="50%"]  { background-size: 500% 100%; background-position: 50% center; }
-                            .accordion-front[data-pos="75%"],  .accordion-back[data-pos="75%"]  { background-size: 500% 100%; background-position: 75% center; }
-                            .accordion-front[data-pos="100%"], .accordion-back[data-pos="100%"] { background-size: 500% 100%; background-position: 100% center; }
+                            .accordion-front, .accordion-back {
+                                background-size: cover;
+                                background-position: center;
+                            }
                         }
                         @media (max-width: 767px) {
                             .accordion-front[data-pos="0%"],   .accordion-back[data-pos="0%"]   { background-size: 100% 500%; background-position: center 0%; }

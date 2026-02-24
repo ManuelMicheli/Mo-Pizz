@@ -203,14 +203,14 @@ const MenuHorizontalScroll = () => {
   // ─── Mobile Layout ───────────────────────────────────────────────────────────
   if (isMobile) {
     return (
-      <section ref={mobileSectionRef} className="bg-charcoal py-16 px-4 sm:px-6">
+      <section ref={mobileSectionRef} className="bg-charcoal py-10 sm:py-16 px-4 sm:px-6">
         {menuCategories.map((category, catIdx) => (
-          <div key={category.id} className={`mobile-category ${catIdx > 0 ? 'mt-16 border-t border-white/10 pt-16' : ''}`}>
+          <div key={category.id} className={`mobile-category ${catIdx > 0 ? 'mt-10 sm:mt-16 border-t border-white/10 pt-10 sm:pt-16' : ''}`}>
             {/* Category header */}
             <div className="mb-8">
               {/* Hero image on mobile */}
               {category.heroImage && (
-                <div className="w-full h-40 rounded-2xl overflow-hidden mb-6">
+                <div className="w-full h-32 sm:h-40 rounded-2xl overflow-hidden mb-6">
                   <img
                     src={category.heroImage}
                     alt={category.title}

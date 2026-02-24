@@ -3,14 +3,14 @@ import { Instagram, Facebook, Phone } from 'lucide-react';
 
 const Footer = () => {
     return (
-        <footer className="w-full pt-16 sm:pt-20 pb-8 sm:pb-10 px-4 sm:px-8 md:px-16 lg:px-32 bg-[#111111] text-cream rounded-t-[3rem] sm:rounded-t-[4rem] relative mt-[-2rem] z-20">
+        <footer className="w-full pt-12 sm:pt-20 pb-6 sm:pb-10 px-4 sm:px-8 md:px-16 lg:px-32 bg-[#111111] text-cream rounded-t-[2rem] sm:rounded-t-[4rem] relative mt-[-2rem] z-20">
 
             {/* Top Divider */}
             <div className="absolute top-0 left-12 right-12 h-[1px] bg-ember/40"></div>
 
             <div className="max-w-7xl mx-auto flex flex-col">
                 {/* Top Section - 3 Columns */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-16 mb-20 pb-12 border-b border-smoke/10 text-center md:text-left">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-8 lg:gap-16 mb-12 sm:mb-20 pb-12 border-b border-smoke/10 text-center md:text-left">
 
                     {/* Brand Col */}
                     <div className="flex flex-col items-center md:items-start gap-3">

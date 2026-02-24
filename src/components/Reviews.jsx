@@ -45,7 +45,7 @@ const reviewsData = [
 ];
 
 const ReviewCard = ({ review }) => (
-    <div className="shrink-0 w-[280px] sm:w-[320px] md:w-[370px]">
+    <div className="shrink-0 w-[260px] sm:w-[320px] md:w-[370px]">
         <div className="relative bg-gradient-to-br from-[#222222] to-[#1a1a1a] rounded-[1.5rem] p-7 sm:p-8 h-full flex flex-col overflow-hidden transition-shadow duration-500 hover:shadow-[0_8px_48px_rgba(212,168,83,0.07)]">
             {/* Subtle top accent */}
             <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-gold/25 to-transparent" />
@@ -100,7 +100,7 @@ const Reviews = () => {
     }, []);
 
     return (
-        <section id="reviews" className="py-24 sm:py-32 bg-charcoal relative overflow-hidden">
+        <section id="reviews" className="py-16 sm:py-24 md:py-32 bg-charcoal relative overflow-hidden">
             {/* Header */}
             <div className="px-6 sm:px-12 md:px-20 lg:px-32 max-w-7xl mx-auto flex flex-col items-center text-center mb-14">
                 <div className="font-caveat text-gold text-2xl sm:text-3xl mb-4">

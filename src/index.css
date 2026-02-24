@@ -70,7 +70,9 @@ body.menu-open {
   overflow: hidden;
   position: fixed;
   width: 100%;
+  height: 100%;
   touch-action: none;
+  overscroll-behavior: none;
 }
 
 
@@ -156,6 +158,7 @@ body {
 
 .animate-marquee {
   animation: marquee 25s linear infinite;
+  will-change: transform;
 }
 
 @media (min-width: 640px) {
@@ -173,4 +176,13 @@ body {
 .animate-marquee:hover,
 .animate-marquee.paused {
   animation-play-state: paused;
+}
+
+/* Safe area utilities for notched devices */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-top {
+  padding-top: env(safe-area-inset-top);
 }

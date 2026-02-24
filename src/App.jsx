@@ -11,11 +11,15 @@ gsap.registerPlugin(ScrollTrigger);
 
 function App() {
     useEffect(() => {
+        const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
+
         const lenis = new Lenis({
-            duration: 1.4,
+            duration: isMobile ? 0.8 : 1.4,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             smoothWheel: true,
-            touchMultiplier: 1.2,
+            smoothTouch: false,
+            touchMultiplier: isMobile ? 2.0 : 1.2,
+            wheelMultiplier: 1,
         });
 
         // Sync Lenis with GSAP ScrollTrigger

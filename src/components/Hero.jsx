@@ -20,7 +20,7 @@ const Hero = () => {
     }, []);
 
     return (
-        <section ref={containerRef} id="home" className="relative w-full h-[100dvh] overflow-hidden flex items-center px-6 sm:px-12 md:px-20 lg:px-32">
+        <section ref={containerRef} id="home" className="relative w-full h-screen min-h-[100dvh] overflow-hidden flex items-center px-6 sm:px-12 md:px-20 lg:px-32">
             {/* Background Image */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
@@ -51,19 +51,19 @@ const Hero = () => {
                 </p>
 
                 {/* Two CTAs */}
-                <div className="hero-elem flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                    <a href="#menu" className="magnetic-btn w-full sm:w-auto text-center border box-border border-cream text-cream hover:bg-cream hover:text-charcoal font-sans font-bold py-4 px-8 rounded-full transition-colors duration-300">
+                <div className="hero-elem flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+                    <a href="#menu" className="magnetic-btn w-full sm:w-auto text-center border box-border border-cream text-cream hover:bg-cream hover:text-charcoal font-sans font-bold py-3 px-6 sm:py-4 sm:px-8 text-sm sm:text-base rounded-full transition-colors duration-300">
                         Scopri il Menu
                     </a>
-                    <a href="#contatti" className="magnetic-btn w-full sm:w-auto text-center bg-flame hover:bg-ember text-cream font-sans font-bold py-4 px-8 rounded-full transition-colors duration-300">
+                    <a href="#contatti" className="magnetic-btn w-full sm:w-auto text-center bg-flame hover:bg-ember text-cream font-sans font-bold py-3 px-6 sm:py-4 sm:px-8 text-sm sm:text-base rounded-full transition-colors duration-300">
                         Prenota un Tavolo
                     </a>
                 </div>
             </div>
 
             {/* Scroll indicator */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 text-cream/50 flex flex-col items-center gap-2">
-                <ChevronDown size={32} className="animate-bounce-slow" />
+            <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 text-cream/50 flex flex-col items-center gap-2">
+                <ChevronDown size={24} className="animate-bounce-slow" />
             </div>
         </section>
     );
