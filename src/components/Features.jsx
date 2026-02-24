@@ -5,39 +5,95 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const Features = () => {
-    const containerRef = useRef(null);
+    const sectionRef = useRef(null);
+    const trackRef = useRef(null);
+    const progressRef = useRef(null);
 
-    // Entrance Animation
     useEffect(() => {
         let ctx = gsap.context(() => {
-            gsap.fromTo('.feature-card',
-                { y: 60, opacity: 0 },
-                {
+            const mm = gsap.matchMedia();
+
+            // ── Desktop: pinned horizontal scroll + flip ──
+            mm.add('(min-width: 768px)', () => {
+                const flips = gsap.utils.toArray('.flip-inner');
+                const track = trackRef.current;
+
+                // Entrance fade
+                gsap.fromTo('.feature-card',
+                    { y: 50, opacity: 0 },
+                    {
+                        y: 0, opacity: 1, duration: 0.8, stagger: 0.06, ease: 'power3.out',
+                        scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' },
+                    }
+                );
+
+                // Pinned timeline
+                const tl = gsap.timeline({
                     scrollTrigger: {
-                        trigger: containerRef.current,
-                        start: "top 75%",
+                        trigger: sectionRef.current,
+                        start: 'top top',
+                        end: '+=900',
+                        pin: true,
+                        scrub: 0.5,
+                        anticipatePin: 1,
+                        onUpdate: (self) => {
+                            if (progressRef.current) {
+                                progressRef.current.style.transform = `scaleX(${self.progress})`;
+                            }
+                        },
                     },
-                    y: 0,
-                    opacity: 1,
-                    duration: 1,
-                    stagger: 0.1,
-                    ease: 'power3.out'
-                }
-            );
-        }, containerRef);
+                });
+
+                // Subtle horizontal slide of the card group
+                tl.fromTo(track,
+                    { xPercent: 1.5 },
+                    { xPercent: -1.5, duration: 1, ease: 'none' },
+                    0
+                );
+
+                // Flip each card one by one across the timeline
+                flips.forEach((flip, i) => {
+                    tl.to(flip, {
+                        rotateY: 180,
+                        duration: 0.2,
+                        ease: 'power2.inOut',
+                    }, 0.05 + i * 0.16);
+                });
+            });
+
+            // ── Mobile: scroll-triggered entrance + sequential flip ──
+            mm.add('(max-width: 767px)', () => {
+                gsap.fromTo('.feature-card',
+                    { y: 40, opacity: 0 },
+                    {
+                        y: 0, opacity: 1, duration: 0.8, stagger: 0.08, ease: 'power3.out',
+                        scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' },
+                    }
+                );
+
+                gsap.utils.toArray('.flip-inner').forEach((inner, i) => {
+                    gsap.to(inner, {
+                        rotateY: 180,
+                        ease: 'power2.inOut',
+                        duration: 0.6,
+                        scrollTrigger: {
+                            trigger: inner.closest('.feature-card'),
+                            start: 'top 60%',
+                            end: 'top 30%',
+                            scrub: 0.4,
+                        },
+                    });
+                });
+            });
+        }, sectionRef);
+
         return () => ctx.revert();
     }, []);
 
-    const cards = [
-        { id: 1, title: 'Lievito Madre', position: '0%' },
-        { id: 2, title: 'Impasto Artigianale', position: '25%' },
-        { id: 3, title: 'Ingredienti DOP', position: '50%' },
-        { id: 4, title: 'Forno a Legna', position: '75%' },
-        { id: 5, title: 'Vera Napoletana', position: '100%' },
-    ];
+    const positions = ['0%', '25%', '50%', '75%', '100%'];
 
     return (
-        <section id="features" ref={containerRef} className="py-24 sm:py-32 bg-charcoal relative overflow-hidden">
+        <section id="features" ref={sectionRef} className="py-24 sm:py-32 bg-charcoal relative overflow-hidden">
             <div className="w-full flex flex-col">
                 {/* Header */}
                 <div className="flex flex-col items-center text-center mb-16 px-6 sm:px-12">
@@ -52,62 +108,76 @@ const Features = () => {
                     </p>
                 </div>
 
-                {/* 5-Card Continuous Flex Container */}
+                {/* 5-Card Accordion with Flip */}
                 <div className="w-full px-4 sm:px-8 md:px-12 max-w-[1400px] mx-auto">
-                    <div className="flex flex-col md:flex-row md:h-[600px] w-full gap-1.5 sm:gap-2 md:gap-4 group-container hover:gap-2">
-                        {cards.map((card, index) => (
+                    <div
+                        ref={trackRef}
+                        className="flex flex-col md:flex-row md:h-[600px] w-full gap-1.5 sm:gap-2 md:gap-4"
+                        style={{ willChange: 'transform' }}
+                    >
+                        {positions.map((pos, i) => (
                             <div
-                                key={card.id}
-                                className="feature-card split-accordion-card relative overflow-hidden rounded-2xl sm:rounded-[2rem] md:rounded-[3rem] bg-charcoal/50 h-28 sm:h-32 md:h-auto"
+                                key={i}
+                                className="feature-card relative overflow-hidden rounded-2xl sm:rounded-[2rem] md:rounded-[3rem] h-28 sm:h-32 md:h-auto"
+                                style={{ flex: 1, perspective: '1200px' }}
                             >
-                                {/* Background split layer — default */}
                                 <div
-                                    className="absolute inset-0 bg-no-repeat accordion-bg accordion-bg-default"
-                                    style={{
-                                        backgroundImage: `url('/images/wmremove-transformed.png')`
-                                    }}
-                                />
-                                {/* Background split layer — hover */}
-                                <div
-                                    className="absolute inset-0 bg-no-repeat accordion-bg accordion-bg-hover"
-                                    style={{
-                                        backgroundImage: `url('/images/wmremove-transformed (43).png')`
-                                    }}
-                                />
+                                    className="flip-inner absolute inset-0"
+                                    style={{ transformStyle: 'preserve-3d' }}
+                                >
+                                    {/* Front — B&W */}
+                                    <div
+                                        className="absolute inset-0"
+                                        style={{ backfaceVisibility: 'hidden' }}
+                                    >
+                                        <div
+                                            className="absolute inset-0 bg-no-repeat accordion-bg"
+                                            style={{ backgroundImage: `url('/images/wmremove-transformed.png')` }}
+                                            data-pos={pos}
+                                        />
+                                    </div>
+
+                                    {/* Back — Color */}
+                                    <div
+                                        className="absolute inset-0"
+                                        style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+                                    >
+                                        <div
+                                            className="absolute inset-0 bg-no-repeat accordion-bg"
+                                            style={{ backgroundImage: `url('/images/wmremove-transformed (43).png')` }}
+                                            data-pos={pos}
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         ))}
                     </div>
 
+                    {/* Progress bar — desktop only */}
+                    <div className="hidden md:flex justify-center mt-10">
+                        <div className="w-24 h-[2px] bg-cream/10 rounded-full overflow-hidden">
+                            <div
+                                ref={progressRef}
+                                className="h-full bg-flame rounded-full origin-left"
+                                style={{ transform: 'scaleX(0)' }}
+                            />
+                        </div>
+                    </div>
+
                     <style>{`
-                        .split-accordion-card {
-                            flex: 1;
-                        }
-
-                        /* Hover transition layers */
-                        .accordion-bg-default,
-                        .accordion-bg-hover {
-                            transition: opacity 0.5s ease;
-                        }
-                        .accordion-bg-default { opacity: 1; }
-                        .accordion-bg-hover { opacity: 0; }
-
-                        .group-container:hover .accordion-bg-default { opacity: 0; }
-                        .group-container:hover .accordion-bg-hover { opacity: 1; }
-
-                        /* Background position logic */
                         @media (min-width: 768px) {
-                            .split-accordion-card:nth-child(1) .accordion-bg { background-size: 500% 100%; background-position: 0% center; }
-                            .split-accordion-card:nth-child(2) .accordion-bg { background-size: 500% 100%; background-position: 25% center; }
-                            .split-accordion-card:nth-child(3) .accordion-bg { background-size: 500% 100%; background-position: 50% center; }
-                            .split-accordion-card:nth-child(4) .accordion-bg { background-size: 500% 100%; background-position: 75% center; }
-                            .split-accordion-card:nth-child(5) .accordion-bg { background-size: 500% 100%; background-position: 100% center; }
+                            .accordion-bg[data-pos="0%"]   { background-size: 500% 100%; background-position: 0% center; }
+                            .accordion-bg[data-pos="25%"]  { background-size: 500% 100%; background-position: 25% center; }
+                            .accordion-bg[data-pos="50%"]  { background-size: 500% 100%; background-position: 50% center; }
+                            .accordion-bg[data-pos="75%"]  { background-size: 500% 100%; background-position: 75% center; }
+                            .accordion-bg[data-pos="100%"] { background-size: 500% 100%; background-position: 100% center; }
                         }
                         @media (max-width: 767px) {
-                            .split-accordion-card:nth-child(1) .accordion-bg { background-size: 100% 500%; background-position: center 0%; }
-                            .split-accordion-card:nth-child(2) .accordion-bg { background-size: 100% 500%; background-position: center 25%; }
-                            .split-accordion-card:nth-child(3) .accordion-bg { background-size: 100% 500%; background-position: center 50%; }
-                            .split-accordion-card:nth-child(4) .accordion-bg { background-size: 100% 500%; background-position: center 75%; }
-                            .split-accordion-card:nth-child(5) .accordion-bg { background-size: 100% 500%; background-position: center 100%; }
+                            .accordion-bg[data-pos="0%"]   { background-size: 100% 500%; background-position: center 0%; }
+                            .accordion-bg[data-pos="25%"]  { background-size: 100% 500%; background-position: center 25%; }
+                            .accordion-bg[data-pos="50%"]  { background-size: 100% 500%; background-position: center 50%; }
+                            .accordion-bg[data-pos="75%"]  { background-size: 100% 500%; background-position: center 75%; }
+                            .accordion-bg[data-pos="100%"] { background-size: 100% 500%; background-position: center 100%; }
                         }
                     `}</style>
                 </div>

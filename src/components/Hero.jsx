@@ -32,37 +32,33 @@ const Hero = () => {
                 />
             </picture>
 
-            {/* "Mo Pizz" — top left, big & black */}
-            <div className="hero-elem absolute top-8 sm:top-12 left-6 sm:left-12 md:left-20 lg:left-32 z-20">
-                <h2 className="font-playfair font-black text-black text-[clamp(2rem,5vw,4.5rem)] leading-none tracking-tight">
+            {/* Content — left aligned */}
+            <div className="relative z-20 flex flex-col items-start gap-4">
+                <h2 className="hero-elem font-playfair font-black text-black text-[clamp(4rem,12vw,12rem)] leading-none tracking-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]">
                     Mo Pizz
                 </h2>
-            </div>
-
-            {/* Content */}
-            <div className="relative z-20 w-full flex flex-col items-start gap-4">
 
                 {/* Micro-label */}
-                <div className="hero-elem font-caveat text-gold text-2xl sm:text-3xl mb-2">
+                <div className="hero-elem font-caveat text-gold text-lg sm:text-xl">
                     Pizzeria Napoletana Verace • Legnano
                 </div>
 
-                {/* Massive Typography */}
+                {/* Typography */}
                 <div className="hero-elem flex flex-col">
-                    <h1 className="font-playfair font-black text-cream text-[clamp(2.5rem,8vw,8rem)] leading-[0.9] -ml-1">
+                    <h1 className="font-playfair font-black text-cream text-[clamp(1.5rem,3.5vw,3.5rem)] leading-[0.9] -ml-1">
                         La Vera
                     </h1>
-                    <h1 className="font-playfair font-black italic text-flame text-[clamp(2.5rem,9vw,9rem)] leading-[1] -ml-1">
+                    <h1 className="font-playfair font-black italic text-flame text-[clamp(1.5rem,4vw,4rem)] leading-[1] -ml-1">
                         Pizza Napoletana.
                     </h1>
                 </div>
 
                 {/* Subtitle */}
-                <p className="hero-elem font-sans text-smoke text-[clamp(1rem,1.5vw,1.25rem)] max-w-[85vw] sm:max-w-[550px] mt-2 mb-6 text-balance leading-relaxed">
+                <p className="hero-elem font-sans text-smoke text-[clamp(0.85rem,1.2vw,1.05rem)] max-w-[85vw] sm:max-w-[450px] mt-1 mb-4 text-balance leading-relaxed">
                     Impasto lievitato 48 ore. Forno a legna a 450°C. Ingredienti DOP dal cuore della Campania.
                 </p>
 
-                {/* Two CTAs */}
+                {/* CTA */}
                 <div className="hero-elem flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                     <a href="#contatti" className="magnetic-btn w-full sm:w-auto text-center bg-flame hover:bg-ember text-cream font-sans font-bold py-4 px-8 rounded-full transition-colors duration-300">
                         Prenota un Tavolo
