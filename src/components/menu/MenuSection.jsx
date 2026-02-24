@@ -58,7 +58,9 @@ const MenuSection = () => {
         </>
       )}
 
-      {/* Full-width image 46 — flush with MenuIntro above and video below */}
+      <MenuVideoIntro />
+
+      {/* Full-width image 46 — flush with video above */}
       <div className="relative w-full h-[50dvh] overflow-hidden">
         <img
           src="/images/wmremove-transformed (46).png"
@@ -91,8 +93,6 @@ const MenuSection = () => {
           }}
         />
       </div>
-
-      <MenuVideoIntro />
     </div>
   );
 };
