@@ -48,29 +48,39 @@ const MenuIntro = () => {
       ref={sectionRef}
       className="relative w-full h-[50dvh] overflow-hidden flex items-center justify-center"
     >
-      {/* Video Background */}
+      {/* Video Background — preload auto for max quality */}
       <video
         ref={videoRef}
         autoPlay
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover"
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover scale-[1.02]"
+        style={{ filter: 'contrast(1.08) brightness(0.95) saturate(0.85)' }}
         src="/videos/Pizzeria_Menu_Background_Video_Generation (1).mp4"
       />
 
-      {/* Dark overlay + radial ember glow */}
-      <div className="absolute inset-0 bg-charcoal/70" />
+      {/* Cinematic dark overlay stack */}
+      <div className="absolute inset-0 bg-black/40" />
+      {/* Vignette — heavy edges, clear center */}
       <div
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse at 50% 90%, rgba(232,93,38,0.25) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse 70% 60% at 50% 50%, transparent 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.7) 100%)',
+        }}
+      />
+      {/* Subtle cool-tone atmosphere at top */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(10,12,18,0.35) 0%, transparent 40%, rgba(0,0,0,0.4) 100%)',
         }}
       />
 
-      {/* Noise texture via CSS (GPU-friendly, no SVG filter) */}
+      {/* Cinematic film grain (GPU-friendly, no SVG filter) */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        className="absolute inset-0 pointer-events-none opacity-[0.045]"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
           backgroundSize: '256px 256px',

@@ -81,6 +81,7 @@ const Contacts = () => {
                         allowFullScreen=""
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
+                        sandbox="allow-scripts allow-same-origin allow-popups"
                         title="Mappa di Mo Pizz a Legnano"
                     ></iframe>
                 </div>

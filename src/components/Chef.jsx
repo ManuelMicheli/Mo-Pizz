@@ -48,7 +48,7 @@ const Chef = () => {
                 <div className="chef-photo w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full border-4 border-gold shadow-2xl relative flex items-center justify-center overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-tr from-ember to-flame opacity-90 mix-blend-multiply"></div>
                     <img
-                        src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                        src="/images/chef-cristian.jpg"
                         alt="Cristian Moschiano"
                         className="absolute inset-0 w-full h-full object-cover filter grayscale sepia-[0.3]"
                     />

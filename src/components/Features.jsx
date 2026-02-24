@@ -77,23 +77,21 @@ const Features = () => {
                         .split-accordion-card {
                             flex: 1;
                         }
-                        
+
                         /* Background position logic */
                         @media (min-width: 768px) {
-                            ${cards.map((c, i) => `
-                            .split-accordion-card:nth-child(${i + 1}) .accordion-bg {
-                                background-size: 500% 100%;
-                                background-position: ${c.position} center;
-                            }
-                            `).join('')}
+                            .split-accordion-card:nth-child(1) .accordion-bg { background-size: 500% 100%; background-position: 0% center; }
+                            .split-accordion-card:nth-child(2) .accordion-bg { background-size: 500% 100%; background-position: 25% center; }
+                            .split-accordion-card:nth-child(3) .accordion-bg { background-size: 500% 100%; background-position: 50% center; }
+                            .split-accordion-card:nth-child(4) .accordion-bg { background-size: 500% 100%; background-position: 75% center; }
+                            .split-accordion-card:nth-child(5) .accordion-bg { background-size: 500% 100%; background-position: 100% center; }
                         }
                         @media (max-width: 767px) {
-                            ${cards.map((c, i) => `
-                            .split-accordion-card:nth-child(${i + 1}) .accordion-bg {
-                                background-size: 100% 500%;
-                                background-position: center ${c.position};
-                            }
-                            `).join('')}
+                            .split-accordion-card:nth-child(1) .accordion-bg { background-size: 100% 500%; background-position: center 0%; }
+                            .split-accordion-card:nth-child(2) .accordion-bg { background-size: 100% 500%; background-position: center 25%; }
+                            .split-accordion-card:nth-child(3) .accordion-bg { background-size: 100% 500%; background-position: center 50%; }
+                            .split-accordion-card:nth-child(4) .accordion-bg { background-size: 100% 500%; background-position: center 75%; }
+                            .split-accordion-card:nth-child(5) .accordion-bg { background-size: 100% 500%; background-position: center 100%; }
                         }
                     `}</style>
                 </div>

@@ -47,12 +47,19 @@ const tabs = [
 
 const highlightKeywords = (text) => {
     const keywords = ['DOP', 'DOCG', 'IGP', 'Slow Food'];
-    let result = text;
-    keywords.forEach(kw => {
-        const rx = new RegExp(`\\b${kw}\\b`, 'g');
-        result = result.replace(rx, `<span class="text-gold font-caveat text-lg ml-1 px-1.5 py-0 border border-gold/30 rounded inline-block translate-y-[1px] bg-gold/5">${kw}</span>`);
-    });
-    return <span dangerouslySetInnerHTML={{ __html: result }} />;
+    const regex = new RegExp(`(${keywords.join('|')})`, 'g');
+    const parts = text.split(regex);
+    return (
+        <span>
+            {parts.map((part, i) =>
+                keywords.includes(part) ? (
+                    <span key={i} className="text-gold font-caveat text-lg ml-1 px-1.5 py-0 border border-gold/30 rounded inline-block translate-y-[1px] bg-gold/5">{part}</span>
+                ) : (
+                    <React.Fragment key={i}>{part}</React.Fragment>
+                )
+            )}
+        </span>
+    );
 };
 
 const Menu = () => {

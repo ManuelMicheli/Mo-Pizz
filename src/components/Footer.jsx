@@ -42,7 +42,7 @@ const Footer = () => {
                     <div className="flex flex-col items-center md:items-end gap-6 text-center md:text-right">
                         <h4 className="font-sans font-bold text-lg mb-2 uppercase tracking-wide hidden md:block opacity-0">Social</h4>
                         <div className="flex items-center gap-4">
-                            <a href="https://instagram.com/mo_pizz" className="w-12 h-12 rounded-full border border-smoke/30 flex items-center justify-center text-smoke hover:border-flame hover:bg-flame hover:text-cream transition-all duration-300">
+                            <a href="https://instagram.com/mo_pizz" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-smoke/30 flex items-center justify-center text-smoke hover:border-flame hover:bg-flame hover:text-cream transition-all duration-300">
                                 <Instagram size={20} />
                             </a>
                             <a href="#" className="w-12 h-12 rounded-full border border-smoke/30 flex items-center justify-center text-smoke hover:border-flame hover:bg-flame hover:text-cream transition-all duration-300">

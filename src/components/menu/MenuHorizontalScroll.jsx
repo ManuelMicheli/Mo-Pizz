@@ -10,15 +10,19 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const badgeKeywords = ['DOP', 'DOCG', 'IGP', 'DOC', 'IGT', 'Slow Food'];
 
 const HighlightBadges = ({ text }) => {
-  let result = text;
-  badgeKeywords.forEach((kw) => {
-    const rx = new RegExp(`\\b${kw}\\b`, 'g');
-    result = result.replace(
-      rx,
-      `<span class="inline-block text-gold font-caveat text-base ml-1 px-1.5 py-0 border border-gold/30 rounded bg-gold/5 badge-glow">${kw}</span>`
-    );
-  });
-  return <span dangerouslySetInnerHTML={{ __html: result }} />;
+  const regex = new RegExp(`(${badgeKeywords.join('|')})`, 'g');
+  const parts = text.split(regex);
+  return (
+    <span>
+      {parts.map((part, i) =>
+        badgeKeywords.includes(part) ? (
+          <span key={i} className="inline-block text-gold font-caveat text-base ml-1 px-1.5 py-0 border border-gold/30 rounded bg-gold/5 badge-glow">{part}</span>
+        ) : (
+          <React.Fragment key={i}>{part}</React.Fragment>
+        )
+      )}
+    </span>
+  );
 };
 
 const MenuHorizontalScroll = () => {
