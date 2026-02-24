@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -87,7 +87,8 @@ const MenuHorizontalScroll = () => {
   }, [hoverImage]);
 
   // GSAP horizontal scroll (desktop only)
-  useEffect(() => {
+  // useLayoutEffect so ctx.revert() runs BEFORE React removes DOM nodes on unmount
+  useLayoutEffect(() => {
     if (isMobile) return;
 
     const container = containerRef.current;
