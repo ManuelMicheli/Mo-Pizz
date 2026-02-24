@@ -2,6 +2,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import { ChevronDown } from 'lucide-react';
 import MenuIntro from './MenuIntro';
 import MenuVideoIntro from './MenuVideoIntro';
 import MenuHorizontalScroll from './MenuHorizontalScroll';
@@ -45,10 +46,25 @@ const MenuSection = () => {
   return (
     <div id="menu">
       <div ref={heroRef}>
-        <MenuIntro onCtaClick={handleCtaClick} menuOpen={menuUnlocked} />
+        <MenuIntro />
       </div>
 
-      {/* Scroll anchor + menu: right after the hero images */}
+      {/* CTA — between the two images */}
+      <div className="w-full bg-charcoal flex flex-col items-center justify-center py-10 sm:py-14">
+        <button
+          onClick={handleCtaClick}
+          className={`magnetic-btn border font-sans font-bold py-3.5 px-10 rounded-full transition-colors duration-300 text-base tracking-wide cursor-pointer ${
+            menuUnlocked
+              ? 'border-flame/60 text-flame hover:bg-flame hover:text-cream'
+              : 'border-cream/60 text-cream hover:bg-cream hover:text-charcoal'
+          }`}
+        >
+          {menuUnlocked ? 'Chiudi il Menu' : 'Esplora il Menu'}
+        </button>
+        {!menuUnlocked && <ChevronDown size={20} className="text-cream/40 animate-bounce-slow mt-3" />}
+      </div>
+
+      {/* Scroll anchor + menu */}
       <div ref={scrollAnchorRef} />
 
       {menuUnlocked && (
@@ -58,7 +74,7 @@ const MenuSection = () => {
         </>
       )}
 
-      {/* Full-width image 46 — flush with MenuIntro above and video below */}
+      {/* Full-width image 46 — flush between CTA and video */}
       <div className="relative w-full h-[50dvh] overflow-hidden">
         <img
           src="/images/wmremove-transformed (46).png"

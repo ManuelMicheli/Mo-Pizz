@@ -1,11 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ChevronDown } from 'lucide-react';
-
 gsap.registerPlugin(ScrollTrigger);
 
-const MenuIntro = ({ onCtaClick, menuOpen }) => {
+const MenuIntro = () => {
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -37,18 +35,6 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
         },
       });
 
-      // CTA entrance
-      gsap.from('.menu-hero-cta', {
-        y: 30,
-        opacity: 0,
-        duration: 1,
-        delay: 0.6,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 60%',
-        },
-      });
     }, section);
 
     return () => ctx.revert();
@@ -111,20 +97,6 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
         }}
       />
 
-      {/* CTA — bottom center */}
-      <div className="menu-hero-cta absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-3">
-        <button
-          onClick={onCtaClick}
-          className={`magnetic-btn border font-sans font-bold py-3.5 px-10 rounded-full transition-colors duration-300 text-base tracking-wide cursor-pointer ${
-            menuOpen
-              ? 'border-flame/60 text-flame hover:bg-flame hover:text-cream'
-              : 'border-cream/60 text-cream hover:bg-cream hover:text-charcoal'
-          }`}
-        >
-          {menuOpen ? 'Chiudi il Menu' : 'Esplora il Menu'}
-        </button>
-        {!menuOpen && <ChevronDown size={20} className="text-cream/40 animate-bounce-slow" />}
-      </div>
     </section>
   );
 };
