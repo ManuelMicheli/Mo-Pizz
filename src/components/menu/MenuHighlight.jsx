@@ -67,7 +67,7 @@ const MenuHighlight = () => {
               className={`signature-card group flex flex-col items-center text-center ${offsets[i]}`}
             >
               {/* Circular image */}
-              <div className="relative w-48 h-48 sm:w-56 sm:h-56 mb-8 rounded-full overflow-hidden border-2 border-gold/30 group-hover:border-gold/60 transition-all duration-500 group-hover:scale-[1.03] group-hover:rotate-2 group-hover:shadow-[0_0_40px_rgba(232,93,38,0.2)] bg-charcoal">
+              <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-56 md:h-56 mb-8 rounded-full overflow-hidden border-2 border-gold/30 group-hover:border-gold/60 transition-all duration-500 group-hover:scale-[1.03] group-hover:rotate-2 group-hover:shadow-[0_0_40px_rgba(232,93,38,0.2)] bg-charcoal">
                 <img
                   src={dish.image}
                   alt={dish.name}
@@ -103,7 +103,7 @@ const MenuHighlight = () => {
             href="/brand-assets/mo pizza menu 2026 WEB.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="magnetic-btn bg-flame hover:bg-ember text-cream font-sans font-bold py-4 px-10 rounded-full transition-colors duration-300 text-lg"
+            className="magnetic-btn w-full sm:w-auto text-center bg-flame hover:bg-ember text-cream font-sans font-bold py-4 px-10 rounded-full transition-colors duration-300 text-lg"
           >
             Scarica il Menu Completo
           </a>

@@ -169,14 +169,51 @@ const MenuHorizontalScroll = () => {
     setHoverImage(img || null);
   }, []);
 
+  // ScrollTrigger fade-in for mobile categories
+  const mobileSectionRef = useRef(null);
+  useEffect(() => {
+    if (!isMobile) return;
+    const section = mobileSectionRef.current;
+    if (!section) return;
+
+    let ctx = gsap.context(() => {
+      const categories = section.querySelectorAll('.mobile-category');
+      categories.forEach((cat) => {
+        gsap.from(cat, {
+          y: 30,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: cat,
+            start: 'top 85%',
+          },
+        });
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, [isMobile]);
+
   // ─── Mobile Layout ───────────────────────────────────────────────────────────
   if (isMobile) {
     return (
-      <section className="bg-charcoal py-16 px-6">
+      <section ref={mobileSectionRef} className="bg-charcoal py-16 px-4 sm:px-6">
         {menuCategories.map((category, catIdx) => (
-          <div key={category.id} className={catIdx > 0 ? 'mt-16' : ''}>
+          <div key={category.id} className={`mobile-category ${catIdx > 0 ? 'mt-16 border-t border-white/10 pt-16' : ''}`}>
             {/* Category header */}
             <div className="mb-8">
+              {/* Hero image on mobile */}
+              {category.heroImage && (
+                <div className="w-full h-40 rounded-2xl overflow-hidden mb-6">
+                  <img
+                    src={category.heroImage}
+                    alt={category.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
               <h3 className="font-playfair font-black text-cream text-3xl leading-none">
                 {category.title}
               </h3>
@@ -196,11 +233,11 @@ const MenuHorizontalScroll = () => {
                         <span className="font-playfair font-bold text-cream text-base">
                           {item.name}
                         </span>
-                        <span className="block font-sans text-smoke text-xs italic mt-0.5">
+                        <span className="block font-sans text-smoke text-xs sm:text-sm italic mt-0.5 leading-relaxed">
                           <HighlightBadges text={item.desc} />
                         </span>
                       </div>
-                      <span className="font-mono text-gold text-sm flex-shrink-0 tabular-nums">
+                      <span className="font-mono text-gold text-base flex-shrink-0 tabular-nums">
                         {item.price}
                       </span>
                     </div>

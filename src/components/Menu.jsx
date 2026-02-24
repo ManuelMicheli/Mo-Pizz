@@ -66,7 +66,7 @@ const Menu = () => {
     const [activeTab, setActiveTab] = useState('classiche');
 
     return (
-        <section id="menu" className="w-full py-24 sm:py-32 px-6 sm:px-12 md:px-20 lg:px-32 bg-charcoal relative">
+        <section id="menu" className="w-full py-16 sm:py-24 md:py-32 px-4 sm:px-8 md:px-16 lg:px-32 bg-charcoal relative">
             <div className="max-w-7xl mx-auto flex flex-col">
                 {/* Section Header */}
                 <div className="flex flex-col items-center text-center mb-16">
@@ -83,12 +83,12 @@ const Menu = () => {
 
                 {/* Tab Navigation */}
                 <div className="w-full overflow-x-auto pb-6 mb-12 scroll-smooth scrollbar-hide snap-x flex justify-start lg:justify-center border-b border-smoke/20">
-                    <div className="flex gap-8 px-4 sm:px-0 min-w-max">
+                    <div className="flex gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-0">
                         {tabs.map(tab => (
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
-                                className={`snap-center pb-4 relative font-sans text-lg transition-colors duration-300 w-max
+                                className={`snap-center pb-4 relative font-sans text-base sm:text-lg whitespace-nowrap transition-colors duration-300
                   ${activeTab === tab.id ? 'text-cream font-bold' : 'text-smoke hover:text-cream/80'}`}
                             >
                                 {tab.label}
@@ -105,7 +105,7 @@ const Menu = () => {
                     {activeTab === 'business' ? (
                         <div className="bg-flour rounded-[2rem] p-8 sm:p-12 shadow-2xl w-full max-w-4xl mx-auto flex flex-col items-center text-center">
                             <span className="font-caveat text-xl text-charcoal mb-6 bg-gold/20 px-4 py-2 rounded-full border border-gold/40">Solo Venerdì e Sabato, 12:00–14:30</span>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full">
                                 {businessLunch.map((b, i) => (
                                     <div key={i} className="flex flex-col items-center p-6 bg-white rounded-2xl shadow-sm border border-black/5 hover:-translate-y-2 transition-transform duration-300">
                                         <span className="text-4xl mb-4">{b.icon}</span>
@@ -124,7 +124,7 @@ const Menu = () => {
                                     className="group bg-[#242424] rounded-[2rem] overflow-hidden flex flex-col border border-white/5 hover:border-l-4 hover:border-l-flame hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/60 transition-all duration-300"
                                 >
                                     {/* Decorative Placeholder */}
-                                    <div className="w-full h-32 relative flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity" style={{ background: 'radial-gradient(circle at 50% 100%, #C94A1A 0%, #242424 70%)' }}>
+                                    <div className="w-full h-16 sm:h-24 md:h-32 relative flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity" style={{ background: 'radial-gradient(circle at 50% 100%, #C94A1A 0%, #242424 70%)' }}>
                                         <Flame className="text-flame/40 group-hover:text-flame transition-colors w-8 h-8" />
                                     </div>
                                     {/* Info */}

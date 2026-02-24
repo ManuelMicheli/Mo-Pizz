@@ -54,11 +54,11 @@ const Features = () => {
 
                 {/* 5-Card Continuous Flex Container */}
                 <div className="w-full px-4 sm:px-8 md:px-12 max-w-[1400px] mx-auto">
-                    <div className="flex flex-col md:flex-row h-[800px] md:h-[600px] w-full gap-2 md:gap-4 group-container hover:gap-2">
+                    <div className="flex flex-col md:flex-row md:h-[600px] w-full gap-1.5 sm:gap-2 md:gap-4 group-container hover:gap-2">
                         {cards.map((card, index) => (
                             <div
                                 key={card.id}
-                                className="feature-card split-accordion-card relative overflow-hidden rounded-[2rem] md:rounded-[3rem] bg-charcoal/50"
+                                className="feature-card split-accordion-card relative overflow-hidden rounded-2xl sm:rounded-[2rem] md:rounded-[3rem] bg-charcoal/50 h-28 sm:h-32 md:h-auto"
                             >
                                 {/* Background split layer */}
                                 <div

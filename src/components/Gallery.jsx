@@ -7,7 +7,8 @@ const Gallery = () => {
                 <img
                     src="/images/wmremove-transformed-gallery.png"
                     alt="Gallery"
-                    className="w-full h-auto object-cover"
+                    loading="lazy"
+                    className="w-full h-auto object-cover max-h-[50vh] sm:max-h-[60vh] md:max-h-[70vh]"
                 />
             </div>
         </section>

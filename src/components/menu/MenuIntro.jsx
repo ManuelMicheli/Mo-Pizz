@@ -112,10 +112,10 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
       />
 
       {/* CTA — bottom center */}
-      <div className="menu-hero-cta absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-3">
+      <div className="menu-hero-cta absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-3">
         <button
           onClick={onCtaClick}
-          className={`magnetic-btn border font-sans font-bold py-3 px-8 rounded-full transition-colors duration-300 text-sm sm:text-base tracking-wide cursor-pointer ${
+          className={`magnetic-btn border font-sans font-bold py-3.5 px-10 rounded-full transition-colors duration-300 text-base tracking-wide cursor-pointer ${
             menuOpen
               ? 'border-flame/60 text-flame hover:bg-flame hover:text-cream'
               : 'border-cream/60 text-cream hover:bg-cream hover:text-charcoal'

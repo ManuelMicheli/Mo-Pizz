@@ -82,7 +82,7 @@ const MenuVideoIntro = () => {
       />
 
       {/* Content — bottom-right */}
-      <div className="menu-video-content absolute bottom-8 right-6 sm:bottom-10 sm:right-12 md:right-20 lg:right-32 z-10 flex flex-col items-end text-right max-w-[380px] sm:max-w-[440px]">
+      <div className="menu-video-content absolute bottom-8 left-4 right-4 sm:left-auto sm:right-12 md:right-20 lg:right-32 z-10 flex flex-col items-end text-right sm:max-w-[440px]">
         <span className="menu-video-line font-caveat text-gold text-lg sm:text-xl md:text-2xl mb-3">
           Dal 2016, Legnano
         </span>

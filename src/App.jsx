@@ -15,7 +15,7 @@ function App() {
             duration: 1.4,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             smoothWheel: true,
-            touchMultiplier: 1.5,
+            touchMultiplier: 1.2,
         });
 
         // Sync Lenis with GSAP ScrollTrigger

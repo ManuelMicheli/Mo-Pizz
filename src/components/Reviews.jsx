@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
 import { Star } from 'lucide-react';
 
 const reviewsData = [
@@ -45,7 +45,7 @@ const reviewsData = [
 ];
 
 const ReviewCard = ({ review }) => (
-    <div className="shrink-0 w-[320px] sm:w-[370px]">
+    <div className="shrink-0 w-[280px] sm:w-[320px] md:w-[370px]">
         <div className="relative bg-gradient-to-br from-[#222222] to-[#1a1a1a] rounded-[1.5rem] p-7 sm:p-8 h-full flex flex-col overflow-hidden transition-shadow duration-500 hover:shadow-[0_8px_48px_rgba(212,168,83,0.07)]">
             {/* Subtle top accent */}
             <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-gold/25 to-transparent" />
@@ -53,7 +53,7 @@ const ReviewCard = ({ review }) => (
             {/* Stars */}
             <div className="flex mb-5 space-x-0.5">
                 {[...Array(5)].map((_, j) => (
-                    <Star key={j} className="fill-gold stroke-gold" size={14} />
+                    <Star key={j} className="fill-gold stroke-gold w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 ))}
             </div>
 
@@ -81,6 +81,23 @@ const ReviewCard = ({ review }) => (
 const Reviews = () => {
     // Triple reviews for seamless infinite loop on all screen sizes
     const tripled = [...reviewsData, ...reviewsData, ...reviewsData];
+    const marqueeRef = useRef(null);
+    const touchTimer = useRef(null);
+
+    const handleTouchStart = useCallback(() => {
+        if (marqueeRef.current) {
+            marqueeRef.current.classList.add('paused');
+        }
+        if (touchTimer.current) clearTimeout(touchTimer.current);
+    }, []);
+
+    const handleTouchEnd = useCallback(() => {
+        touchTimer.current = setTimeout(() => {
+            if (marqueeRef.current) {
+                marqueeRef.current.classList.remove('paused');
+            }
+        }, 2000);
+    }, []);
 
     return (
         <section id="reviews" className="py-24 sm:py-32 bg-charcoal relative overflow-hidden">
@@ -108,7 +125,12 @@ const Reviews = () => {
                 <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-r from-charcoal to-transparent z-10 pointer-events-none" />
                 <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-l from-charcoal to-transparent z-10 pointer-events-none" />
 
-                <div className="flex gap-5 animate-marquee w-max">
+                <div
+                    ref={marqueeRef}
+                    className="flex gap-5 animate-marquee w-max"
+                    onTouchStart={handleTouchStart}
+                    onTouchEnd={handleTouchEnd}
+                >
                     {tripled.map((review, i) => (
                         <ReviewCard key={i} review={review} />
                     ))}

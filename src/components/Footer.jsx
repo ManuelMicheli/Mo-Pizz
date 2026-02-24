@@ -3,7 +3,7 @@ import { Instagram, Facebook, Phone } from 'lucide-react';
 
 const Footer = () => {
     return (
-        <footer className="w-full pt-20 pb-10 px-6 sm:px-12 md:px-20 lg:px-32 bg-[#111111] text-cream rounded-t-[4rem] relative mt-[-2rem] z-20">
+        <footer className="w-full pt-16 sm:pt-20 pb-8 sm:pb-10 px-4 sm:px-8 md:px-16 lg:px-32 bg-[#111111] text-cream rounded-t-[3rem] sm:rounded-t-[4rem] relative mt-[-2rem] z-20">
 
             {/* Top Divider */}
             <div className="absolute top-0 left-12 right-12 h-[1px] bg-ember/40"></div>
@@ -30,11 +30,11 @@ const Footer = () => {
                     <div className="flex flex-col items-center md:items-start gap-4 mx-auto md:mx-0">
                         <h4 className="font-sans font-bold text-lg mb-2 uppercase tracking-wide">Navigazione</h4>
                         <div className="flex flex-col gap-3 font-sans text-smoke">
-                            <a href="#" className="hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Home</a>
-                            <a href="#menu" className="hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Menu</a>
-                            <a href="#chef" className="hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Lo Chef</a>
-                            <a href="#contatti" className="hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Contatti</a>
-                            <a href="#contatti" className="hover:text-cream hover:-translate-y-[1px] transition-all duration-300 flex items-center gap-2"><Phone size={14} />Prenota</a>
+                            <a href="#" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Home</a>
+                            <a href="#menu" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Menu</a>
+                            <a href="#chef" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Lo Chef</a>
+                            <a href="#contatti" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Contatti</a>
+                            <a href="#contatti" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300 flex items-center gap-2"><Phone size={18} />Prenota</a>
                         </div>
                     </div>
 
@@ -49,7 +49,7 @@ const Footer = () => {
                                 <Facebook size={20} />
                             </a>
                         </div>
-                        <div className="flex flex-col gap-1 mt-auto font-caveat text-smoke text-xl opacity-60">
+                        <div className="flex flex-col gap-1 mt-auto font-caveat text-smoke text-lg sm:text-xl opacity-60">
                             <p>© 2025 Mo Pizz Legnano SRL</p>
                             <p>P.IVA 10529490960</p>
                         </div>
