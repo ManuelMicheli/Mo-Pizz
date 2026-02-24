@@ -1,0 +1,19 @@
+node_modules
+dist
+.env
+.env.local
+*.log
+.DS_Store
+Thumbs.db
+.claude/
+
+# Original high-res source images (compressed webp versions in public/images/menu/)
+public/images/wmremove-transformed (21).png
+public/images/wmremove-transformed (24).png
+public/images/wmremove-transformed (29).png
+public/images/wmremove-transformed (31).png
+public/images/wmremove-transformed (32).png
+public/images/wmremove-transformed (33).png
+public/images/wmremove-transformed (18).png
+public/brand-assets/menu-extracted-text.txt
+FONT/
