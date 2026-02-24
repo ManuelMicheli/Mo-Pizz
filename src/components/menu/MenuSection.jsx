@@ -49,32 +49,7 @@ const MenuSection = () => {
         <MenuIntro />
       </div>
 
-      {/* CTA — between the two images */}
-      <div className="w-full bg-charcoal flex flex-col items-center justify-center py-10 sm:py-14">
-        <button
-          onClick={handleCtaClick}
-          className={`magnetic-btn border font-sans font-bold py-3.5 px-10 rounded-full transition-colors duration-300 text-base tracking-wide cursor-pointer ${
-            menuUnlocked
-              ? 'border-flame/60 text-flame hover:bg-flame hover:text-cream'
-              : 'border-cream/60 text-cream hover:bg-cream hover:text-charcoal'
-          }`}
-        >
-          {menuUnlocked ? 'Chiudi il Menu' : 'Esplora il Menu'}
-        </button>
-        {!menuUnlocked && <ChevronDown size={20} className="text-cream/40 animate-bounce-slow mt-3" />}
-      </div>
-
-      {/* Scroll anchor + menu */}
-      <div ref={scrollAnchorRef} />
-
-      {menuUnlocked && (
-        <>
-          <MenuHorizontalScroll />
-          <MenuHighlight />
-        </>
-      )}
-
-      {/* Full-width image 46 — flush between CTA and video */}
+      {/* Full-width image 46 — flush with MenuIntro, CTA overlaid */}
       <div className="relative w-full h-[50dvh] overflow-hidden">
         <img
           src="/images/wmremove-transformed (46).png"
@@ -106,7 +81,31 @@ const MenuSection = () => {
             backgroundSize: '256px 256px',
           }}
         />
+        {/* CTA — centered over image 46 */}
+        <div className="absolute inset-0 z-30 flex flex-col items-center justify-center">
+          <button
+            onClick={handleCtaClick}
+            className={`magnetic-btn border font-sans font-bold py-3.5 px-10 rounded-full transition-colors duration-300 text-base tracking-wide cursor-pointer ${
+              menuUnlocked
+                ? 'border-flame/60 text-flame hover:bg-flame hover:text-cream'
+                : 'border-cream/60 text-cream hover:bg-cream hover:text-charcoal'
+            }`}
+          >
+            {menuUnlocked ? 'Chiudi il Menu' : 'Esplora il Menu'}
+          </button>
+          {!menuUnlocked && <ChevronDown size={20} className="text-cream/40 animate-bounce-slow mt-3" />}
+        </div>
       </div>
+
+      {/* Scroll anchor + menu */}
+      <div ref={scrollAnchorRef} />
+
+      {menuUnlocked && (
+        <>
+          <MenuHorizontalScroll />
+          <MenuHighlight />
+        </>
+      )}
 
       <MenuVideoIntro />
     </div>
