@@ -58,6 +58,15 @@ const MenuSection = () => {
         </>
       )}
 
+      {/* Full-width image 46 — half-hero vertical padding */}
+      <div className="w-full bg-charcoal py-[25dvh]">
+        <img
+          src="/images/wmremove-transformed (46).png"
+          alt=""
+          className="w-full h-auto object-cover"
+        />
+      </div>
+
       <MenuVideoIntro />
     </div>
   );
