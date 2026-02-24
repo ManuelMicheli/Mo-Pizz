@@ -60,15 +60,20 @@ const Features = () => {
                                 key={card.id}
                                 className="feature-card split-accordion-card relative overflow-hidden rounded-2xl sm:rounded-[2rem] md:rounded-[3rem] bg-charcoal/50 h-28 sm:h-32 md:h-auto"
                             >
-                                {/* Background split layer */}
+                                {/* Background split layer — default */}
                                 <div
-                                    className="absolute inset-0 bg-no-repeat accordion-bg"
+                                    className="absolute inset-0 bg-no-repeat accordion-bg accordion-bg-default"
                                     style={{
                                         backgroundImage: `url('/images/wmremove-transformed.png')`
                                     }}
                                 />
-
-                                {/* Removed text and overlay to show clean image */}
+                                {/* Background split layer — hover */}
+                                <div
+                                    className="absolute inset-0 bg-no-repeat accordion-bg accordion-bg-hover"
+                                    style={{
+                                        backgroundImage: `url('/images/wmremove-transformed (43).png')`
+                                    }}
+                                />
                             </div>
                         ))}
                     </div>
@@ -77,6 +82,17 @@ const Features = () => {
                         .split-accordion-card {
                             flex: 1;
                         }
+
+                        /* Hover transition layers */
+                        .accordion-bg-default,
+                        .accordion-bg-hover {
+                            transition: opacity 0.5s ease;
+                        }
+                        .accordion-bg-default { opacity: 1; }
+                        .accordion-bg-hover { opacity: 0; }
+
+                        .group-container:hover .accordion-bg-default { opacity: 0; }
+                        .group-container:hover .accordion-bg-hover { opacity: 1; }
 
                         /* Background position logic */
                         @media (min-width: 768px) {

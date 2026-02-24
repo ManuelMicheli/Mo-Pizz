@@ -22,10 +22,15 @@ const Hero = () => {
     return (
         <section ref={containerRef} id="home" className="relative w-full h-[100dvh] overflow-hidden flex items-center px-5 sm:px-10 md:px-16 lg:px-32">
             {/* Background Image */}
-            <div
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-                style={{ backgroundImage: `url('/images/wmremove-transformedhero.png')` }}
-            />
+            <picture className="absolute inset-0 z-0">
+                <source srcSet="/images/wmremove-transformedhero.webp" type="image/webp" />
+                <img
+                    src="/images/wmremove-transformedhero.png"
+                    alt=""
+                    className="w-full h-full object-cover object-center"
+                    loading="eager"
+                />
+            </picture>
 
             {/* "Mo Pizz" — top left, big & black */}
             <div className="hero-elem absolute top-8 sm:top-12 left-6 sm:left-12 md:left-20 lg:left-32 z-20">
