@@ -4,7 +4,7 @@ import { MapPin, Phone, Instagram, Map } from 'lucide-react';
 const Contacts = () => {
     return (
         <section id="contatti" className="py-24 sm:py-32 px-6 sm:px-12 md:px-20 lg:px-32 bg-flour text-charcoal relative">
-            <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-start">
+            <div className="max-w-[1600px] mx-auto flex flex-col lg:flex-row gap-16 xl:gap-24 items-start">
 
                 {/* Left Column - Info */}
                 <div className="w-full lg:w-1/2 flex flex-col">
