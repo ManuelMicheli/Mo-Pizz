@@ -25,8 +25,6 @@ const Hero = () => {
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
                 style={{ backgroundImage: `url('/images/wmremove-transformedhero.png')` }}
-                role="img"
-                aria-label="Pizza napoletana verace dal forno a legna di Mo Pizz a Legnano"
             />
 
             {/* Content */}
@@ -41,9 +39,9 @@ const Hero = () => {
                 <div className="hero-elem flex flex-col">
                     <h1 className="font-playfair font-black text-cream text-[clamp(2.5rem,8vw,8rem)] leading-[0.9] -ml-1">
                         La Vera
-                        <span className="block font-playfair font-black italic text-flame text-[clamp(2.5rem,9vw,9rem)] leading-[1]">
-                            Pizza Napoletana.
-                        </span>
+                    </h1>
+                    <h1 className="font-playfair font-black italic text-flame text-[clamp(2.5rem,9vw,9rem)] leading-[1] -ml-1">
+                        Pizza Napoletana.
                     </h1>
                 </div>
 
