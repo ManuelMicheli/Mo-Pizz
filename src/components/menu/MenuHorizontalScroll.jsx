@@ -242,7 +242,8 @@ const MenuHorizontalScroll = () => {
     );
     sectionObserver.observe(section);
 
-    // Active category tracking
+    // Active category tracking — use negative bottom margin so only the
+    // category whose TOP portion is in view counts as active
     const catObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -252,7 +253,7 @@ const MenuHorizontalScroll = () => {
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.1, rootMargin: '0px 0px -60% 0px' }
     );
 
     categoryRefs.current.forEach((ref) => {
@@ -309,7 +310,11 @@ const MenuHorizontalScroll = () => {
                         key={sIdx}
                         onClick={() => {
                           setPizzeriaActiveSection(sIdx);
-                          pizzeriaSectionRefs.current[sIdx]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          const el = pizzeriaSectionRefs.current[sIdx];
+                          if (el) {
+                            const y = el.getBoundingClientRect().top + window.scrollY - 20;
+                            window.scrollTo({ top: y, behavior: 'smooth' });
+                          }
                         }}
                         className={`flex-shrink-0 font-sans text-xs tracking-wide py-2 px-4 rounded-full border transition-all duration-300 ${
                           pizzeriaActiveSection === sIdx

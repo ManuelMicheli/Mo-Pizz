@@ -8,10 +8,8 @@ const Features = () => {
     const sectionRef = useRef(null);
     const trackRef = useRef(null);
     const progressRef = useRef(null);
-    const carouselRef = useRef(null);
 
     const [isMobile, setIsMobile] = useState(false);
-    const [activeCard, setActiveCard] = useState(0);
 
     // Mobile detection
     useEffect(() => {
@@ -73,41 +71,21 @@ const Features = () => {
                 });
             });
 
-            // ── Mobile: only animate header ──
+            // ── Mobile: animate header + image ──
             mm.add('(max-width: 767px)', () => {
                 gsap.from('.features-header', {
                     y: 30, opacity: 0, duration: 0.8, ease: 'power3.out',
                     scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' },
+                });
+                gsap.from('.features-mobile-img', {
+                    y: 40, opacity: 0, scale: 0.97, duration: 1, ease: 'power3.out',
+                    scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' },
                 });
             });
         }, sectionRef);
 
         return () => ctx.revert();
     }, []);
-
-    // IntersectionObserver for mobile active card tracking
-    useEffect(() => {
-        if (!isMobile) return;
-        const carousel = carouselRef.current;
-        if (!carousel) return;
-
-        const cards = carousel.querySelectorAll('.chi-siamo-card');
-
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
-                        const idx = Number(entry.target.dataset.cardIndex);
-                        if (!isNaN(idx)) setActiveCard(idx);
-                    }
-                });
-            },
-            { root: carousel, threshold: 0.6 }
-        );
-
-        cards.forEach((card) => observer.observe(card));
-        return () => observer.disconnect();
-    }, [isMobile]);
 
     const positions = ['0%', '25%', '50%', '75%', '100%'];
 
@@ -127,35 +105,15 @@ const Features = () => {
                     </p>
                 </div>
 
-                {/* Mobile: Horizontal Carousel — color only */}
+                {/* Mobile: Single color image */}
                 {isMobile ? (
-                    <div className="w-full">
-                        <div ref={carouselRef} className="chi-siamo-carousel">
-                            {positions.map((pos, i) => (
-                                <div
-                                    key={i}
-                                    className="chi-siamo-card rounded-2xl overflow-hidden"
-                                    data-card-index={i}
-                                >
-                                    <div
-                                        className="relative w-full h-[50vh] bg-no-repeat accordion-back"
-                                        style={{ backgroundImage: `url('/images/wmremove-transformed (43).png')` }}
-                                        data-pos={pos}
-                                    />
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Dot indicator */}
-                        <div className="flex justify-center gap-2 mt-6">
-                            {positions.map((_, i) => (
-                                <div
-                                    key={i}
-                                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                                        i === activeCard ? 'bg-flame w-6' : 'bg-cream/20'
-                                    }`}
-                                />
-                            ))}
+                    <div className="w-full px-4">
+                        <div className="features-mobile-img rounded-2xl overflow-hidden">
+                            <img
+                                src="/images/wmremove-transformed (43).png"
+                                alt="Chi Siamo — Mo Pizz"
+                                className="w-full h-auto object-cover"
+                            />
                         </div>
                     </div>
                 ) : (
