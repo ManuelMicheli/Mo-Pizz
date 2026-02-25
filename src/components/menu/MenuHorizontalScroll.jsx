@@ -191,9 +191,7 @@ const MenuHorizontalScroll = () => {
       const categories = section.querySelectorAll('.mobile-category');
 
       categories.forEach((cat, i) => {
-        const cardInner = cat.querySelector('.mobile-card-inner');
-
-        // Parallax on hero image — image moves slower than scroll
+        // Parallax on hero image
         const heroImg = cat.querySelector('.mobile-hero-parallax');
         if (heroImg) {
           gsap.fromTo(heroImg,
@@ -211,19 +209,14 @@ const MenuHorizontalScroll = () => {
           );
         }
 
-        // Scale-down + dim effect as category gets covered by the next one
-        if (cardInner && i < categories.length - 1) {
-          gsap.to(cardInner, {
-            scale: 0.92,
-            opacity: 0.5,
-            borderRadius: '1.5rem',
-            ease: 'none',
-            scrollTrigger: {
-              trigger: cat,
-              start: 'bottom 80%',
-              end: 'bottom 20%',
-              scrub: true,
-            },
+        // Pin each category (except last) so the next one scrolls over it
+        if (i < categories.length - 1) {
+          ScrollTrigger.create({
+            trigger: cat,
+            start: 'bottom bottom',
+            end: 'bottom top',
+            pin: true,
+            pinSpacing: false,
           });
         }
       });
@@ -302,40 +295,37 @@ const MenuHorizontalScroll = () => {
               key={category.id}
               ref={(el) => (categoryRefs.current[catIdx] = el)}
               data-cat-index={catIdx}
-              className="mobile-category relative bg-charcoal"
-              style={{ zIndex: catIdx + 1 }}
+              className={`mobile-category relative bg-charcoal ${
+                catIdx > 0 ? 'rounded-t-[2rem] -mt-12 shadow-[0_-20px_60px_rgba(0,0,0,0.8)]' : ''
+              }`}
+              style={{ zIndex: (catIdx + 1) * 10 }}
             >
-              {/* Full category card — sticks to create covering effect */}
-              <div className="mobile-card-inner sticky top-0 overflow-hidden will-change-transform origin-top">
-                {/* Hero Image with parallax */}
-                {category.heroImage && (
-                  <div className="relative w-full h-[55vh] max-h-[400px] overflow-hidden">
-                    <div className="mobile-hero-parallax absolute inset-0 will-change-transform">
-                      <img
-                        src={category.heroImage}
-                        alt={category.title}
-                        loading={catIdx === 0 ? 'eager' : 'lazy'}
-                        className="w-full h-[120%] object-cover"
-                      />
-                    </div>
-                    {/* Category title overlay */}
-                    <div className="absolute bottom-12 left-5 right-5 z-10">
-                      <h3 className="font-playfair font-black text-cream text-3xl leading-none drop-shadow-lg">
-                        {category.title}
-                      </h3>
-                    </div>
-                    {/* Bottom gradient fade into card */}
-                    <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent" />
-                    {/* Top shadow edge for covering effect (not on first) */}
-                    {catIdx > 0 && (
-                      <div className="absolute top-0 left-0 right-0 h-6 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]" />
-                    )}
+              {/* Hero Image with parallax */}
+              {category.heroImage && (
+                <div className={`relative w-full h-[55vh] max-h-[400px] overflow-hidden ${
+                  catIdx > 0 ? 'rounded-t-[2rem]' : ''
+                }`}>
+                  <div className="mobile-hero-parallax absolute inset-0 will-change-transform">
+                    <img
+                      src={category.heroImage}
+                      alt={category.title}
+                      loading={catIdx === 0 ? 'eager' : 'lazy'}
+                      className="w-full h-[120%] object-cover"
+                    />
                   </div>
-                )}
-              </div>
+                  {/* Category title overlay */}
+                  <div className="absolute bottom-12 left-5 right-5 z-10">
+                    <h3 className="font-playfair font-black text-cream text-3xl leading-none drop-shadow-lg">
+                      {category.title}
+                    </h3>
+                  </div>
+                  {/* Bottom gradient fade into card */}
+                  <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent" />
+                </div>
+              )}
 
               {/* Menu Items Card */}
-              <div className="relative bg-charcoal rounded-t-3xl -mt-8 pt-8 px-5 pb-10" style={{ zIndex: catIdx + 2 }}>
+              <div className="relative bg-charcoal -mt-8 pt-8 px-5 pb-16">
                 {/* Category subtitle */}
                 <div className="mb-8">
                   <p className="font-sans text-smoke text-sm">{category.subtitle}</p>
