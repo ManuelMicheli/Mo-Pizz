@@ -93,7 +93,7 @@ const Contacts = () => {
                 <div className="w-full lg:w-1/2 aspect-[4/3] sm:aspect-[3/2] lg:aspect-auto lg:h-[700px] h-[45vh] sm:h-auto sm:max-h-[60vh] lg:max-h-none rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-2xl flex relative bg-smoke/20">
                     {mapsLoaded ? (
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.6338006679586!2d8.903960076296!3d45.597970371077366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786915df0000000%3A0x1d36cbede0802c6b!2sMo%20pizz!5e0!3m2!1sen!2sit!4v1700000000000!5m2!1sen!2sit"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.6338006679586!2d8.903960076296!3d45.597950371077366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786915df0000000%3A0x1d36cbede0802c6b!2sMo%20pizz!5e0!3m2!1sen!2sit!4v1700000000000!5m2!1sen!2sit"
                             className="absolute inset-0 w-full h-full border-0"
                             allowFullScreen=""
                             loading="lazy"
