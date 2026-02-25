@@ -12,7 +12,7 @@ export default function MobileMenuTabBar({ activeIndex, onTabPress, visible }) {
   return (
     <nav
       className={`
-        fixed bottom-0 left-0 right-0 z-50
+        fixed bottom-0 left-0 right-0 z-40
         bg-charcoal/80 backdrop-blur-xl border-t border-white/10
         safe-bottom
         flex items-center justify-around
@@ -33,6 +33,7 @@ export default function MobileMenuTabBar({ activeIndex, onTabPress, visible }) {
             onClick={() => onTabPress(i)}
             className={`
               relative flex-1 py-3 font-sans text-xs tracking-wide
+              whitespace-nowrap truncate
               transition-colors duration-300
               ${isActive ? 'text-cream font-bold' : 'text-smoke'}
             `}

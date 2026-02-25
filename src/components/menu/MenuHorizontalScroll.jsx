@@ -255,7 +255,7 @@ const MenuHorizontalScroll = () => {
             >
               {/* Sticky Hero Image */}
               {category.heroImage && (
-                <div className="sticky top-0 z-0 w-full h-[55vh] overflow-hidden">
+                <div className="sticky top-0 z-0 w-full h-[55vh] max-h-[400px] overflow-hidden" style={{ willChange: 'transform' }}>
                   <img
                     src={category.heroImage}
                     alt={category.title}

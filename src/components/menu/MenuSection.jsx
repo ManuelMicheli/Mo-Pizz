@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -11,8 +11,15 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const MenuSection = () => {
   const [menuUnlocked, setMenuUnlocked] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
   const scrollAnchorRef = useRef(null);
   const heroRef = useRef(null);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   const handleCtaClick = useCallback(() => {
     if (menuUnlocked) {
@@ -46,13 +53,16 @@ const MenuSection = () => {
   return (
     <div id="menu">
       <div ref={heroRef}>
-        <MenuIntro onCtaClick={handleCtaClick} menuOpen={menuUnlocked} />
+        <MenuIntro
+          onCtaClick={isMobile ? undefined : handleCtaClick}
+          menuOpen={isMobile ? true : menuUnlocked}
+        />
       </div>
 
       {/* Scroll anchor + menu */}
       <div ref={scrollAnchorRef} />
 
-      {menuUnlocked && (
+      {(isMobile || menuUnlocked) && (
         <>
           <MenuHorizontalScroll />
           <MenuHighlight />

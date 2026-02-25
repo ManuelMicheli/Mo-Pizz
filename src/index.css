@@ -186,3 +186,29 @@ body {
 .safe-top {
   padding-top: env(safe-area-inset-top);
 }
+
+/* Chi Siamo mobile carousel */
+.chi-siamo-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  gap: 12px;
+  padding: 0 7.5vw;
+}
+.chi-siamo-carousel::-webkit-scrollbar {
+  display: none;
+}
+.chi-siamo-card {
+  scroll-snap-align: center;
+  flex-shrink: 0;
+  width: 85vw;
+}
+.chi-siamo-flip-inner {
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.chi-siamo-flip-inner.flipped {
+  transform: rotateY(180deg);
+}
