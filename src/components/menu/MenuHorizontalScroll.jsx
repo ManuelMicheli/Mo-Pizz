@@ -210,13 +210,14 @@ const MenuHorizontalScroll = () => {
         }
 
         // Pin each category (except last) so the next one scrolls over it
+        // end: +=150 adds extra scroll where category stays visible before being covered
         if (i < categories.length - 1) {
           ScrollTrigger.create({
             trigger: cat,
             start: 'bottom bottom',
-            end: 'bottom top',
+            end: '+=150',
             pin: true,
-            pinSpacing: false,
+            pinSpacing: true,
           });
         }
       });
@@ -325,7 +326,7 @@ const MenuHorizontalScroll = () => {
               )}
 
               {/* Menu Items Card */}
-              <div className="relative bg-charcoal -mt-8 pt-8 px-5 pb-16">
+              <div className="relative bg-charcoal -mt-8 pt-8 px-5 pb-40">
                 {/* Category subtitle */}
                 <div className="mb-8">
                   <p className="font-sans text-smoke text-sm">{category.subtitle}</p>
@@ -394,7 +395,11 @@ const MenuHorizontalScroll = () => {
         <MobileMenuTabBar
           activeIndex={mobileActiveCategory}
           onTabPress={(i) => {
-            categoryRefs.current[i]?.scrollIntoView({ behavior: 'smooth' });
+            const el = categoryRefs.current[i];
+            if (el) {
+              const y = el.getBoundingClientRect().top + window.scrollY - 10;
+              window.scrollTo({ top: y, behavior: 'smooth' });
+            }
           }}
           visible={tabBarVisible}
         />
