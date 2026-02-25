@@ -210,14 +210,13 @@ const MenuHorizontalScroll = () => {
         }
 
         // Pin each category (except last) so the next one scrolls over it
-        // end: +=150 adds extra scroll where category stays visible before being covered
         if (i < categories.length - 1) {
           ScrollTrigger.create({
             trigger: cat,
             start: 'bottom bottom',
-            end: '+=80',
+            end: 'bottom top',
             pin: true,
-            pinSpacing: true,
+            pinSpacing: false,
           });
         }
       });
