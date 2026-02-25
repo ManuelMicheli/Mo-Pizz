@@ -1,5 +1,3 @@
-# Mo Pizz — La Vera Pizza Napoletana | Legnano
 User-agent: *
 Allow: /
-
-Sitemap: https://mo-pizz.vercel.app/sitemap.xml
+Disallow: /privacy
