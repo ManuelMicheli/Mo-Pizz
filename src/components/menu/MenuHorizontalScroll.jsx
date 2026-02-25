@@ -26,6 +26,108 @@ const HighlightBadges = ({ text }) => {
   );
 };
 
+/* ── Desktop Panel Right-Side: stacking-sticky sub-nav between sections ───── */
+const PanelContent = ({ category, handleDishHover }) => {
+  const scrollRef = useRef(null);
+  const sectionRefs = useRef([]);
+  const navBarRefs = useRef([]);
+  const hasSubNav = category.sections.length > 1;
+
+  const scrollToSection = useCallback((idx) => {
+    const container = scrollRef.current;
+    const navBar = navBarRefs.current[idx];
+    const el = sectionRefs.current[idx];
+    if (!container || !el) return;
+
+    if (idx === 0) {
+      container.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    // Calculate the nav bar's normal-flow position (right before the section)
+    const containerRect = container.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+    const navH = navBar ? navBar.offsetHeight : 0;
+    const navScrollPos = container.scrollTop + (elRect.top - containerRect.top) - navH;
+
+    // Scroll so the nav sits ~60px from the top — the previous section's
+    // last item stays visible above the nav, heading appears below
+    container.scrollTo({
+      top: navScrollPos - 60,
+      behavior: 'smooth',
+    });
+  }, []);
+
+  const renderNavPills = (currentSIdx) => (
+    <div className="flex gap-2 overflow-x-auto scrollbar-hide">
+      {category.sections.map((sec, navIdx) => (
+        <button
+          key={navIdx}
+          onClick={() => scrollToSection(navIdx)}
+          className={`flex-shrink-0 font-sans text-[11px] tracking-wide py-1.5 px-3.5 rounded-full border transition-all duration-300 cursor-pointer whitespace-nowrap ${
+            currentSIdx === navIdx
+              ? 'bg-flame/15 border-flame/40 text-flame font-bold'
+              : 'bg-white/5 border-white/10 text-smoke hover:text-cream hover:border-white/20'
+          }`}
+        >
+          {sec.heading}
+        </button>
+      ))}
+    </div>
+  );
+
+  return (
+    <div ref={scrollRef} className="w-[60%] h-full overflow-y-auto px-10 md:px-16 pt-20 pb-12 flex flex-col">
+      {category.sections.map((section, sIdx) => (
+        <React.Fragment key={sIdx}>
+          {/* Stacking-sticky nav — one before each section, each pushes the previous off */}
+          {hasSubNav && (
+            <div
+              ref={(el) => (navBarRefs.current[sIdx] = el)}
+              className="sticky top-0 z-20 -mx-10 md:-mx-16 px-10 md:px-16 pt-3 pb-3 bg-charcoal/90 backdrop-blur-md border-b border-white/5"
+            >
+              {renderNavPills(sIdx)}
+            </div>
+          )}
+          <div
+            ref={(el) => (sectionRefs.current[sIdx] = el)}
+            data-section-idx={sIdx}
+            className={hasSubNav ? 'mb-4' : 'mb-10'}
+          >
+            <h4 className="font-caveat text-gold text-2xl sm:text-3xl mb-6 mt-4">
+              {section.heading}
+            </h4>
+            <div className="space-y-1">
+              {section.items.map((item, iIdx) => (
+                <div
+                  key={iIdx}
+                  className="menu-item group flex items-baseline justify-between py-3 border-b border-white/5 hover:border-flame/30 transition-colors duration-300 cursor-default"
+                  onMouseEnter={() => handleDishHover(item.hoverImage)}
+                  onMouseLeave={() => handleDishHover(null)}
+                >
+                  <div className="flex-1 mr-4">
+                    <span className="font-playfair font-bold text-cream text-lg sm:text-xl group-hover:text-flame transition-colors duration-300">
+                      {item.name}
+                    </span>
+                    <span className="block font-sans text-smoke text-sm italic mt-0.5 leading-relaxed">
+                      <HighlightBadges text={item.desc} />
+                    </span>
+                  </div>
+                  <span className="font-mono text-gold text-base sm:text-lg flex-shrink-0 tabular-nums">
+                    {item.price}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </React.Fragment>
+      ))}
+      {/* Spacer so the last sections can scroll fully into position */}
+      {hasSubNav && <div className="flex-shrink-0 min-h-[60vh]" />}
+    </div>
+  );
+};
+
 const MenuHorizontalScroll = () => {
   const containerRef = useRef(null);
   const trackRef = useRef(null);
@@ -40,8 +142,8 @@ const MenuHorizontalScroll = () => {
   const [mobileActiveCategory, setMobileActiveCategory] = useState(0);
   const [tabBarVisible, setTabBarVisible] = useState(false);
   const categoryRefs = useRef([]);
-  const [pizzeriaActiveSection, setPizzeriaActiveSection] = useState(0);
-  const pizzeriaSectionRefs = useRef([]);
+  const [activeSections, setActiveSections] = useState({});
+  const mobileSectionRefsMap = useRef({});
 
   // Navigate to a specific category panel
   const goToCategory = useCallback((index) => {
@@ -225,25 +327,28 @@ const MenuHorizontalScroll = () => {
     return () => ctx.revert();
   }, [isMobile]);
 
-  // IntersectionObserver for pizzeria sub-section tracking
+  // IntersectionObserver for sub-section tracking (all multi-section categories)
   useEffect(() => {
     if (!isMobile) return;
-    const refs = pizzeriaSectionRefs.current;
-    if (!refs.length) return;
+    const elements = Object.values(mobileSectionRefsMap.current).filter(Boolean);
+    if (!elements.length) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const idx = refs.indexOf(entry.target);
-            if (idx !== -1) setPizzeriaActiveSection(idx);
+            const catIdx = Number(entry.target.dataset.catIdx);
+            const sIdx = Number(entry.target.dataset.sIdx);
+            if (!isNaN(catIdx) && !isNaN(sIdx)) {
+              setActiveSections(prev => ({ ...prev, [catIdx]: sIdx }));
+            }
           }
         });
       },
       { threshold: 0.3 }
     );
 
-    refs.forEach((ref) => { if (ref) observer.observe(ref); });
+    elements.forEach((ref) => observer.observe(ref));
     return () => observer.disconnect();
   }, [isMobile]);
 
@@ -331,22 +436,22 @@ const MenuHorizontalScroll = () => {
                   <p className="font-sans text-smoke text-sm">{category.subtitle}</p>
                 </div>
 
-                {/* Mini sub-tabs — only for Pizzeria (first category) */}
-                {catIdx === 0 && (
+                {/* Mini sub-tabs for multi-section categories */}
+                {category.sections.length > 1 && (
                   <div className="flex gap-2 mb-8 overflow-x-auto scrollbar-hide -mx-1 px-1">
                     {category.sections.map((sec, sIdx) => (
                       <button
                         key={sIdx}
                         onClick={() => {
-                          setPizzeriaActiveSection(sIdx);
-                          const el = pizzeriaSectionRefs.current[sIdx];
+                          setActiveSections(prev => ({ ...prev, [catIdx]: sIdx }));
+                          const el = mobileSectionRefsMap.current[`${catIdx}-${sIdx}`];
                           if (el) {
                             const y = el.getBoundingClientRect().top + window.scrollY - 20;
                             window.scrollTo({ top: y, behavior: 'smooth' });
                           }
                         }}
                         className={`flex-shrink-0 font-sans text-xs tracking-wide py-2 px-4 rounded-full border transition-all duration-300 ${
-                          pizzeriaActiveSection === sIdx
+                          (activeSections[catIdx] || 0) === sIdx
                             ? 'bg-flame/15 border-flame/40 text-flame font-bold'
                             : 'bg-white/5 border-white/10 text-smoke'
                         }`}
@@ -360,7 +465,11 @@ const MenuHorizontalScroll = () => {
                 {category.sections.map((section, sIdx) => (
                   <div
                     key={sIdx}
-                    ref={catIdx === 0 ? (el) => (pizzeriaSectionRefs.current[sIdx] = el) : undefined}
+                    ref={category.sections.length > 1 ? (el) => {
+                      mobileSectionRefsMap.current[`${catIdx}-${sIdx}`] = el;
+                    } : undefined}
+                    data-cat-idx={catIdx}
+                    data-s-idx={sIdx}
                     className="mb-8"
                   >
                     <h4 className="font-caveat text-gold text-2xl mb-4">{section.heading}</h4>
@@ -500,38 +609,8 @@ const MenuHorizontalScroll = () => {
                 </div>
               </div>
 
-              {/* Right: Menu Grid (60%) */}
-              <div className="w-[60%] h-full overflow-y-auto px-10 md:px-16 pt-20 pb-12 flex flex-col">
-                {category.sections.map((section, sIdx) => (
-                  <div key={sIdx} className="mb-10">
-                    <h4 className="font-caveat text-gold text-2xl sm:text-3xl mb-6">
-                      {section.heading}
-                    </h4>
-                    <div className="space-y-1">
-                      {section.items.map((item, iIdx) => (
-                        <div
-                          key={iIdx}
-                          className="menu-item group flex items-baseline justify-between py-3 border-b border-white/5 hover:border-flame/30 transition-colors duration-300 cursor-default"
-                          onMouseEnter={() => handleDishHover(item.hoverImage)}
-                          onMouseLeave={() => handleDishHover(null)}
-                        >
-                          <div className="flex-1 mr-4">
-                            <span className="font-playfair font-bold text-cream text-lg sm:text-xl group-hover:text-flame transition-colors duration-300">
-                              {item.name}
-                            </span>
-                            <span className="block font-sans text-smoke text-sm italic mt-0.5 leading-relaxed">
-                              <HighlightBadges text={item.desc} />
-                            </span>
-                          </div>
-                          <span className="font-mono text-gold text-base sm:text-lg flex-shrink-0 tabular-nums">
-                            {item.price}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
+              {/* Right: Menu Grid (60%) with sub-nav */}
+              <PanelContent category={category} handleDishHover={handleDishHover} />
             </div>
           ))}
         </div>

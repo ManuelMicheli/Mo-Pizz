@@ -2,7 +2,7 @@
  * Menu data for Mo Pizz restaurant.
  *
  * Exports:
- *   menuCategories  - array of 4 category objects (Pizzeria, Cucina, Dolci, Birre & Vini)
+ *   menuCategories  - array of 4 category objects (Pizzeria, Cucina [8 sezioni], Dolci, Birre & Vini)
  *   signatureDishes - array of 3 signature dish objects for the highlight section
  */
 
@@ -86,26 +86,80 @@ export const menuCategories = [
     heroFit: 'contain',
     sections: [
       {
-        heading: 'Antipasti',
+        heading: 'Antipasti di Mare',
         items: [
-          { name: 'Fritturine Napoletane', desc: 'Crocch\u00E8, arancini, frittatine artigianali', price: '12.00' },
-          { name: 'Crudo e Bufala', desc: 'Crudo di Parma 24 mesi con Bufala Campana', price: '15.00', badges: ['DOP'] },
-          { name: 'Tagliere Campano', desc: 'Salumi selezionati da piccoli artigiani del territorio', price: '15.00' },
+          { name: "A' Mpepata e Cozze", desc: 'Cozze fresche saltate in padella, olio, aglio, limone I.G.P. e prezzemolo', price: '12.00' },
+          { name: 'Nzalat e Mar', desc: 'Insalata di mare classica con seppioline, polpo, gamberetti, calamari e cozze', price: '14.00' },
+          { name: "A' Bruschetta e Mare", desc: 'Bruschetta con stracciata di bufala campana, filetto di acciuga e bruschetta con polipetti alla luciana', price: '10.00' },
+          { name: 'O Purptiell Affugat', desc: 'Polipetti alla luciana, pomodoro San Marzano e tanto amore', price: '13.00' },
+          { name: 'Code di Gambero alla Catalana', desc: 'Code di gambero cotte, servite con verdurine, olio EVO e basilico', price: '15.00' },
+          { name: "O' Mar a Tavola", desc: 'Mix di antipasti di mare in unica portata', price: '18.00' },
         ],
       },
       {
-        heading: 'Primi',
+        heading: 'Antipasti, Sfizi e Fritti',
         items: [
-          { name: 'Spaghetto & Bisque', desc: 'Spaghetto trafilato a bronzo, bisque di crostacei', price: '14.00', hoverImage: '/images/menu/spaghetto.jpg' },
-          { name: 'Mezzemaniche e Purptiell', desc: 'Pasta corta, polpo verace napoletano', price: '14.00' },
-          { name: 'La Nerano', desc: 'Spaghetti trafilati a bronzo, crema di zucchine, menta, provolone del Monaco', price: '13.00', badges: ['DOP'], hoverImage: '/images/menu/nerano.jpg' },
+          { name: "O' Cuopp", desc: 'Tipici fritti napoletani: zeppoline, crocch\u00E8, frittatine', price: '10.00' },
+          { name: "A' Fellat", desc: 'Selezione di salumi alta qualit\u00E0, stracciatella, bufala campana D.O.G.C., gnocco fritto home made', price: '15.00' },
+          { name: "A' Parmmigian", desc: 'Classica parmigiana di melanzane', price: '9.00' },
+          { name: "A' Bruschetta e Terra", desc: 'Bruschetta classica con pomodorini, basilico, origano e olio EVO; bruschetta con Parma 24 mesi e stracciata di bufala', price: '7.00' },
+          { name: 'Tris di Frittatine', desc: 'Tris di frittatine napoletane', price: '7.00' },
+          { name: 'Patatine alla Zingara', desc: 'Patatine fritte, ripassate in forno con provola di Agerola affumicata e wurstel', price: '6.00' },
         ],
       },
       {
-        heading: 'Secondi',
+        heading: 'Primi di Mare',
         items: [
-          { name: 'Fritto Misto', desc: 'Calamari, gamberi, verdure di stagione', price: '18.00' },
-          { name: 'Porchettato Disossato', desc: 'Porchetta artigianale con contorno', price: '14.00' },
+          { name: "O' Scialatiello allo Scoglio", desc: 'Pasta fresca napoletana in crosta vesuviana, prima cottura in cucina, seconda nel forno della pizza, basilico e olio EVO', price: '19.00' },
+          { name: "Spaghetto a' Vongole", desc: 'Spaghetto trafilato a bronzo con vongole veraci', price: '18.00' },
+          { name: 'Spaghetto & Bisque', desc: 'Spaghetto, bisque di crostacei, olio EVO e zeste di limone della costiera', price: '14.00', hoverImage: '/images/menu/spaghetto.jpg' },
+          { name: 'Mezzemaniche e Purptiell', desc: 'Mezzemaniche, polipetti, pomodoro, capperi e taggiasche, basilico e olio EVO', price: '14.00' },
+        ],
+      },
+      {
+        heading: 'Primi della Tradizione',
+        items: [
+          { name: 'Pasta, Patate e Provola', desc: 'Pasta della tradizione napoletana, patate selezionate, provola di Agerola affumicata, pepe, basilico e olio EVO', price: '13.00' },
+          { name: 'Pasta Fasule e Cozz', desc: 'Pasta della tradizione napoletana, fagioli cannellini e cozze fresche, olio EVO', price: '14.00' },
+          { name: "A' Genovese", desc: 'Zito napoletano, cipolla di Montoro, carne di manzo e lunga cottura, basilico e olio EVO', price: '14.00' },
+          { name: 'La Nerano', desc: 'Spaghetti trafilati a bronzo, crema di zucchine, profumo di menta, chips di zucchine e provolone del Monaco', price: '13.00', badges: ['DOP'], hoverImage: '/images/menu/nerano.jpg' },
+        ],
+      },
+      {
+        heading: 'Secondi di Mare',
+        items: [
+          { name: 'Bianco di Orata', desc: 'Filetto di orata e i suoi profumi, servito con crosta di patate e zucchine, olio EVO', price: '15.00' },
+          { name: "A' Frittur e' Pesce", desc: 'Classico fritto misto con calamari, gamberi e verdure', price: '18.00' },
+          { name: "O' Calamar M'buttunato", desc: 'Calamaro al forno farcito con pane, acciughe, capperi e taggiasche, su cremoso di friariello vivace', price: '16.00' },
+          { name: 'Spiedino di Pesce', desc: 'Due spiedini di gamberi, seppia e calamaro gratinato al forno al profumo di agrumi', price: '15.00' },
+        ],
+      },
+      {
+        heading: 'Secondi di Carne',
+        items: [
+          { name: "A' Purpett ra Nonna", desc: 'Polpette di carne fatte in casa, affogate in pomodoro San Marzano, basilico e olio EVO', price: '12.00' },
+          { name: 'Ribs CBT in Salsa BBQ', desc: 'Costine di maialino cotte a bassa temperatura, salsa BBQ e profumi, patate al forno', price: '15.00' },
+          { name: 'Costata alla Griglia', desc: 'Costata di manzo alla griglia c.ca 500 g, profumo di rosmarino e olio EVO, servita con patate al forno', price: '23.00' },
+          { name: 'Stinco CBT', desc: 'Stinco di maialino cotto a bassa temperatura, disossato e porchettato con i suoi profumi, patate al forno', price: '14.00' },
+        ],
+      },
+      {
+        heading: 'Contorni',
+        items: [
+          { name: 'Patate al Forno', desc: 'Patate al forno con i nostri profumi', price: '5.00' },
+          { name: 'Friarielli Saltati', desc: 'Friarielli saltati in padella', price: '5.00' },
+          { name: 'Patatine Fritte', desc: 'Patatine fritte classiche', price: '4.00' },
+          { name: 'Insalata Verde', desc: 'Insalata verde mista', price: '4.00' },
+          { name: 'Verdure', desc: 'Verdure di stagione', price: '5.00' },
+        ],
+      },
+      {
+        heading: 'Per i Bambini',
+        items: [
+          { name: 'Pennette al Pomodoro', desc: 'Pennetta classica al pomodoro, basilico e olio EVO', price: '8.00' },
+          { name: 'Pennette al Pesto', desc: 'Pennetta classica al pesto artigianale, basilico e olio EVO', price: '8.00' },
+          { name: 'Cotoletta e Patatine', desc: 'Classica cotoletta di pollo, dorata e fritta, servita con patatine fritte', price: '12.00' },
+          { name: "O' Cuopp Beby", desc: 'Nuggets di pollo fritti, serviti con patatine fritte', price: '10.00' },
         ],
       },
     ],
