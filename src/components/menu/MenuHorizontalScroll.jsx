@@ -40,6 +40,8 @@ const MenuHorizontalScroll = () => {
   const [mobileActiveCategory, setMobileActiveCategory] = useState(0);
   const [tabBarVisible, setTabBarVisible] = useState(false);
   const categoryRefs = useRef([]);
+  const [pizzeriaActiveSection, setPizzeriaActiveSection] = useState(0);
+  const pizzeriaSectionRefs = useRef([]);
 
   // Navigate to a specific category panel
   const goToCategory = useCallback((index) => {
@@ -204,6 +206,28 @@ const MenuHorizontalScroll = () => {
     return () => ctx.revert();
   }, [isMobile]);
 
+  // IntersectionObserver for pizzeria sub-section tracking
+  useEffect(() => {
+    if (!isMobile) return;
+    const refs = pizzeriaSectionRefs.current;
+    if (!refs.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = refs.indexOf(entry.target);
+            if (idx !== -1) setPizzeriaActiveSection(idx);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    refs.forEach((ref) => { if (ref) observer.observe(ref); });
+    return () => observer.disconnect();
+  }, [isMobile]);
+
   // IntersectionObserver for mobile tab bar visibility + active category tracking
   useEffect(() => {
     if (!isMobile) return;
@@ -277,8 +301,34 @@ const MenuHorizontalScroll = () => {
                   <p className="font-sans text-smoke text-sm mt-2">{category.subtitle}</p>
                 </div>
 
+                {/* Mini sub-tabs — only for Pizzeria (first category) */}
+                {catIdx === 0 && (
+                  <div className="flex gap-2 mb-8 overflow-x-auto scrollbar-hide -mx-1 px-1">
+                    {category.sections.map((sec, sIdx) => (
+                      <button
+                        key={sIdx}
+                        onClick={() => {
+                          setPizzeriaActiveSection(sIdx);
+                          pizzeriaSectionRefs.current[sIdx]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }}
+                        className={`flex-shrink-0 font-sans text-xs tracking-wide py-2 px-4 rounded-full border transition-all duration-300 ${
+                          pizzeriaActiveSection === sIdx
+                            ? 'bg-flame/15 border-flame/40 text-flame font-bold'
+                            : 'bg-white/5 border-white/10 text-smoke'
+                        }`}
+                      >
+                        {sec.heading}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
                 {category.sections.map((section, sIdx) => (
-                  <div key={sIdx} className="mb-8">
+                  <div
+                    key={sIdx}
+                    ref={catIdx === 0 ? (el) => (pizzeriaSectionRefs.current[sIdx] = el) : undefined}
+                    className="mb-8"
+                  >
                     <h4 className="font-caveat text-gold text-2xl mb-4">{section.heading}</h4>
                     <div className="space-y-1">
                       {section.items.map((item, iIdx) => (

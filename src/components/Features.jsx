@@ -85,7 +85,7 @@ const Features = () => {
         return () => ctx.revert();
     }, []);
 
-    // IntersectionObserver for mobile flip effect
+    // IntersectionObserver for mobile active card tracking
     useEffect(() => {
         if (!isMobile) return;
         const carousel = carouselRef.current;
@@ -96,13 +96,9 @@ const Features = () => {
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
-                    const flipInner = entry.target.querySelector('.flip-inner');
                     if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
-                        flipInner?.classList.add('flipped');
                         const idx = Number(entry.target.dataset.cardIndex);
                         if (!isNaN(idx)) setActiveCard(idx);
-                    } else {
-                        flipInner?.classList.remove('flipped');
                     }
                 });
             },
@@ -131,7 +127,7 @@ const Features = () => {
                     </p>
                 </div>
 
-                {/* Mobile: Horizontal Carousel */}
+                {/* Mobile: Horizontal Carousel — color only */}
                 {isMobile ? (
                     <div className="w-full">
                         <div ref={carouselRef} className="chi-siamo-carousel">
@@ -140,32 +136,12 @@ const Features = () => {
                                     key={i}
                                     className="chi-siamo-card rounded-2xl overflow-hidden"
                                     data-card-index={i}
-                                    style={{ perspective: '1200px' }}
                                 >
-                                    <div className="chi-siamo-flip-inner flip-inner relative w-full h-[50vh]" style={{ willChange: 'transform' }}>
-                                        {/* Front — B&W */}
-                                        <div
-                                            className="absolute inset-0"
-                                            style={{ backfaceVisibility: 'hidden' }}
-                                        >
-                                            <div
-                                                className="absolute inset-0 bg-no-repeat accordion-front"
-                                                style={{ backgroundImage: `url('/images/wmremove-transformed.png')` }}
-                                                data-pos={pos}
-                                            />
-                                        </div>
-                                        {/* Back — Color */}
-                                        <div
-                                            className="absolute inset-0"
-                                            style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
-                                        >
-                                            <div
-                                                className="absolute inset-0 bg-no-repeat accordion-back"
-                                                style={{ backgroundImage: `url('/images/wmremove-transformed (43).png')` }}
-                                                data-pos={pos}
-                                            />
-                                        </div>
-                                    </div>
+                                    <div
+                                        className="relative w-full h-[50vh] bg-no-repeat accordion-back"
+                                        style={{ backgroundImage: `url('/images/wmremove-transformed (43).png')` }}
+                                        data-pos={pos}
+                                    />
                                 </div>
                             ))}
                         </div>
