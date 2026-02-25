@@ -1,7 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Instagram, Facebook, Phone } from 'lucide-react';
 
+const getIsOpen = () => {
+    const now = new Date();
+    const italyTime = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Rome' }));
+    const day = italyTime.getDay(); // 0=Sunday, 1=Monday
+    const currentMinutes = italyTime.getHours() * 60 + italyTime.getMinutes();
+
+    // Lunedì chiuso
+    if (day === 1) return false;
+
+    // Venerdì (5) e Sabato (6): 12:00–14:30 + 18:00–22:30
+    if (day === 5 || day === 6) {
+        return (currentMinutes >= 720 && currentMinutes <= 870) ||
+               (currentMinutes >= 1080 && currentMinutes <= 1350);
+    }
+
+    // Mar–Gio (2-4), Domenica (0): 18:00–22:30
+    return currentMinutes >= 1080 && currentMinutes <= 1350;
+};
+
 const Footer = () => {
+    const [isOpen, setIsOpen] = useState(getIsOpen);
+
+    useEffect(() => {
+        const interval = setInterval(() => setIsOpen(getIsOpen()), 60000);
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <footer className="w-full pt-12 sm:pt-20 pb-6 sm:pb-10 px-4 sm:px-8 md:px-16 lg:px-32 bg-[#111111] text-cream rounded-t-[2rem] sm:rounded-t-[4rem] relative mt-[-2rem] z-20">
 
@@ -59,8 +85,10 @@ const Footer = () => {
 
                 {/* Bottom Status Indicator */}
                 <div className="flex items-center justify-center gap-3">
-                    <span className="w-2.5 h-2.5 rounded-full bg-flame shadow-[0_0_10px_#E85D26] animate-[pulse_2s_infinite]"></span>
-                    <span className="font-caveat text-2xl text-smoke">Forno Operativo</span>
+                    <span className={`w-2.5 h-2.5 rounded-full transition-colors duration-700 ${isOpen ? 'bg-flame shadow-[0_0_10px_#E85D26] animate-[pulse_2s_infinite]' : 'bg-smoke/50'}`}></span>
+                    <span className={`font-caveat text-2xl transition-colors duration-700 ${isOpen ? 'text-smoke' : 'text-smoke/40'}`}>
+                        {isOpen ? 'Forno Operativo' : 'Forno Spento'}
+                    </span>
                 </div>
             </div>
         </footer>
