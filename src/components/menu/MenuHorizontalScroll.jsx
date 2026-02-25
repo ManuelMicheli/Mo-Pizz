@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { menuCategories } from '../../data/menuData';
 import CustomCursor from './CustomCursor';
+import MobileMenuTabBar from './MobileMenuTabBar';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -36,6 +37,9 @@ const MenuHorizontalScroll = () => {
   const imgYTo = useRef(null);
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
   const scrollTriggerRef = useRef(null);
+  const [mobileActiveCategory, setMobileActiveCategory] = useState(0);
+  const [tabBarVisible, setTabBarVisible] = useState(false);
+  const categoryRefs = useRef([]);
 
   // Navigate to a specific category panel
   const goToCategory = useCallback((index) => {
@@ -200,59 +204,117 @@ const MenuHorizontalScroll = () => {
     return () => ctx.revert();
   }, [isMobile]);
 
+  // IntersectionObserver for mobile tab bar visibility + active category tracking
+  useEffect(() => {
+    if (!isMobile) return;
+
+    // Tab bar visibility - observe the mobile section
+    const section = mobileSectionRef.current;
+    if (!section) return;
+
+    const sectionObserver = new IntersectionObserver(
+      ([entry]) => setTabBarVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    sectionObserver.observe(section);
+
+    // Active category tracking
+    const catObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number(entry.target.dataset.catIndex);
+            if (!isNaN(idx)) setMobileActiveCategory(idx);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    categoryRefs.current.forEach((ref) => {
+      if (ref) catObserver.observe(ref);
+    });
+
+    return () => {
+      sectionObserver.disconnect();
+      catObserver.disconnect();
+    };
+  }, [isMobile]);
+
   // ─── Mobile Layout ───────────────────────────────────────────────────────────
   if (isMobile) {
     return (
-      <section ref={mobileSectionRef} className="bg-charcoal py-10 sm:py-16 px-4 sm:px-6">
-        {menuCategories.map((category, catIdx) => (
-          <div key={category.id} className={`mobile-category ${catIdx > 0 ? 'mt-10 sm:mt-16 border-t border-white/10 pt-10 sm:pt-16' : ''}`}>
-            {/* Category header */}
-            <div className="mb-8">
-              {/* Hero image on mobile */}
+      <>
+        <section ref={mobileSectionRef} className="bg-charcoal">
+          {menuCategories.map((category, catIdx) => (
+            <div
+              key={category.id}
+              ref={(el) => (categoryRefs.current[catIdx] = el)}
+              data-cat-index={catIdx}
+              className="mobile-category relative"
+            >
+              {/* Sticky Hero Image */}
               {category.heroImage && (
-                <div className="w-full h-32 sm:h-40 rounded-2xl overflow-hidden mb-6">
+                <div className="sticky top-0 z-0 w-full h-[55vh] overflow-hidden">
                   <img
                     src={category.heroImage}
                     alt={category.title}
-                    loading="lazy"
+                    loading={catIdx === 0 ? 'eager' : 'lazy'}
                     className="w-full h-full object-cover"
                   />
+                  {/* Bottom gradient fade into card */}
+                  <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-charcoal to-transparent" />
                 </div>
               )}
-              <h3 className="font-playfair font-black text-cream text-3xl leading-none">
-                {category.title}
-              </h3>
-              <p className="font-sans text-smoke text-sm mt-2">{category.subtitle}</p>
-            </div>
 
-            {category.sections.map((section, sIdx) => (
-              <div key={sIdx} className="mb-8">
-                <h4 className="font-caveat text-gold text-2xl mb-4">{section.heading}</h4>
-                <div className="space-y-1">
-                  {section.items.map((item, iIdx) => (
-                    <div
-                      key={iIdx}
-                      className="flex items-baseline justify-between py-3 border-b border-white/5"
-                    >
-                      <div className="flex-1 mr-4">
-                        <span className="font-playfair font-bold text-cream text-base">
-                          {item.name}
-                        </span>
-                        <span className="block font-sans text-smoke text-xs sm:text-sm italic mt-0.5 leading-relaxed">
-                          <HighlightBadges text={item.desc} />
-                        </span>
-                      </div>
-                      <span className="font-mono text-gold text-base flex-shrink-0 tabular-nums">
-                        {item.price}
-                      </span>
-                    </div>
-                  ))}
+              {/* Menu Items Card — overlaps the image */}
+              <div className="relative z-10 bg-charcoal rounded-t-3xl -mt-8 pt-8 px-5 pb-10">
+                {/* Category header */}
+                <div className="mb-8">
+                  <h3 className="font-playfair font-black text-cream text-3xl leading-none">
+                    {category.title}
+                  </h3>
+                  <p className="font-sans text-smoke text-sm mt-2">{category.subtitle}</p>
                 </div>
+
+                {category.sections.map((section, sIdx) => (
+                  <div key={sIdx} className="mb-8">
+                    <h4 className="font-caveat text-gold text-2xl mb-4">{section.heading}</h4>
+                    <div className="space-y-1">
+                      {section.items.map((item, iIdx) => (
+                        <div
+                          key={iIdx}
+                          className="flex items-baseline justify-between py-3 border-b border-white/5"
+                        >
+                          <div className="flex-1 mr-4">
+                            <span className="font-playfair font-bold text-cream text-base">
+                              {item.name}
+                            </span>
+                            <span className="block font-sans text-smoke text-xs italic mt-0.5 leading-relaxed">
+                              <HighlightBadges text={item.desc} />
+                            </span>
+                          </div>
+                          <span className="font-mono text-gold text-base flex-shrink-0 tabular-nums">
+                            {item.price}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        ))}
-      </section>
+            </div>
+          ))}
+        </section>
+
+        <MobileMenuTabBar
+          activeIndex={mobileActiveCategory}
+          onTabPress={(i) => {
+            categoryRefs.current[i]?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          visible={tabBarVisible}
+        />
+      </>
     );
   }
 
