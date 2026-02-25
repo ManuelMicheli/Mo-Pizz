@@ -38,7 +38,7 @@ const Contacts = () => {
                         </a>
                     </div>
 
-                    <div className="bg-white rounded-[2rem] border border-smoke/10 p-6 sm:p-8 shadow-lg shadow-charcoal/5 mb-10 w-full sm:max-w-md">
+                    <div className="bg-white rounded-[2rem] border border-smoke/10 p-6 sm:p-8 shadow-lg shadow-charcoal/5 mb-10 max-w-full sm:max-w-md">
                         <h3 className="font-sans font-bold text-xl mb-6 text-charcoal uppercase tracking-wide">Orari di Apertura</h3>
                         <div className="flex flex-col gap-4 font-sans text-charcoal">
                             <div className="flex justify-between items-center py-2 border-b border-smoke/10">
@@ -74,7 +74,7 @@ const Contacts = () => {
                 </div>
 
                 {/* Right Column - Map IFRAME */}
-                <div className="w-full lg:w-1/2 aspect-[4/3] sm:aspect-[3/2] lg:aspect-auto lg:h-[700px] max-h-[50vh] sm:max-h-[60vh] lg:max-h-none rounded-[2rem] sm:rounded-[3rem] overflow-hidden shadow-2xl flex relative bg-smoke/20">
+                <div className="w-full lg:w-1/2 aspect-[4/3] sm:aspect-[3/2] lg:aspect-auto lg:h-[700px] h-[45vh] sm:h-auto sm:max-h-[60vh] lg:max-h-none rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-2xl flex relative bg-smoke/20">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.6338006679586!2d8.903960076296!3d45.597950371077366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786915df0000000%3A0x1d36cbede0802c6b!2sMo%20pizz!5e0!3m2!1sen!2sit!4v1700000000000!5m2!1sen!2sit"
                         className="absolute inset-0 w-full h-full border-0"

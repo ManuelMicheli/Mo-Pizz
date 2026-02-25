@@ -44,7 +44,7 @@ const Chef = () => {
             </div>
 
             {/* Left side: Photo (Mobile bg-flour, Desktop bg-flour visually via absolute) */}
-            <div className="w-full md:w-[45%] bg-flour flex items-center justify-center py-10 px-6 sm:p-12 lg:p-24 relative overflow-hidden">
+            <div className="w-full md:w-[45%] bg-flour flex items-center justify-center py-8 px-6 sm:p-12 lg:p-24 relative overflow-hidden">
                 <div className="chef-photo w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full border-4 border-gold shadow-2xl relative flex items-center justify-center overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-tr from-ember to-flame opacity-90 mix-blend-multiply"></div>
                     <img
@@ -57,7 +57,7 @@ const Chef = () => {
             </div>
 
             {/* Right side: Manifesto */}
-            <div className="w-full md:w-[55%] bg-charcoal flex flex-col justify-center px-5 sm:px-10 md:px-16 lg:px-32 py-12 sm:py-20 relative">
+            <div className="w-full md:w-[55%] bg-charcoal flex flex-col justify-center px-5 sm:px-10 md:px-16 lg:px-32 py-12 sm:py-20 relative overflow-hidden">
                 <div className="chef-text font-caveat text-gold text-2xl sm:text-3xl mb-4">
                     Il Pizzaiolo
                 </div>

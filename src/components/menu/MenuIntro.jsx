@@ -57,7 +57,7 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-[50dvh] overflow-hidden bg-charcoal flex items-center justify-center"
+      className="relative w-full h-[45dvh] md:h-[50dvh] overflow-hidden bg-charcoal flex items-center justify-center"
     >
       {/* Two-image hero grid */}
       <div className="relative z-10 w-full h-full flex">
