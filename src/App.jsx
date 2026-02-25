@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import Layout from './components/Layout';
 import Home from './pages/Home';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -41,6 +42,7 @@ function App() {
             <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
                 <Route path="menu" element={<Navigate to="/#menu" replace />} />
+                <Route path="privacy" element={<PrivacyPolicy />} />
             </Route>
         </Routes>
     )

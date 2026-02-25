@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Instagram, Facebook, Phone } from 'lucide-react';
 
 const getIsOpen = () => {
@@ -75,6 +76,9 @@ const Footer = () => {
                                 <Facebook size={20} />
                             </a>
                         </div>
+                        <Link to="/privacy" className="font-sans text-smoke text-sm hover:text-cream transition-colors duration-300">
+                            Privacy Policy
+                        </Link>
                         <div className="flex flex-col gap-1 mt-auto font-caveat text-smoke text-lg sm:text-xl opacity-60">
                             <p>© 2025 Mo Pizz Legnano SRL</p>
                             <p>P.IVA 10529490960</p>
