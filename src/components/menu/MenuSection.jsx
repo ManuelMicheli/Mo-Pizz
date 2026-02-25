@@ -10,7 +10,7 @@ import MenuHighlight from './MenuHighlight';
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const MenuSection = () => {
-  const [menuUnlocked, setMenuUnlocked] = useState(false);
+  const [menuUnlocked, setMenuUnlocked] = useState(true);
   const scrollAnchorRef = useRef(null);
   const heroRef = useRef(null);
 
