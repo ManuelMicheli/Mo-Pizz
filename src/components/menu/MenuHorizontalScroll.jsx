@@ -215,7 +215,7 @@ const MenuHorizontalScroll = () => {
           ScrollTrigger.create({
             trigger: cat,
             start: 'bottom bottom',
-            end: '+=150',
+            end: '+=80',
             pin: true,
             pinSpacing: true,
           });
@@ -326,7 +326,7 @@ const MenuHorizontalScroll = () => {
               )}
 
               {/* Menu Items Card */}
-              <div className="relative bg-charcoal -mt-8 pt-8 px-5 pb-40">
+              <div className="relative bg-charcoal -mt-8 pt-8 px-5 pb-24">
                 {/* Category subtitle */}
                 <div className="mb-8">
                   <p className="font-sans text-smoke text-sm">{category.subtitle}</p>
