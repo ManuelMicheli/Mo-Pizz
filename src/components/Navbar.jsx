@@ -52,9 +52,8 @@ const Navbar = () => {
 
     const navLinks = [
         { label: 'Home', href: '/#' },
-        { label: 'Chi Siamo', href: '/#features' },
+        { label: 'Chi Siamo', href: '/#chef' },
         { label: 'Menu', href: '/menu' },
-        { label: 'Lo Chef', href: '/#chef' },
         { label: 'Contatti', href: '/#contatti' },
     ];
 

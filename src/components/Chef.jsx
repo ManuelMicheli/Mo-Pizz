@@ -59,7 +59,7 @@ const Chef = () => {
             {/* Right side: Manifesto */}
             <div className="w-full md:w-[55%] bg-charcoal flex flex-col justify-center px-5 sm:px-10 md:px-16 lg:px-32 py-12 sm:py-20 relative overflow-hidden">
                 <div className="chef-text font-caveat text-gold text-2xl sm:text-3xl mb-4">
-                    Il Pizzaiolo
+                    Chi Siamo
                 </div>
 
                 <h2 className="chef-text font-playfair font-black text-cream text-[clamp(2.5rem,5vw,5rem)] leading-none mb-4 -ml-1">

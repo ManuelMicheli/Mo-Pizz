@@ -98,22 +98,66 @@ const Features = () => {
 
     return (
         <section id="features" ref={sectionRef} className="bg-charcoal relative z-10">
-            {/* Header + Video */}
-            <div className="pt-24 sm:pt-32 w-full flex flex-col">
-                {/* Header */}
-                <div className="features-header flex flex-col items-center text-center mb-16 px-6 sm:px-12">
-                    <div className="font-caveat text-gold text-2xl sm:text-3xl mb-4">
-                        Chi Siamo
+            {/* Desktop: Pinned Accordion Cards */}
+            {!isMobile && (
+                <div ref={cardsRef} className="w-full px-4 sm:px-8 md:px-12 max-w-[1400px] mx-auto py-24 bg-charcoal">
+                    <div
+                        ref={trackRef}
+                        className="flex flex-row md:h-[600px] w-full gap-4"
+                        style={{ willChange: 'transform' }}
+                    >
+                        {positions.map((pos, i) => (
+                            <div
+                                key={i}
+                                className="feature-card relative overflow-hidden rounded-[3rem] h-auto"
+                                style={{ flex: 1, perspective: '1200px' }}
+                            >
+                                <div
+                                    className="flip-inner absolute inset-0"
+                                    style={{ transformStyle: 'preserve-3d' }}
+                                >
+                                    {/* Front — B&W spezzettata */}
+                                    <div
+                                        className="absolute inset-0"
+                                        style={{ backfaceVisibility: 'hidden' }}
+                                    >
+                                        <div
+                                            className="absolute inset-0 bg-no-repeat accordion-front"
+                                            style={{ backgroundImage: `url('/images/wmremove-transformed.png')` }}
+                                            data-pos={pos}
+                                        />
+                                    </div>
+                                    {/* Back — Color spezzettata */}
+                                    <div
+                                        className="absolute inset-0"
+                                        style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+                                    >
+                                        <div
+                                            className="absolute inset-0 bg-no-repeat accordion-back"
+                                            style={{ backgroundImage: `url('/images/wmremove-transformed (43).png')` }}
+                                            data-pos={pos}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                    <h2 className="font-playfair font-bold text-cream text-4xl sm:text-5xl md:text-6xl text-balance">
-                        Passione e Tradizione
-                    </h2>
-                    <p className="font-sans text-smoke text-lg mt-6 max-w-2xl">
-                        Un unico, ininterrotto processo di creazione.
-                    </p>
-                </div>
 
-                {/* Video section */}
+                    {/* Progress bar — desktop only */}
+                    <div className="flex justify-center mt-10">
+                        <div className="w-24 h-[2px] bg-cream/10 rounded-full overflow-hidden">
+                            <div
+                                ref={progressRef}
+                                className="h-full bg-flame rounded-full origin-left"
+                                style={{ transform: 'scaleX(0)' }}
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Video section */}
+            <div className="w-full flex flex-col">
                 <div className="features-video relative w-full h-[50dvh] overflow-hidden">
                     <div className="relative w-full h-full overflow-hidden">
                         <video
@@ -182,64 +226,6 @@ const Features = () => {
                     </div>
                 )}
             </div>
-
-            {/* Desktop: Pinned Accordion Cards — outside flex, direct child of section */}
-            {!isMobile && (
-                <div ref={cardsRef} className="w-full px-4 sm:px-8 md:px-12 max-w-[1400px] mx-auto py-24 bg-charcoal">
-                    <div
-                        ref={trackRef}
-                        className="flex flex-row md:h-[600px] w-full gap-4"
-                        style={{ willChange: 'transform' }}
-                    >
-                        {positions.map((pos, i) => (
-                            <div
-                                key={i}
-                                className="feature-card relative overflow-hidden rounded-[3rem] h-auto"
-                                style={{ flex: 1, perspective: '1200px' }}
-                            >
-                                <div
-                                    className="flip-inner absolute inset-0"
-                                    style={{ transformStyle: 'preserve-3d' }}
-                                >
-                                    {/* Front — B&W spezzettata */}
-                                    <div
-                                        className="absolute inset-0"
-                                        style={{ backfaceVisibility: 'hidden' }}
-                                    >
-                                        <div
-                                            className="absolute inset-0 bg-no-repeat accordion-front"
-                                            style={{ backgroundImage: `url('/images/wmremove-transformed.png')` }}
-                                            data-pos={pos}
-                                        />
-                                    </div>
-                                    {/* Back — Color spezzettata */}
-                                    <div
-                                        className="absolute inset-0"
-                                        style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
-                                    >
-                                        <div
-                                            className="absolute inset-0 bg-no-repeat accordion-back"
-                                            style={{ backgroundImage: `url('/images/wmremove-transformed (43).png')` }}
-                                            data-pos={pos}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Progress bar — desktop only */}
-                    <div className="flex justify-center mt-10">
-                        <div className="w-24 h-[2px] bg-cream/10 rounded-full overflow-hidden">
-                            <div
-                                ref={progressRef}
-                                className="h-full bg-flame rounded-full origin-left"
-                                style={{ transform: 'scaleX(0)' }}
-                            />
-                        </div>
-                    </div>
-                </div>
-            )}
 
             {/* Background position styles */}
             <style>{`
