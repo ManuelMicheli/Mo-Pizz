@@ -180,7 +180,7 @@ const MenuHorizontalScroll = () => {
     setHoverImage(img || null);
   }, []);
 
-  // ScrollTrigger fade-in for mobile categories
+  // ScrollTrigger parallax + fade-in for mobile categories
   const mobileSectionRef = useRef(null);
   useEffect(() => {
     if (!isMobile) return;
@@ -189,7 +189,9 @@ const MenuHorizontalScroll = () => {
 
     let ctx = gsap.context(() => {
       const categories = section.querySelectorAll('.mobile-category');
+
       categories.forEach((cat) => {
+        // Fade-in entrance for each category
         gsap.from(cat, {
           y: 30,
           opacity: 0,
@@ -200,6 +202,24 @@ const MenuHorizontalScroll = () => {
             start: 'top 85%',
           },
         });
+
+        // Parallax on hero image — image moves slower than scroll
+        const heroImg = cat.querySelector('.mobile-hero-parallax');
+        if (heroImg) {
+          gsap.fromTo(heroImg,
+            { yPercent: -8, scale: 1.05 },
+            {
+              yPercent: 8, scale: 1,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: cat,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true,
+              },
+            }
+          );
+        }
       });
     }, section);
 
@@ -278,28 +298,33 @@ const MenuHorizontalScroll = () => {
               data-cat-index={catIdx}
               className="mobile-category relative"
             >
-              {/* Sticky Hero Image */}
+              {/* Sticky Hero Image with parallax */}
               {category.heroImage && (
-                <div className="sticky top-0 z-0 w-full h-[55vh] max-h-[400px] overflow-hidden" style={{ willChange: 'transform' }}>
-                  <img
-                    src={category.heroImage}
-                    alt={category.title}
-                    loading={catIdx === 0 ? 'eager' : 'lazy'}
-                    className="w-full h-full object-cover"
-                  />
+                <div className="sticky top-0 z-0 w-full h-[55vh] max-h-[400px] overflow-hidden">
+                  <div className="mobile-hero-parallax absolute inset-0 will-change-transform">
+                    <img
+                      src={category.heroImage}
+                      alt={category.title}
+                      loading={catIdx === 0 ? 'eager' : 'lazy'}
+                      className="w-full h-[120%] object-cover"
+                    />
+                  </div>
+                  {/* Category title overlay */}
+                  <div className="absolute bottom-12 left-5 right-5 z-10">
+                    <h3 className="font-playfair font-black text-cream text-3xl leading-none drop-shadow-lg">
+                      {category.title}
+                    </h3>
+                  </div>
                   {/* Bottom gradient fade into card */}
-                  <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-charcoal to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent" />
                 </div>
               )}
 
               {/* Menu Items Card — overlaps the image */}
               <div className="relative z-10 bg-charcoal rounded-t-3xl -mt-8 pt-8 px-5 pb-10">
-                {/* Category header */}
+                {/* Category subtitle */}
                 <div className="mb-8">
-                  <h3 className="font-playfair font-black text-cream text-3xl leading-none">
-                    {category.title}
-                  </h3>
-                  <p className="font-sans text-smoke text-sm mt-2">{category.subtitle}</p>
+                  <p className="font-sans text-smoke text-sm">{category.subtitle}</p>
                 </div>
 
                 {/* Mini sub-tabs — only for Pizzeria (first category) */}
