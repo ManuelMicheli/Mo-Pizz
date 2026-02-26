@@ -194,6 +194,33 @@ body {
   animation-play-state: paused;
 }
 
+/* Infinite marquee for Instagram (reverse direction — right to left) */
+@keyframes marquee-reverse {
+  from { transform: translateX(calc(-100% / 3)); }
+  to { transform: translateX(0); }
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 30s linear infinite;
+  will-change: transform;
+}
+
+@media (min-width: 640px) {
+  .animate-marquee-reverse {
+    animation-duration: 40s;
+  }
+}
+
+@media (min-width: 1024px) {
+  .animate-marquee-reverse {
+    animation-duration: 50s;
+  }
+}
+
+.animate-marquee-reverse:hover {
+  animation-play-state: paused;
+}
+
 /* Safe area utilities for notched devices */
 .safe-bottom {
   padding-bottom: env(safe-area-inset-bottom);

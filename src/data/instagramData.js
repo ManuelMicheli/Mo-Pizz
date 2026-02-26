@@ -1,0 +1,58 @@
+export const instagramPosts = [
+    {
+        id: 1,
+        image: '/images/Instagram1.PNG',
+        caption: 'Il nostro impasto dopo 48 ore di lievitazione naturale',
+        alt: 'Impasto pizza napoletana a lunga lievitazione',
+        postUrl: 'https://www.instagram.com/mo_pizz/',
+    },
+    {
+        id: 2,
+        image: '/images/Instagram2.jpg',
+        caption: 'Margherita DOP — mozzarella di bufala, pomodoro San Marzano',
+        alt: 'Pizza Margherita DOP con mozzarella di bufala',
+        postUrl: 'https://www.instagram.com/mo_pizz/',
+    },
+    {
+        id: 3,
+        image: '/images/Instagram3.jpg',
+        caption: 'Il forno a legna, cuore pulsante della nostra pizzeria',
+        alt: 'Forno a legna tradizionale napoletano',
+        postUrl: 'https://www.instagram.com/mo_pizz/',
+    },
+    {
+        id: 4,
+        image: '/images/Instagram4.jpg',
+        caption: 'Ingredienti freschi ogni giorno — solo eccellenze italiane',
+        alt: 'Ingredienti freschi DOP e IGP',
+        postUrl: 'https://www.instagram.com/mo_pizz/',
+    },
+    {
+        id: 5,
+        image: '/images/Instagram5.jpg',
+        caption: 'La nostra sala — atmosfera calda e accogliente',
+        alt: 'Interno della pizzeria Mo Pizz a Legnano',
+        postUrl: 'https://www.instagram.com/mo_pizz/',
+    },
+    {
+        id: 6,
+        image: '/images/Instagram6.jpg',
+        caption: 'Cornicione leopardato — il segno di una vera napoletana',
+        alt: 'Dettaglio cornicione pizza napoletana leopardato',
+        postUrl: 'https://www.instagram.com/mo_pizz/',
+    },
+    {
+        id: 7,
+        image: '/images/Instagram7.jpg',
+        caption: 'Il team Mo Pizz — passione e dedizione dal 2016',
+        alt: 'Team della pizzeria Mo Pizz',
+        postUrl: 'https://www.instagram.com/mo_pizz/',
+    },
+    {
+        id: 8,
+        image: '/images/Instagram8.jpg',
+        caption: 'Le nostre pizze speciali — creatività e tradizione',
+        alt: 'Pizze speciali del menu Mo Pizz',
+        postUrl: 'https://www.instagram.com/mo_pizz/',
+    },
+];

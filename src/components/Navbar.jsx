@@ -53,7 +53,7 @@ const Navbar = () => {
     const navLinks = [
         { label: 'Home', href: '/#' },
         { label: 'Chi Siamo', href: '/#chef' },
-        { label: 'Menu', href: '/menu' },
+        { label: 'Menu', href: '/#menu' },
         { label: 'Contatti', href: '/#contatti' },
     ];
 

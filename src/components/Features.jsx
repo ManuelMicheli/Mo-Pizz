@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Instagram, Heart, ExternalLink } from 'lucide-react';
+import { instagramPosts } from '@/data/instagramData';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -9,8 +11,10 @@ const Features = () => {
     const cardsRef = useRef(null);
     const trackRef = useRef(null);
     const progressRef = useRef(null);
+    const instagramRef = useRef(null);
 
     const [isMobile, setIsMobile] = useState(false);
+
 
     // Mobile detection
     useEffect(() => {
@@ -77,6 +81,22 @@ const Features = () => {
                 y: 40, opacity: 0, scale: 0.98, duration: 1, ease: 'power3.out',
                 scrollTrigger: { trigger: '.features-video', start: 'top 80%' },
             });
+
+            // ── Instagram carousel animations (simple, no pin/scrub) ──
+            if (instagramRef.current) {
+                gsap.from('.ig-header', {
+                    y: 30, opacity: 0, duration: 0.8, ease: 'power3.out',
+                    scrollTrigger: { trigger: instagramRef.current, start: 'top 85%' },
+                });
+                gsap.from('.ig-card', {
+                    y: 40, opacity: 0, duration: 0.7, stagger: 0.08, ease: 'power3.out',
+                    scrollTrigger: { trigger: instagramRef.current, start: 'top 75%' },
+                });
+                gsap.from('.ig-cta', {
+                    y: 20, opacity: 0, duration: 0.6, ease: 'power3.out',
+                    scrollTrigger: { trigger: instagramRef.current, start: 'top 60%' },
+                });
+            }
 
             // ── Mobile: animate header + image ──
             mm.add('(max-width: 767px)', () => {
@@ -225,6 +245,93 @@ const Features = () => {
                         </div>
                     </div>
                 )}
+            </div>
+
+            {/* ── Instagram Gallery ── */}
+            <div ref={instagramRef} className="w-full pb-16 sm:pb-20 md:pb-24 bg-charcoal">
+                {/* Divider strip */}
+                <div className="relative mb-10 sm:mb-12">
+                    <div className="absolute inset-0 bg-gold" />
+
+                    {/* Header */}
+                    <div className="ig-header max-w-[1400px] mx-auto px-4 sm:px-8 md:px-12 py-8 sm:py-10">
+                        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 sm:gap-6">
+                        <div>
+                            <div className="flex items-center gap-3 mb-3">
+                                <div className="w-10 h-10 rounded-full flex items-center justify-center"
+                                     style={{ background: 'linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)' }}>
+                                    <Instagram className="w-5 h-5 text-white" />
+                                </div>
+                                <span className="font-mono text-charcoal/60 text-sm tracking-wide">@mo_pizz</span>
+                            </div>
+                            <h3 className="font-playfair text-charcoal text-[clamp(1.5rem,3vw,2.5rem)] leading-tight">
+                                Seguici su Instagram
+                            </h3>
+                            <p className="font-sans text-charcoal/60 text-sm sm:text-base mt-2 max-w-md leading-relaxed">
+                                Le nostre creazioni, il dietro le quinte e l'atmosfera che ci rende unici.
+                            </p>
+                        </div>
+                        <a
+                            href="https://www.instagram.com/mo_pizz/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="magnetic-btn hidden sm:inline-flex items-center gap-2 px-6 py-3 rounded-full bg-charcoal/5 border border-charcoal/15 text-charcoal font-sans text-sm hover:bg-charcoal/10 transition-colors"
+                        >
+                            <ExternalLink className="w-4 h-4" />
+                            Vedi il profilo
+                        </a>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Infinite marquee carousel (right to left = reverse of reviews) */}
+                <div className="relative overflow-hidden">
+                    {/* Edge fades */}
+                    <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-20 md:w-28 z-10 pointer-events-none"
+                         style={{ background: 'linear-gradient(to right, #1A1A1A, transparent)' }} />
+                    <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-20 md:w-28 z-10 pointer-events-none"
+                         style={{ background: 'linear-gradient(to left, #1A1A1A, transparent)' }} />
+
+                    {/* Marquee track — tripled for seamless loop */}
+                    <div className="flex gap-4 w-max animate-marquee-reverse hover:[animation-play-state:paused]">
+                        {[0, 1, 2].map((set) =>
+                            instagramPosts.map((post) => (
+                                <a
+                                    key={`${set}-${post.id}`}
+                                    href={post.postUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="ig-card flex-shrink-0 relative rounded-[2rem] overflow-hidden group w-[55vw] sm:w-[35vw] md:w-[25vw] lg:w-[18vw] xl:w-[15vw] aspect-square"
+                                >
+                                    <img
+                                        src={post.image}
+                                        alt={post.alt}
+                                        loading="lazy"
+                                        draggable={false}
+                                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                                    />
+                                    {/* Hover overlay */}
+                                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                        <Heart className="w-7 h-7 text-white" />
+                                    </div>
+                                </a>
+                            ))
+                        )}
+                    </div>
+                </div>
+
+                {/* Mobile CTA */}
+                <div className="ig-cta flex justify-center mt-8 sm:hidden px-4">
+                    <a
+                        href="https://www.instagram.com/mo_pizz/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="magnetic-btn inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cream/5 border border-cream/10 text-cream font-sans text-sm hover:bg-cream/10 transition-colors"
+                    >
+                        <Instagram className="w-4 h-4" />
+                        Seguici su Instagram
+                    </a>
+                </div>
             </div>
 
             {/* Background position styles */}

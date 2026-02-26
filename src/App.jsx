@@ -23,6 +23,9 @@ function App() {
             wheelMultiplier: 1,
         });
 
+        // Expose globally so components can stop/start for scroll-hijack sections
+        window.__lenis = lenis;
+
         // Sync Lenis with GSAP ScrollTrigger
         lenis.on('scroll', ScrollTrigger.update);
 
@@ -34,6 +37,7 @@ function App() {
         return () => {
             gsap.ticker.remove(lenis.raf);
             lenis.destroy();
+            delete window.__lenis;
         };
     }, []);
 
