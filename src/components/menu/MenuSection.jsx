@@ -7,9 +7,12 @@ import MenuIntro from './MenuIntro';
 import MenuHorizontalScroll from './MenuHorizontalScroll';
 import MenuHighlight from './MenuHighlight';
 
+import { useMenu } from '../../hooks/useMenu';
+
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const MenuSection = () => {
+  const { menuCategories } = useMenu();
   const [menuUnlocked, setMenuUnlocked] = useState(true);
   const scrollAnchorRef = useRef(null);
   const heroRef = useRef(null);
@@ -57,7 +60,7 @@ const MenuSection = () => {
 
       {menuUnlocked && (
         <>
-          <MenuHorizontalScroll />
+          <MenuHorizontalScroll menuCategories={menuCategories} />
           <MenuHighlight />
         </>
       )}

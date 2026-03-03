@@ -2,7 +2,6 @@ import React, { useEffect, useLayoutEffect, useRef, useState, useCallback } from
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-import { menuCategories } from '../../data/menuData';
 import CustomCursor from './CustomCursor';
 import MobileMenuTabBar from './MobileMenuTabBar';
 
@@ -128,7 +127,7 @@ const PanelContent = ({ category, handleDishHover }) => {
   );
 };
 
-const MenuHorizontalScroll = () => {
+const MenuHorizontalScroll = ({ menuCategories }) => {
   const containerRef = useRef(null);
   const trackRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -501,6 +500,7 @@ const MenuHorizontalScroll = () => {
         </section>
 
         <MobileMenuTabBar
+          menuCategories={menuCategories}
           activeIndex={mobileActiveCategory}
           onTabPress={(i) => {
             const el = categoryRefs.current[i];

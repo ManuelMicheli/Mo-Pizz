@@ -1,14 +1,13 @@
-import { menuCategories } from '../../data/menuData';
-
 /**
  * MobileMenuTabBar — fixed bottom tab bar for mobile menu navigation.
  *
  * Props:
- *   activeIndex (number)   — which category is active (0-3)
- *   onTabPress  (function) — called with index when user taps a category
- *   visible     (boolean)  — whether the tab bar should be shown
+ *   menuCategories (array)  — menu category objects (from useMenu hook)
+ *   activeIndex    (number) — which category is active (0-3)
+ *   onTabPress  (function)  — called with index when user taps a category
+ *   visible     (boolean)   — whether the tab bar should be shown
  */
-export default function MobileMenuTabBar({ activeIndex, onTabPress, visible }) {
+export default function MobileMenuTabBar({ menuCategories, activeIndex, onTabPress, visible }) {
   return (
     <nav
       className={`

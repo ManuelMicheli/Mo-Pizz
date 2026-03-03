@@ -1,0 +1,48 @@
+// ===== SEO SCHEMA DATA =====
+export const schemaData = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  name: 'Mo Pizz',
+  description: 'Pizzeria e trattoria napoletana verace a Legnano. Pizza con lievitazione naturale 48-60h e ingredienti DOP, IGP, Presidio Slow Food.',
+  url: 'https://www.mopizz.it',
+  telephone: '+390331024363',
+  email: 'info@mopizzlegnano.it',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Via Cadore 4',
+    addressLocality: 'Legnano',
+    addressRegion: 'MI',
+    postalCode: '20025',
+    addressCountry: 'IT',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 45.5964,
+    longitude: 8.9117,
+  },
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Tuesday', opens: '18:00', closes: '22:30' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Wednesday', opens: '18:00', closes: '22:30' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Thursday', opens: '18:00', closes: '22:30' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '12:00', closes: '14:30' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '18:00', closes: '22:30' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '12:00', closes: '14:30' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '18:00', closes: '22:30' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: '18:00', closes: '22:30' },
+  ],
+  servesCuisine: ['Pizza Napoletana', 'Cucina Napoletana', 'Italiana'],
+  priceRange: '€€',
+  menu: 'https://mopizz.plateform.app/menu/momenu',
+  acceptsReservations: true,
+  image: 'https://www.mopizz.it/og-image.jpg',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.2',
+    reviewCount: '620',
+    bestRating: '5',
+  },
+  sameAs: [
+    'https://www.instagram.com/mo_pizz/',
+    'https://www.facebook.com/mopizzlegnano',
+  ],
+};
