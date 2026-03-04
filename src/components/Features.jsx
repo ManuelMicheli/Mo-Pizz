@@ -143,7 +143,7 @@ const Features = () => {
                                     >
                                         <div
                                             className="absolute inset-0 bg-no-repeat accordion-front"
-                                            style={{ backgroundImage: `url('/images/wmremove-transformed.png')` }}
+                                            style={{ backgroundImage: `url('/images/wmremove-transformed.webp')` }}
                                             data-pos={pos}
                                         />
                                     </div>
@@ -154,7 +154,7 @@ const Features = () => {
                                     >
                                         <div
                                             className="absolute inset-0 bg-no-repeat accordion-back"
-                                            style={{ backgroundImage: `url('/images/wmremove-transformed (43).png')` }}
+                                            style={{ backgroundImage: `url('/images/wmremove-transformed (43).webp')` }}
                                             data-pos={pos}
                                         />
                                     </div>
@@ -186,7 +186,7 @@ const Features = () => {
                             loop
                             playsInline
                             preload="metadata"
-                            poster="/images/wmremove-transformed-gallery.png"
+                            poster="/images/wmremove-transformed-gallery.webp"
                             className="absolute inset-0 w-full h-full object-cover scale-[1.02]"
                             style={{ filter: 'contrast(1.08) brightness(0.95) saturate(0.85)' }}
                             src="/videos/Pizzeria_Menu_Background_Video_Generation (1).mp4"
@@ -238,7 +238,7 @@ const Features = () => {
                     <div className="w-full px-4 mt-16">
                         <div className="features-mobile-img rounded-2xl overflow-hidden">
                             <img
-                                src="/images/wmremove-transformed (43).png"
+                                src="/images/wmremove-transformed (43).webp"
                                 alt="Chi Siamo — Mo Pizz"
                                 className="w-full h-auto object-cover"
                             />

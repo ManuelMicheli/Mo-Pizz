@@ -6,9 +6,11 @@ import Hero from '../components/Hero';
 import MenuSection from '../components/menu/MenuSection';
 import Features from '../components/Features';
 import Chef from '../components/Chef';
+import Staff from '../components/Staff';
 import Statement from '../components/Statement';
 import Gallery from '../components/Gallery';
 import Reviews from '../components/Reviews';
+import ServicesGrid from '../components/ServicesGrid';
 import Contacts from '../components/Contacts';
 
 
@@ -34,10 +36,12 @@ const Home = () => {
     return (
         <React.Fragment>
             <Hero />
+            <ServicesGrid />
             <MenuSection />
             <Statement />
             <Gallery />
             <Chef />
+            <Staff />
             <Features />
             <Reviews />
             <Contacts />

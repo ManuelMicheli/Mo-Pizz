@@ -5,7 +5,7 @@ const Gallery = () => {
         <section id="gallery" className="w-full bg-charcoal relative overflow-hidden">
             <div className="w-full">
                 <img
-                    src="/images/wmremove-transformed-gallery.png"
+                    src="/images/wmremove-transformed-gallery.webp"
                     alt="Gallery"
                     loading="lazy"
                     className="w-full h-auto object-cover max-h-[50vh] sm:max-h-[60vh] md:max-h-[70vh]"

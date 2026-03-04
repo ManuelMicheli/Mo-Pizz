@@ -50,6 +50,7 @@ const Chef = () => {
                     <img
                         src="/images/chef-cristian.jpg"
                         alt="Cristian Moschiano"
+                        loading="lazy"
                         className="absolute inset-0 w-full h-full object-cover filter grayscale sepia-[0.3]"
                     />
                     <ChefHat size={48} className="text-cream relative z-10 opacity-70" />

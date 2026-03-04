@@ -16,21 +16,23 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
       gsap.to('.menu-hero-img', {
         yPercent: -8,
         ease: 'none',
+        force3D: true,
         scrollTrigger: {
           trigger: section,
           start: 'top top',
           end: 'bottom top',
-          scrub: true,
+          scrub: 0.5,
         },
       });
 
       // Fade-in images
       gsap.from('.menu-hero-img', {
-        scale: 1.08,
+        scale: 1.05,
         opacity: 0,
-        duration: 1.4,
-        stagger: 0.2,
+        duration: 1,
+        stagger: 0.15,
         ease: 'power3.out',
+        force3D: true,
         scrollTrigger: {
           trigger: section,
           start: 'top 80%',
@@ -39,11 +41,12 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
 
       // CTA entrance
       gsap.from('.menu-hero-cta', {
-        y: 30,
+        y: 20,
         opacity: 0,
-        duration: 1,
-        delay: 0.6,
+        duration: 0.8,
+        delay: 0.4,
         ease: 'power3.out',
+        force3D: true,
         scrollTrigger: {
           trigger: section,
           start: 'top 60%',
@@ -62,24 +65,26 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
       {/* Two-image hero grid */}
       <div className="relative z-10 w-full h-full flex">
         {/* Image 39 — left half */}
-        <div className="menu-hero-img w-1/2 h-full relative overflow-hidden">
+        <div className="menu-hero-img w-1/2 h-full relative overflow-hidden will-change-transform" style={{ transform: 'translateZ(0)' }}>
           <img
-            src="/images/wmremove-transformed (39).png"
+            src="/images/wmremove-transformed (39).webp"
             alt=""
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover"
-            style={{ filter: 'contrast(1.05) brightness(0.92) saturate(0.9)' }}
           />
           {/* Inner edge fade */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-charcoal/60" />
         </div>
 
         {/* Image 40 — right half */}
-        <div className="menu-hero-img w-1/2 h-full relative overflow-hidden">
+        <div className="menu-hero-img w-1/2 h-full relative overflow-hidden will-change-transform" style={{ transform: 'translateZ(0)' }}>
           <img
-            src="/images/wmremove-transformed (40).png"
+            src="/images/wmremove-transformed (40).webp"
             alt=""
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover"
-            style={{ filter: 'contrast(1.05) brightness(0.92) saturate(0.9)' }}
           />
           {/* Inner edge fade */}
           <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-charcoal/60" />
@@ -102,14 +107,7 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
         }}
       />
 
-      {/* Film grain */}
-      <div
-        className="absolute inset-0 z-20 pointer-events-none opacity-[0.04]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          backgroundSize: '256px 256px',
-        }}
-      />
+      {/* Film grain — uses global noise overlay from index.css */}
 
       {/* CTA — bottom center */}
       <div className="menu-hero-cta absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-3">

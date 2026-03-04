@@ -209,15 +209,17 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
       const scrollTween = gsap.to(track, {
         x: -totalWidth,
         ease: 'none',
+        force3D: true,
         scrollTrigger: {
           trigger: container,
           start: 'top top',
           end: () => `+=${totalWidth}`,
           pin: true,
-          scrub: 0.5,
+          scrub: 0.8,
           anticipatePin: 1,
           invalidateOnRefresh: true,
           refreshPriority: 1,
+          fastScrollEnd: true,
           onUpdate: (self) => {
             const idx = Math.round(self.progress * (panels.length - 1));
             setActiveIndex(idx);
@@ -241,10 +243,11 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
         if (!img) return;
         gsap.fromTo(
           img,
-          { xPercent: -15 },
+          { xPercent: -10 },
           {
-            xPercent: 15,
+            xPercent: 10,
             ease: 'none',
+            force3D: true,
             scrollTrigger: {
               trigger: panel,
               containerAnimation: scrollTween,
@@ -260,11 +263,12 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
       panels.forEach((panel) => {
         const items = panel.querySelectorAll('.menu-item');
         gsap.from(items, {
-          y: 30,
+          y: 20,
           opacity: 0,
-          stagger: 0.05,
-          duration: 0.8,
+          stagger: 0.03,
+          duration: 0.6,
           ease: 'power3.out',
+          force3D: true,
           scrollTrigger: {
             trigger: panel,
             containerAnimation: scrollTween,
@@ -296,15 +300,17 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
         const heroImg = cat.querySelector('.mobile-hero-parallax');
         if (heroImg) {
           gsap.fromTo(heroImg,
-            { yPercent: -5, scale: 1.08 },
+            { yPercent: -3, scale: 1.05 },
             {
-              yPercent: 5, scale: 1,
+              yPercent: 3, scale: 1,
               ease: 'none',
+              force3D: true,
               scrollTrigger: {
                 trigger: cat,
                 start: 'top bottom',
                 end: 'bottom top',
-                scrub: true,
+                scrub: 0.5,
+                fastScrollEnd: true,
               },
             }
           );
@@ -318,6 +324,7 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
             end: 'bottom top',
             pin: true,
             pinSpacing: false,
+            fastScrollEnd: true,
           });
         }
       });
@@ -538,12 +545,16 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
         )}
       </div>
 
-      <section ref={containerRef} className="relative bg-charcoal overflow-hidden z-20">
+      <section ref={containerRef} id="menu-horizontal" className="relative bg-charcoal overflow-hidden z-20">
         {/* Progress bar */}
-        <div className="absolute top-0 left-0 right-0 z-30 h-[3px] bg-white/5">
+        <div className="absolute top-0 left-0 right-0 z-30 h-[3px] bg-white/5 overflow-hidden">
           <div
-            className="h-full bg-flame transition-all duration-300 ease-out"
-            style={{ width: `${((activeIndex + 1) / menuCategories.length) * 100}%` }}
+            className="h-full w-full bg-flame origin-left"
+            style={{
+              transform: `scaleX(${(activeIndex + 1) / menuCategories.length})`,
+              transition: 'transform 0.3s ease-out',
+              willChange: 'transform',
+            }}
           />
         </div>
 
@@ -587,7 +598,7 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
               {/* Left: Hero Image (40%) */}
               <div className="w-[40%] h-full relative overflow-hidden flex items-end">
                 <div
-                  className={`panel-hero-img absolute ${category.heroFit === 'contain' ? 'inset-0' : 'inset-[-20%]'}`}
+                  className={`panel-hero-img absolute will-change-transform ${category.heroFit === 'contain' ? 'inset-0' : 'inset-[-10%]'}`}
                   style={{
                     backgroundImage: `url('${category.heroImage}')`,
                     backgroundSize: category.heroFit || 'cover',

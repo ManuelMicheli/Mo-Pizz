@@ -52,7 +52,7 @@ const MenuVideoIntro = () => {
         loop
         playsInline
         preload="metadata"
-        poster="/images/wmremove-transformed-gallery.png"
+        poster="/images/wmremove-transformed-gallery.webp"
         className="absolute inset-0 w-full h-full object-cover scale-[1.02]"
         style={{ filter: 'contrast(1.08) brightness(0.95) saturate(0.85)' }}
         src="/videos/Pizzeria_Menu_Background_Video_Generation (1).mp4"

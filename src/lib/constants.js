@@ -1,3 +1,14 @@
+// ===== ORDINA (ASPORTO) =====
+export const PLATEFORM_ORDER_URL = 'https://mopizz.plateform.app/menu/momenu';
+export const ORDER_MODE = 'link'; // 'iframe' | 'link'
+
+// ===== PRENOTAZIONE TAVOLO =====
+export const PLATEFORM_RESERVE_URL = 'https://mopizz.plateform.app/reserve';
+
+// ===== FIDELITY =====
+export const PLATEFORM_FIDELITY_URL = 'https://mopizz.plateform.app/fidelity';
+export const FIDELITY_MODE = 'iframe'; // 'iframe' | 'link'
+
 // ===== SEO SCHEMA DATA =====
 export const schemaData = {
   '@context': 'https://schema.org',

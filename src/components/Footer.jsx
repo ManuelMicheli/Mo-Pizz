@@ -62,6 +62,9 @@ const Footer = () => {
                             <a href="#chef" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Lo Chef</a>
                             <a href="#contatti" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Contatti</a>
                             <a href="#contatti" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300 flex items-center gap-2"><Phone size={18} />Prenota</a>
+                            <Link to="/ordina" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Ordina Online</Link>
+                            <Link to="/gift-cards" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Gift Card</Link>
+                            <Link to="/fidelity" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Fidelity</Link>
                         </div>
                     </div>
 

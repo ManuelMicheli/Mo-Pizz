@@ -111,6 +111,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* GPU-promote heavy scroll sections to avoid paint jank */
+.service-card,
+.menu-panel,
+.mobile-category {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Contain rendering for off-screen sections */
+.services-grid {
+  contain: layout style paint;
+}
+
 /* Custom bounce keyframes for scroll indicator */
 @keyframes bounce {
 

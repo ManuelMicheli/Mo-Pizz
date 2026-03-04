@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Lenis from 'lenis';
 import gsap from 'gsap';
@@ -6,7 +6,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import Layout from './components/Layout';
 import Home from './pages/Home';
-import PrivacyPolicy from './pages/PrivacyPolicy';
+
+// Lazy-load secondary pages to reduce initial bundle size
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const GiftCards = lazy(() => import('./pages/GiftCards'));
+const Ordina = lazy(() => import('./pages/Ordina'));
+const Fidelity = lazy(() => import('./pages/Fidelity'));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,13 +47,18 @@ function App() {
     }, []);
 
     return (
-        <Routes>
-            <Route path="/" element={<Layout />}>
-                <Route index element={<Home />} />
-                <Route path="menu" element={<Navigate to="/#menu" replace />} />
-                <Route path="privacy" element={<PrivacyPolicy />} />
-            </Route>
-        </Routes>
+        <Suspense fallback={<div className="min-h-screen bg-charcoal" />}>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<Home />} />
+                    <Route path="menu" element={<Navigate to="/#menu" replace />} />
+                    <Route path="privacy" element={<PrivacyPolicy />} />
+                    <Route path="gift-cards" element={<GiftCards />} />
+                    <Route path="ordina" element={<Ordina />} />
+                    <Route path="fidelity" element={<Fidelity />} />
+                </Route>
+            </Routes>
+        </Suspense>
     )
 }
 
