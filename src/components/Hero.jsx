@@ -23,14 +23,14 @@ const Hero = () => {
         <section ref={containerRef} id="home" className="relative w-full h-screen min-h-[100dvh] overflow-hidden flex items-center px-6 sm:px-12 md:px-20 lg:px-32">
             {/* Background Image — CSS background to prevent downloading */}
             <div
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-                style={{ backgroundImage: `url('/images/3d4kt58x19rmr0cwq6gvp4w3p0_upscayl_4x_upscayl-standard-4x.webp')` }}
+                className="absolute inset-0 bg-center bg-no-repeat z-0"
+                style={{ backgroundImage: `url('/images/hero-home.webp')`, backgroundSize: 'cover' }}
                 role="img"
                 aria-label="Mo Pizz - Pizza Napoletana"
             />
 
             {/* Logo + Title — centered top, below navbar */}
-            <div className="absolute top-24 sm:top-28 md:top-32 left-0 right-0 z-20 flex flex-col items-center text-center pointer-events-none">
+            <div className="absolute top-6 sm:top-8 md:top-10 left-0 right-0 z-20 flex flex-col items-center text-center pointer-events-none">
                 <img
                     src="/images/logo_mopizz.webp"
                     alt="Mo Pizz"

@@ -17,11 +17,6 @@ const cards = [
         badge: 'Novità',
         badgeColor: 'bg-gold text-charcoal',
         images: [
-            '/images/Gemini_Generated_Image_6shtz6shtz6shtz6.webp',
-            '/images/Gemini_Generated_Image_6shtz6shtz6shtz6.webp',
-            '/images/Gemini_Generated_Image_6shtz6shtz6shtz6.webp',
-        ],
-        hoverImages: [
             '/images/esperienza libera.webp',
             '/images/esperienza napoletana per 2.webp',
             '/images/pizza per due.webp',
@@ -35,8 +30,7 @@ const cards = [
         to: '/ordina',
         badge: 'Ordina Online',
         badgeColor: 'bg-flame text-cream',
-        image: '/images/Gemini_Generated_Image_38s8ib38s8ib38s8.webp',
-        hoverImage: '/images/Gemini_Generated_Image_770xr3770xr3770x.webp',
+        image: '/images/Gemini_Generated_Image_770xr3770xr3770x.webp',
     },
     {
         title: 'Eventi Privati',
@@ -56,8 +50,7 @@ const cards = [
         to: '/fidelity',
         badge: 'Novità',
         badgeColor: 'bg-gold text-charcoal',
-        image: '/images/Gemini_Generated_Image_pou4phpou4phpou4_upscayl_4x_upscayl-standard-4x.webp',
-        hoverImage: '/images/n2nty4t6f5rmw0cwq8cbbc93w8_upscayl_4x_upscayl-standard-4x.webp',
+        image: '/images/n2nty4t6f5rmw0cwq8cbbc93w8_upscayl_4x_upscayl-standard-4x.webp',
     },
 ];
 
@@ -79,7 +72,7 @@ const CardItem = memo(({ card }) => {
             {/* Background image(s) */}
             {card.images ? (
                 <>
-                    <div className="absolute inset-0 z-0 flex transition-opacity duration-500 group-hover:opacity-0">
+                    <div className="absolute inset-0 z-0 flex">
                         {card.images.map((src, idx) => (
                             <img key={idx} src={src} alt="" loading="lazy" decoding="async" className="h-full flex-1 min-w-0 object-cover" />
                         ))}
@@ -96,7 +89,7 @@ const CardItem = memo(({ card }) => {
             ) : card.image ? (
                 <>
                     <div
-                        className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0 transition-opacity duration-500 group-hover:opacity-0"
+                        className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
                         style={{ backgroundImage: `url('${card.image}')` }}
                     />
                     {card.hoverImage && (
