@@ -146,7 +146,7 @@ const Features = () => {
                                     >
                                         <div
                                             className="absolute inset-0 bg-no-repeat accordion-front"
-                                            style={{ backgroundImage: `url('/images/wmremove-transformed (43).webp')` }}
+                                            style={{ backgroundImage: `url('/images/chi-siamo-bw.webp')` }}
                                             data-pos={pos}
                                         />
                                     </div>

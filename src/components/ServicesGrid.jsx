@@ -179,15 +179,15 @@ const ServicesGrid = () => {
         <section ref={sectionRef} className="relative z-10">
             {/* Header — sfondo bianco, scritte arancioni */}
             <div className="bg-cream py-14 sm:py-20 lg:pt-32 lg:pb-8 px-4 sm:px-8 md:px-12">
-                <div className="services-header flex flex-col gap-4">
-                    <span className="font-mono text-flame text-sm tracking-widest uppercase">
+                <div className="services-header flex flex-col gap-4 items-center text-center">
+                    <span className="font-mono text-charcoal text-sm tracking-widest uppercase">
                         {services.eyebrow}
                     </span>
-                    <h2 className="font-playfair font-black text-flame text-[clamp(1.8rem,4vw,3.5rem)] leading-[0.95] max-w-xl">
+                    <h2 className="font-playfair font-black text-charcoal text-[clamp(1.8rem,4vw,3.5rem)] leading-[0.95] max-w-xl">
                         {services.headline}<br />
                         <span className="italic">{services.headlineEm}</span> {services.headlineSuffix}
                     </h2>
-                    <p className="font-sans text-flame/70 text-base max-w-lg leading-relaxed">
+                    <p className="font-sans text-charcoal/70 text-base max-w-lg leading-relaxed">
                         {services.subtext}
                     </p>
                 </div>
