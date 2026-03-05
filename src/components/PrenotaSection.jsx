@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ExternalLink, CalendarCheck, Phone } from 'lucide-react';
@@ -10,28 +10,30 @@ const PrenotaSection = () => {
     const sectionRef = useRef(null);
     const [iframeLoaded, setIframeLoaded] = useState(false);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const ctx = gsap.context(() => {
             gsap.from('.prenota-heading', {
-                y: 30,
+                y: 24,
                 opacity: 0,
-                duration: 0.8,
-                ease: 'power3.out',
+                duration: 1.2,
+                ease: 'expo.out',
+                force3D: true,
                 scrollTrigger: {
                     trigger: sectionRef.current,
-                    start: 'top 80%',
+                    start: 'top 85%',
                 },
             });
 
             gsap.from('.prenota-card', {
-                y: 40,
+                y: 30,
                 opacity: 0,
                 scale: 0.98,
-                duration: 1,
-                ease: 'power3.out',
+                duration: 1.4,
+                ease: 'expo.out',
+                force3D: true,
                 scrollTrigger: {
                     trigger: '.prenota-card',
-                    start: 'top 85%',
+                    start: 'top 88%',
                 },
             });
         }, sectionRef);

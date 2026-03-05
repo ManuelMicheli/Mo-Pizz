@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { signatureDishes } from '../../data/menuData';
@@ -11,28 +11,31 @@ const { menu: menuCopy } = siteContent;
 const MenuHighlight = () => {
   const sectionRef = useRef(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let ctx = gsap.context(() => {
       gsap.from('.signature-card', {
-        y: 80,
+        y: 50,
         opacity: 0,
-        duration: 1.2,
-        stagger: 0.2,
-        ease: 'power3.out',
+        scale: 0.97,
+        duration: 1.4,
+        stagger: 0.18,
+        ease: 'expo.out',
+        force3D: true,
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 65%',
+          start: 'top 75%',
         },
       });
 
       gsap.from('.menu-cta', {
-        y: 40,
+        y: 24,
         opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
+        duration: 1.2,
+        ease: 'expo.out',
+        force3D: true,
         scrollTrigger: {
           trigger: '.menu-cta',
-          start: 'top 85%',
+          start: 'top 88%',
         },
       });
     }, sectionRef);

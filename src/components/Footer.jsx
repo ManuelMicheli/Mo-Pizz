@@ -45,9 +45,8 @@ const Footer = () => {
 
                     {/* Brand Col */}
                     <div className="flex flex-col items-center md:items-start gap-3">
-                        <a href="#" className="flex items-center gap-1.5 mb-2 group">
-                            <span className="uppercase font-sans font-bold text-3xl tracking-tighter text-cream transition-colors duration-500 group-hover:text-flame">Mo</span>
-                            <span className="font-playfair font-black italic text-3xl text-cream transition-colors duration-500 group-hover:text-flame">Pizz</span>
+                        <a href="#" className="mb-2 group">
+                            <img src="/images/logo_mopizz.webp" alt="Mo Pizz" className="h-10 sm:h-12 w-auto brightness-0 invert transition-all duration-500 group-hover:brightness-100 group-hover:invert-0" />
                         </a>
                         <div className="font-sans text-smoke text-sm uppercase tracking-wide">
                             {footer.subTagline}
@@ -78,7 +77,7 @@ const Footer = () => {
                             <a href="https://instagram.com/mo_pizz" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-12 h-12 rounded-full border border-smoke/30 flex items-center justify-center text-smoke hover:border-flame hover:bg-flame hover:text-cream transition-all duration-300">
                                 <Instagram size={20} />
                             </a>
-                            <a href="https://www.facebook.com/mopizzlegnano" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-12 h-12 rounded-full border border-smoke/30 flex items-center justify-center text-smoke hover:border-flame hover:bg-flame hover:text-cream transition-all duration-300">
+                            <a href="https://www.facebook.com/MOPIZZ.IT/?locale=it_IT" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-12 h-12 rounded-full border border-smoke/30 flex items-center justify-center text-smoke hover:border-flame hover:bg-flame hover:text-cream transition-all duration-300">
                                 <Facebook size={20} />
                             </a>
                         </div>

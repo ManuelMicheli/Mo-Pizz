@@ -103,7 +103,7 @@ const Reviews = () => {
     }, []);
 
     return (
-        <section id="reviews" className="py-16 sm:py-24 md:py-32 bg-charcoal relative overflow-hidden">
+        <section id="reviews" className="pt-2 sm:pt-4 pb-16 sm:pb-24 md:pb-32 bg-charcoal relative overflow-hidden">
             {/* Header */}
             <div className="px-6 sm:px-12 md:px-20 lg:px-32 max-w-7xl mx-auto flex flex-col items-center text-center mb-14">
                 <div className="font-caveat text-gold text-2xl sm:text-3xl mb-4">

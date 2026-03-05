@@ -38,10 +38,11 @@ const Features = () => {
 
                 // Entrance fade
                 gsap.fromTo('.feature-card',
-                    { y: 50, opacity: 0 },
+                    { y: 40, opacity: 0 },
                     {
-                        y: 0, opacity: 1, duration: 0.8, stagger: 0.06, ease: 'power3.out',
-                        scrollTrigger: { trigger: cardsRef.current, start: 'top 75%' },
+                        y: 0, opacity: 1, duration: 1.3, stagger: 0.06, ease: 'expo.out',
+                        force3D: true,
+                        scrollTrigger: { trigger: cardsRef.current, start: 'top 80%' },
                     }
                 );
 
@@ -81,35 +82,41 @@ const Features = () => {
 
             // ── Video entrance animation ──
             gsap.from('.features-video', {
-                y: 40, opacity: 0, scale: 0.98, duration: 1, ease: 'power3.out',
-                scrollTrigger: { trigger: '.features-video', start: 'top 80%' },
+                y: 30, opacity: 0, scale: 0.98, duration: 1.3, ease: 'expo.out',
+                force3D: true,
+                scrollTrigger: { trigger: '.features-video', start: 'top 85%' },
             });
 
             // ── Instagram carousel animations (simple, no pin/scrub) ──
             if (instagramRef.current) {
                 gsap.from('.ig-header', {
-                    y: 30, opacity: 0, duration: 0.8, ease: 'power3.out',
-                    scrollTrigger: { trigger: instagramRef.current, start: 'top 85%' },
+                    y: 24, opacity: 0, duration: 1.1, ease: 'expo.out',
+                    force3D: true,
+                    scrollTrigger: { trigger: instagramRef.current, start: 'top 88%' },
                 });
                 gsap.from('.ig-card', {
-                    y: 40, opacity: 0, duration: 0.7, stagger: 0.08, ease: 'power3.out',
-                    scrollTrigger: { trigger: instagramRef.current, start: 'top 75%' },
+                    y: 30, opacity: 0, duration: 1.1, stagger: 0.06, ease: 'expo.out',
+                    force3D: true,
+                    scrollTrigger: { trigger: instagramRef.current, start: 'top 80%' },
                 });
                 gsap.from('.ig-cta', {
-                    y: 20, opacity: 0, duration: 0.6, ease: 'power3.out',
-                    scrollTrigger: { trigger: instagramRef.current, start: 'top 60%' },
+                    y: 16, opacity: 0, duration: 1, ease: 'expo.out',
+                    force3D: true,
+                    scrollTrigger: { trigger: instagramRef.current, start: 'top 65%' },
                 });
             }
 
             // ── Mobile: animate header + image ──
             mm.add('(max-width: 767px)', () => {
                 gsap.from('.features-header', {
-                    y: 30, opacity: 0, duration: 0.8, ease: 'power3.out',
-                    scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' },
+                    y: 24, opacity: 0, duration: 1.1, ease: 'expo.out',
+                    force3D: true,
+                    scrollTrigger: { trigger: sectionRef.current, start: 'top 85%' },
                 });
                 gsap.from('.features-mobile-img', {
-                    y: 40, opacity: 0, scale: 0.97, duration: 1, ease: 'power3.out',
-                    scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' },
+                    y: 30, opacity: 0, scale: 0.98, duration: 1.3, ease: 'expo.out',
+                    force3D: true,
+                    scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' },
                 });
             });
         }, sectionRef);
@@ -337,23 +344,6 @@ const Features = () => {
                 </div>
             </div>
 
-            {/* Background position styles */}
-            <style>{`
-                @media (min-width: 768px) {
-                    .accordion-front[data-pos="0%"],   .accordion-back[data-pos="0%"]   { background-size: 500% 100%; background-position: 0% center; }
-                    .accordion-front[data-pos="25%"],  .accordion-back[data-pos="25%"]  { background-size: 500% 100%; background-position: 25% center; }
-                    .accordion-front[data-pos="50%"],  .accordion-back[data-pos="50%"]  { background-size: 500% 100%; background-position: 50% center; }
-                    .accordion-front[data-pos="75%"],  .accordion-back[data-pos="75%"]  { background-size: 500% 100%; background-position: 75% center; }
-                    .accordion-front[data-pos="100%"], .accordion-back[data-pos="100%"] { background-size: 500% 100%; background-position: 100% center; }
-                }
-                @media (max-width: 767px) {
-                    .accordion-front[data-pos="0%"],   .accordion-back[data-pos="0%"]   { background-size: 100% 500%; background-position: center 0%; }
-                    .accordion-front[data-pos="25%"],  .accordion-back[data-pos="25%"]  { background-size: 100% 500%; background-position: center 25%; }
-                    .accordion-front[data-pos="50%"],  .accordion-back[data-pos="50%"]  { background-size: 100% 500%; background-position: center 50%; }
-                    .accordion-front[data-pos="75%"],  .accordion-back[data-pos="75%"]  { background-size: 100% 500%; background-position: center 75%; }
-                    .accordion-front[data-pos="100%"], .accordion-back[data-pos="100%"] { background-size: 100% 500%; background-position: center 100%; }
-                }
-            `}</style>
         </section>
     );
 };

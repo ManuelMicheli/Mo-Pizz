@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ChefHat } from 'lucide-react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -9,18 +9,19 @@ const { chiSiamo } = siteContent;
 const Chef = () => {
     const cRef = useRef(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         let ctx = gsap.context(() => {
             gsap.from('.chef-text', {
                 scrollTrigger: {
                     trigger: cRef.current,
-                    start: 'top 60%',
+                    start: 'top 70%',
                 },
-                y: 40,
+                y: 30,
                 opacity: 0,
-                stagger: 0.15,
-                duration: 1,
-                ease: 'power3.out'
+                stagger: 0.12,
+                duration: 1.3,
+                ease: 'expo.out',
+                force3D: true,
             });
 
             gsap.to('.chef-photo', {
@@ -89,7 +90,7 @@ const Chef = () => {
                 <div className="chef-text relative mt-10 sm:mt-16 pl-6 sm:pl-10 md:pl-16">
                     <span className="font-serif text-gold text-8xl absolute -top-8 left-0 leading-none opacity-40">&ldquo;</span>
                     <p className="font-caveat text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-cream italic leading-snug">
-                        {chiSiamo.quote}
+                        {chiSiamo.quote}&rdquo;
                     </p>
                 </div>
             </div>

@@ -154,7 +154,7 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
       duration: 1,
       ease: 'power2.inOut',
     });
-  }, []);
+  }, [menuCategories.length]);
 
   // Detect mobile
   useEffect(() => {

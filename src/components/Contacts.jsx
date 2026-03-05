@@ -1,26 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 import { MapPin, Phone, Instagram, Map } from 'lucide-react';
 import { siteContent } from '@/data/copy';
 
 const { contatti } = siteContent;
 
 const Contacts = () => {
-    const [mapsLoaded, setMapsLoaded] = useState(false);
-    const [consent, setConsent] = useState(() => {
-        try { return localStorage.getItem('mopizz-consent'); } catch { return null; }
-    });
-
-    useEffect(() => {
-        const onConsentChanged = () => {
-            try { setConsent(localStorage.getItem('mopizz-consent')); } catch { /* noop */ }
-        };
-        window.addEventListener('consent-changed', onConsentChanged);
-        return () => window.removeEventListener('consent-changed', onConsentChanged);
-    }, []);
-
-    const handleMapClick = useCallback(() => {
-        if (consent === 'all') setMapsLoaded(true);
-    }, [consent]);
     return (
         <section id="contatti" className="py-12 sm:py-24 md:py-32 px-4 sm:px-8 md:px-16 lg:px-32 bg-flour text-charcoal relative">
             <div className="max-w-[1600px] mx-auto flex flex-col lg:flex-row gap-16 xl:gap-24 items-start">
@@ -92,39 +76,16 @@ const Contacts = () => {
                     </div>
                 </div>
 
-                {/* Right Column - Map IFRAME */}
+                {/* Right Column - Map IFRAME (always visible) */}
                 <div className="w-full lg:w-1/2 aspect-[4/3] sm:aspect-[3/2] lg:aspect-auto lg:h-[700px] h-[45vh] sm:h-auto sm:max-h-[60vh] lg:max-h-none rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-2xl flex relative bg-smoke/20">
-                    {mapsLoaded ? (
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.6338006679586!2d8.903960076296!3d45.597950371077366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786915df0000000%3A0x1d36cbede0802c6b!2sMo%20pizz!5e0!3m2!1sen!2sit!4v1700000000000!5m2!1sen!2sit"
-                            className="absolute inset-0 w-full h-full border-0"
-                            allowFullScreen=""
-                            loading="lazy"
-                            referrerPolicy="no-referrer-when-downgrade"
-                            sandbox="allow-scripts allow-same-origin allow-popups"
-                            title={contatti.mappaTitle}
-                        ></iframe>
-                    ) : (
-                        <button
-                            onClick={handleMapClick}
-                            className="group absolute inset-0 w-full h-full bg-charcoal/90 flex flex-col items-center justify-center gap-4 cursor-pointer transition-colors duration-300"
-                            aria-label={consent === 'all' ? contatti.mappaCarica : contatti.mappaCookie}
-                        >
-                            <div className="w-16 h-16 rounded-full bg-flame/20 group-hover:bg-flame/30 flex items-center justify-center transition-colors duration-300">
-                                <MapPin className="text-flame" size={32} />
-                            </div>
-                            <span className="font-sans font-semibold text-cream text-lg">
-                                {consent === 'all'
-                                    ? contatti.mappaCarica
-                                    : contatti.mappaCookie}
-                            </span>
-                            <span className="font-sans text-smoke text-sm max-w-xs text-center">
-                                {consent === 'all'
-                                    ? contatti.mappaDisclaimer
-                                    : contatti.mappaCookieDisclaimer}
-                            </span>
-                        </button>
-                    )}
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.6!2d8.9061923!3d45.6028006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47868d9bf3567e25%3A0x6c09ada059a69fd2!2sMo%20Pizz%20Pizzeria%20Napoletana!5e0!3m2!1sit!2sit"
+                        className="absolute inset-0 w-full h-full border-0"
+                        allowFullScreen=""
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        title={contatti.mappaTitle}
+                    ></iframe>
                 </div>
 
             </div>

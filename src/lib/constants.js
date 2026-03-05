@@ -99,7 +99,7 @@ export const schemaData = {
   },
   sameAs: [
     'https://www.instagram.com/mo_pizz/',
-    'https://www.facebook.com/mopizzlegnano',
+    'https://www.facebook.com/MOPIZZ.IT/?locale=it_IT',
   ],
   potentialAction: {
     '@type': 'OrderAction',

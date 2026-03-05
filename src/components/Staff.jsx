@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Users } from 'lucide-react';
@@ -16,7 +16,7 @@ const splitIntoWords = (text) =>
 const Staff = () => {
     const sRef = useRef(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const ctx = gsap.context(() => {
             const words = gsap.utils.toArray('.staff-word');
 

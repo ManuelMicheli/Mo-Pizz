@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChevronDown } from 'lucide-react';
@@ -11,7 +11,7 @@ const { menu } = siteContent;
 const MenuIntro = ({ onCtaClick, menuOpen }) => {
   const sectionRef = useRef(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const section = sectionRef.current;
 
     let ctx = gsap.context(() => {
@@ -30,29 +30,29 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
 
       // Fade-in images
       gsap.from('.menu-hero-img', {
-        scale: 1.05,
+        scale: 1.04,
         opacity: 0,
-        duration: 1,
-        stagger: 0.15,
-        ease: 'power3.out',
+        duration: 1.3,
+        stagger: 0.12,
+        ease: 'expo.out',
         force3D: true,
         scrollTrigger: {
           trigger: section,
-          start: 'top 80%',
+          start: 'top 85%',
         },
       });
 
       // CTA entrance
       gsap.from('.menu-hero-cta', {
-        y: 20,
+        y: 16,
         opacity: 0,
-        duration: 0.8,
-        delay: 0.4,
-        ease: 'power3.out',
+        duration: 1.1,
+        delay: 0.3,
+        ease: 'expo.out',
         force3D: true,
         scrollTrigger: {
           trigger: section,
-          start: 'top 60%',
+          start: 'top 65%',
         },
       });
     }, section);
