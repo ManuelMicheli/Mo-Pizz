@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useEffect } from 'react';
+import React, { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -16,32 +16,38 @@ import { buildBreadcrumb } from '../lib/constants';
 gsap.registerPlugin(ScrollTrigger);
 
 const Ordina = () => {
+    const pageRef = useRef(null);
     const [showStickyBar, setShowStickyBar] = useState(false);
 
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
 
-        const timer = setTimeout(() => {
-            ScrollTrigger.refresh();
-        }, 100);
+        const ctx = gsap.context(() => {
+            requestAnimationFrame(() => {
+                ScrollTrigger.refresh();
+            });
+        }, pageRef);
 
-        return () => {
-            clearTimeout(timer);
-            ScrollTrigger.getAll().forEach((t) => t.kill());
-        };
+        return () => ctx.revert();
     }, []);
 
     // Sticky bar: show after scrolling past hero (100vh)
     useEffect(() => {
+        let ticking = false;
         const handleScroll = () => {
-            setShowStickyBar(window.scrollY > window.innerHeight * 0.8);
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+                setShowStickyBar(window.scrollY > window.innerHeight * 0.8);
+                ticking = false;
+            });
         };
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
-        <>
+        <div ref={pageRef}>
             <Helmet>
                 <title>{siteContent.meta.ordinaTitle}</title>
                 <meta name="description" content={siteContent.meta.ordinaDescription} />
@@ -87,7 +93,7 @@ const Ordina = () => {
                     </a>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

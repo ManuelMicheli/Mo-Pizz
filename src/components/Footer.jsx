@@ -62,7 +62,7 @@ const Footer = () => {
                         <h4 className="font-sans font-bold text-lg mb-2 uppercase tracking-wide">{footer.navHeading}</h4>
                         <div className="flex flex-col gap-3 font-sans text-smoke">
                             {footer.navLinks.map((link, i) => (
-                                <a key={i} href={link.href} className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{link.label}</a>
+                                <HashLink smooth key={i} to={`/${link.href}`} className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{link.label}</HashLink>
                             ))}
                             <HashLink smooth to="/#prenota" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300 flex items-center gap-2"><Phone size={18} />{footer.ctaPrenota}</HashLink>
                             <Link to="/ordina" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaOrdina}</Link>
@@ -75,10 +75,10 @@ const Footer = () => {
                     <div className="flex flex-col items-center md:items-end gap-6 text-center md:text-right">
                         <h4 className="font-sans font-bold text-lg mb-2 uppercase tracking-wide hidden md:block opacity-0">Social</h4>
                         <div className="flex items-center gap-4">
-                            <a href="https://instagram.com/mo_pizz" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-smoke/30 flex items-center justify-center text-smoke hover:border-flame hover:bg-flame hover:text-cream transition-all duration-300">
+                            <a href="https://instagram.com/mo_pizz" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-12 h-12 rounded-full border border-smoke/30 flex items-center justify-center text-smoke hover:border-flame hover:bg-flame hover:text-cream transition-all duration-300">
                                 <Instagram size={20} />
                             </a>
-                            <a href="#" className="w-12 h-12 rounded-full border border-smoke/30 flex items-center justify-center text-smoke hover:border-flame hover:bg-flame hover:text-cream transition-all duration-300">
+                            <a href="https://www.facebook.com/mopizzlegnano" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-12 h-12 rounded-full border border-smoke/30 flex items-center justify-center text-smoke hover:border-flame hover:bg-flame hover:text-cream transition-all duration-300">
                                 <Facebook size={20} />
                             </a>
                         </div>

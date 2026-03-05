@@ -234,6 +234,18 @@ body {
   animation-play-state: paused;
 }
 
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation: none;
+  }
+
+  .animate-bounce-slow {
+    animation: none;
+  }
+}
+
 /* Safe area utilities for notched devices */
 .safe-bottom {
   padding-bottom: env(safe-area-inset-bottom);

@@ -140,7 +140,7 @@ export const siteContent = {
   // ─── CONTATTI ───────────────────────────────────────
   contatti: {
     eyebrow: 'Contatti',
-    headline: 'Dove Siamo a Legnano',
+    headline: 'Vieni a Trovarci',
     indirizzo: 'Via Cadore 4,\n20025 Legnano (MI)',
     telefono: '0331 024363',
     telefonoHref: 'tel:+390331024363',
@@ -179,7 +179,7 @@ export const siteContent = {
     ctaFidelity: 'Fidelity',
     statusOpen: 'Forno Operativo',
     statusClosed: 'Forno Spento',
-    legal: '© 2025 Mo Pizz Legnano SRL',
+    legal: `© ${new Date().getFullYear()} Mo Pizz Legnano SRL`,
     piva: 'P.IVA 10529490960',
   },
 

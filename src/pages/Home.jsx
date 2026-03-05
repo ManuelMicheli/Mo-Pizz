@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -21,24 +21,22 @@ import Contacts from '../components/Contacts';
 gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
+    const pageRef = useRef(null);
 
-    // Refresh ScrollTrigger and jump to top on mount
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
 
-        // Wait a tick for DOM to paint before refreshing GSAP triggers
-        const timer = setTimeout(() => {
-            ScrollTrigger.refresh();
-        }, 100);
+        const ctx = gsap.context(() => {
+            requestAnimationFrame(() => {
+                ScrollTrigger.refresh();
+            });
+        }, pageRef);
 
-        return () => {
-            clearTimeout(timer);
-            ScrollTrigger.getAll().forEach(t => t.kill());
-        };
+        return () => ctx.revert();
     }, []);
 
     return (
-        <React.Fragment>
+        <div ref={pageRef}>
             <Hero />
             <ServicesGrid />
             <MenuFisso />
@@ -53,7 +51,7 @@ const Home = () => {
             <PrenotaSection />
             <SeoContent />
             <Contacts />
-        </React.Fragment>
+        </div>
     );
 };
 
