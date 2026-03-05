@@ -254,7 +254,7 @@ const Features = () => {
             <div ref={instagramRef} className="w-full pb-16 sm:pb-20 md:pb-24 bg-charcoal">
                 {/* Divider strip */}
                 <div className="relative mb-10 sm:mb-12">
-                    <div className="absolute inset-0 bg-gold" />
+                    <div className="absolute inset-0 bg-flame" />
 
                     {/* Header */}
                     <div className="ig-header max-w-[1400px] mx-auto px-4 sm:px-8 md:px-12 py-8 sm:py-10">
@@ -265,12 +265,12 @@ const Features = () => {
                                      style={{ background: 'linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)' }}>
                                     <Instagram className="w-5 h-5 text-white" />
                                 </div>
-                                <span className="font-mono text-charcoal/60 text-sm tracking-wide">{instagram.handle}</span>
+                                <span className="font-mono text-cream/70 text-sm tracking-wide">{instagram.handle}</span>
                             </div>
-                            <h3 className="font-playfair text-charcoal text-[clamp(1.5rem,3vw,2.5rem)] leading-tight">
+                            <h3 className="font-playfair text-cream text-[clamp(1.5rem,3vw,2.5rem)] leading-tight">
                                 {instagram.eyebrow}
                             </h3>
-                            <p className="font-sans text-charcoal/60 text-sm sm:text-base mt-2 max-w-md leading-relaxed">
+                            <p className="font-sans text-cream/70 text-sm sm:text-base mt-2 max-w-md leading-relaxed">
                                 {instagram.body}
                             </p>
                         </div>
@@ -278,7 +278,7 @@ const Features = () => {
                             href="https://www.instagram.com/mo_pizz/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="magnetic-btn hidden sm:inline-flex items-center gap-2 px-6 py-3 rounded-full bg-charcoal/5 border border-charcoal/15 text-charcoal font-sans text-sm hover:bg-charcoal/10 transition-colors"
+                            className="magnetic-btn hidden sm:inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cream/10 border border-cream/20 text-cream font-sans text-sm hover:bg-cream/20 transition-colors"
                         >
                             <ExternalLink className="w-4 h-4" />
                             {instagram.cta}

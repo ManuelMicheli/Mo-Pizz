@@ -18,9 +18,9 @@ const OrdComeFunziona = () => {
                         viewport={{ once: true, margin: '-30px' }}
                         transition={{ duration: 0.6, ease: 'easeOut', delay: i * 0.08 }}
                         className={cn(
-                            'relative border border-charcoal/20 bg-flame p-5 sm:p-6',
+                            'relative border border-white/10 bg-charcoal p-5 sm:p-6',
                             'flex flex-col justify-between group transition-all duration-500',
-                            'hover:bg-ember'
+                            'hover:bg-charcoal/80'
                         )}
                     >
                         <span className="font-mono text-cream/50 text-[10px] tracking-[0.15em] uppercase">
