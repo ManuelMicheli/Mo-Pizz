@@ -56,6 +56,7 @@ function App() {
                     <Route path="gift-cards" element={<GiftCards />} />
                     <Route path="ordina" element={<Ordina />} />
                     <Route path="fidelity" element={<Fidelity />} />
+                    <Route path="prenota" element={<Navigate to="/#prenota" replace />} />
                 </Route>
             </Routes>
         </Suspense>
