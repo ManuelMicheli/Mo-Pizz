@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import CookieBanner from './CookieBanner';
-import { schemaData } from '@/lib/constants';
+import { schemaData, localBusinessSchema } from '@/lib/constants';
 import { siteContent } from '@/data/copy';
 
 // A persistent layout wrapper so Navbar and Footer survive route changes without unmounting
@@ -24,15 +24,28 @@ const Layout = () => {
             <Helmet>
                 <title>{siteContent.meta.title}</title>
                 <meta name="description" content={siteContent.meta.description} />
+                <meta name="keywords" content={siteContent.meta.keywords} />
+                <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
                 <meta property="og:title" content={siteContent.meta.ogTitle} />
                 <meta property="og:description" content={siteContent.meta.ogDescription} />
-                <meta property="og:image" content="/og-image.jpg" />
+                <meta property="og:site_name" content="MO PIZZ" />
+                <meta property="og:image" content="https://www.mopizz.it/og-image.jpg" />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta property="og:image:alt" content="MO PIZZ — Pizzeria Napoletana a Legnano" />
                 <meta property="og:type" content="restaurant" />
                 <meta property="og:url" content="https://www.mopizz.it" />
                 <meta property="og:locale" content="it_IT" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={siteContent.meta.ogTitle} />
+                <meta name="twitter:description" content={siteContent.meta.ogDescription} />
+                <meta name="twitter:image" content="https://www.mopizz.it/og-image.jpg" />
                 <link rel="canonical" href="https://www.mopizz.it" />
                 <script type="application/ld+json">
                     {JSON.stringify(schemaData)}
+                </script>
+                <script type="application/ld+json">
+                    {JSON.stringify(localBusinessSchema)}
                 </script>
             </Helmet>
 

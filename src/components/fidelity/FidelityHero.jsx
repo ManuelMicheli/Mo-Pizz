@@ -48,11 +48,9 @@ const FidelityHero = () => {
             {/* Content — left aligned */}
             <div className="relative z-10 flex flex-col items-start text-left w-full max-w-2xl">
                 {/* Headline */}
-                <h1 className="fid-hero-elem font-playfair font-black text-cream text-[clamp(2.5rem,8vw,6.5rem)] leading-[0.9] tracking-tight">
-                    {fidelity.hero.headlinePart1}
-                </h1>
-                <h1 className="fid-hero-elem font-playfair font-black italic text-cream text-[clamp(2.8rem,9vw,7.5rem)] leading-[0.9] tracking-tight">
-                    {fidelity.hero.headlinePart2}
+                <h1 className="fid-hero-elem font-playfair font-black text-cream leading-[0.9] tracking-tight">
+                    <span className="block text-[clamp(2.5rem,8vw,6.5rem)]">{fidelity.hero.headlinePart1}</span>
+                    <span className="block italic text-[clamp(2.8rem,9vw,7.5rem)]">{fidelity.hero.headlinePart2}</span>
                 </h1>
                 <p className="fid-hero-elem font-sans text-cream/80 text-[clamp(1rem,1.5vw,1.25rem)] max-w-[480px] mt-4 leading-relaxed">
                     {fidelity.hero.body}

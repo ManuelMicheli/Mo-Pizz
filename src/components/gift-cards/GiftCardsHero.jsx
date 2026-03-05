@@ -49,11 +49,9 @@ const GiftCardsHero = () => {
                 <div className="gc-hero-elem font-caveat text-gold text-2xl sm:text-3xl mb-2">
                     {giftCards.hero.eyebrow}
                 </div>
-                <h1 className="gc-hero-elem font-playfair font-black text-cream text-[clamp(2.2rem,7vw,5.5rem)] leading-[0.95]">
-                    {giftCards.hero.headline}
-                </h1>
-                <h1 className="gc-hero-elem font-playfair font-black text-cream text-[clamp(2.5rem,8vw,6.5rem)] leading-[0.95]">
-                    {giftCards.hero.headlineEm}
+                <h1 className="gc-hero-elem font-playfair font-black text-cream leading-[0.95]">
+                    <span className="block text-[clamp(2.2rem,7vw,5.5rem)]">{giftCards.hero.headline}</span>
+                    <span className="block text-[clamp(2.5rem,8vw,6.5rem)]">{giftCards.hero.headlineEm}</span>
                 </h1>
                 <p className="gc-hero-elem font-sans text-cream/70 text-[clamp(1rem,1.5vw,1.25rem)] max-w-[550px] mt-2 leading-relaxed">
                     {giftCards.hero.body}

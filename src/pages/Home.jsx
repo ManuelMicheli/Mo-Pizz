@@ -10,7 +10,11 @@ import Staff from '../components/Staff';
 import Statement from '../components/Statement';
 import Gallery from '../components/Gallery';
 import Reviews from '../components/Reviews';
+import ReviewCta from '../components/ReviewCta';
+import PrenotaSection from '../components/PrenotaSection';
 import ServicesGrid from '../components/ServicesGrid';
+import MenuFisso from '../components/MenuFisso';
+import SeoContent from '../components/SeoContent';
 import Contacts from '../components/Contacts';
 
 
@@ -37,13 +41,17 @@ const Home = () => {
         <React.Fragment>
             <Hero />
             <ServicesGrid />
+            <MenuFisso />
             <MenuSection />
             <Statement />
             <Gallery />
             <Chef />
             <Staff />
             <Features />
+            <ReviewCta />
             <Reviews />
+            <PrenotaSection />
+            <SeoContent />
             <Contacts />
         </React.Fragment>
     );

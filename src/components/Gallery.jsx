@@ -6,7 +6,7 @@ const Gallery = () => {
             <div className="w-full">
                 <img
                     src="/images/wmremove-transformed-gallery.webp"
-                    alt="Gallery"
+                    alt="Sala ristorante MO PIZZ, pizzeria napoletana a Legnano — atmosfera calda e accogliente"
                     loading="lazy"
                     className="w-full h-auto object-cover max-h-[50vh] sm:max-h-[60vh] md:max-h-[70vh]"
                 />

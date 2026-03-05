@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { PLATEFORM_RESERVE_URL } from '@/lib/constants';
 import { siteContent } from '@/data/copy';
 
 const { hero } = siteContent;
@@ -36,14 +35,15 @@ const Hero = () => {
             <div className="absolute top-6 sm:top-8 md:top-10 left-0 right-0 z-20 flex flex-col items-center text-center pointer-events-none">
                 <img
                     src="/images/logo_mopizz.webp"
-                    alt="Mo Pizz"
+                    alt="Logo MO PIZZ — Pizzeria Napoletana a Legnano"
                     className="hero-elem h-20 sm:h-28 lg:h-36 w-auto mb-3 drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]"
                 />
                 <div className="hero-elem font-caveat text-gold text-xl sm:text-2xl mb-1">
                     {hero.eyebrow}
                 </div>
                 <h1 className="hero-elem font-playfair font-black text-cream text-[clamp(2rem,6vw,5rem)] leading-[0.95] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
-                    {hero.headline} <span className="italic">{hero.headlineEm}</span>
+                    <span className="sr-only">{hero.h1Sr}</span>
+                    <span aria-hidden="true">{hero.headline} <span className="italic">{hero.headlineEm}</span></span>
                 </h1>
             </div>
 
@@ -52,7 +52,7 @@ const Hero = () => {
                 <a href="#menu" className="hero-elem magnetic-btn text-center bg-charcoal border border-charcoal text-cream hover:bg-cream hover:text-charcoal font-sans font-bold py-3 px-6 sm:py-4 sm:px-8 text-sm sm:text-base rounded-full transition-colors duration-300">
                     {hero.ctaMenu}
                 </a>
-                <a href={PLATEFORM_RESERVE_URL} target="_blank" rel="noopener noreferrer" className="hero-elem magnetic-btn text-center bg-flame hover:bg-ember text-cream font-sans font-bold py-3 px-6 sm:py-4 sm:px-8 text-sm sm:text-base rounded-full transition-colors duration-300">
+                <a href="#prenota" className="hero-elem magnetic-btn text-center bg-flame hover:bg-ember text-cream font-sans font-bold py-3 px-6 sm:py-4 sm:px-8 text-sm sm:text-base rounded-full transition-colors duration-300">
                     {hero.ctaPrenota}
                 </a>
             </div>

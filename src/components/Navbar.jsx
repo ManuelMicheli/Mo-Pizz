@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Phone, Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
-import { PLATEFORM_RESERVE_URL } from '@/lib/constants';
 import { siteContent } from '@/data/copy';
 
 const { nav } = siteContent;
@@ -93,7 +92,7 @@ const Navbar = () => {
                             <span className="font-playfair font-black italic text-xl sm:text-2xl text-cream">Pizz</span>
                         </>
                     ) : (
-                        <img src="/images/logo_mopizz.webp" alt="Mo Pizz" className="h-8 sm:h-9 w-auto" />
+                        <img src="/images/logo_mopizz.webp" alt="MO PIZZ — Pizzeria Napoletana Legnano" className="h-8 sm:h-9 w-auto" />
                     )}
                 </HashLink>
 
@@ -121,10 +120,10 @@ const Navbar = () => {
                     >
                         {nav.ctaOrdina}
                     </Link>
-                    <a href={PLATEFORM_RESERVE_URL} target="_blank" rel="noopener noreferrer" className="magnetic-btn bg-flame hover:bg-ember text-cream font-sans font-semibold py-3 px-6 rounded-full flex items-center gap-2 transition-colors duration-300">
+                    <HashLink smooth to="/#prenota" className="magnetic-btn bg-flame hover:bg-ember text-cream font-sans font-semibold py-3 px-6 rounded-full flex items-center gap-2 transition-colors duration-300">
                         <Phone size={18} />
                         {nav.ctaPrenota}
-                    </a>
+                    </HashLink>
                 </div>
 
                 {/* Mobile Toggle — larger tap target, correct color for X */}
@@ -174,10 +173,9 @@ const Navbar = () => {
                 >
                     {nav.ctaOrdina}
                 </Link>
-                <a
-                    href={PLATEFORM_RESERVE_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                <HashLink
+                    smooth
+                    to="/#prenota"
                     className={`font-sans text-[11px] uppercase tracking-[0.25em] flex items-center gap-1.5 transition-all duration-500 ${
                         isGathering && !isScrolled ? 'text-flame/10 scale-90' : 'text-flame/70 hover:text-flame scale-100'
                     }`}
@@ -185,7 +183,7 @@ const Navbar = () => {
                 >
                     <Phone size={11} />
                     {nav.ctaPrenota}
-                </a>
+                </HashLink>
             </div>}
 
             {/* Mobile Menu Overlay — clip-path circle expand animation */}
@@ -222,10 +220,9 @@ const Navbar = () => {
                     >
                         {nav.ctaOrdina}
                     </Link>
-                    <a
-                        href={PLATEFORM_RESERVE_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                    <HashLink
+                        smooth
+                        to="/#prenota"
                         onClick={closeMenu}
                         className="mobile-link mt-8 bg-flame hover:bg-ember text-cream font-sans font-semibold py-4 px-10 rounded-full flex items-center gap-2 text-xl"
                         style={{
@@ -236,7 +233,7 @@ const Navbar = () => {
                     >
                         <Phone size={24} />
                         {nav.ctaPrenota}
-                    </a>
+                    </HashLink>
                 </div>
             </div>
         </nav>

@@ -7,17 +7,24 @@ export const siteContent = {
 
   // ─── SEO META ───────────────────────────────────────
   meta: {
-    title: 'Mo Pizz — Pizzeria e Ristorante a Legnano',
-    description: 'Pizzeria e ristorante a Legnano: pizza verace con lievitazione 48-60h, cucina di tradizione, ingredienti DOP e IGP. Prenota il tuo tavolo.',
-    ogTitle: 'Mo Pizz — Pizzeria e Ristorante a Legnano',
-    ogDescription: 'Pizza verace e cucina autentica a Legnano. Forno a legna, ingredienti selezionati, atmosfera unica. Dal 2019.',
+    // Homepage
+    title: 'MO PIZZ | Pizzeria Napoletana a Legnano — Pizza con Forno a Legna',
+    description: 'MO PIZZ è la pizzeria napoletana autentica a Legnano. Pizza con forno a legna, cucina tradizionale, menu fisso pranzo da €9, asporto e gift card. Via Cadore 4.',
+    keywords: 'pizzeria legnano, ristorante legnano, pizza napoletana legnano, miglior pizzeria legnano, ristorante napoletano legnano, pizza forno a legna legnano, menu fisso pranzo legnano, asporto legnano, pizzeria vicino a me',
+    ogTitle: 'MO PIZZ | Pizzeria Napoletana a Legnano',
+    ogDescription: 'Pizza napoletana autentica con forno a legna a Legnano. Cucina tradizionale, menu fisso pranzo, asporto e gift card.',
     // Sub-pages
-    giftCardsTitle: 'Gift Card — Mo Pizz Legnano',
-    giftCardsDescription: 'Regala un\'esperienza autentica da Mo Pizz. Scegli tra le nostre gift card e sorprendi chi ami con pizza verace e cucina di tradizione a Legnano.',
-    fidelityTitle: 'Programma Fidelity | Mo Pizz — Accumula Punti e Ottieni Sconti',
-    fidelityDescription: 'Iscriviti al programma Fidelity Mo Pizz: accumula punti ad ogni visita e ottieni sconti esclusivi. Ogni 10€ spesi guadagni 1 punto, 10 punti = 10% di sconto.',
-    ordinaTitle: 'Ordina per Asporto — Mo Pizz Legnano',
-    ordinaDescription: 'Ordina la tua pizza e i piatti di Mo Pizz online, ritira al locale. Pronto in 20-30 minuti.',
+    giftCardsTitle: 'Gift Card | MO PIZZ — Regala un\'Esperienza Napoletana a Legnano',
+    giftCardsDescription: 'Regala un\'esperienza culinaria unica con le gift card MO PIZZ. Tre formule: Esperienza Libera da €15, Pizza per Due €40, Esperienza Napoletana per Due €90. Pizzeria a Legnano.',
+    giftCardsKeywords: 'gift card ristorante legnano, buono regalo pizzeria legnano, regalo esperienza culinaria legnano',
+    ordinaTitle: 'Ordina per Asporto | MO PIZZ — Pizza Napoletana da Asporto a Legnano',
+    ordinaDescription: 'Ordina pizza napoletana e piatti della tradizione per asporto da MO PIZZ Legnano. Ordina online, prepariamo tutto al momento con forno a legna. Ritira in Via Cadore 4.',
+    ordinaKeywords: 'asporto legnano, pizza asporto legnano, ordina pizza legnano, cibo da asporto legnano, take away legnano',
+    fidelityTitle: 'Programma Fidelity | MO PIZZ — Accumula Punti alla Pizzeria di Legnano',
+    fidelityDescription: 'Iscriviti al programma Fidelity MO PIZZ: ogni 10€ spesi guadagni 1 punto, raggiungi 10 punti e ottieni il 10% di sconto. Pizzeria napoletana a Legnano, Via Cadore 4.',
+    fidelityKeywords: 'programma fidelity pizzeria legnano, sconti ristorante legnano, punti fedeltà pizzeria',
+    prenotaTitle: 'Prenota un Tavolo | MO PIZZ — Pizzeria Napoletana a Legnano',
+    prenotaDescription: 'Prenota il tuo tavolo da MO PIZZ a Legnano. Scegli data, orario e numero di coperti. Pizzeria napoletana in Via Cadore 4.',
   },
 
   // ─── NAVIGAZIONE ────────────────────────────────────
@@ -38,12 +45,13 @@ export const siteContent = {
 
   // ─── HERO ───────────────────────────────────────────
   hero: {
-    eyebrow: 'Pizzeria & Ristorante • Legnano',
+    eyebrow: 'Pizzeria Napoletana • Legnano',
     headline: 'Pizza verace.',
     headlineEm: 'Cucina autentica.',
+    h1Sr: 'MO PIZZ — Pizzeria Napoletana a Legnano',
     ctaMenu: 'Scopri il Menu',
     ctaPrenota: 'Prenota un Tavolo',
-    ariaBackground: 'Mo Pizz — Pizzeria e Ristorante a Legnano',
+    ariaBackground: 'Interno del ristorante MO PIZZ, pizzeria napoletana a Legnano',
   },
 
   // ─── STATEMENT / MARQUEE ────────────────────────────
@@ -72,7 +80,7 @@ export const siteContent = {
       'In cucina lavora un team affiatato: Cristian segue il forno e gli impasti, il cuoco — di formazione campana — firma antipasti, primi e secondi, mentre Lule cura la visione e la gestione del brand. Attorno a loro, uno staff giovane e professionale che trasforma ogni serata in qualcosa da ricordare.',
     ],
     quote: 'La pizza è rispetto per la materia prima e amore per il fuoco.',
-    photoAlt: 'Il team di Mo Pizz',
+    photoAlt: 'Il team di MO PIZZ, pizzeria napoletana a Legnano — Cristian, Lule e lo staff',
   },
 
   // ─── STAFF ──────────────────────────────────────────
@@ -111,12 +119,27 @@ export const siteContent = {
     headline: 'Cosa Dicono i Nostri Clienti',
     badge1: '4.2/5 su Google — 620+ recensioni',
     badge2: "Travellers' Choice Tripadvisor",
+    ctaReview: 'Lascia una Recensione',
+    ctaReviewBody: 'Ti è piaciuta l\'esperienza da Mo Pizz? Raccontalo agli altri!',
+  },
+
+  // ─── SEO CONTENT (Homepage) ─────────────────────────
+  seoContent: {
+    headline: 'Dove Siamo a Legnano',
+    paragraphs: [
+      'MO PIZZ è la pizzeria napoletana di Legnano dove la tradizione incontra l\'autenticità. In Via Cadore 4, nel cuore di Legnano, prepariamo ogni giorno pizza napoletana con forno a legna, impasto a lunga lievitazione e ingredienti selezionati direttamente dalla Campania.',
+      'Il nostro ristorante a Legnano offre un\'esperienza culinaria completa: dalla pizza margherita alla cucina tradizionale napoletana con primi, secondi, fritti e dolci della casa. Per chi lavora in zona, il menu fisso pranzo da martedì a venerdì parte da soli €9 con acqua, servizio e caffè sempre inclusi.',
+      'Cerchi una pizzeria a Legnano per una serata speciale, una cena con amici o semplicemente la miglior pizza napoletana della zona? Vieni a trovarci o ordina per asporto direttamente online. Serviamo anche i comuni limitrofi: San Giorgio su Legnano, Canegrate, Cerro Maggiore, Rescaldina e Nerviano. MO PIZZ: il sapore di Napoli a Legnano.',
+    ],
+    ctaOrdina: 'Ordina la tua pizza per asporto',
+    ctaGiftCard: 'Scopri le nostre gift card per regalare un\'esperienza napoletana',
+    ctaFidelity: 'Iscriviti al programma Fidelity e accumula punti',
   },
 
   // ─── CONTATTI ───────────────────────────────────────
   contatti: {
     eyebrow: 'Contatti',
-    headline: 'Vieni a Trovarci',
+    headline: 'Dove Siamo a Legnano',
     indirizzo: 'Via Cadore 4,\n20025 Legnano (MI)',
     telefono: '0331 024363',
     telefonoHref: 'tel:+390331024363',
@@ -159,6 +182,22 @@ export const siteContent = {
     piva: 'P.IVA 10529490960',
   },
 
+  // ─── MENU FISSO PRANZO ─────────────────────────────
+  menuFisso: {
+    eyebrow: 'Menu Fisso Pranzo',
+    headline: 'A pranzo si fa',
+    headlineEm: 'sul serio.',
+    subtitle: 'Da martedì a venerdì, un pranzo completo a partire da €9. Acqua, servizio e caffè sempre inclusi.',
+    badgePrezzo: 'A partire da €9',
+    infoQuando: 'Da martedì a venerdì, solo a pranzo',
+    infoDove: 'Via Cadore 4, Legnano',
+    infoIncluso: 'Acqua, servizio e caffè inclusi',
+    notaIncluso: 'Acqua, servizio e caffè inclusi',
+    notaEscluso: 'Vino, birra, amari e dolci esclusi',
+    ctaPrenota: 'Prenota il tuo pranzo',
+    ctaWalkin: 'Nessuna prenotazione? Passa direttamente in pausa pranzo!',
+  },
+
   // ─── SERVICES GRID ──────────────────────────────────
   services: {
     eyebrow: 'I Nostri Servizi',
@@ -193,10 +232,10 @@ export const siteContent = {
   // ─── ORDINA (Asporto) ──────────────────────────────
   ordina: {
     hero: {
-      eyebrow: 'Asporto • Ordina Online',
+      eyebrow: 'Asporto • Pizza Napoletana Legnano',
       headline: 'Il nostro forno,',
       headlineEm: 'a casa tua.',
-      body: 'La stessa pizza del nostro forno a legna, pronta da ritirare in pochi minuti. Ordina online e vieni a prenderla calda.',
+      body: 'La stessa pizza napoletana del nostro forno a legna a Legnano, pronta da ritirare in pochi minuti. Ordina online e vieni a prenderla calda in Via Cadore 4.',
       ctaPrimary: 'Ordina Ora',
       ctaSecondary: 'Vedi il Menu',
     },
@@ -247,6 +286,56 @@ export const siteContent = {
       body: 'La tua pizza preferita ti aspetta. Ordina online o chiamaci direttamente.',
       ctaPrimary: 'Ordina Ora',
       ctaSecondary: 'Chiama per Ordinare',
+    },
+  },
+
+  // ─── PRENOTA (Tavolo) ─────────────────────────────────
+  prenota: {
+    hero: {
+      eyebrow: 'Prenotazione Tavolo',
+      headline: 'Il tuo tavolo',
+      headlineEm: 'ti aspetta.',
+      body: 'Prenota in pochi click e assicurati il posto per una serata indimenticabile tra pizza verace e cucina autentica.',
+      ctaPrimary: 'Prenota Ora',
+      ctaSecondary: 'Vedi il Menu',
+    },
+    comeFunziona: {
+      eyebrow: 'Semplice e veloce',
+      headline: 'Come Funziona',
+      steps: [
+        { num: '01', title: 'Scegli', desc: 'Seleziona data, orario e numero di coperti dal form qui sotto.' },
+        { num: '02', title: 'Conferma', desc: 'Ricevi la conferma della tua prenotazione via email in pochi istanti.' },
+        { num: '03', title: 'Goditi la Serata', desc: 'Presentati al locale e lasciati coccolare dal nostro team.' },
+      ],
+    },
+    infoPratiche: {
+      eyebrow: 'Info utili',
+      headline: 'Informazioni Pratiche',
+      cards: [
+        {
+          title: 'Orari Prenotabili',
+          lines: ['Lunedì: Chiuso', 'Mar – Gio: 18:00 – 22:30', 'Ven – Sab: 12:00 – 14:30 / 18:00 – 22:30', 'Domenica: 18:00 – 22:30'],
+        },
+        {
+          title: 'Coperti Disponibili',
+          lines: ['Prenota per gruppi da 1 a 15 persone.', 'Per gruppi più grandi, contattaci telefonicamente.'],
+        },
+        {
+          title: 'Dove Siamo',
+          lines: ['Via Cadore 4, Legnano (MI)'],
+          link: { href: 'https://maps.google.com/?q=Mo+Pizz+Via+Cadore+4+Legnano', label: 'Apri in Google Maps →' },
+        },
+        {
+          title: 'Modifiche e Cancellazioni',
+          lines: ['Puoi modificare o cancellare', 'la prenotazione dalla email di conferma', 'o chiamandoci direttamente.'],
+        },
+      ],
+    },
+    ctaFinale: {
+      headline: 'Preferisci chiamare?',
+      body: 'Se preferisci prenotare per telefono o hai richieste particolari, chiamaci direttamente.',
+      ctaPrimary: 'Prenota Online',
+      ctaSecondary: 'Chiama per Prenotare',
     },
   },
 

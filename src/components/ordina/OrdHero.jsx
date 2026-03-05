@@ -49,14 +49,14 @@ const OrdHero = () => {
                     {ordina.hero.eyebrow}
                 </div>
 
-                <div className="ord-hero-elem flex flex-col">
-                    <h1 className="font-playfair font-black text-cream text-[clamp(2.5rem,8vw,7rem)] leading-[0.9] -ml-1">
+                <h1 className="ord-hero-elem flex flex-col -ml-1">
+                    <span className="font-playfair font-black text-cream text-[clamp(2.5rem,8vw,7rem)] leading-[0.9]">
                         {ordina.hero.headline}
-                    </h1>
-                    <h1 className="font-playfair font-black italic text-flame text-[clamp(2.5rem,9vw,8rem)] leading-[1] -ml-1">
+                    </span>
+                    <span className="font-playfair font-black italic text-flame text-[clamp(2.5rem,9vw,8rem)] leading-[1]">
                         {ordina.hero.headlineEm}
-                    </h1>
-                </div>
+                    </span>
+                </h1>
 
                 <p className="ord-hero-elem font-sans text-smoke text-[clamp(1rem,1.5vw,1.25rem)] max-w-[600px] mt-2 mb-6 text-balance leading-relaxed">
                     {ordina.hero.body}
