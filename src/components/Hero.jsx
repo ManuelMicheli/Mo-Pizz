@@ -30,8 +30,8 @@ const Hero = () => {
                 alt={hero.ariaBackground}
                 fetchpriority="high"
                 decoding="async"
-                width="1920"
-                height="815"
+                width="3840"
+                height="1629"
                 className="absolute inset-0 w-full h-full object-cover z-0"
             />
 
