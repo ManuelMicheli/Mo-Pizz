@@ -24,12 +24,15 @@ const Hero = () => {
 
     return (
         <section ref={containerRef} id="home" className="relative w-full h-screen min-h-[100dvh] overflow-hidden flex items-center px-6 sm:px-12 md:px-20 lg:px-32">
-            {/* Background Image — CSS background to prevent downloading */}
-            <div
-                className="absolute inset-0 bg-center bg-no-repeat z-0"
-                style={{ backgroundImage: `url('/images/hero-home.webp')`, backgroundSize: 'cover' }}
-                role="img"
-                aria-label={hero.ariaBackground}
+            {/* Background Image — native <img> for preload + fetchpriority */}
+            <img
+                src="/images/hero-home.webp"
+                alt={hero.ariaBackground}
+                fetchpriority="high"
+                decoding="async"
+                width="1920"
+                height="815"
+                className="absolute inset-0 w-full h-full object-cover z-0"
             />
 
             {/* Logo + Title — centered top, below navbar */}
@@ -37,6 +40,10 @@ const Hero = () => {
                 <img
                     src="/images/logo_mopizz.webp"
                     alt="Logo MO PIZZ — Pizzeria Napoletana a Legnano"
+                    fetchpriority="high"
+                    decoding="async"
+                    width="400"
+                    height="389"
                     className="hero-elem h-20 sm:h-28 lg:h-36 w-auto mb-3 drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]"
                 />
                 <div className="hero-elem font-caveat text-gold text-xl sm:text-2xl mb-1">

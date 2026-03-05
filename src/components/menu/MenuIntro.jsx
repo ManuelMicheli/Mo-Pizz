@@ -67,10 +67,10 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
     >
       {/* Two-image hero grid */}
       <div className="relative z-10 w-full h-full flex">
-        {/* Image 39 — left half */}
+        {/* Left half */}
         <div className="menu-hero-img w-1/2 h-full relative overflow-hidden will-change-transform" style={{ transform: 'translateZ(0)' }}>
           <img
-            src="/images/wmremove-transformed (39).webp"
+            src="/images/menu-intro-left.webp"
             alt=""
             loading="lazy"
             decoding="async"
@@ -80,10 +80,10 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-charcoal/60" />
         </div>
 
-        {/* Image 40 — right half */}
+        {/* Right half */}
         <div className="menu-hero-img w-1/2 h-full relative overflow-hidden will-change-transform" style={{ transform: 'translateZ(0)' }}>
           <img
-            src="/images/wmremove-transformed (40).webp"
+            src="/images/menu-intro-right.webp"
             alt=""
             loading="lazy"
             decoding="async"

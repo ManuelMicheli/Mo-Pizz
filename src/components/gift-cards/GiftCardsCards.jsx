@@ -13,21 +13,21 @@ const GiftCardsCards = () => {
     const cards = [
         {
             ...giftCards.cards.items[0],
-            imageSrc: '/images/esperienza libera.webp',
+            imageSrc: '/images/gift-card-esperienza-libera.webp',
             imageAlt: 'Gift Card Esperienza Libera — Mo Pizz',
             waMessage: 'Ciao! Vorrei acquistare una Gift Card "Esperienza Libera" di Mo Pizz. Potete darmi maggiori informazioni?',
             featured: false,
         },
         {
             ...giftCards.cards.items[1],
-            imageSrc: '/images/esperienza napoletana per 2.webp',
+            imageSrc: '/images/gift-card-esperienza-napoletana.webp',
             imageAlt: 'Gift Card Esperienza Napoletana per Due — Mo Pizz',
             waMessage: 'Ciao! Vorrei acquistare una Gift Card "Esperienza Napoletana per Due" (€90) di Mo Pizz. Potete darmi maggiori informazioni?',
             featured: true,
         },
         {
             ...giftCards.cards.items[2],
-            imageSrc: '/images/pizza per due.webp',
+            imageSrc: '/images/gift-card-pizza-per-due.webp',
             imageAlt: 'Gift Card Pizza per Due — Mo Pizz',
             waMessage: 'Ciao! Vorrei acquistare una Gift Card "Pizza per Due" (€40) di Mo Pizz. Potete darmi maggiori informazioni?',
             featured: false,

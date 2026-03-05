@@ -201,7 +201,7 @@ const ServicesGrid = () => {
             <div
                 className="services-grid relative flex flex-col gap-3 sm:gap-4 px-3 sm:px-4 pb-28 lg:pb-40 pt-8 lg:pt-12 overflow-hidden"
                 style={{
-                    backgroundImage: 'url(/images/f7jz553sphrmr0cwq6k8e1kc48_upscayl_4x_upscayl-standard-4x.webp)',
+                    backgroundImage: 'url(/images/services-grid-bg.webp)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                 }}

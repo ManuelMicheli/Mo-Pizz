@@ -34,12 +34,16 @@ export default defineConfig({
                     'vendor-react': ['react', 'react-dom', 'react-router-dom', 'react-router-hash-link'],
                     'vendor-gsap': ['gsap'],
                     'vendor-lenis': ['lenis'],
-                    'vendor-framer': ['framer-motion'],
+                    // framer-motion excluded: only used by lazy-loaded sections,
+                    // letting Rollup split it naturally avoids modulepreload in entry HTML
                 },
             },
         },
-        // Drop console.log in production
+        // Drop console in production
         minify: 'esbuild',
         target: 'es2020',
+    },
+    esbuild: {
+        drop: ['console', 'debugger'],
     },
 })

@@ -60,9 +60,10 @@ const Chef = () => {
                 <div className="chef-photo w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full border-4 border-gold shadow-2xl relative flex items-center justify-center overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-tr from-ember to-flame opacity-90 mix-blend-multiply"></div>
                     <img
-                        src="/images/chef-cristian.jpg"
+                        src="/images/chef-cristian.webp"
                         alt={chiSiamo.photoAlt}
                         loading="lazy"
+                        decoding="async"
                         className="absolute inset-0 w-full h-full object-cover filter grayscale sepia-[0.3]"
                     />
                     <ChefHat size={48} className="text-cream relative z-10 opacity-70" />

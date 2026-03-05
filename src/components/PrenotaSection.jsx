@@ -81,6 +81,7 @@ const PrenotaSection = () => {
                                 src={PLATEFORM_RESERVE_URL}
                                 className="w-full border-0 h-[480px] sm:h-[560px] md:h-[640px]"
                                 style={{ marginTop: '-80px' }}
+                                loading="lazy"
                                 onLoad={() => setIframeLoaded(true)}
                                 title="Prenota un tavolo — Mo Pizz"
                             />
