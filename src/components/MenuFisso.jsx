@@ -124,8 +124,8 @@ const MenuFisso = () => {
         }}
       />
 
+      {/* Header */}
       <div className="relative max-w-[1000px] mx-auto px-4 sm:px-8">
-        {/* Header */}
         <div className="mf-anim text-center mb-8 sm:mb-8">
           <span className="inline-block bg-flame/15 text-flame font-mono font-bold text-xs tracking-wider uppercase px-4 py-1.5 rounded-full mb-4 border border-flame/20">
             {menuFisso.badgePrezzo}
@@ -138,22 +138,24 @@ const MenuFisso = () => {
             {menuFisso.subtitle}
           </p>
         </div>
+      </div>
 
-        {/* Cards — mobile */}
-        <div className="mf-anim flex flex-col gap-5 md:hidden">
-          {mobileOrder.map((f) => (
-            <MenuFissoCard key={f.id} formula={f} />
-          ))}
-        </div>
+      {/* Cards — mobile */}
+      <div className="relative mf-anim flex flex-col gap-5 md:hidden px-4 sm:px-8 max-w-[1000px] mx-auto">
+        {mobileOrder.map((f) => (
+          <MenuFissoCard key={f.id} formula={f} />
+        ))}
+      </div>
 
-        {/* Cards — desktop */}
-        <div className="mf-anim hidden md:grid md:grid-cols-3 gap-5 lg:gap-7 items-stretch">
-          {menuFissoFormule.map((f) => (
-            <MenuFissoCard key={f.id} formula={f} />
-          ))}
-        </div>
+      {/* Cards — desktop */}
+      <div className="relative mf-anim hidden md:grid md:grid-cols-3 gap-8 lg:gap-12 items-stretch px-6 lg:px-12 xl:px-20">
+        {menuFissoFormule.map((f) => (
+          <MenuFissoCard key={f.id} formula={f} />
+        ))}
+      </div>
 
-        {/* Info Strip */}
+      {/* Info Strip & CTA */}
+      <div className="relative max-w-[1000px] mx-auto px-4 sm:px-8">
         <div className="mf-anim flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mt-7 sm:mt-8">
           <div className="flex items-center gap-1.5 text-smoke">
             <Calendar className="w-3.5 h-3.5 text-flame/70" />

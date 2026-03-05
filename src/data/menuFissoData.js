@@ -22,7 +22,7 @@ export const menuFissoFormule = [
     nome: 'Menu Completo',
     prezzo: 13,
     piatti: ['Un primo a scelta', 'Un secondo a scelta', 'Un contorno a scelta'],
-    badge: 'Consigliato',
+    badge: 'Popolare',
     featured: true,
   },
   {
