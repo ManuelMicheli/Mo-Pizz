@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import { Instagram, Facebook, Phone } from 'lucide-react';
 import { siteContent } from '@/data/copy';
 
@@ -63,7 +64,7 @@ const Footer = () => {
                             {footer.navLinks.map((link, i) => (
                                 <a key={i} href={link.href} className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{link.label}</a>
                             ))}
-                            <a href="#contatti" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300 flex items-center gap-2"><Phone size={18} />{footer.ctaPrenota}</a>
+                            <HashLink smooth to="/#prenota" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300 flex items-center gap-2"><Phone size={18} />{footer.ctaPrenota}</HashLink>
                             <Link to="/ordina" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaOrdina}</Link>
                             <Link to="/gift-cards" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaGiftCard}</Link>
                             <Link to="/fidelity" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaFidelity}</Link>

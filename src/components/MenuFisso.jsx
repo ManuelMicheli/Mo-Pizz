@@ -2,9 +2,9 @@ import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Calendar, MapPin, Coffee, Check, ArrowRight } from 'lucide-react';
+import { HashLink } from 'react-router-hash-link';
 import { siteContent } from '@/data/copy';
 import { menuFissoFormule } from '@/data/menuFissoData';
-import { PLATEFORM_RESERVE_URL } from '@/lib/constants';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -60,10 +60,9 @@ const MenuFissoCard = ({ formula }) => {
         {menuFisso.notaEscluso}
       </p>
 
-      <a
-        href={PLATEFORM_RESERVE_URL}
-        target="_blank"
-        rel="noopener noreferrer"
+      <HashLink
+        smooth
+        to="/#prenota"
         aria-label={`Prenota per ${nome}`}
         className={`magnetic-btn mt-5 flex items-center justify-center gap-2 py-3 px-6 rounded-full font-sans font-bold text-sm transition-colors duration-300 ${
           featured
@@ -73,7 +72,7 @@ const MenuFissoCard = ({ formula }) => {
       >
         Vieni a pranzo
         <ArrowRight className="w-3.5 h-3.5" />
-      </a>
+      </HashLink>
     </div>
   );
 };
@@ -179,15 +178,14 @@ const MenuFisso = () => {
 
         {/* CTA */}
         <div className="mf-anim flex flex-col items-center mt-6">
-          <a
-            href={PLATEFORM_RESERVE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <HashLink
+            smooth
+            to="/#prenota"
             className="magnetic-btn inline-flex items-center gap-2 bg-flame hover:bg-ember text-cream font-sans font-bold text-sm py-3 px-8 rounded-full transition-colors duration-300 shadow-lg shadow-flame/20"
           >
             {menuFisso.ctaPrenota}
             <ArrowRight className="w-4 h-4" />
-          </a>
+          </HashLink>
           <p className="font-sans text-smoke/50 text-xs mt-3 text-center max-w-xs">
             {menuFisso.ctaWalkin}
           </p>
