@@ -3,39 +3,38 @@ import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Gift, ShoppingBag, CalendarHeart, Star, ArrowRight } from 'lucide-react';
+import { siteContent } from '@/data/copy';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const { services } = siteContent;
 
 // Row 1: large (2/3) + small (1/3)   |   Row 2: small (1/3) + large (2/3)
 const cards = [
     {
-        title: 'Gift Card',
-        subtitle: 'Regala un\'esperienza napoletana',
-        description: 'Sorprendi chi ami con il gusto autentico di Napoli. Scegli tra le nostre gift card e regala un momento indimenticabile.',
+        title: services.cards[0].title,
+        subtitle: services.cards[0].subtitle,
+        description: services.cards[0].description,
         icon: Gift,
         to: '/gift-cards',
         badge: 'Novità',
         badgeColor: 'bg-gold text-charcoal',
-        images: [
-            '/images/esperienza libera.webp',
-            '/images/esperienza napoletana per 2.webp',
-            '/images/pizza per due.webp',
-        ],
+        image: '/images/gift-card-hero.webp',
     },
     {
-        title: 'Ordina per Asporto',
-        subtitle: 'La Napoli che ami, a casa tua',
-        description: 'Ordina le nostre specialità e ritira al locale. Tutto preparato al momento.',
+        title: services.cards[1].title,
+        subtitle: services.cards[1].subtitle,
+        description: services.cards[1].description,
         icon: ShoppingBag,
         to: '/ordina',
         badge: 'Ordina Online',
         badgeColor: 'bg-flame text-cream',
-        image: '/images/Gemini_Generated_Image_770xr3770xr3770x.webp',
+        image: '/images/ordina-hero.webp',
     },
     {
-        title: 'Eventi Privati',
-        subtitle: 'Prossimamente',
-        description: 'Festeggia le tue occasioni speciali con noi. Cene private e celebrazioni in stile napoletano.',
+        title: services.cards[2].title,
+        subtitle: services.cards[2].subtitle,
+        description: services.cards[2].description,
         icon: CalendarHeart,
         to: null,
         badge: 'Coming Soon',
@@ -43,14 +42,14 @@ const cards = [
         image: null,
     },
     {
-        title: 'Fidelity',
-        subtitle: 'Accumula punti, ottieni premi',
-        description: 'Iscriviti al programma fedeltà: ogni 10€ spesi guadagni 1 punto. Raggiungi 10 punti e ottieni il 10% di sconto.',
+        title: services.cards[3].title,
+        subtitle: services.cards[3].subtitle,
+        description: services.cards[3].description,
         icon: Star,
         to: '/fidelity',
         badge: 'Novità',
         badgeColor: 'bg-gold text-charcoal',
-        image: '/images/n2nty4t6f5rmw0cwq8cbbc93w8_upscayl_4x_upscayl-standard-4x.webp',
+        image: '/images/fidelity-hero.webp',
     },
 ];
 
@@ -182,14 +181,14 @@ const ServicesGrid = () => {
             <div className="bg-cream py-14 sm:py-20 lg:pt-32 lg:pb-8 px-4 sm:px-8 md:px-12">
                 <div className="services-header flex flex-col gap-4">
                     <span className="font-mono text-flame text-sm tracking-widest uppercase">
-                        I Nostri Servizi
+                        {services.eyebrow}
                     </span>
                     <h2 className="font-playfair font-black text-flame text-[clamp(1.8rem,4vw,3.5rem)] leading-[0.95] max-w-xl">
-                        Scopri tutto quello che<br />
-                        <span className="italic">Mo Pizz</span> ha da offrirti
+                        {services.headline}<br />
+                        <span className="italic">{services.headlineEm}</span> {services.headlineSuffix}
                     </h2>
                     <p className="font-sans text-flame/70 text-base max-w-lg leading-relaxed">
-                        Non solo pizza in sala. Esplora le nostre gift card, ordina per asporto e molto altro ancora.
+                        {services.subtext}
                     </p>
                 </div>
             </div>

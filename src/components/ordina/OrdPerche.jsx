@@ -3,17 +3,15 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Flame, Leaf, Thermometer, ShieldCheck } from 'lucide-react';
 import { LinesPatternCard, LinesPatternCardBody } from '@/components/ui/LinesPatternCard';
+import { siteContent } from '@/data/copy';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const usps = [
-    { num: '01', icon: Flame, title: 'Impasto Autentico', desc: 'Lievitazione naturale 48–60 ore per una pizza leggera e digeribile.' },
-    { num: '02', icon: Leaf, title: 'Ingredienti DOP', desc: 'Mozzarella di bufala campana, pomodoro San Marzano e farine selezionate.' },
-    { num: '03', icon: Thermometer, title: 'Sempre Caldo', desc: 'Preparato al momento del ritiro per garantire freschezza e qualità.' },
-    { num: '04', icon: ShieldCheck, title: 'Ordine Sicuro', desc: 'Pagamento protetto online o comodamente al ritiro in pizzeria.' },
-];
+const icons = [Flame, Leaf, Thermometer, ShieldCheck];
 
 const OrdPerche = () => {
+    const { ordina } = siteContent;
+    const usps = ordina.perche.usps.map((u, i) => ({ ...u, icon: icons[i] }));
     const sectionRef = useRef(null);
 
     useEffect(() => {
@@ -36,9 +34,9 @@ const OrdPerche = () => {
         <section ref={sectionRef} className="py-24 sm:py-36 px-4 sm:px-8 md:px-12 lg:px-20 bg-charcoal">
             <div className="max-w-[1400px] mx-auto">
                 <div className="text-center mb-16 sm:mb-20 usp-heading">
-                    <span className="font-caveat text-gold text-2xl sm:text-3xl">Perché Mo Pizz</span>
+                    <span className="font-caveat text-gold text-2xl sm:text-3xl">{ordina.perche.eyebrow}</span>
                     <h2 className="font-playfair font-bold text-cream text-4xl sm:text-5xl md:text-6xl lg:text-7xl mt-3">
-                        La Differenza Mo Pizz
+                        {ordina.perche.headline}
                     </h2>
                 </div>
 

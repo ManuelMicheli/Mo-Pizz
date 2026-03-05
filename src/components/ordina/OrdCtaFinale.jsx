@@ -3,10 +3,12 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ExternalLink, Phone } from 'lucide-react';
 import { PLATEFORM_ORDER_URL } from '@/lib/constants';
+import { siteContent } from '@/data/copy';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const OrdCtaFinale = () => {
+    const { ordina } = siteContent;
     const sectionRef = useRef(null);
 
     useEffect(() => {
@@ -33,10 +35,10 @@ const OrdCtaFinale = () => {
 
             <div className="relative max-w-[1400px] mx-auto text-center flex flex-col items-center gap-8 sm:gap-10">
                 <h2 className="cta-finale-elem font-playfair font-bold text-cream text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
-                    Pronto per ordinare?
+                    {ordina.ctaFinale.headline}
                 </h2>
                 <p className="cta-finale-elem font-sans text-cream/80 text-lg sm:text-xl md:text-2xl max-w-2xl leading-relaxed">
-                    La tua pizza napoletana preferita ti aspetta. Ordina online o chiamaci direttamente.
+                    {ordina.ctaFinale.body}
                 </p>
                 <div className="cta-finale-elem flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto">
                     <a
@@ -45,7 +47,7 @@ const OrdCtaFinale = () => {
                         rel="noopener noreferrer"
                         className="magnetic-btn w-full sm:w-auto bg-cream text-charcoal hover:bg-white font-sans font-bold py-4 px-10 sm:py-5 sm:px-14 rounded-full text-lg sm:text-xl flex items-center justify-center gap-3 transition-colors duration-300"
                     >
-                        Ordina Ora
+                        {ordina.ctaFinale.ctaPrimary}
                         <ExternalLink size={22} />
                     </a>
                     <a
@@ -53,7 +55,7 @@ const OrdCtaFinale = () => {
                         className="magnetic-btn w-full sm:w-auto border-2 border-cream text-cream hover:bg-cream hover:text-charcoal font-sans font-bold py-4 px-10 sm:py-5 sm:px-14 rounded-full text-lg sm:text-xl flex items-center justify-center gap-3 transition-colors duration-300"
                     >
                         <Phone size={22} />
-                        Chiama per Ordinare
+                        {ordina.ctaFinale.ctaSecondary}
                     </a>
                 </div>
             </div>

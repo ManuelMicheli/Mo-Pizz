@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
+import { siteContent } from '@/data/copy';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const FidelityCta = () => {
+    const { fidelity } = siteContent;
     const sectionRef = useRef(null);
 
     useEffect(() => {
@@ -59,7 +61,7 @@ const FidelityCta = () => {
 
             <div className="relative w-full max-w-[1200px] mx-auto px-6 sm:px-12 md:px-16 lg:px-24 text-center flex flex-col items-center gap-10 sm:gap-12">
                 <h2 className="fid-cta-elem font-playfair font-bold text-cream text-[clamp(2rem,5vw,4.5rem)] leading-tight">
-                    Ogni pizza ti avvicina
+                    {fidelity.cta.headline}
                     <br />
                     <span className="italic"
                         style={{
@@ -69,12 +71,12 @@ const FidelityCta = () => {
                             backgroundClip: 'text',
                         }}
                     >
-                        al premio.
+                        {fidelity.cta.headlineEm}
                     </span>
                 </h2>
 
                 <p className="fid-cta-elem font-sans text-smoke/80 text-lg sm:text-xl max-w-xl leading-relaxed">
-                    Iscriviti al programma Fidelity e inizia ad accumulare punti oggi stesso.
+                    {fidelity.cta.body}
                 </p>
 
                 <div className="fid-cta-elem flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-2">
@@ -82,14 +84,14 @@ const FidelityCta = () => {
                         onClick={scrollToForm}
                         className="magnetic-btn w-full sm:w-auto bg-gradient-to-r from-gold to-[#c4943d] text-charcoal font-sans font-bold py-4 px-10 sm:py-5 sm:px-14 rounded-full text-lg flex items-center justify-center gap-3 transition-all duration-300 hover:shadow-[0_0_40px_rgba(212,168,83,0.25)]"
                     >
-                        Iscriviti al Programma
+                        {fidelity.cta.ctaPrimary}
                         <ArrowRight size={20} />
                     </button>
                     <Link
                         to="/ordina"
                         className="magnetic-btn w-full sm:w-auto border border-white/15 text-cream hover:bg-white/[0.06] font-sans font-medium py-4 px-10 sm:py-5 sm:px-14 rounded-full text-lg flex items-center justify-center gap-3 transition-all duration-300"
                     >
-                        Scopri il Menu
+                        {fidelity.cta.ctaSecondary}
                     </Link>
                 </div>
             </div>

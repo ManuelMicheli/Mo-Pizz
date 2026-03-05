@@ -2,8 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { signatureDishes } from '../../data/menuData';
+import { siteContent } from '@/data/copy';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const { menu: menuCopy } = siteContent;
 
 const MenuHighlight = () => {
   const sectionRef = useRef(null);
@@ -52,10 +55,10 @@ const MenuHighlight = () => {
         {/* Section header */}
         <div className="text-center mb-6 sm:mb-8">
           <span className="font-caveat text-gold text-2xl sm:text-3xl block mb-4">
-            La Firma dello Chef
+            {menuCopy.highlightEyebrow}
           </span>
           <h2 className="font-playfair font-black text-cream text-4xl sm:text-5xl md:text-6xl">
-            I Piatti Iconici
+            {menuCopy.highlightHeadline}
           </h2>
         </div>
 
@@ -97,7 +100,7 @@ const MenuHighlight = () => {
         {/* CTA */}
         <div className="menu-cta flex flex-col items-center text-center">
           <span className="font-caveat text-gold text-xl sm:text-2xl mb-6">
-            Vuoi scoprire tutto?
+            {menuCopy.highlightCtaEyebrow}
           </span>
           <a
             href="/brand-assets/mo pizza menu 2026 WEB.pdf"
@@ -105,7 +108,7 @@ const MenuHighlight = () => {
             rel="noopener noreferrer"
             className="magnetic-btn w-full sm:w-auto text-center bg-flame hover:bg-ember text-cream font-sans font-bold py-4 px-10 rounded-full transition-colors duration-300 text-lg"
           >
-            Scarica il Menu Completo
+            {menuCopy.highlightCtaLabel}
           </a>
         </div>
       </div>

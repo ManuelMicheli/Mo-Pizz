@@ -3,6 +3,9 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Instagram, Heart, ExternalLink } from 'lucide-react';
 import { instagramPosts } from '@/data/instagramData';
+import { siteContent } from '@/data/copy';
+
+const { chiSiamoVideo, instagram } = siteContent;
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -216,18 +219,18 @@ const Features = () => {
                         {/* Content — bottom-right */}
                         <div className="absolute bottom-8 left-0 right-0 px-6 sm:left-auto sm:right-12 sm:px-0 md:right-20 lg:right-32 z-10 flex flex-col items-center text-center sm:items-end sm:text-right sm:max-w-[440px]">
                             <span className="font-caveat text-gold text-lg sm:text-xl md:text-2xl mb-3">
-                                Dal 2016, Legnano
+                                {chiSiamoVideo.eyebrow}
                             </span>
                             <h2 className="font-playfair font-black text-cream text-[clamp(1.6rem,4vw,3.5rem)] leading-[0.95] mb-1">
-                                Ogni pizza è un racconto
+                                {chiSiamoVideo.headline}
                             </h2>
                             <h2 className="font-playfair font-black italic text-flame text-[clamp(1.8rem,5vw,4.5rem)] leading-[0.95] mb-4">
-                                scritto col fuoco.
+                                {chiSiamoVideo.headlineEm}
                             </h2>
                             <p className="font-sans text-smoke text-[clamp(0.75rem,1.1vw,1rem)] max-w-sm leading-relaxed">
-                                48 ore di doppia lievitazione. Farine selezionate.<br />
-                                Ingredienti DOP, IGP, Slow Food.<br />
-                                Il menu di Cristian Moschiano, classe '94.
+                                {chiSiamoVideo.body.split('\n').map((line, i) => (
+                                    <React.Fragment key={i}>{line}{i < chiSiamoVideo.body.split('\n').length - 1 && <br />}</React.Fragment>
+                                ))}
                             </p>
                         </div>
                     </div>
@@ -262,13 +265,13 @@ const Features = () => {
                                      style={{ background: 'linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)' }}>
                                     <Instagram className="w-5 h-5 text-white" />
                                 </div>
-                                <span className="font-mono text-charcoal/60 text-sm tracking-wide">@mo_pizz</span>
+                                <span className="font-mono text-charcoal/60 text-sm tracking-wide">{instagram.handle}</span>
                             </div>
                             <h3 className="font-playfair text-charcoal text-[clamp(1.5rem,3vw,2.5rem)] leading-tight">
-                                Seguici su Instagram
+                                {instagram.eyebrow}
                             </h3>
                             <p className="font-sans text-charcoal/60 text-sm sm:text-base mt-2 max-w-md leading-relaxed">
-                                Le nostre creazioni, il dietro le quinte e l'atmosfera che ci rende unici.
+                                {instagram.body}
                             </p>
                         </div>
                         <a
@@ -278,7 +281,7 @@ const Features = () => {
                             className="magnetic-btn hidden sm:inline-flex items-center gap-2 px-6 py-3 rounded-full bg-charcoal/5 border border-charcoal/15 text-charcoal font-sans text-sm hover:bg-charcoal/10 transition-colors"
                         >
                             <ExternalLink className="w-4 h-4" />
-                            Vedi il profilo
+                            {instagram.cta}
                         </a>
                         </div>
                     </div>
@@ -329,7 +332,7 @@ const Features = () => {
                         className="magnetic-btn inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cream/5 border border-cream/10 text-cream font-sans text-sm hover:bg-cream/10 transition-colors"
                     >
                         <Instagram className="w-4 h-4" />
-                        Seguici su Instagram
+                        {instagram.ctaMobile}
                     </a>
                 </div>
             </div>

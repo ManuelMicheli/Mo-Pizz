@@ -1,8 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { siteContent } from '@/data/copy';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const { chiSiamoVideo } = siteContent;
 
 const MenuVideoIntro = () => {
   const sectionRef = useRef(null);
@@ -85,20 +88,20 @@ const MenuVideoIntro = () => {
       {/* Content — bottom-right */}
       <div className="menu-video-content absolute bottom-8 left-0 right-0 px-6 sm:left-auto sm:right-12 sm:px-0 md:right-20 lg:right-32 z-10 flex flex-col items-center text-center sm:items-end sm:text-right sm:max-w-[440px]">
         <span className="menu-video-line font-caveat text-gold text-lg sm:text-xl md:text-2xl mb-3">
-          Dal 2016, Legnano
+          {chiSiamoVideo.eyebrow}
         </span>
 
         <h2 className="menu-video-line font-playfair font-black text-cream text-[clamp(1.6rem,4vw,3.5rem)] leading-[0.95] mb-1">
-          Ogni pizza è un racconto
+          {chiSiamoVideo.headline}
         </h2>
         <h2 className="menu-video-line font-playfair font-black italic text-flame text-[clamp(1.8rem,5vw,4.5rem)] leading-[0.95] mb-4">
-          scritto col fuoco.
+          {chiSiamoVideo.headlineEm}
         </h2>
 
         <p className="menu-video-line font-sans text-smoke text-[clamp(0.75rem,1.1vw,1rem)] max-w-sm leading-relaxed">
-          48 ore di doppia lievitazione. Farine selezionate.<br />
-          Ingredienti DOP, IGP, Slow Food.<br />
-          Il menu di Cristian Moschiano, classe '94.
+          {chiSiamoVideo.body.split('\n').map((line, i) => (
+            <React.Fragment key={i}>{line}{i < chiSiamoVideo.body.split('\n').length - 1 && <br />}</React.Fragment>
+          ))}
         </p>
       </div>
     </section>

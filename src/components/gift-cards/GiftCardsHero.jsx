@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ChevronDown } from 'lucide-react';
+import { siteContent } from '@/data/copy';
 
 const GiftCardsHero = () => {
+    const { giftCards } = siteContent;
     const containerRef = useRef(null);
 
     useEffect(() => {
@@ -22,16 +24,13 @@ const GiftCardsHero = () => {
     return (
         <section
             ref={containerRef}
-            className="relative w-full min-h-[70vh] overflow-hidden flex items-end justify-start px-6 sm:px-12 md:px-20 lg:px-32 pt-24 pb-16 sm:pb-24"
+            className="relative w-full h-[75vh] min-h-[500px] overflow-hidden flex items-center pt-20 sm:pt-24 px-6 sm:px-12 md:px-20 lg:px-32"
         >
             {/* Background Image */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-                style={{ backgroundImage: `url('/images/vp0xezmnhnrmw0cwq7g806tmxg_upscayl_4x_upscayl-standard-4x.webp')` }}
+                style={{ backgroundImage: `url('/images/gift-card-hero.webp')` }}
             />
-
-            {/* Dark overlay */}
-            <div className="absolute inset-0 bg-black/65 z-[1]" />
 
             {/* Film grain */}
             <div
@@ -45,16 +44,16 @@ const GiftCardsHero = () => {
             {/* Content */}
             <div className="relative z-10 flex flex-col items-start text-left gap-2 max-w-3xl">
                 <div className="gc-hero-elem font-caveat text-gold text-2xl sm:text-3xl mb-2">
-                    Un regalo speciale per chi ami
+                    {giftCards.hero.eyebrow}
                 </div>
                 <h1 className="gc-hero-elem font-playfair font-black text-cream text-[clamp(2.2rem,7vw,5.5rem)] leading-[0.95]">
-                    Non solo pizza,
+                    {giftCards.hero.headline}
                 </h1>
                 <h1 className="gc-hero-elem font-playfair font-black text-cream text-[clamp(2.5rem,8vw,6.5rem)] leading-[0.95]">
-                    regala un&apos;esperienza.
+                    {giftCards.hero.headlineEm}
                 </h1>
                 <p className="gc-hero-elem font-sans text-cream/70 text-[clamp(1rem,1.5vw,1.25rem)] max-w-[550px] mt-2 leading-relaxed">
-                    Le nostre gift card portano il calore del forno e la passione per la tradizione direttamente nelle mani di chi vuoi bene.
+                    {giftCards.hero.body}
                 </p>
             </div>
 

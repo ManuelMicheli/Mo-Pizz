@@ -1,13 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { fidelityBenefits } from '@/data/fidelityData';
+import { siteContent } from '@/data/copy';
 
 const FidelityBenefits = () => {
+    const { fidelity } = siteContent;
     return (
         <section className="w-full bg-flour">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-                {fidelityBenefits.map((benefit, i) => (
+                {fidelity.benefits.map((benefit, i) => (
                     <motion.div
                         key={i}
                         initial={{ opacity: 0, y: 30 }}

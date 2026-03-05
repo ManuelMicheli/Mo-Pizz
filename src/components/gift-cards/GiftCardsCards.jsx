@@ -2,50 +2,37 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { cn } from '@/lib/utils';
+import { siteContent } from '@/data/copy';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const cards = [
-    {
-        id: 'libera',
-        badge: 'Flessibile',
-        title: 'Scegli tu l\'importo perfetto.',
-        price: 'Da €15 a €300',
-        description:
-            'La libertà di regalare qualsiasi importo, da una pizza a una cena completa. Il destinatario potrà scegliere liberamente dal nostro menu e vivere la propria esperienza napoletana su misura.',
-        imageSrc: '/images/esperienza libera.webp',
-        imageAlt: 'Gift Card Esperienza Libera — Mo Pizz',
-        waMessage: 'Ciao! Vorrei acquistare una Gift Card "Esperienza Libera" di Mo Pizz. Potete darmi maggiori informazioni?',
-        featured: false,
-    },
-    {
-        id: 'napoletana',
-        badge: 'Più Popolare',
-        title: 'La cena completa per due persone.',
-        price: '€90',
-        description:
-            'Un\'esperienza completa per due: antipasto dello chef, due pizze a scelta dal menu, dolce della casa e bevande incluse. Il modo perfetto per far scoprire Mo Pizz a qualcuno di speciale.',
-        imageSrc: '/images/esperienza napoletana per 2.webp',
-        imageAlt: 'Gift Card Esperienza Napoletana per Due — Mo Pizz',
-        waMessage: 'Ciao! Vorrei acquistare una Gift Card "Esperienza Napoletana per Due" (€90) di Mo Pizz. Potete darmi maggiori informazioni?',
-        featured: true,
-    },
-    {
-        id: 'pizza',
-        badge: 'Classica',
-        title: 'Due pizze, una serata indimenticabile.',
-        price: '€40',
-        description:
-            'Due pizze a scelta dal nostro menu con bevande incluse. Perfetta per un regalo pensato ma accessibile, ideale per compleanni e occasioni speciali.',
-        imageSrc: '/images/pizza per due.webp',
-        imageAlt: 'Gift Card Pizza per Due — Mo Pizz',
-        waMessage: 'Ciao! Vorrei acquistare una Gift Card "Pizza per Due" (€40) di Mo Pizz. Potete darmi maggiori informazioni?',
-        featured: false,
-    },
-];
-
 const GiftCardsCards = () => {
+    const { giftCards } = siteContent;
     const sectionRef = useRef(null);
+
+    const cards = [
+        {
+            ...giftCards.cards.items[0],
+            imageSrc: '/images/esperienza libera.webp',
+            imageAlt: 'Gift Card Esperienza Libera — Mo Pizz',
+            waMessage: 'Ciao! Vorrei acquistare una Gift Card "Esperienza Libera" di Mo Pizz. Potete darmi maggiori informazioni?',
+            featured: false,
+        },
+        {
+            ...giftCards.cards.items[1],
+            imageSrc: '/images/esperienza napoletana per 2.webp',
+            imageAlt: 'Gift Card Esperienza Napoletana per Due — Mo Pizz',
+            waMessage: 'Ciao! Vorrei acquistare una Gift Card "Esperienza Napoletana per Due" (€90) di Mo Pizz. Potete darmi maggiori informazioni?',
+            featured: true,
+        },
+        {
+            ...giftCards.cards.items[2],
+            imageSrc: '/images/pizza per due.webp',
+            imageAlt: 'Gift Card Pizza per Due — Mo Pizz',
+            waMessage: 'Ciao! Vorrei acquistare una Gift Card "Pizza per Due" (€40) di Mo Pizz. Potete darmi maggiori informazioni?',
+            featured: false,
+        },
+    ];
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -96,13 +83,13 @@ const GiftCardsCards = () => {
                     {/* Section header */}
                     <div className="gc-card flex flex-col items-center gap-4 text-center mb-14 sm:mb-20">
                         <span className="inline-flex items-center rounded-full border border-charcoal/15 px-3 py-1 font-mono text-xs uppercase tracking-wider text-charcoal/60">
-                            Gift Card
+                            {giftCards.cards.headerBadge}
                         </span>
                         <h2 className="max-w-2xl font-playfair font-black text-charcoal text-[clamp(1.8rem,4vw,3.5rem)] leading-tight">
-                            Scegli la tua Gift Card
+                            {giftCards.cards.headerTitle}
                         </h2>
                         <p className="font-sans text-smoke text-base sm:text-lg">
-                            Tre modi per regalare un&apos;esperienza napoletana autentica.
+                            {giftCards.cards.headerSubtitle}
                         </p>
                     </div>
 
@@ -154,7 +141,7 @@ const GiftCardsCards = () => {
                                         rel="noopener noreferrer"
                                         className="magnetic-btn mt-2 w-fit inline-flex items-center gap-2 bg-flame hover:bg-ember text-cream font-sans font-semibold py-3.5 px-8 rounded-full transition-colors duration-300"
                                     >
-                                        Regala Ora
+                                        {giftCards.cards.ctaLabel}
                                     </a>
                                 </div>
                             </div>

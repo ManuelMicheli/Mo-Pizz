@@ -5,6 +5,7 @@ import GiftCardsCards from '@/components/gift-cards/GiftCardsCards';
 import GiftCardsHowItWorks from '@/components/gift-cards/GiftCardsHowItWorks';
 import GiftCardsFaq from '@/components/gift-cards/GiftCardsFaq';
 import GiftCardsCta from '@/components/gift-cards/GiftCardsCta';
+import { siteContent } from '@/data/copy';
 
 const GiftCards = () => {
     useEffect(() => {
@@ -14,10 +15,10 @@ const GiftCards = () => {
     return (
         <>
             <Helmet>
-                <title>Gift Card — Mo Pizz Legnano</title>
+                <title>{siteContent.meta.giftCardsTitle}</title>
                 <meta
                     name="description"
-                    content="Regala un'esperienza napoletana autentica. Scegli tra le nostre gift card e sorprendi chi ami con la vera pizza napoletana di Mo Pizz a Legnano."
+                    content={siteContent.meta.giftCardsDescription}
                 />
                 <link rel="canonical" href="https://www.mopizz.it/gift-cards" />
             </Helmet>

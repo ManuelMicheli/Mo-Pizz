@@ -1,6 +1,6 @@
 // ===== ORDINA (ASPORTO) =====
-export const PLATEFORM_ORDER_URL = 'https://mopizz.plateform.app/menu/momenu';
-export const ORDER_MODE = 'link'; // 'iframe' | 'link'
+export const PLATEFORM_ORDER_URL = 'https://mopizz.plateform.app/takeaway';
+export const ORDER_MODE = 'iframe'; // 'iframe' | 'link'
 
 // ===== PRENOTAZIONE TAVOLO =====
 export const PLATEFORM_RESERVE_URL = 'https://mopizz.plateform.app/reserve';

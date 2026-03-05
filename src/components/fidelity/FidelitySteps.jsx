@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { UserPlus, Coins, Gift, ArrowRight } from 'lucide-react';
-import { fidelitySteps } from '@/data/fidelityData';
+import { siteContent } from '@/data/copy';
 
 const iconMap = {
     UserPlus,
@@ -10,6 +10,7 @@ const iconMap = {
 };
 
 const FidelitySteps = () => {
+    const { fidelity } = siteContent;
     return (
         <section className="w-full py-28 sm:py-40 bg-charcoal relative overflow-hidden">
             {/* Subtle top gradient */}
@@ -31,10 +32,10 @@ const FidelitySteps = () => {
                     transition={{ duration: 1, ease: 'easeOut' }}
                 >
                     <span className="font-mono text-gold/60 text-xs sm:text-sm tracking-[0.3em] uppercase">
-                        Semplice e veloce
+                        {fidelity.stepsHeader.eyebrow}
                     </span>
                     <h2 className="font-playfair font-bold text-cream text-[clamp(2rem,5vw,4rem)] mt-4 leading-tight">
-                        Come Funziona
+                        {fidelity.stepsHeader.headline}
                     </h2>
                     <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-gold/40 to-transparent mx-auto mt-6" />
                 </motion.div>
@@ -45,9 +46,9 @@ const FidelitySteps = () => {
                     <div className="hidden lg:block absolute top-[3.5rem] left-[calc(16.66%+1rem)] right-[calc(16.66%+1rem)] h-px bg-gradient-to-r from-gold/0 via-gold/20 to-gold/0 z-0" />
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-0">
-                        {fidelitySteps.map((step, i) => {
+                        {fidelity.steps.map((step, i) => {
                             const Icon = iconMap[step.icon];
-                            const isLast = i === fidelitySteps.length - 1;
+                            const isLast = i === fidelity.steps.length - 1;
 
                             return (
                                 <motion.div

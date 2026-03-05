@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Instagram, Facebook, Phone } from 'lucide-react';
+import { siteContent } from '@/data/copy';
+
+const { footer } = siteContent;
 
 const getIsOpen = () => {
     const now = new Date();
@@ -46,25 +49,24 @@ const Footer = () => {
                             <span className="font-playfair font-black italic text-3xl text-cream transition-colors duration-500 group-hover:text-flame">Pizz</span>
                         </a>
                         <div className="font-sans text-smoke text-sm uppercase tracking-wide">
-                            La Vera Pizza Napoletana — Legnano
+                            {footer.subTagline}
                         </div>
                         <div className="font-caveat text-gold text-2xl mt-4 max-w-[250px]">
-                            "Passione, tradizione e fuoco dal 2019."
+                            &ldquo;{footer.tagline}&rdquo;
                         </div>
                     </div>
 
                     {/* Navigation Col */}
                     <div className="flex flex-col items-center md:items-start gap-4 mx-auto md:mx-0">
-                        <h4 className="font-sans font-bold text-lg mb-2 uppercase tracking-wide">Navigazione</h4>
+                        <h4 className="font-sans font-bold text-lg mb-2 uppercase tracking-wide">{footer.navHeading}</h4>
                         <div className="flex flex-col gap-3 font-sans text-smoke">
-                            <a href="#" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Home</a>
-                            <a href="#menu" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Menu</a>
-                            <a href="#chef" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Lo Chef</a>
-                            <a href="#contatti" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Contatti</a>
-                            <a href="#contatti" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300 flex items-center gap-2"><Phone size={18} />Prenota</a>
-                            <Link to="/ordina" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Ordina Online</Link>
-                            <Link to="/gift-cards" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Gift Card</Link>
-                            <Link to="/fidelity" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">Fidelity</Link>
+                            {footer.navLinks.map((link, i) => (
+                                <a key={i} href={link.href} className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{link.label}</a>
+                            ))}
+                            <a href="#contatti" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300 flex items-center gap-2"><Phone size={18} />{footer.ctaPrenota}</a>
+                            <Link to="/ordina" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaOrdina}</Link>
+                            <Link to="/gift-cards" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaGiftCard}</Link>
+                            <Link to="/fidelity" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaFidelity}</Link>
                         </div>
                     </div>
 
@@ -83,8 +85,8 @@ const Footer = () => {
                             Privacy Policy
                         </Link>
                         <div className="flex flex-col gap-1 mt-auto font-caveat text-smoke text-lg sm:text-xl opacity-60">
-                            <p>© 2025 Mo Pizz Legnano SRL</p>
-                            <p>P.IVA 10529490960</p>
+                            <p>{footer.legal}</p>
+                            <p>{footer.piva}</p>
                         </div>
                     </div>
 
@@ -94,7 +96,7 @@ const Footer = () => {
                 <div className="flex items-center justify-center gap-3">
                     <span className={`w-2.5 h-2.5 rounded-full transition-colors duration-700 ${isOpen ? 'bg-flame shadow-[0_0_10px_#E85D26] animate-[pulse_2s_infinite]' : 'bg-smoke/50'}`}></span>
                     <span className={`font-caveat text-2xl transition-colors duration-700 ${isOpen ? 'text-smoke' : 'text-smoke/40'}`}>
-                        {isOpen ? 'Forno Operativo' : 'Forno Spento'}
+                        {isOpen ? footer.statusOpen : footer.statusClosed}
                     </span>
                 </div>
             </div>

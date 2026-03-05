@@ -2,10 +2,12 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { siteContent } from '@/data/copy';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const GiftCardsCta = () => {
+    const { giftCards } = siteContent;
     const sectionRef = useRef(null);
 
     useEffect(() => {
@@ -33,13 +35,13 @@ const GiftCardsCta = () => {
         <section ref={sectionRef} className="bg-flour py-20 sm:py-28 px-4 sm:px-8 md:px-12">
             <div className="max-w-3xl mx-auto text-center">
                 <span className="gc-cta-elem font-caveat text-flame text-xl sm:text-2xl">
-                    Non aspettare
+                    {giftCards.cta.eyebrow}
                 </span>
                 <h2 className="gc-cta-elem font-playfair font-black text-charcoal text-[clamp(1.8rem,5vw,4rem)] leading-tight mt-3 mb-4">
-                    Regala il sapore di Napoli
+                    {giftCards.cta.headline}
                 </h2>
                 <p className="gc-cta-elem font-sans text-smoke text-base sm:text-lg leading-relaxed max-w-xl mx-auto mb-10">
-                    Un regalo che scalda il cuore e delizia il palato. Sorprendi chi ami con un&apos;esperienza autentica da Mo Pizz.
+                    {giftCards.cta.body}
                 </p>
 
                 <div className="gc-cta-elem flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -49,13 +51,13 @@ const GiftCardsCta = () => {
                         rel="noopener noreferrer"
                         className="magnetic-btn w-full sm:w-auto text-center bg-flame hover:bg-ember text-cream font-sans font-semibold py-4 px-10 rounded-full transition-colors duration-300"
                     >
-                        Acquista su WhatsApp
+                        {giftCards.cta.ctaPrimary}
                     </a>
                     <Link
                         to="/"
                         className="magnetic-btn w-full sm:w-auto text-center border border-charcoal/20 text-charcoal hover:bg-charcoal hover:text-cream font-sans font-semibold py-4 px-10 rounded-full transition-colors duration-300"
                     >
-                        Torna alla Home
+                        {giftCards.cta.ctaSecondary}
                     </Link>
                 </div>
             </div>

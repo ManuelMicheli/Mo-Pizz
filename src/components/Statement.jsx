@@ -1,5 +1,6 @@
 import React from 'react';
 import { ParallaxText } from './ui/scroll-based-velocity';
+import { siteContent } from '@/data/copy';
 
 const Statement = () => {
     return (
@@ -8,7 +9,7 @@ const Statement = () => {
                 baseVelocity={2}
                 className="font-playfair font-bold text-charcoal text-[clamp(2rem,5vw,4.5rem)] leading-[1.1] tracking-tight"
             >
-                Mo Pizz, tradizione napoletana. Ogni pizza è un atto d'amore.
+                {siteContent.statement.marquee}
             </ParallaxText>
         </section>
     );

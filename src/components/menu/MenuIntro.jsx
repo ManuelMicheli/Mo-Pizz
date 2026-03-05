@@ -2,8 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChevronDown } from 'lucide-react';
+import { siteContent } from '@/data/copy';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const { menu } = siteContent;
 
 const MenuIntro = ({ onCtaClick, menuOpen }) => {
   const sectionRef = useRef(null);
@@ -119,7 +122,7 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
               : 'border-cream/60 text-cream hover:bg-cream hover:text-charcoal'
           }`}
         >
-          {menuOpen ? 'Chiudi il Menu' : 'Esplora il Menu'}
+          {menuOpen ? menu.introCtaClose : menu.introCta}
         </button>
         {!menuOpen && <ChevronDown size={20} className="text-cream/40 animate-bounce-slow" />}
       </div>

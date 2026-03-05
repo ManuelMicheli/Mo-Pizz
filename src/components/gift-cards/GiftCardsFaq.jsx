@@ -2,36 +2,11 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-const faqs = [
-    {
-        question: 'Come posso acquistare una gift card?',
-        answer:
-            'Scegli la gift card che preferisci e clicca su "Regala Ora". Verrai reindirizzato su WhatsApp dove potrai completare l\'acquisto direttamente con il nostro team. Accettiamo pagamenti tramite bonifico o in contanti al locale.',
-    },
-    {
-        question: 'Le gift card hanno una scadenza?',
-        answer:
-            'Le nostre gift card sono valide per 12 mesi dalla data di acquisto. Troverai la data di scadenza indicata sulla card stessa.',
-    },
-    {
-        question: 'Posso personalizzare la gift card con un messaggio?',
-        answer:
-            'Assolutamente! Quando ci contatti su WhatsApp, comunicaci il messaggio che desideri includere. Prepareremo la gift card con la tua dedica personale.',
-    },
-    {
-        question: 'La gift card è utilizzabile in più visite?',
-        answer:
-            'Sì, il credito della gift card "Esperienza Libera" può essere utilizzato in più visite fino all\'esaurimento del saldo. Le gift card "Esperienza Napoletana per Due" e "Pizza per Due" sono invece utilizzabili in un\'unica visita.',
-    },
-    {
-        question: 'Posso regalare la gift card in formato digitale?',
-        answer:
-            'Certamente! Riceverai la gift card in formato digitale via WhatsApp, pronta per essere inoltrata al destinatario. Se preferisci il formato fisico, puoi ritirarla direttamente al locale.',
-    },
-];
+import { siteContent } from '@/data/copy';
 
 const GiftCardsFaq = () => {
+    const { giftCards } = siteContent;
+    const faqs = giftCards.faq.items;
     const [openIndex, setOpenIndex] = useState(null);
 
     const toggle = (i) => {
@@ -44,10 +19,10 @@ const GiftCardsFaq = () => {
                 {/* Header */}
                 <div className="text-center mb-14 sm:mb-20">
                     <span className="font-caveat text-gold text-xl sm:text-2xl">
-                        Hai domande?
+                        {giftCards.faq.eyebrow}
                     </span>
                     <h2 className="font-playfair font-black text-cream text-[clamp(1.8rem,4vw,3.5rem)] leading-tight mt-3">
-                        Domande Frequenti
+                        {giftCards.faq.headline}
                     </h2>
                 </div>
 

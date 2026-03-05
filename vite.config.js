@@ -4,7 +4,23 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [react()],
+    plugins: [
+        // Block /api/* requests in dev — these are Vercel serverless functions
+        {
+            name: 'block-api-routes',
+            configureServer(server) {
+                server.middlewares.use((req, res, next) => {
+                    if (req.url?.startsWith('/api/')) {
+                        res.statusCode = 404;
+                        res.end(JSON.stringify({ error: 'API routes are only available on Vercel' }));
+                        return;
+                    }
+                    next();
+                });
+            },
+        },
+        react(),
+    ],
     resolve: {
         alias: {
             '@': path.resolve(__dirname, './src'),

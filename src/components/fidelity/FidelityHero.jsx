@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ChevronDown } from 'lucide-react';
+import { siteContent } from '@/data/copy';
 
 const FidelityHero = () => {
+    const { fidelity } = siteContent;
     const containerRef = useRef(null);
 
     useEffect(() => {
@@ -28,7 +30,7 @@ const FidelityHero = () => {
             {/* Background Image — full bleed, no overlay */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-                style={{ backgroundImage: `url('/images/n2nty4t6f5rmw0cwq8cbbc93w8_upscayl_4x_upscayl-standard-4x.webp')` }}
+                style={{ backgroundImage: `url('/images/fidelity-hero.webp')` }}
             />
 
             {/* Film grain */}
@@ -44,14 +46,14 @@ const FidelityHero = () => {
             <div className="relative z-10 flex flex-col items-start text-left w-full max-w-2xl">
                 {/* Headline */}
                 <h1 className="fid-hero-elem font-playfair font-black text-cream text-[clamp(2.5rem,8vw,6.5rem)] leading-[0.9] tracking-tight">
-                    La tua fedeltà
+                    {fidelity.hero.headlinePart1}
                 </h1>
                 <h1 className="fid-hero-elem font-playfair font-black italic text-cream text-[clamp(2.8rem,9vw,7.5rem)] leading-[0.9] tracking-tight">
-                    merita un premio.
+                    {fidelity.hero.headlinePart2}
                 </h1>
                 <p className="fid-hero-elem font-sans text-cream/80 text-[clamp(1rem,1.5vw,1.25rem)] max-w-[480px] mt-4 leading-relaxed">
-                    Accumula punti ad ogni visita e ottieni sconti esclusivi riservati solo a te.
-                    <span className="text-gold/80 font-medium"> È gratis, ci vuole un minuto.</span>
+                    {fidelity.hero.body}
+                    <span className="text-gold/80 font-medium">{' '}{fidelity.hero.bodyHighlight}</span>
                 </p>
 
                 {/* Counter sequence */}

@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import CookieBanner from './CookieBanner';
 import { schemaData } from '@/lib/constants';
+import { siteContent } from '@/data/copy';
 
 // A persistent layout wrapper so Navbar and Footer survive route changes without unmounting
 const Layout = () => {
@@ -21,10 +22,10 @@ const Layout = () => {
     return (
         <div className="relative w-full min-h-screen bg-charcoal font-sans text-cream selection:bg-flame flex flex-col">
             <Helmet>
-                <title>Mo Pizz — Pizzeria Napoletana Verace a Legnano</title>
-                <meta name="description" content="La vera pizza napoletana a Legnano. Impasto a lievitazione naturale 48-60h, forno a legna 450°C, ingredienti DOP e IGP dai produttori campani. Prenota il tuo tavolo." />
-                <meta property="og:title" content="Mo Pizz — Pizzeria Napoletana Verace" />
-                <meta property="og:description" content="Dal cuore di Napoli al cuore di Legnano. Pizza napoletana verace con ingredienti DOP, IGP e Presidio Slow Food." />
+                <title>{siteContent.meta.title}</title>
+                <meta name="description" content={siteContent.meta.description} />
+                <meta property="og:title" content={siteContent.meta.ogTitle} />
+                <meta property="og:description" content={siteContent.meta.ogDescription} />
                 <meta property="og:image" content="/og-image.jpg" />
                 <meta property="og:type" content="restaurant" />
                 <meta property="og:url" content="https://www.mopizz.it" />

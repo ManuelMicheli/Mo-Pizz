@@ -6,6 +6,7 @@ import FidelityEmbed from '@/components/fidelity/FidelityEmbed';
 import FidelityRegolamento from '@/components/fidelity/FidelityRegolamento';
 import FidelityFaq from '@/components/fidelity/FidelityFaq';
 import FidelityCta from '@/components/fidelity/FidelityCta';
+import { siteContent } from '@/data/copy';
 
 const Fidelity = () => {
     useEffect(() => {
@@ -15,10 +16,10 @@ const Fidelity = () => {
     return (
         <>
             <Helmet>
-                <title>Programma Fidelity | MO PIZZ — Accumula Punti e Ottieni Sconti</title>
+                <title>{siteContent.meta.fidelityTitle}</title>
                 <meta
                     name="description"
-                    content="Iscriviti al programma Fidelity MO PIZZ: accumula punti ad ogni visita e ottieni sconti esclusivi. Ogni 10€ spesi guadagni 1 punto, 10 punti = 10% di sconto."
+                    content={siteContent.meta.fidelityDescription}
                 />
                 <link rel="canonical" href="https://www.mopizz.it/fidelity" />
             </Helmet>

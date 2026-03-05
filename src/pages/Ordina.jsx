@@ -7,7 +7,6 @@ import OrdHero from '../components/ordina/OrdHero';
 import OrdComeFunziona from '../components/ordina/OrdComeFunziona';
 import OrdIframe from '../components/ordina/OrdIframe';
 import OrdInfoPratiche from '../components/ordina/OrdInfoPratiche';
-import OrdPerche from '../components/ordina/OrdPerche';
 import OrdCtaFinale from '../components/ordina/OrdCtaFinale';
 import { PLATEFORM_ORDER_URL } from '../lib/constants';
 
@@ -44,7 +43,6 @@ const Ordina = () => {
             <OrdComeFunziona />
             <OrdIframe />
             <OrdInfoPratiche />
-            <OrdPerche />
             <OrdCtaFinale />
 
             {/* Sticky bottom bar — mobile only */}

@@ -3,6 +3,9 @@ import { Phone, Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import { PLATEFORM_RESERVE_URL } from '@/lib/constants';
+import { siteContent } from '@/data/copy';
+
+const { nav } = siteContent;
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -68,14 +71,7 @@ const Navbar = () => {
         setIsMobileMenuOpen(false);
     }, []);
 
-    const navLinks = [
-        { label: 'Home', href: '/#' },
-        { label: 'Chi Siamo', href: '/#chef' },
-        { label: 'Menu', href: '/#menu' },
-        { label: 'Gift Card', href: '/gift-cards', isRoute: true },
-        { label: 'Fidelity', href: '/fidelity', isRoute: true },
-        { label: 'Contatti', href: '/#contatti' },
-    ];
+    const navLinks = nav.links;
 
     return (
         <nav ref={navRef} className="fixed top-0 left-0 w-full z-50 flex justify-center pt-4 sm:pt-6 px-4 pointer-events-none">
@@ -123,11 +119,11 @@ const Navbar = () => {
                                 : 'border-cream/60 text-cream hover:bg-cream hover:text-charcoal'
                         }`}
                     >
-                        Ordina
+                        {nav.ctaOrdina}
                     </Link>
                     <a href={PLATEFORM_RESERVE_URL} target="_blank" rel="noopener noreferrer" className="magnetic-btn bg-flame hover:bg-ember text-cream font-sans font-semibold py-3 px-6 rounded-full flex items-center gap-2 transition-colors duration-300">
                         <Phone size={18} />
-                        Prenota Ora
+                        {nav.ctaPrenota}
                     </a>
                 </div>
 
@@ -135,7 +131,7 @@ const Navbar = () => {
                 <button
                     className="md:hidden p-3 relative z-50"
                     onClick={toggleMenu}
-                    aria-label={isMobileMenuOpen ? 'Chiudi menu' : 'Apri menu'}
+                    aria-label={isMobileMenuOpen ? nav.ariaCloseMenu : nav.ariaOpenMenu}
                 >
                     {isMobileMenuOpen ? (
                         <X className="text-cream" size={28} />
@@ -176,7 +172,7 @@ const Navbar = () => {
                     }`}
                     style={{ transitionDelay: `${(navLinks.length + 1) * 35}ms` }}
                 >
-                    Ordina
+                    {nav.ctaOrdina}
                 </Link>
                 <a
                     href={PLATEFORM_RESERVE_URL}
@@ -188,7 +184,7 @@ const Navbar = () => {
                     style={{ transitionDelay: `${(navLinks.length + 2) * 35}ms` }}
                 >
                     <Phone size={11} />
-                    Prenota
+                    {nav.ctaPrenota}
                 </a>
             </div>}
 
@@ -224,7 +220,7 @@ const Navbar = () => {
                             transition: `opacity 0.4s ease ${200 + navLinks.length * 80}ms, transform 0.4s ease ${200 + navLinks.length * 80}ms`,
                         }}
                     >
-                        Ordina
+                        {nav.ctaOrdina}
                     </Link>
                     <a
                         href={PLATEFORM_RESERVE_URL}
@@ -239,7 +235,7 @@ const Navbar = () => {
                         }}
                     >
                         <Phone size={24} />
-                        Prenota Ora
+                        {nav.ctaPrenota}
                     </a>
                 </div>
             </div>

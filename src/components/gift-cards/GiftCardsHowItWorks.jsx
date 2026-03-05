@@ -1,33 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { siteContent } from '@/data/copy';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const steps = [
-    {
-        number: '01',
-        title: 'Scegli',
-        description: 'Seleziona la gift card perfetta tra le nostre tre esperienze curate.',
-    },
-    {
-        number: '02',
-        title: 'Personalizza',
-        description: 'Contattaci su WhatsApp e aggiungi il tuo messaggio di auguri personale.',
-    },
-    {
-        number: '03',
-        title: 'Regala',
-        description: 'Ricevi la gift card digitale, pronta da inviare o stampare per l\'occasione.',
-    },
-    {
-        number: '04',
-        title: 'Vivi l\'Esperienza',
-        description: 'Il destinatario si presenta da noi e vive la magia della vera pizza napoletana.',
-    },
-];
-
 const GiftCardsHowItWorks = () => {
+    const { giftCards } = siteContent;
+    const steps = giftCards.howItWorks.steps;
     const sectionRef = useRef(null);
 
     useEffect(() => {
@@ -83,10 +63,10 @@ const GiftCardsHowItWorks = () => {
                 {/* Header */}
                 <div className="text-center mb-20 sm:mb-28">
                     <span className="gc-step-header font-mono text-xs uppercase tracking-[0.3em] text-flame">
-                        Come Funziona
+                        {giftCards.howItWorks.eyebrow}
                     </span>
                     <h2 className="gc-step-header font-playfair font-black text-cream text-[clamp(2rem,5vw,4rem)] leading-tight mt-4">
-                        Quattro semplici passi
+                        {giftCards.howItWorks.headline}
                     </h2>
                     <div className="gc-step-header w-16 h-[2px] bg-flame mx-auto mt-6" />
                 </div>

@@ -1,5 +1,8 @@
 import React, { useRef, useCallback } from 'react';
 import { Star } from 'lucide-react';
+import { siteContent } from '@/data/copy';
+
+const { recensioni } = siteContent;
 
 const reviewsData = [
     {
@@ -104,17 +107,17 @@ const Reviews = () => {
             {/* Header */}
             <div className="px-6 sm:px-12 md:px-20 lg:px-32 max-w-7xl mx-auto flex flex-col items-center text-center mb-14">
                 <div className="font-caveat text-gold text-2xl sm:text-3xl mb-4">
-                    Dicono Di Noi
+                    {recensioni.eyebrow}
                 </div>
                 <h2 className="font-playfair font-bold text-cream text-4xl sm:text-5xl md:text-6xl text-balance mb-8">
-                    Cosa Dicono i Nostri Clienti
+                    {recensioni.headline}
                 </h2>
                 <div className="flex flex-col sm:flex-row items-center gap-3 font-sans text-sm">
                     <div className="bg-[#222] px-5 py-2.5 rounded-full text-gold/80 flex items-center gap-2 border border-gold/10">
-                        <span>4.2/5 su Google — 620+ recensioni</span>
+                        <span>{recensioni.badge1}</span>
                     </div>
                     <div className="bg-[#222] px-5 py-2.5 rounded-full text-gold/80 flex items-center gap-2 border border-gold/10">
-                        <span>Travellers' Choice Tripadvisor</span>
+                        <span>{recensioni.badge2}</span>
                     </div>
                 </div>
             </div>

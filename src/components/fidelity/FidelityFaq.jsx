@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { fidelityFaqs } from '@/data/fidelityData';
+import { siteContent } from '@/data/copy';
 
 const FidelityFaq = () => {
+    const { fidelity } = siteContent;
     const [openIndex, setOpenIndex] = useState(null);
 
     const toggle = (i) => {
@@ -23,17 +24,17 @@ const FidelityFaq = () => {
                     transition={{ duration: 0.8, ease: 'easeOut' }}
                 >
                     <span className="font-mono text-charcoal/50 text-xs sm:text-sm tracking-[0.2em] uppercase">
-                        Hai domande?
+                        {fidelity.faqHeader.eyebrow}
                     </span>
                     <h2 className="font-playfair font-bold text-charcoal text-[clamp(2rem,5vw,4rem)] leading-tight mt-4">
-                        Domande Frequenti
+                        {fidelity.faqHeader.headline}
                     </h2>
                     <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-charcoal/30 to-transparent mx-auto mt-6" />
                 </motion.div>
 
                 {/* Accordion */}
                 <div className="flex flex-col gap-3">
-                    {fidelityFaqs.map((faq, i) => (
+                    {fidelity.faqs.map((faq, i) => (
                         <motion.div
                             key={i}
                             initial={{ opacity: 0, y: 20 }}

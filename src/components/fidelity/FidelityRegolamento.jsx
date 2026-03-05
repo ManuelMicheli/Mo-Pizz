@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, ScrollText } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { fidelityRegolamento } from '@/data/fidelityData';
+import { siteContent } from '@/data/copy';
 
 const FidelityRegolamento = () => {
+    const { fidelity } = siteContent;
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -28,7 +29,7 @@ const FidelityRegolamento = () => {
                                 isOpen ? 'text-gold' : 'text-smoke/50'
                             )} />
                             <span className="font-sans font-medium text-cream text-base sm:text-lg">
-                                Regolamento del Programma Fidelity
+                                {fidelity.regolamentoTitle}
                             </span>
                         </div>
                         <ChevronDown
@@ -51,7 +52,7 @@ const FidelityRegolamento = () => {
                                 <div className="px-7 sm:px-9 pb-7 sm:pb-9">
                                     <div className="w-full h-px bg-white/[0.06] mb-6" />
                                     <ol className="space-y-4">
-                                        {fidelityRegolamento.map((item, i) => (
+                                        {fidelity.regolamento.map((item, i) => (
                                             <li
                                                 key={i}
                                                 className="flex gap-3 font-sans text-smoke/60 text-sm leading-relaxed"

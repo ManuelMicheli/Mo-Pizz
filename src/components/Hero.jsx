@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { PLATEFORM_RESERVE_URL } from '@/lib/constants';
+import { siteContent } from '@/data/copy';
+
+const { hero } = siteContent;
 
 const Hero = () => {
     const containerRef = useRef(null);
@@ -26,7 +29,7 @@ const Hero = () => {
                 className="absolute inset-0 bg-center bg-no-repeat z-0"
                 style={{ backgroundImage: `url('/images/hero-home.webp')`, backgroundSize: 'cover' }}
                 role="img"
-                aria-label="Mo Pizz - Pizza Napoletana"
+                aria-label={hero.ariaBackground}
             />
 
             {/* Logo + Title — centered top, below navbar */}
@@ -37,20 +40,20 @@ const Hero = () => {
                     className="hero-elem h-20 sm:h-28 lg:h-36 w-auto mb-3 drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]"
                 />
                 <div className="hero-elem font-caveat text-gold text-xl sm:text-2xl mb-1">
-                    Pizzeria Napoletana Verace • Legnano
+                    {hero.eyebrow}
                 </div>
                 <h1 className="hero-elem font-playfair font-black text-cream text-[clamp(2rem,6vw,5rem)] leading-[0.95] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
-                    La Vera <span className="italic">Pizza Napoletana.</span>
+                    {hero.headline} <span className="italic">{hero.headlineEm}</span>
                 </h1>
             </div>
 
             {/* CTAs — centered bottom */}
             <div className="absolute bottom-20 sm:bottom-24 left-0 right-0 z-20 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-6">
                 <a href="#menu" className="hero-elem magnetic-btn text-center bg-charcoal border border-charcoal text-cream hover:bg-cream hover:text-charcoal font-sans font-bold py-3 px-6 sm:py-4 sm:px-8 text-sm sm:text-base rounded-full transition-colors duration-300">
-                    Scopri il Menu
+                    {hero.ctaMenu}
                 </a>
                 <a href={PLATEFORM_RESERVE_URL} target="_blank" rel="noopener noreferrer" className="hero-elem magnetic-btn text-center bg-flame hover:bg-ember text-cream font-sans font-bold py-3 px-6 sm:py-4 sm:px-8 text-sm sm:text-base rounded-full transition-colors duration-300">
-                    Prenota un Tavolo
+                    {hero.ctaPrenota}
                 </a>
             </div>
 
