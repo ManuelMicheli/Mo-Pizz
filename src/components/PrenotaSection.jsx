@@ -64,7 +64,7 @@ const PrenotaSection = () => {
                 </div>
 
                 {RESERVE_MODE === 'iframe' ? (
-                    <div className="prenota-card relative w-full max-w-4xl mx-auto rounded-[1.5rem] sm:rounded-[2.5rem] border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden shadow-2xl shadow-black/30">
+                    <div className="prenota-card relative w-full max-w-7xl mx-auto rounded-[1.5rem] sm:rounded-[2.5rem] border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden shadow-2xl shadow-black/30">
                         {/* Top accent */}
                         <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-flame to-transparent" />
 

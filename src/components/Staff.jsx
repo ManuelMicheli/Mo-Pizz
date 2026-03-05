@@ -6,12 +6,19 @@ import { siteContent } from '@/data/copy';
 
 const { staff } = siteContent;
 
-const splitIntoWords = (text) =>
-    text.split(' ').map((word, i) => (
-        <span key={i} className="staff-word inline-block mr-[0.3em]">
-            {word}
-        </span>
-    ));
+const splitIntoWords = (text) => {
+    const parts = text.split(/(\*\*.+?\*\*)/);
+    let key = 0;
+    return parts.flatMap((part) => {
+        const isHighlight = part.startsWith('**') && part.endsWith('**');
+        const clean = isHighlight ? part.slice(2, -2) : part;
+        return clean.split(' ').filter(Boolean).map((word) => (
+            <span key={key++} className={`staff-word inline-block mr-[0.3em] ${isHighlight ? 'text-flame font-semibold' : ''}`}>
+                {word}
+            </span>
+        ));
+    });
+};
 
 const Staff = () => {
     const sRef = useRef(null);

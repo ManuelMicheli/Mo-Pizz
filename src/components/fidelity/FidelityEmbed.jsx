@@ -75,7 +75,7 @@ const FidelityEmbed = () => {
                 </div>
 
                 {FIDELITY_MODE === 'iframe' ? (
-                    <div className="fid-embed-card relative w-full max-w-4xl mx-auto rounded-[1.5rem] sm:rounded-[2.5rem] border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden shadow-2xl shadow-black/30">
+                    <div className="fid-embed-card relative w-full max-w-7xl mx-auto rounded-[1.5rem] sm:rounded-[2.5rem] border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden shadow-2xl shadow-black/30">
                         {/* Top accent line */}
                         <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-flame to-transparent" />
 
@@ -90,8 +90,8 @@ const FidelityEmbed = () => {
                             )}
                             <iframe
                                 src={PLATEFORM_FIDELITY_URL}
-                                className="w-full border-0 h-[500px] sm:h-[600px] md:h-[700px]"
-                                style={{ marginTop: '-80px' }}
+                                className="w-full border-0 h-[540px] sm:h-[640px] md:h-[740px]"
+                                style={{ marginTop: '-120px' }}
                                 onLoad={() => setIframeLoaded(true)}
                                 title="Iscrizione Fidelity MO PIZZ"
                             />

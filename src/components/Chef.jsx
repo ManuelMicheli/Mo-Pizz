@@ -6,6 +6,14 @@ import { siteContent } from '@/data/copy';
 
 const { chiSiamo } = siteContent;
 
+const renderHighlighted = (text) =>
+    text.split(/(\*\*.+?\*\*)/).map((part, i) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+            return <span key={i} className="text-flame font-semibold">{part.slice(2, -2)}</span>;
+        }
+        return part;
+    });
+
 const Chef = () => {
     const cRef = useRef(null);
 
@@ -81,7 +89,7 @@ const Chef = () => {
                 <div className="chef-text space-y-6">
                     {chiSiamo.paragraphs.map((p, i) => (
                         <p key={i} className="font-sans text-cream/90 text-lg sm:text-xl leading-relaxed max-w-xl">
-                            {p}
+                            {renderHighlighted(p)}
                         </p>
                     ))}
                 </div>
