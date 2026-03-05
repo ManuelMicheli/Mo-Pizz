@@ -9,15 +9,17 @@ import { siteContent } from '@/data/copy';
 
 // A persistent layout wrapper so Navbar and Footer survive route changes without unmounting
 const Layout = () => {
-    const { pathname } = useLocation();
+    const { pathname, hash } = useLocation();
 
-    // Scroll to top on every route change, including Lenis
+    // Scroll to top on route change, but skip if there's a hash (let HashLink handle it)
     useEffect(() => {
-        window.scrollTo(0, 0);
-        if (window.__lenis) {
-            window.__lenis.scrollTo(0, { immediate: true });
+        if (!hash) {
+            window.scrollTo(0, 0);
+            if (window.__lenis) {
+                window.__lenis.scrollTo(0, { immediate: true });
+            }
         }
-    }, [pathname]);
+    }, [pathname, hash]);
 
     return (
         <div className="relative w-full min-h-screen bg-charcoal font-sans text-cream selection:bg-flame flex flex-col">
