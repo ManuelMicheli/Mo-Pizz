@@ -31,6 +31,9 @@ const OrdHero = () => {
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
                 style={{ backgroundImage: `url('/images/ordina-hero.webp')` }}
             />
+            {/* Mobile-only dark overlay */}
+            <div className="absolute inset-0 bg-black/50 z-[1] md:hidden" />
+
             {/* Film grain */}
             <div
                 className="absolute inset-0 pointer-events-none opacity-[0.045] z-[2]"

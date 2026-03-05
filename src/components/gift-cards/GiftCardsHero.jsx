@@ -32,6 +32,9 @@ const GiftCardsHero = () => {
                 style={{ backgroundImage: `url('/images/gift-card-hero.webp')` }}
             />
 
+            {/* Mobile-only dark overlay */}
+            <div className="absolute inset-0 bg-black/50 z-[1] md:hidden" />
+
             {/* Film grain */}
             <div
                 className="absolute inset-0 pointer-events-none opacity-[0.045] z-[2]"
