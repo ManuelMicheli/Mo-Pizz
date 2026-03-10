@@ -18,3 +18,7 @@ public/images/wmremove-transformed (33).png
 public/images/wmremove-transformed (18).png
 public/brand-assets/menu-extracted-text.txt
 FONT/
+
+# Development prompts
+prompt-*.md
+mo-pizz-*.md
