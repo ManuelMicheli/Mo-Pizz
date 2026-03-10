@@ -2,20 +2,21 @@ import OrdinaPage from './OrdinaPage';
 import { buildBreadcrumb } from '@/lib/constants';
 
 export const metadata = {
-    title: 'Ordina per Asporto | MO PIZZ — Pizza Napoletana da Asporto a Legnano',
+    title: 'Ordina Pizza per Asporto a Legnano — Forno a Legna',
     description: 'Ordina pizza napoletana e piatti della tradizione per asporto da MO PIZZ Legnano. Ordina online, prepariamo tutto al momento con forno a legna. Ritira in Via Cadore 4.',
-    keywords: 'asporto legnano, pizza asporto legnano, ordina pizza legnano, cibo da asporto legnano, take away legnano',
+    keywords: 'asporto legnano, pizza asporto legnano, ordina pizza legnano, cibo da asporto legnano, take away legnano, pizza da asporto vicino a me, ordina online pizza',
     alternates: {
         canonical: 'https://www.mopizz.it/ordina',
     },
     openGraph: {
-        title: 'Asporto MO PIZZ — Ordina Pizza Napoletana a Legnano',
-        description: 'Pizza e cucina napoletana da asporto. Ordina online e ritira al locale.',
+        title: 'Ordina Pizza per Asporto a Legnano — MO PIZZ',
+        description: 'Pizza napoletana e cucina tradizionale da asporto. Ordina online, prepariamo tutto al momento con forno a legna. Ritira in Via Cadore 4, Legnano.',
         url: 'https://www.mopizz.it/ordina',
+        images: [{ url: '/images/ordina-hero.webp', width: 1920, height: 1080, alt: 'Ordina pizza per asporto da MO PIZZ Legnano' }],
     },
     twitter: {
-        title: 'Asporto MO PIZZ — Ordina Pizza Napoletana a Legnano',
-        description: 'Pizza e cucina napoletana da asporto. Ordina online e ritira al locale.',
+        title: 'Ordina Pizza per Asporto a Legnano — MO PIZZ',
+        description: 'Pizza napoletana e cucina tradizionale da asporto. Ordina online, prepariamo tutto al momento con forno a legna.',
     },
 };
 

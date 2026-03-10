@@ -26,10 +26,15 @@ export const schemaData = {
   telephone: '+390331024363',
   email: 'info@mopizz.it',
   image: [
-    'https://www.mopizz.it/og-image.jpg',
     'https://www.mopizz.it/images/hero-home.webp',
+    'https://www.mopizz.it/images/gallery-main.webp',
   ],
-  logo: 'https://www.mopizz.it/images/logo_mopizz.webp',
+  logo: {
+    '@type': 'ImageObject',
+    url: 'https://www.mopizz.it/images/logo_mopizz.webp',
+    width: 400,
+    height: 389,
+  },
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Via Cadore 4',
@@ -71,19 +76,19 @@ export const schemaData = {
             '@type': 'MenuItem',
             name: 'Menu Completo',
             description: 'Un primo a scelta, un secondo a scelta, un contorno a scelta. Acqua, servizio e caffè inclusi.',
-            offers: { '@type': 'Offer', price: '13.00', priceCurrency: 'EUR' },
+            offers: { '@type': 'Offer', price: '13.00', priceCurrency: 'EUR', availability: 'https://schema.org/InStock' },
           },
           {
             '@type': 'MenuItem',
             name: 'Menu Primo e Contorno',
             description: 'Un primo a scelta, un contorno a scelta. Acqua, servizio e caffè inclusi.',
-            offers: { '@type': 'Offer', price: '9.00', priceCurrency: 'EUR' },
+            offers: { '@type': 'Offer', price: '9.00', priceCurrency: 'EUR', availability: 'https://schema.org/InStock' },
           },
           {
             '@type': 'MenuItem',
             name: 'Menu Secondo e Contorno',
             description: 'Un secondo a scelta, un contorno a scelta. Acqua, servizio e caffè inclusi.',
-            offers: { '@type': 'Offer', price: '11.00', priceCurrency: 'EUR' },
+            offers: { '@type': 'Offer', price: '11.00', priceCurrency: 'EUR', availability: 'https://schema.org/InStock' },
           },
         ],
       },
@@ -100,22 +105,38 @@ export const schemaData = {
   sameAs: [
     'https://www.instagram.com/mo_pizz/',
     'https://www.facebook.com/MOPIZZ.IT/?locale=it_IT',
+    'https://www.tripadvisor.com/Restaurant_Review-g670658-d19352966-Reviews-Mo_Pizz-Legnano_Province_of_Milan_Lombardy.html',
   ],
-  potentialAction: {
-    '@type': 'OrderAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: 'https://www.mopizz.it/ordina',
-      actionPlatform: 'http://schema.org/DesktopWebPlatform',
+  potentialAction: [
+    {
+      '@type': 'OrderAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://www.mopizz.it/ordina',
+        actionPlatform: ['http://schema.org/DesktopWebPlatform', 'http://schema.org/MobileWebPlatform'],
+      },
+      deliveryMethod: 'http://purl.org/goodrelations/v1#DeliveryModePickUp',
     },
-    deliveryMethod: 'http://purl.org/goodrelations/v1#DeliveryModePickUp',
-  },
+    {
+      '@type': 'ReserveAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://www.mopizz.it/#prenota',
+        actionPlatform: ['http://schema.org/DesktopWebPlatform', 'http://schema.org/MobileWebPlatform'],
+      },
+      result: {
+        '@type': 'Reservation',
+        name: 'Prenota un Tavolo',
+      },
+    },
+  ],
 };
 
 // LocalBusiness schema (supplements Restaurant schema)
 export const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
+  '@id': 'https://www.mopizz.it/#localbusiness',
   name: 'MO PIZZ — Pizzeria Napoletana Legnano',
   image: 'https://www.mopizz.it/images/hero-home.webp',
   address: {
@@ -133,6 +154,21 @@ export const localBusinessSchema = {
   },
   url: 'https://www.mopizz.it',
   telephone: '+390331024363',
+  email: 'info@mopizz.it',
+  priceRange: '€€',
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Tuesday', opens: '18:00', closes: '22:30' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Wednesday', opens: '18:00', closes: '22:30' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Thursday', opens: '18:00', closes: '22:30' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Friday', 'Saturday'], opens: '12:00', closes: '14:30' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Friday', 'Saturday'], opens: '18:00', closes: '22:30' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: '18:00', closes: '22:30' },
+  ],
+  sameAs: [
+    'https://www.instagram.com/mo_pizz/',
+    'https://www.facebook.com/MOPIZZ.IT/?locale=it_IT',
+    'https://www.tripadvisor.com/Restaurant_Review-g670658-d19352966-Reviews-Mo_Pizz-Legnano_Province_of_Milan_Lombardy.html',
+  ],
   areaServed: [
     { '@type': 'City', name: 'Legnano' },
     { '@type': 'City', name: 'San Giorgio su Legnano' },
@@ -141,6 +177,18 @@ export const localBusinessSchema = {
     { '@type': 'City', name: 'Rescaldina' },
     { '@type': 'City', name: 'Nerviano' },
   ],
+};
+
+// WebSite schema (enables sitelinks search box in SERP)
+export const webSiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': 'https://www.mopizz.it/#website',
+  name: 'MO PIZZ',
+  alternateName: 'Mo Pizz Pizzeria Napoletana',
+  url: 'https://www.mopizz.it',
+  publisher: { '@id': 'https://www.mopizz.it/#restaurant' },
+  inLanguage: 'it-IT',
 };
 
 // BreadcrumbList schema generator

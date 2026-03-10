@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import CookieBanner from '@/components/CookieBanner';
 import LenisProvider from '@/components/LenisProvider';
 import NoiseOverlay from '@/components/NoiseOverlay';
-import { schemaData, localBusinessSchema } from '@/lib/constants';
+import { schemaData, localBusinessSchema, webSiteSchema } from '@/lib/constants';
 
 export const metadata = {
     metadataBase: new URL('https://www.mopizz.it'),
@@ -30,10 +30,11 @@ export const metadata = {
         type: 'website',
         images: [
             {
-                url: '/og-image.jpg',
-                width: 1200,
-                height: 630,
-                alt: 'MO PIZZ — Pizzeria Napoletana a Legnano',
+                url: '/images/hero-home.webp',
+                width: 1920,
+                height: 1080,
+                alt: 'MO PIZZ — Pizzeria Napoletana a Legnano, interno del ristorante',
+                type: 'image/webp',
             },
         ],
     },
@@ -41,7 +42,10 @@ export const metadata = {
         card: 'summary_large_image',
         title: 'MO PIZZ | Pizzeria Napoletana a Legnano',
         description: 'Pizza napoletana autentica con forno a legna a Legnano. Cucina tradizionale, menu fisso pranzo, asporto e gift card.',
-        images: ['/og-image.jpg'],
+        images: [{
+            url: '/images/hero-home.webp',
+            alt: 'MO PIZZ — Pizzeria Napoletana a Legnano',
+        }],
     },
     alternates: {
         canonical: 'https://www.mopizz.it',
@@ -76,6 +80,10 @@ export default function RootLayout({ children }) {
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+                />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
                 />
             </head>
             <body className="bg-charcoal text-cream antialiased overflow-x-hidden selection:bg-flame selection:text-cream font-sans">
