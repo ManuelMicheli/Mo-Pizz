@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /privacy
-Disallow: /api/
-
-Sitemap: https://www.mopizz.it/sitemap.xml

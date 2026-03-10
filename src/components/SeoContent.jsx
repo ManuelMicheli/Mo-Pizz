@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { siteContent } from '@/data/copy';
 
 const { seoContent } = siteContent;
@@ -17,13 +17,13 @@ const SeoContent = () => {
                     ))}
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 mt-8 font-sans text-sm sm:text-base">
-                    <Link to="/ordina" className="text-flame hover:text-ember font-medium transition-colors underline underline-offset-4">
+                    <Link href="/ordina" className="text-flame hover:text-ember font-medium transition-colors underline underline-offset-4">
                         {seoContent.ctaOrdina}
                     </Link>
-                    <Link to="/gift-cards" className="text-flame hover:text-ember font-medium transition-colors underline underline-offset-4">
+                    <Link href="/gift-cards" className="text-flame hover:text-ember font-medium transition-colors underline underline-offset-4">
                         {seoContent.ctaGiftCard}
                     </Link>
-                    <Link to="/fidelity" className="text-flame hover:text-ember font-medium transition-colors underline underline-offset-4">
+                    <Link href="/fidelity" className="text-flame hover:text-ember font-medium transition-colors underline underline-offset-4">
                         {seoContent.ctaFidelity}
                     </Link>
                 </div>

@@ -1,5 +1,6 @@
+'use client';
 import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
@@ -88,7 +89,7 @@ const FidelityCta = () => {
                         <ArrowRight size={20} />
                     </button>
                     <Link
-                        to="/ordina"
+                        href="/ordina"
                         className="magnetic-btn w-full sm:w-auto border border-white/15 text-cream hover:bg-white/[0.06] font-sans font-medium py-4 px-10 sm:py-5 sm:px-14 rounded-full text-lg flex items-center justify-center gap-3 transition-all duration-300"
                     >
                         {fidelity.cta.ctaSecondary}

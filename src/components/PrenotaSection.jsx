@@ -1,4 +1,5 @@
-import React, { useState, useLayoutEffect, useRef } from 'react';
+'use client';
+import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ExternalLink, CalendarCheck, Phone } from 'lucide-react';
@@ -10,30 +11,34 @@ const PrenotaSection = () => {
     const sectionRef = useRef(null);
     const [iframeLoaded, setIframeLoaded] = useState(false);
 
-    useLayoutEffect(() => {
+    // Fallback: hide spinner after 4s even if onLoad doesn't fire
+    useEffect(() => {
+        const timer = setTimeout(() => setIframeLoaded(true), 4000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    useEffect(() => {
         const ctx = gsap.context(() => {
             gsap.from('.prenota-heading', {
-                y: 24,
+                y: 40,
                 opacity: 0,
-                duration: 1.2,
-                ease: 'expo.out',
-                force3D: true,
+                duration: 1,
+                ease: 'power3.out',
                 scrollTrigger: {
                     trigger: sectionRef.current,
-                    start: 'top 85%',
+                    start: 'top 80%',
                 },
             });
 
             gsap.from('.prenota-card', {
-                y: 30,
+                y: 60,
                 opacity: 0,
-                scale: 0.98,
-                duration: 1.4,
-                ease: 'expo.out',
-                force3D: true,
+                scale: 0.97,
+                duration: 1.2,
+                ease: 'power3.out',
                 scrollTrigger: {
                     trigger: '.prenota-card',
-                    start: 'top 88%',
+                    start: 'top 85%',
                 },
             });
         }, sectionRef);
@@ -81,14 +86,15 @@ const PrenotaSection = () => {
                                 src={PLATEFORM_RESERVE_URL}
                                 className="w-full border-0 h-[480px] sm:h-[560px] md:h-[640px]"
                                 style={{ marginTop: '-80px' }}
-                                loading="lazy"
+                                allow="clipboard-write; payment; web-share"
+                                referrerPolicy="no-referrer-when-downgrade"
                                 onLoad={() => setIframeLoaded(true)}
                                 title="Prenota un tavolo — Mo Pizz"
                             />
                         </div>
 
                         {/* Bottom bar */}
-                        <div className="p-3 text-center border-t border-white/5">
+                        <div className="p-4 text-center border-t border-white/5">
                             <a
                                 href={PLATEFORM_RESERVE_URL}
                                 target="_blank"

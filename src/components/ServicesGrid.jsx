@@ -1,5 +1,7 @@
+'use client';
+
 import React, { useLayoutEffect, useRef, memo } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Gift, ShoppingBag, CalendarHeart, Star, ArrowRight } from 'lucide-react';
@@ -128,7 +130,7 @@ const CardItem = memo(({ card }) => {
     );
 
     return card.to ? (
-        <Link to={card.to} className="block h-full">
+        <Link href={card.to} className="block h-full">
             {inner}
         </Link>
     ) : (

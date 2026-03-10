@@ -1,6 +1,9 @@
+'use client';
+
 import React, { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
-import { HashLink } from 'react-router-hash-link';
+import Link from 'next/link';
 import { siteContent } from '@/data/copy';
 
 const { hero } = siteContent;
@@ -24,26 +27,30 @@ const Hero = () => {
 
     return (
         <section ref={containerRef} id="home" className="relative w-full h-screen min-h-[100dvh] overflow-hidden flex items-center px-6 sm:px-12 md:px-20 lg:px-32">
-            {/* Background Image — native <img> for preload + fetchpriority */}
-            <img
+            {/* Background Image — next/image with preload for LCP */}
+            <Image
                 src="/images/hero-home.webp"
                 alt={hero.ariaBackground}
-                fetchpriority="high"
-                decoding="async"
-                width="3840"
-                height="1629"
-                className="absolute inset-0 w-full h-full object-cover z-0"
+                fill
+                sizes="100vw"
+                quality={85}
+                preload
+                loading="eager"
+                fetchPriority="high"
+                className="object-cover z-0"
             />
 
             {/* Logo + Title — centered top, below navbar */}
             <div className="absolute top-6 sm:top-8 md:top-10 left-0 right-0 z-20 flex flex-col items-center text-center pointer-events-none">
-                <img
+                <Image
                     src="/images/logo_mopizz.webp"
                     alt="Logo MO PIZZ — Pizzeria Napoletana a Legnano"
-                    fetchpriority="high"
-                    decoding="async"
-                    width="400"
-                    height="389"
+                    width={400}
+                    height={389}
+                    quality={85}
+                    preload
+                    loading="eager"
+                    fetchPriority="high"
                     className="hero-elem h-20 sm:h-28 lg:h-36 w-auto mb-3 drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]"
                 />
                 <div className="hero-elem font-caveat text-gold text-xl sm:text-2xl mb-1">
@@ -60,9 +67,9 @@ const Hero = () => {
                 <a href="#menu" className="hero-elem magnetic-btn text-center bg-charcoal border border-charcoal text-cream hover:bg-cream hover:text-charcoal font-sans font-bold py-3 px-6 sm:py-4 sm:px-8 text-sm sm:text-base rounded-full transition-colors duration-300">
                     {hero.ctaMenu}
                 </a>
-                <HashLink smooth to="/#prenota" className="hero-elem magnetic-btn text-center bg-flame hover:bg-ember text-cream font-sans font-bold py-3 px-6 sm:py-4 sm:px-8 text-sm sm:text-base rounded-full transition-colors duration-300">
+                <Link href="/#prenota" className="hero-elem magnetic-btn text-center bg-flame hover:bg-ember text-cream font-sans font-bold py-3 px-6 sm:py-4 sm:px-8 text-sm sm:text-base rounded-full transition-colors duration-300">
                     {hero.ctaPrenota}
-                </HashLink>
+                </Link>
             </div>
 
         </section>

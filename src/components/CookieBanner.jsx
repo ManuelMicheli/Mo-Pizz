@@ -1,5 +1,7 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 const CookieBanner = () => {
     const [visible, setVisible] = useState(false);
@@ -33,7 +35,7 @@ const CookieBanner = () => {
                 </p>
                 <p className="font-sans text-smoke text-xs sm:text-sm mb-6">
                     Leggi la nostra{' '}
-                    <Link to="/privacy" className="text-flame underline hover:text-ember transition-colors">
+                    <Link href="/privacy" className="text-flame underline hover:text-ember transition-colors">
                         Privacy Policy
                     </Link>{' '}
                     per maggiori informazioni.

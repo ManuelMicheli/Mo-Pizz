@@ -1,6 +1,7 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
+import Link from 'next/link';
 import { Instagram, Facebook, Phone } from 'lucide-react';
 import { siteContent } from '@/data/copy';
 
@@ -61,12 +62,12 @@ const Footer = () => {
                         <h4 className="font-sans font-bold text-lg mb-2 uppercase tracking-wide">{footer.navHeading}</h4>
                         <div className="flex flex-col gap-3 font-sans text-smoke">
                             {footer.navLinks.map((link, i) => (
-                                <HashLink smooth key={i} to={`/${link.href}`} className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{link.label}</HashLink>
+                                <Link key={i} href={`/${link.href}`} className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{link.label}</Link>
                             ))}
-                            <HashLink smooth to="/#prenota" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300 flex items-center gap-2"><Phone size={18} />{footer.ctaPrenota}</HashLink>
-                            <Link to="/ordina" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaOrdina}</Link>
-                            <Link to="/gift-cards" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaGiftCard}</Link>
-                            <Link to="/fidelity" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaFidelity}</Link>
+                            <Link href="/#prenota" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300 flex items-center gap-2"><Phone size={18} />{footer.ctaPrenota}</Link>
+                            <Link href="/ordina" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaOrdina}</Link>
+                            <Link href="/gift-cards" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaGiftCard}</Link>
+                            <Link href="/fidelity" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaFidelity}</Link>
                         </div>
                     </div>
 
@@ -81,7 +82,7 @@ const Footer = () => {
                                 <Facebook size={20} />
                             </a>
                         </div>
-                        <Link to="/privacy" className="font-sans text-smoke text-sm hover:text-cream transition-colors duration-300">
+                        <Link href="/privacy" className="font-sans text-smoke text-sm hover:text-cream transition-colors duration-300">
                             Privacy Policy
                         </Link>
                         <div className="flex flex-col gap-1 mt-auto font-caveat text-smoke text-lg sm:text-xl opacity-60">

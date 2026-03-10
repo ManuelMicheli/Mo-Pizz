@@ -1,7 +1,9 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+'use client';
 
-const PrivacyPolicy = () => {
+import { useEffect } from 'react';
+import Link from 'next/link';
+
+const PrivacyPage = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -91,7 +93,7 @@ const PrivacyPolicy = () => {
 
                 <div className="mt-16">
                     <Link
-                        to="/"
+                        href="/"
                         className="font-sans text-flame hover:text-ember text-base sm:text-lg transition-colors duration-300"
                     >
                         &larr; Torna alla Home
@@ -102,4 +104,4 @@ const PrivacyPolicy = () => {
     );
 };
 
-export default PrivacyPolicy;
+export default PrivacyPage;

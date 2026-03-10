@@ -1,21 +1,20 @@
-import React, { useLayoutEffect, useRef, useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+'use client';
+
+import { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ExternalLink, Phone } from 'lucide-react';
 
-import OrdHero from '../components/ordina/OrdHero';
-import OrdComeFunziona from '../components/ordina/OrdComeFunziona';
-import OrdIframe from '../components/ordina/OrdIframe';
-import OrdInfoPratiche from '../components/ordina/OrdInfoPratiche';
-import OrdCtaFinale from '../components/ordina/OrdCtaFinale';
-import { PLATEFORM_ORDER_URL } from '../lib/constants';
-import { siteContent } from '../data/copy';
-import { buildBreadcrumb } from '../lib/constants';
+import OrdHero from '@/components/ordina/OrdHero';
+import OrdComeFunziona from '@/components/ordina/OrdComeFunziona';
+import OrdIframe from '@/components/ordina/OrdIframe';
+import OrdInfoPratiche from '@/components/ordina/OrdInfoPratiche';
+import OrdCtaFinale from '@/components/ordina/OrdCtaFinale';
+import { PLATEFORM_ORDER_URL } from '@/lib/constants';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Ordina = () => {
+const OrdinaPage = () => {
     const pageRef = useRef(null);
     const [showStickyBar, setShowStickyBar] = useState(false);
 
@@ -48,20 +47,6 @@ const Ordina = () => {
 
     return (
         <div ref={pageRef}>
-            <Helmet>
-                <title>{siteContent.meta.ordinaTitle}</title>
-                <meta name="description" content={siteContent.meta.ordinaDescription} />
-                <meta name="keywords" content={siteContent.meta.ordinaKeywords} />
-                <link rel="canonical" href="https://www.mopizz.it/ordina" />
-                <meta property="og:title" content="Asporto MO PIZZ — Ordina Pizza Napoletana a Legnano" />
-                <meta property="og:description" content="Pizza e cucina napoletana da asporto. Ordina online e ritira al locale." />
-                <meta property="og:url" content="https://www.mopizz.it/ordina" />
-                <meta name="twitter:title" content="Asporto MO PIZZ — Ordina Pizza Napoletana a Legnano" />
-                <meta name="twitter:description" content="Pizza e cucina napoletana da asporto. Ordina online e ritira al locale." />
-                <script type="application/ld+json">
-                    {JSON.stringify(buildBreadcrumb('Ordina per Asporto', 'https://www.mopizz.it/ordina'))}
-                </script>
-            </Helmet>
             <OrdHero />
             <OrdComeFunziona />
             <OrdIframe />
@@ -97,4 +82,4 @@ const Ordina = () => {
     );
 };
 
-export default Ordina;
+export default OrdinaPage;

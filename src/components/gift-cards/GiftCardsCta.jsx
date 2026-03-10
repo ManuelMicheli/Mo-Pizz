@@ -1,5 +1,6 @@
+'use client';
 import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { siteContent } from '@/data/copy';
@@ -54,7 +55,7 @@ const GiftCardsCta = () => {
                         {giftCards.cta.ctaPrimary}
                     </a>
                     <Link
-                        to="/"
+                        href="/"
                         className="magnetic-btn w-full sm:w-auto text-center border border-charcoal/20 text-charcoal hover:bg-charcoal hover:text-cream font-sans font-semibold py-4 px-10 rounded-full transition-colors duration-300"
                     >
                         {giftCards.cta.ctaSecondary}

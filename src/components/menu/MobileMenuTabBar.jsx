@@ -1,3 +1,4 @@
+'use client';
 /**
  * MobileMenuTabBar — fixed bottom tab bar for mobile menu navigation.
  *

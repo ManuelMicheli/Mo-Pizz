@@ -1,7 +1,9 @@
+'use client';
+
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Phone, Menu, X } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { siteContent } from '@/data/copy';
 
 const { nav } = siteContent;
@@ -13,31 +15,43 @@ const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const navRef = useRef(null);
     const savedScrollY = useRef(0);
-    const location = useLocation();
-    const isHomePage = location.pathname === '/';
+    const pathname = usePathname();
+    const isHomePage = pathname === '/';
 
     useEffect(() => {
+        let heroEl = null;
+        let menuHorizEl = null;
+        let ticking = false;
+
         const handleScroll = () => {
-            const y = window.scrollY;
-            setIsGathering(y > 40);
-            // Show horizontal navbar when hero ends
-            // Detect any hero section to know when to switch to cream navbar
-            const heroEl = document.getElementById('home');
-            if (heroEl) {
-                const heroBottom = heroEl.getBoundingClientRect().bottom;
-                setIsScrolled(heroBottom <= 80);
-            } else {
-                // Non-home pages: switch after ~60vh scroll (past their dark heroes)
-                setIsScrolled(y > window.innerHeight * 0.55);
-            }
-            const menuHorizEl = document.getElementById('menu-horizontal');
-            if (menuHorizEl) {
-                const rect = menuHorizEl.getBoundingClientRect();
-                setIsInMenu(rect.top < 80 && rect.bottom > 0);
-            } else {
-                setIsInMenu(false);
-            }
+            if (ticking) return;
+            ticking = true;
+
+            requestAnimationFrame(() => {
+                const y = window.scrollY;
+                setIsGathering(y > 40);
+
+                // Lazy-cache DOM refs (re-query only while not yet found)
+                if (!heroEl) heroEl = document.getElementById('home');
+                if (!menuHorizEl) menuHorizEl = document.getElementById('menu-horizontal');
+
+                if (heroEl) {
+                    setIsScrolled(heroEl.getBoundingClientRect().bottom <= 80);
+                } else {
+                    setIsScrolled(y > window.innerHeight * 0.55);
+                }
+
+                if (menuHorizEl) {
+                    const rect = menuHorizEl.getBoundingClientRect();
+                    setIsInMenu(rect.top < 80 && rect.bottom > 0);
+                } else {
+                    setIsInMenu(false);
+                }
+
+                ticking = false;
+            });
         };
+
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
@@ -85,7 +99,7 @@ const Navbar = () => {
                 }`}
             >
                 {/* Logo — hidden only during home hero (transparent navbar), visible everywhere else */}
-                <HashLink smooth to="/#" className={`flex items-center gap-1.5 group transition-opacity duration-500 ${!isScrolled && !isInMenu && isHomePage ? 'opacity-0 pointer-events-none' : ''}`}>
+                <a href="/#" className={`flex items-center gap-1.5 group transition-opacity duration-500 ${!isScrolled && !isInMenu && isHomePage ? 'opacity-0 pointer-events-none' : ''}`}>
                     {isInMenu ? (
                         <>
                             <span className="uppercase font-sans font-bold text-xl sm:text-2xl tracking-tighter text-cream">Mo</span>
@@ -94,16 +108,16 @@ const Navbar = () => {
                     ) : (
                         <img src="/images/logo_mopizz.webp" alt="MO PIZZ — Pizzeria Napoletana Legnano" decoding="async" width="400" height="389" className="h-8 sm:h-9 w-auto" />
                     )}
-                </HashLink>
+                </a>
 
                 {/* Desktop Links — hidden during hero (home only) & menu horizontal scroll */}
                 <div className={`hidden md:flex items-center gap-8 transition-all duration-500 ${isInMenu || (!isScrolled && isHomePage) ? 'opacity-0 w-0 overflow-hidden pointer-events-none' : 'opacity-100'}`}>
                     {navLinks.map((link, i) => {
                         const cls = `font-sans font-medium hover:-translate-y-[1px] transition-transform duration-300 ${isScrolled ? 'text-charcoal hover:text-flame' : 'text-cream hover:text-gold'}`;
                         return link.isRoute ? (
-                            <Link key={i} to={link.href} className={cls}>{link.label}</Link>
+                            <Link key={i} href={link.href} className={cls}>{link.label}</Link>
                         ) : (
-                            <HashLink smooth key={i} to={link.href} className={cls}>{link.label}</HashLink>
+                            <a key={i} href={link.href} className={cls}>{link.label}</a>
                         );
                     })}
                 </div>
@@ -111,7 +125,7 @@ const Navbar = () => {
                 {/* Desktop CTAs — hidden during menu horizontal scroll and home hero */}
                 <div className={`hidden md:flex items-center gap-3 transition-all duration-500 ${isInMenu || (!isScrolled && isHomePage) ? 'opacity-0 w-0 overflow-hidden pointer-events-none' : 'opacity-100'}`}>
                     <Link
-                        to="/ordina"
+                        href="/ordina"
                         className={`magnetic-btn font-sans font-semibold py-2.5 px-5 rounded-full flex items-center gap-1.5 transition-colors duration-300 border ${
                             isScrolled
                                 ? 'border-flame text-flame hover:bg-flame hover:text-cream'
@@ -120,10 +134,10 @@ const Navbar = () => {
                     >
                         {nav.ctaOrdina}
                     </Link>
-                    <HashLink smooth to="/#prenota" className="magnetic-btn bg-flame hover:bg-ember text-cream font-sans font-semibold py-3 px-6 rounded-full flex items-center gap-2 transition-colors duration-300">
+                    <a href="/#prenota" className="magnetic-btn bg-flame hover:bg-ember text-cream font-sans font-semibold py-3 px-6 rounded-full flex items-center gap-2 transition-colors duration-300">
                         <Phone size={18} />
                         {nav.ctaPrenota}
-                    </HashLink>
+                    </a>
                 </div>
 
                 {/* Mobile Toggle — larger tap target, correct color for X */}
@@ -158,14 +172,14 @@ const Navbar = () => {
                     }`;
                     const style = { transitionDelay: `${i * 35}ms` };
                     return link.isRoute ? (
-                        <Link key={i} to={link.href} className={cls} style={style}>{link.label}</Link>
+                        <Link key={i} href={link.href} className={cls} style={style}>{link.label}</Link>
                     ) : (
-                        <HashLink smooth key={i} to={link.href} className={cls} style={style}>{link.label}</HashLink>
+                        <a key={i} href={link.href} className={cls} style={style}>{link.label}</a>
                     );
                 })}
                 <div className={`h-px bg-cream/20 transition-all duration-500 ${isGathering ? 'w-0 opacity-0' : 'w-8 opacity-100'}`} style={{ transitionDelay: `${navLinks.length * 35}ms` }} />
                 <Link
-                    to="/ordina"
+                    href="/ordina"
                     className={`font-sans text-[11px] uppercase tracking-[0.25em] transition-all duration-500 ${
                         isGathering && !isScrolled ? 'text-gold/10 scale-90' : 'text-gold/70 hover:text-gold scale-100'
                     }`}
@@ -173,9 +187,8 @@ const Navbar = () => {
                 >
                     {nav.ctaOrdina}
                 </Link>
-                <HashLink
-                    smooth
-                    to="/#prenota"
+                <a
+                    href="/#prenota"
                     className={`font-sans text-[11px] uppercase tracking-[0.25em] flex items-center gap-1.5 transition-all duration-500 ${
                         isGathering && !isScrolled ? 'text-flame/10 scale-90' : 'text-flame/70 hover:text-flame scale-100'
                     }`}
@@ -183,7 +196,7 @@ const Navbar = () => {
                 >
                     <Phone size={11} />
                     {nav.ctaPrenota}
-                </HashLink>
+                </a>
             </div>}
 
             {/* Mobile Menu Overlay — clip-path circle expand animation */}
@@ -203,13 +216,13 @@ const Navbar = () => {
                             transition: `opacity 0.4s ease ${200 + i * 80}ms, transform 0.4s ease ${200 + i * 80}ms`,
                         };
                         return link.isRoute ? (
-                            <Link key={i} to={link.href} onClick={closeMenu} className={cls} style={style}>{link.label}</Link>
+                            <Link key={i} href={link.href} onClick={closeMenu} className={cls} style={style}>{link.label}</Link>
                         ) : (
-                            <HashLink smooth key={i} to={link.href} onClick={closeMenu} className={cls} style={style}>{link.label}</HashLink>
+                            <a key={i} href={link.href} onClick={closeMenu} className={cls} style={style}>{link.label}</a>
                         );
                     })}
                     <Link
-                        to="/ordina"
+                        href="/ordina"
                         onClick={closeMenu}
                         className="mobile-link text-3xl font-sans font-bold text-gold hover:text-flame transition-colors"
                         style={{
@@ -220,9 +233,8 @@ const Navbar = () => {
                     >
                         {nav.ctaOrdina}
                     </Link>
-                    <HashLink
-                        smooth
-                        to="/#prenota"
+                    <a
+                        href="/#prenota"
                         onClick={closeMenu}
                         className="mobile-link mt-8 bg-flame hover:bg-ember text-cream font-sans font-semibold py-4 px-10 rounded-full flex items-center gap-2 text-xl"
                         style={{
@@ -233,7 +245,7 @@ const Navbar = () => {
                     >
                         <Phone size={24} />
                         {nav.ctaPrenota}
-                    </HashLink>
+                    </a>
                 </div>
             </div>
         </nav>

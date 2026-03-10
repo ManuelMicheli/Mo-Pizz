@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -16,8 +18,28 @@ const Features = () => {
     const progressRef = useRef(null);
     const instagramRef = useRef(null);
 
+    const videoWrapRef = useRef(null);
     const [isMobile, setIsMobile] = useState(false);
 
+    // Lazy-load video when section nears viewport
+    useEffect(() => {
+        const el = videoWrapRef.current;
+        if (!el) return;
+        const video = el.querySelector('video');
+        if (!video) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    video.preload = 'auto';
+                    video.load();
+                    observer.disconnect();
+                }
+            },
+            { rootMargin: '300px' }
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
 
     // Mobile detection
     useEffect(() => {
@@ -188,17 +210,16 @@ const Features = () => {
 
             {/* Video section */}
             <div className="w-full flex flex-col">
-                <div className="features-video relative w-full h-[50dvh] overflow-hidden">
+                <div ref={videoWrapRef} className="features-video relative w-full h-[50dvh] overflow-hidden">
                     <div className="relative w-full h-full overflow-hidden">
                         <video
                             autoPlay
                             muted
                             loop
                             playsInline
-                            preload="metadata"
+                            preload="none"
                             poster="/images/gallery-main.webp"
                             className="absolute inset-0 w-full h-full object-cover scale-[1.02]"
-                            style={{ filter: 'contrast(1.08) brightness(0.95) saturate(0.85)' }}
                             src="/videos/Pizzeria_Menu_Background_Video_Generation (1).mp4"
                         />
                         {/* Cinematic dark overlay stack */}

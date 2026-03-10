@@ -1,6 +1,7 @@
+'use client';
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { HashLink } from 'react-router-hash-link';
+import Link from 'next/link';
 import { siteContent } from '@/data/copy';
 
 const OrdHero = () => {
@@ -69,13 +70,12 @@ const OrdHero = () => {
                     >
                         {ordina.hero.ctaPrimary}
                     </a>
-                    <HashLink
-                        smooth
-                        to="/#menu"
+                    <Link
+                        href="/#menu"
                         className="magnetic-btn w-full sm:w-auto text-center border box-border border-cream text-cream hover:bg-cream hover:text-charcoal font-sans font-bold py-3 px-6 sm:py-4 sm:px-10 text-sm sm:text-lg rounded-full transition-colors duration-300"
                     >
                         {ordina.hero.ctaSecondary}
-                    </HashLink>
+                    </Link>
                 </div>
             </div>
         </section>
