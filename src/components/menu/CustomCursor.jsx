@@ -20,7 +20,10 @@ const CustomCursor = ({ isActive }) => {
     };
 
     window.addEventListener('mousemove', onMove);
-    return () => window.removeEventListener('mousemove', onMove);
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      gsap.killTweensOf(cursor);
+    };
   }, []);
 
   useEffect(() => {

@@ -56,6 +56,9 @@ const OrdIframe = () => {
                             <iframe
                                 src={PLATEFORM_ORDER_URL}
                                 className="w-full border-0 h-[500px] sm:h-[600px] md:h-[700px]"
+                                sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+                                allow="payment; clipboard-write"
+                                referrerPolicy="strict-origin-when-cross-origin"
                                 onLoad={() => setIframeLoaded(true)}
                                 title="Menu Mo Pizz — Ordina Online"
                             />

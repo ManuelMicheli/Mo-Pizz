@@ -22,3 +22,5 @@ FONT/
 # Development prompts
 prompt-*.md
 mo-pizz-*.md
+.vercel
+.env*.local

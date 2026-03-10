@@ -179,7 +179,10 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
     };
 
     window.addEventListener('mousemove', onMove);
-    return () => window.removeEventListener('mousemove', onMove);
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      gsap.killTweensOf(imgEl);
+    };
   }, []);
 
   // Show/hide hover image

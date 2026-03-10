@@ -40,13 +40,13 @@ const nextConfig = {
         headers: [
           { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
           { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains' },
+          { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains; preload' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
           { key: 'X-Permitted-Cross-Domain-Policies', value: 'none' },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://mopizz.plateform.app; style-src 'self' 'unsafe-inline' https://mopizz.plateform.app; font-src 'self' https://mopizz.plateform.app https://*.plateform.app; img-src 'self' data: https://www.mopizz.it https://mopizz.plateform.app https://*.plateform.app; frame-src https://www.google.com https://mopizz.plateform.app; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://mopizz.plateform.app; connect-src 'self' https://mopizz.plateform.app https://*.plateform.app",
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://mopizz.plateform.app; style-src 'self' 'unsafe-inline' https://mopizz.plateform.app; font-src 'self' https://mopizz.plateform.app; img-src 'self' data: https://www.mopizz.it https://mopizz.plateform.app; frame-src https://www.google.com https://mopizz.plateform.app; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://mopizz.plateform.app; connect-src 'self' https://mopizz.plateform.app; upgrade-insecure-requests",
           },
         ],
       },

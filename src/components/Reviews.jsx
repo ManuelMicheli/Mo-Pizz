@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useEffect } from 'react';
 import { Star } from 'lucide-react';
 import { siteContent } from '@/data/copy';
 
@@ -102,6 +102,13 @@ const Reviews = () => {
                 marqueeRef.current.classList.remove('paused');
             }
         }, 2000);
+    }, []);
+
+    // Cleanup touch timer on unmount
+    useEffect(() => {
+        return () => {
+            if (touchTimer.current) clearTimeout(touchTimer.current);
+        };
     }, []);
 
     return (

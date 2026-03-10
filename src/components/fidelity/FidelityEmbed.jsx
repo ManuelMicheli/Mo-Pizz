@@ -93,6 +93,9 @@ const FidelityEmbed = () => {
                                 src={PLATEFORM_FIDELITY_URL}
                                 className="w-full border-0 h-[540px] sm:h-[640px] md:h-[740px]"
                                 style={{ marginTop: '-120px' }}
+                                sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+                                allow="clipboard-write"
+                                referrerPolicy="strict-origin-when-cross-origin"
                                 onLoad={() => setIframeLoaded(true)}
                                 title="Iscrizione Fidelity MO PIZZ"
                             />

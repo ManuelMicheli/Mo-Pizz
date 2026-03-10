@@ -81,9 +81,10 @@ const Contacts = () => {
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.6!2d8.9061923!3d45.6028006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47868d9bf3567e25%3A0x6c09ada059a69fd2!2sMo%20Pizz%20Pizzeria%20Napoletana!5e0!3m2!1sit!2sit"
                         className="absolute inset-0 w-full h-full border-0"
+                        sandbox="allow-same-origin allow-scripts allow-popups"
                         allowFullScreen=""
                         loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
+                        referrerPolicy="strict-origin-when-cross-origin"
                         title={contatti.mappaTitle}
                     ></iframe>
                 </div>
