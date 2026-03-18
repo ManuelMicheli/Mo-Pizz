@@ -44,7 +44,7 @@ export const instagramPosts = [
     {
         id: 7,
         image: '/images/instagram-7.webp',
-        caption: 'Il team Mo Pizz — passione e dedizione dal 2019',
+        caption: 'Il team Mo Pizz — passione e dedizione',
         alt: 'Team della pizzeria Mo Pizz',
         postUrl: 'https://www.instagram.com/mo_pizz/',
     },
