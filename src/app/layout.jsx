@@ -51,7 +51,7 @@ export const metadata = {
         type: 'website',
         images: [
             {
-                url: '/images/hero-home.webp',
+                url: '/images/hero-home-v2.webp',
                 width: 1920,
                 height: 1080,
                 alt: 'MO PIZZ — Pizzeria Napoletana a Legnano, interno del ristorante',
@@ -64,7 +64,7 @@ export const metadata = {
         title: 'MO PIZZ | Pizzeria Napoletana a Legnano',
         description: 'Pizza napoletana autentica con forno a legna a Legnano. Cucina tradizionale, menu fisso pranzo, asporto e gift card.',
         images: [{
-            url: '/images/hero-home.webp',
+            url: '/images/hero-home-v2.webp',
             alt: 'MO PIZZ — Pizzeria Napoletana a Legnano',
         }],
     },

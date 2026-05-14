@@ -26,7 +26,7 @@ export const schemaData = {
   telephone: '+390331024363',
   email: 'info@mopizz.it',
   image: [
-    'https://www.mopizz.it/images/hero-home.webp',
+    'https://www.mopizz.it/images/hero-home-v2.webp',
     'https://www.mopizz.it/images/gallery-main.webp',
   ],
   logo: {
@@ -138,7 +138,7 @@ export const localBusinessSchema = {
   '@type': 'LocalBusiness',
   '@id': 'https://www.mopizz.it/#localbusiness',
   name: 'MO PIZZ — Pizzeria Napoletana Legnano',
-  image: 'https://www.mopizz.it/images/hero-home.webp',
+  image: 'https://www.mopizz.it/images/hero-home-v2.webp',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Via Cadore 4',

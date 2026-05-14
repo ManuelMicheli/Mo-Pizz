@@ -29,7 +29,7 @@ const Hero = () => {
         <section ref={containerRef} id="home" className="relative w-full h-screen min-h-[100dvh] overflow-hidden flex items-center px-6 sm:px-12 md:px-20 lg:px-32">
             {/* Background Image — next/image with preload for LCP */}
             <Image
-                src="/images/hero-home.webp"
+                src="/images/hero-home-v2.webp"
                 alt={hero.ariaBackground}
                 fill
                 sizes="100vw"
