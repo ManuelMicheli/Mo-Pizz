@@ -7,25 +7,29 @@ const CustomCursor = ({ isActive }) => {
   const xTo = useRef(null);
   const yTo = useRef(null);
 
+  // Initialize quickTo setters once
   useEffect(() => {
     const cursor = cursorRef.current;
     if (!cursor) return;
-
     xTo.current = gsap.quickTo(cursor, 'x', { duration: 0.6, ease: 'power3' });
     yTo.current = gsap.quickTo(cursor, 'y', { duration: 0.6, ease: 'power3' });
-
-    const onMove = (e) => {
-      xTo.current(e.clientX);
-      yTo.current(e.clientY);
-    };
-
-    window.addEventListener('mousemove', onMove);
     return () => {
-      window.removeEventListener('mousemove', onMove);
       gsap.killTweensOf(cursor);
     };
   }, []);
 
+  // Attach/detach mousemove listener only while active — saves per-frame work
+  useEffect(() => {
+    if (!isActive) return;
+    const onMove = (e) => {
+      if (xTo.current) xTo.current(e.clientX);
+      if (yTo.current) yTo.current(e.clientY);
+    };
+    window.addEventListener('mousemove', onMove, { passive: true });
+    return () => window.removeEventListener('mousemove', onMove);
+  }, [isActive]);
+
+  // Scale/opacity transition on activation
   useEffect(() => {
     const cursor = cursorRef.current;
     if (!cursor) return;
@@ -40,10 +44,9 @@ const CustomCursor = ({ isActive }) => {
   return (
     <div
       ref={cursorRef}
-      className="fixed top-0 left-0 z-[9999] pointer-events-none -translate-x-1/2 -translate-y-1/2 mix-blend-difference hidden lg:flex"
-      style={{ willChange: 'transform' }}
+      className="fixed top-0 left-0 z-[9999] pointer-events-none -translate-x-1/2 -translate-y-1/2 hidden lg:flex"
     >
-      <div className="w-20 h-20 rounded-full border border-cream/60 flex items-center justify-center">
+      <div className="w-20 h-20 rounded-full border border-cream/70 flex items-center justify-center bg-charcoal/40 backdrop-blur-sm">
         <span className="font-caveat text-cream text-sm tracking-wider">Scorri</span>
       </div>
     </div>

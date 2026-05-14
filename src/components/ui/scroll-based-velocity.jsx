@@ -26,8 +26,16 @@ export function ParallaxText({ children, baseVelocity = 100, className }) {
             }
         };
         calculateRepetitions();
-        window.addEventListener('resize', calculateRepetitions);
-        return () => window.removeEventListener('resize', calculateRepetitions);
+        let t;
+        const onResize = () => {
+            clearTimeout(t);
+            t = setTimeout(calculateRepetitions, 150);
+        };
+        window.addEventListener('resize', onResize, { passive: true });
+        return () => {
+            clearTimeout(t);
+            window.removeEventListener('resize', onResize);
+        };
     }, [children]);
 
     useEffect(() => {

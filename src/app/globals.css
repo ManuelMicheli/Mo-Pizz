@@ -74,6 +74,13 @@
     opacity: 0.05;
   }
 
+  /* Shared film-grain texture — reused across sections */
+  .grain-texture {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+    pointer-events: none;
+  }
+
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -189,7 +196,7 @@ body {
 
 .animate-marquee {
   animation: marquee 25s linear infinite;
-  will-change: transform;
+  transform: translateZ(0);
 }
 
 @media (min-width: 640px) {
@@ -217,7 +224,7 @@ body {
 
 .animate-marquee-reverse {
   animation: marquee-reverse 22s linear infinite;
-  will-change: transform;
+  transform: translateZ(0);
 }
 
 @media (min-width: 640px) {
@@ -236,15 +243,20 @@ body {
   animation-play-state: paused;
 }
 
-/* Respect reduced motion preferences */
+/* Respect reduced motion preferences — disable all decorative motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
-  .animate-marquee-reverse {
-    animation: none;
+  .animate-marquee-reverse,
+  .animate-bounce-slow,
+  .statement-glow {
+    animation: none !important;
   }
 
-  .animate-bounce-slow {
-    animation: none;
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 

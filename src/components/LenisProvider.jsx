@@ -7,6 +7,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
+    // Prevent ScrollTrigger refresh storms when iOS Safari collapses address bar
+    ScrollTrigger.config({ ignoreMobileResize: true });
 }
 
 const LenisProvider = ({ children }) => {

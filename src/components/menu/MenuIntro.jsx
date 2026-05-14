@@ -69,7 +69,7 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
       {/* Two-image hero grid */}
       <div className="relative z-10 w-full h-full flex">
         {/* Left half */}
-        <div className="menu-hero-img w-1/2 h-full relative overflow-hidden will-change-transform" style={{ transform: 'translateZ(0)' }}>
+        <div className="menu-hero-img w-1/2 h-full relative overflow-hidden">
           <img
             src="/images/menu-intro-left.webp"
             alt=""
@@ -82,7 +82,7 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
         </div>
 
         {/* Right half */}
-        <div className="menu-hero-img w-1/2 h-full relative overflow-hidden will-change-transform" style={{ transform: 'translateZ(0)' }}>
+        <div className="menu-hero-img w-1/2 h-full relative overflow-hidden">
           <img
             src="/images/menu-intro-right.webp"
             alt=""

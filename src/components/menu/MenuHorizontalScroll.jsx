@@ -137,7 +137,7 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
   const hoverImgRef = useRef(null);
   const imgXTo = useRef(null);
   const imgYTo = useRef(null);
-  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(false);
   const scrollTriggerRef = useRef(null);
   const [mobileActiveCategory, setMobileActiveCategory] = useState(0);
   const [tabBarVisible, setTabBarVisible] = useState(false);
@@ -157,33 +157,41 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
     });
   }, [menuCategories.length]);
 
-  // Detect mobile
+  // Detect mobile — debounced resize so we don't fire 60×/sec during drag
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
+    let t;
+    const onResize = () => {
+      clearTimeout(t);
+      t = setTimeout(check, 150);
+    };
+    window.addEventListener('resize', onResize, { passive: true });
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener('resize', onResize);
+    };
   }, []);
 
-  // Cursor-following image reveal setup
+  // Cursor-following image reveal setup — init quickTo once
   useEffect(() => {
     const imgEl = hoverImgRef.current;
     if (!imgEl) return;
-
     imgXTo.current = gsap.quickTo(imgEl, 'x', { duration: 0.4, ease: 'power3' });
     imgYTo.current = gsap.quickTo(imgEl, 'y', { duration: 0.4, ease: 'power3' });
+    return () => { gsap.killTweensOf(imgEl); };
+  }, []);
 
+  // Attach mousemove only when menu section is active (cursorActive flag)
+  useEffect(() => {
+    if (!cursorActive) return;
     const onMove = (e) => {
       if (imgXTo.current) imgXTo.current(e.clientX);
       if (imgYTo.current) imgYTo.current(e.clientY);
     };
-
-    window.addEventListener('mousemove', onMove);
-    return () => {
-      window.removeEventListener('mousemove', onMove);
-      gsap.killTweensOf(imgEl);
-    };
-  }, []);
+    window.addEventListener('mousemove', onMove, { passive: true });
+    return () => window.removeEventListener('mousemove', onMove);
+  }, [cursorActive]);
 
   // Show/hide hover image
   useEffect(() => {
@@ -420,7 +428,7 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
                 <div className={`relative w-full h-[55vh] max-h-[400px] overflow-hidden ${
                   catIdx > 0 ? 'rounded-t-[2rem]' : ''
                 }`}>
-                  <div className="mobile-hero-parallax absolute inset-0 will-change-transform">
+                  <div className="mobile-hero-parallax absolute inset-0">
                     <img
                       src={category.heroImage}
                       alt={category.title}
@@ -536,7 +544,6 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
       <div
         ref={hoverImgRef}
         className="fixed top-0 left-0 z-[9998] pointer-events-none -translate-x-1/2 -translate-y-1/2 hidden lg:block"
-        style={{ willChange: 'transform' }}
       >
         {hoverImage && (
           <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-gold/40 shadow-2xl">
@@ -593,7 +600,7 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
         <div
           ref={trackRef}
           className="flex h-screen"
-          style={{ width: `${menuCategories.length * 100}vw`, willChange: 'transform' }}
+          style={{ width: `${menuCategories.length * 100}vw` }}
         >
           {menuCategories.map((category) => (
             <div
@@ -603,7 +610,7 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
               {/* Left: Hero Image (40%) */}
               <div className="w-[40%] h-full relative overflow-hidden flex items-end">
                 <div
-                  className={`panel-hero-img absolute will-change-transform ${category.heroFit === 'contain' ? 'inset-0' : 'inset-[-10%]'}`}
+                  className={`panel-hero-img absolute ${category.heroFit === 'contain' ? 'inset-0' : 'inset-[-10%]'}`}
                   style={{
                     backgroundImage: `url('${category.heroImage}')`,
                     backgroundSize: category.heroFit || 'cover',

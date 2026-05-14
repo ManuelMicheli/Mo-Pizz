@@ -34,8 +34,7 @@ const Hero = () => {
                 fill
                 sizes="100vw"
                 quality={85}
-                preload
-                loading="eager"
+                priority
                 fetchPriority="high"
                 className="object-cover z-0"
             />
@@ -48,8 +47,7 @@ const Hero = () => {
                     width={400}
                     height={389}
                     quality={85}
-                    preload
-                    loading="eager"
+                    priority
                     fetchPriority="high"
                     className="hero-elem h-20 sm:h-28 lg:h-36 w-auto mb-3 drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]"
                 />

@@ -29,9 +29,18 @@ const getIsOpen = () => {
 const Footer = () => {
     const [isOpen, setIsOpen] = useState(getIsOpen);
 
+    // Re-check status only when minute rolls over (saves 59 wakeups/hour vs 60s interval)
     useEffect(() => {
-        const interval = setInterval(() => setIsOpen(getIsOpen()), 60000);
-        return () => clearInterval(interval);
+        let timer;
+        const scheduleNext = () => {
+            const msToNextMinute = 60000 - (Date.now() % 60000);
+            timer = setTimeout(() => {
+                setIsOpen(getIsOpen());
+                scheduleNext();
+            }, msToNextMinute);
+        };
+        scheduleNext();
+        return () => clearTimeout(timer);
     }, []);
 
     return (

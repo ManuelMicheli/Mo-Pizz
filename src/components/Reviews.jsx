@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useCallback, useEffect } from 'react';
+import React, { useRef, useCallback, useEffect, memo } from 'react';
 import { Star } from 'lucide-react';
 import { siteContent } from '@/data/copy';
 
@@ -49,7 +49,8 @@ const reviewsData = [
     },
 ];
 
-const ReviewCard = ({ review }) => (
+const ReviewCard = memo(function ReviewCard({ review }) {
+    return (
     <div className="shrink-0 w-[260px] sm:w-[320px] md:w-[370px]">
         <div className="relative bg-gradient-to-br from-[#222222] to-[#1a1a1a] rounded-[1.5rem] p-7 sm:p-8 h-full flex flex-col overflow-hidden transition-shadow duration-500 hover:shadow-[0_8px_48px_rgba(212,168,83,0.07)]">
             {/* Subtle top accent */}
@@ -81,7 +82,8 @@ const ReviewCard = ({ review }) => (
             </div>
         </div>
     </div>
-);
+    );
+});
 
 const Reviews = () => {
     // Triple reviews for seamless infinite loop on all screen sizes

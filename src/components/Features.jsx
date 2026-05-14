@@ -41,12 +41,20 @@ const Features = () => {
         return () => observer.disconnect();
     }, []);
 
-    // Mobile detection
+    // Mobile detection — debounced resize
     useEffect(() => {
         const check = () => setIsMobile(window.innerWidth < 768);
         check();
-        window.addEventListener('resize', check);
-        return () => window.removeEventListener('resize', check);
+        let t;
+        const onResize = () => {
+            clearTimeout(t);
+            t = setTimeout(check, 150);
+        };
+        window.addEventListener('resize', onResize, { passive: true });
+        return () => {
+            clearTimeout(t);
+            window.removeEventListener('resize', onResize);
+        };
     }, []);
 
     useEffect(() => {
@@ -156,7 +164,6 @@ const Features = () => {
                     <div
                         ref={trackRef}
                         className="flex flex-row md:h-[600px] w-full gap-4"
-                        style={{ willChange: 'transform' }}
                     >
                         {positions.map((pos, i) => (
                             <div
@@ -237,13 +244,7 @@ const Features = () => {
                             }}
                         />
                         {/* Film grain */}
-                        <div
-                            className="absolute inset-0 pointer-events-none opacity-[0.045]"
-                            style={{
-                                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-                                backgroundSize: '256px 256px',
-                            }}
-                        />
+                        <div className="absolute inset-0 grain-texture opacity-[0.045]" />
                         {/* Content — bottom-right */}
                         <div className="absolute bottom-8 left-0 right-0 px-6 sm:left-auto sm:right-12 sm:px-0 md:right-20 lg:right-32 z-10 flex flex-col items-center text-center sm:items-end sm:text-right sm:max-w-[440px]">
                             <span className="font-caveat text-gold text-lg sm:text-xl md:text-2xl mb-3">
@@ -267,13 +268,15 @@ const Features = () => {
                 {/* Mobile: Single color image */}
                 {isMobile && (
                     <div className="w-full px-4 mt-16">
-                        <div className="features-mobile-img rounded-2xl overflow-hidden">
+                        <div className="features-mobile-img rounded-2xl overflow-hidden aspect-[4/3]">
                             <img
                                 src="/images/features-chi-siamo.webp"
                                 alt="Chi Siamo — Mo Pizz"
+                                width="1200"
+                                height="900"
                                 loading="lazy"
                                 decoding="async"
-                                className="w-full h-auto object-cover"
+                                className="w-full h-full object-cover"
                             />
                         </div>
                     </div>

@@ -62,12 +62,11 @@ const CardItem = memo(({ card }) => {
 
     const inner = (
         <div
-            className={`service-card group relative overflow-hidden rounded-[2rem] h-full min-h-[220px] sm:min-h-[280px] lg:min-h-[340px] p-5 sm:p-8 flex flex-col justify-between will-change-transform ${
+            className={`service-card group relative overflow-hidden rounded-[2rem] h-full min-h-[220px] sm:min-h-[280px] lg:min-h-[340px] p-5 sm:p-8 flex flex-col justify-between ${
                 isPlaceholder
                     ? 'bg-charcoal cursor-default'
                     : 'bg-charcoal hover:scale-[1.01] cursor-pointer'
             }`}
-            style={{ transform: 'translateZ(0)' }}
         >
 
             {/* Background image(s) */}
