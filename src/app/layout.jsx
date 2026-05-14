@@ -1,4 +1,6 @@
 import './globals.css';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CookieBanner from '@/components/CookieBanner';
@@ -95,6 +97,8 @@ export default function RootLayout({ children }) {
                     </div>
                 </LenisProvider>
                 <NoiseOverlay />
+                <Analytics />
+                <SpeedInsights />
             </body>
         </html>
     );
