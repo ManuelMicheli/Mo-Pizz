@@ -4,7 +4,7 @@ export default function robots() {
             {
                 userAgent: '*',
                 allow: '/',
-                disallow: ['/api/', '/privacy'],
+                disallow: ['/api/'],
             },
         ],
         sitemap: 'https://www.mopizz.it/sitemap.xml',

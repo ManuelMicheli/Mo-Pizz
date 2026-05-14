@@ -16,6 +16,7 @@ export const menuFissoFormule = [
     piatti: ['Un primo a scelta', 'Un contorno a scelta'],
     badge: null,
     featured: false,
+    bgImage: '/images/menu-fisso/primo.jpg',
   },
   {
     id: 'completo',
@@ -24,6 +25,7 @@ export const menuFissoFormule = [
     piatti: ['Un primo a scelta', 'Un secondo a scelta', 'Un contorno a scelta'],
     badge: 'Popolare',
     featured: true,
+    bgImage: '/images/menu-fisso/completo.jpg',
   },
   {
     id: 'secondo-contorno',
@@ -32,5 +34,6 @@ export const menuFissoFormule = [
     piatti: ['Un secondo a scelta', 'Un contorno a scelta'],
     badge: null,
     featured: false,
+    bgImage: '/images/menu-fisso/secondo.jpg',
   },
 ];

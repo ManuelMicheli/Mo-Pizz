@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 const { menuFisso } = siteContent;
 
 const MenuFissoCard = ({ formula }) => {
-  const { nome, prezzo, piatti, badge, featured } = formula;
+  const { nome, prezzo, piatti, badge, featured, bgImage } = formula;
 
   return (
     <div
@@ -23,57 +23,78 @@ const MenuFissoCard = ({ formula }) => {
           : 'border-2 border-gold/15 hover:border-gold/30'
       }`}
     >
+      {bgImage && (
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 rounded-[1.2rem] overflow-hidden pointer-events-none"
+        >
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-30 group-hover:opacity-45 transition-opacity duration-700 ease-out"
+            style={{ backgroundImage: `url('${bgImage}')` }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(180deg, rgba(17,17,17,0.55) 0%, rgba(17,17,17,0.78) 55%, rgba(17,17,17,0.95) 100%)',
+            }}
+          />
+        </div>
+      )}
+
       {badge && (
-        <span className="absolute -top-3 left-1/2 -translate-x-1/2 inline-block bg-gold text-charcoal font-sans font-bold text-[10px] tracking-wide uppercase px-3 py-1 rounded-full shadow-md">
+        <span className="absolute -top-3 left-1/2 -translate-x-1/2 z-10 inline-block bg-gold text-charcoal font-sans font-bold text-[10px] tracking-wide uppercase px-3 py-1 rounded-full shadow-md">
           {badge}
         </span>
       )}
 
-      <h3 className={`font-playfair font-black text-xl sm:text-2xl leading-tight mt-1 ${featured ? 'text-cream' : 'text-cream/90'}`}>
-        {nome}
-      </h3>
+      <div className="relative z-[1] flex flex-col flex-1">
+        <h3 className={`font-playfair font-black text-xl sm:text-2xl leading-tight mt-1 ${featured ? 'text-cream' : 'text-cream/90'}`}>
+          {nome}
+        </h3>
 
-      <div className="flex items-baseline gap-0.5 mt-4 mb-5">
-        <span className="font-playfair text-lg text-gold">€</span>
-        <span className="font-playfair font-black text-5xl leading-none text-cream">
-          {prezzo}
-        </span>
-        <span className="font-sans text-xs ml-0.5 text-gold/40">,00</span>
+        <div className="flex items-baseline gap-0.5 mt-4 mb-5">
+          <span className="font-playfair text-lg text-gold">€</span>
+          <span className="font-playfair font-black text-5xl leading-none text-cream">
+            {prezzo}
+          </span>
+          <span className="font-sans text-xs ml-0.5 text-gold/40">,00</span>
+        </div>
+
+        <div className={`w-full h-px mb-5 ${featured ? 'bg-gold/25' : 'bg-gold/10'}`} />
+
+        <ul className="flex flex-col gap-3 flex-1">
+          {piatti.map((piatto, i) => (
+            <li key={i} className="flex items-center gap-2">
+              <Check className="w-4 h-4 flex-shrink-0 text-gold" strokeWidth={2.5} />
+              <span className="font-sans text-sm sm:text-base leading-snug text-cream/85 [text-shadow:0_1px_2px_rgba(0,0,0,0.55)]">
+                {piatto}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex items-center gap-1.5 mt-5 text-gold/40">
+          <Coffee className="w-3.5 h-3.5 flex-shrink-0" />
+          <span className="font-sans text-[11px]">{menuFisso.notaIncluso}</span>
+        </div>
+        <p className="font-sans text-[10px] mt-1 text-gold/30">
+          {menuFisso.notaEscluso}
+        </p>
+
+        <Link
+          href="/#prenota"
+          aria-label={`Prenota per ${nome}`}
+          className={`magnetic-btn mt-5 flex items-center justify-center gap-2 py-3 px-6 rounded-full font-sans font-bold text-sm transition-all duration-300 ${
+            featured
+              ? 'bg-gold hover:bg-[#c4943d] text-charcoal'
+              : 'bg-gold/15 hover:bg-gold/25 text-gold border border-gold/30 hover:border-gold/50 backdrop-blur-sm'
+          }`}
+        >
+          Vieni a pranzo
+          <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
       </div>
-
-      <div className={`w-full h-px mb-5 ${featured ? 'bg-gold/25' : 'bg-gold/10'}`} />
-
-      <ul className="flex flex-col gap-3 flex-1">
-        {piatti.map((piatto, i) => (
-          <li key={i} className="flex items-center gap-2">
-            <Check className="w-4 h-4 flex-shrink-0 text-gold" strokeWidth={2.5} />
-            <span className="font-sans text-sm sm:text-base leading-snug text-cream/80">
-              {piatto}
-            </span>
-          </li>
-        ))}
-      </ul>
-
-      <div className="flex items-center gap-1.5 mt-5 text-gold/30">
-        <Coffee className="w-3.5 h-3.5 flex-shrink-0" />
-        <span className="font-sans text-[11px]">{menuFisso.notaIncluso}</span>
-      </div>
-      <p className="font-sans text-[10px] mt-1 text-gold/20">
-        {menuFisso.notaEscluso}
-      </p>
-
-      <Link
-        href="/#prenota"
-        aria-label={`Prenota per ${nome}`}
-        className={`magnetic-btn mt-5 flex items-center justify-center gap-2 py-3 px-6 rounded-full font-sans font-bold text-sm transition-all duration-300 ${
-          featured
-            ? 'bg-gold hover:bg-[#c4943d] text-charcoal'
-            : 'bg-gold/10 hover:bg-gold/20 text-gold border border-gold/20 hover:border-gold/40'
-        }`}
-      >
-        Vieni a pranzo
-        <ArrowRight className="w-3.5 h-3.5" />
-      </Link>
     </div>
   );
 };

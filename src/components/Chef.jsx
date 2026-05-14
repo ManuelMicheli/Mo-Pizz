@@ -2,7 +2,6 @@
 
 import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { ChefHat } from 'lucide-react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { siteContent } from '@/data/copy';
 
@@ -57,18 +56,17 @@ const Chef = () => {
                 <div className="absolute top-0 right-0 w-[55%] h-full bg-charcoal -z-20"></div>
             </div>
 
-            {/* Left side: Photo (Mobile bg-flour, Desktop bg-flour visually via absolute) */}
-            <div className="w-full md:w-[45%] bg-flour flex items-center justify-center py-8 px-6 sm:p-12 lg:p-24 relative overflow-hidden">
-                <div className="chef-photo w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full border-4 border-gold shadow-2xl relative flex items-center justify-center overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-ember to-flame opacity-90 mix-blend-multiply"></div>
+            {/* Left side: Photo */}
+            <div className="w-full md:w-[45%] bg-flour flex items-center justify-center py-8 px-6 sm:p-12 lg:p-16 relative overflow-hidden">
+                <div className="chef-photo w-full max-w-[280px] sm:max-w-[340px] md:max-w-[400px] lg:max-w-[460px] aspect-[4/5] rounded-[1.5rem] border-2 border-gold/60 shadow-2xl relative overflow-hidden">
                     <img
-                        src="/images/chef-cristian.webp"
+                        src="/images/christian-moschiano.jpg"
                         alt={chiSiamo.photoAlt}
                         loading="lazy"
                         decoding="async"
-                        className="absolute inset-0 w-full h-full object-cover filter grayscale sepia-[0.3]"
+                        className="absolute inset-0 w-full h-full object-cover"
+                        style={{ objectPosition: 'center' }}
                     />
-                    <ChefHat size={48} className="text-cream relative z-10 opacity-70" />
                 </div>
             </div>
 

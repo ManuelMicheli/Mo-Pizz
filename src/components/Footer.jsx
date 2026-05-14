@@ -55,9 +55,9 @@ const Footer = () => {
 
                     {/* Brand Col */}
                     <div className="flex flex-col items-center md:items-start gap-3">
-                        <a href="#" className="mb-2 group">
+                        <Link href="/" className="mb-2 group">
                             <img src="/images/logo_mopizz.webp" alt="MO PIZZ — Pizzeria Napoletana a Legnano" width="400" height="389" loading="lazy" decoding="async" className="h-10 sm:h-12 w-auto" />
-                        </a>
+                        </Link>
                         <div className="font-sans text-smoke text-sm uppercase tracking-wide">
                             {footer.subTagline}
                         </div>

@@ -16,10 +16,10 @@ export default {
                 wood: '#6B4226',
             },
             fontFamily: {
-                playfair: ['"CSCaliope"', 'serif'],
-                sans: ['"TestTheFuture"', 'sans-serif'],
-                caveat: ['"Caveat"', 'cursive'],
-                mono: ['"TestTheFutureMono"', 'monospace'],
+                playfair: ['"CSCaliope"', 'Georgia', 'serif'],
+                sans: ['"Satoshi"', 'system-ui', '-apple-system', 'sans-serif'],
+                caveat: ['var(--font-caveat)', 'cursive'],
+                mono: ['var(--font-geist-mono)', 'ui-monospace', 'monospace'],
             },
             borderRadius: {
                 '2rem': '2rem',

@@ -1,4 +1,5 @@
 import './globals.css';
+import { Geist_Mono, Caveat } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import Navbar from '@/components/Navbar';
@@ -7,6 +8,24 @@ import CookieBanner from '@/components/CookieBanner';
 import LenisProvider from '@/components/LenisProvider';
 import NoiseOverlay from '@/components/NoiseOverlay';
 import { schemaData, localBusinessSchema, webSiteSchema } from '@/lib/constants';
+
+// Mono — replaces TestTheFutureMono
+const geistMono = Geist_Mono({
+    subsets: ['latin'],
+    weight: ['400', '500', '700'],
+    variable: '--font-geist-mono',
+    display: 'swap',
+});
+
+// Handwritten accents — already OFL
+const caveat = Caveat({
+    subsets: ['latin'],
+    weight: ['400', '700'],
+    variable: '--font-caveat',
+    display: 'swap',
+});
+
+// Satoshi (Fontshare) loaded via <link> in <head> — free commercial license
 
 export const metadata = {
     metadataBase: new URL('https://www.mopizz.it'),
@@ -62,12 +81,17 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="it">
+        <html lang="it" className={`${geistMono.variable} ${caveat.variable}`}>
             <head>
-                {/* Preload critical fonts (WOFF2) */}
+                {/* Preload CSCaliope display serif */}
                 <link rel="preload" href="/fonts/CSCaliope-Regular_demo-BF699bd7c121dcd.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-                <link rel="preload" href="/fonts/TestTheFuture-Regular-BF6645817a3005a.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-                {/* Hero images preloaded via next/image preload prop */}
+                {/* Satoshi (Fontshare) — free commercial license, body sans */}
+                <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
+                <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
+                <link
+                    rel="stylesheet"
+                    href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900,1,2&display=swap"
+                />
                 {/* Preconnect for iframe origins */}
                 <link rel="preconnect" href="https://www.google.com" />
                 <link rel="preconnect" href="https://mopizz.plateform.app" />
