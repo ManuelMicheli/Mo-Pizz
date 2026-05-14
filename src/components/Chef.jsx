@@ -58,7 +58,7 @@ const Chef = () => {
 
             {/* Left side: Photo */}
             <div className="w-full md:w-[45%] bg-flour flex items-center justify-center py-8 px-6 sm:p-12 lg:p-16 relative overflow-hidden">
-                <div className="chef-photo w-full max-w-[280px] sm:max-w-[340px] md:max-w-[400px] lg:max-w-[460px] aspect-[4/5] rounded-[1.5rem] border-2 border-gold/60 shadow-2xl relative overflow-hidden">
+                <div className="chef-photo w-full max-w-[370px] sm:max-w-[440px] md:max-w-[520px] lg:max-w-[610px] aspect-square rounded-full border-2 border-gold/60 shadow-2xl relative overflow-hidden">
                     <img
                         src="/images/christian-moschiano.jpg"
                         alt={chiSiamo.photoAlt}
