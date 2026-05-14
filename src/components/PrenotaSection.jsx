@@ -60,7 +60,7 @@ const PrenotaSection = () => {
                     <span className="font-caveat text-gold text-2xl sm:text-3xl">
                         Prenotazione Tavolo
                     </span>
-                    <h2 className="font-playfair font-bold text-cream text-4xl sm:text-5xl md:text-6xl mt-3 leading-tight">
+                    <h2 className="font-playfair text-cream text-4xl sm:text-5xl md:text-6xl mt-3 leading-tight">
                         Prenota il Tuo Tavolo
                     </h2>
                     <p className="font-sans text-smoke/80 text-base sm:text-lg mt-4 max-w-lg mx-auto leading-relaxed">

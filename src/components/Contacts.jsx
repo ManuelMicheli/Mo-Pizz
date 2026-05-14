@@ -14,7 +14,7 @@ const Contacts = () => {
                     <div className="font-caveat text-charcoal/80 text-2xl sm:text-3xl mb-4">
                         {contatti.eyebrow}
                     </div>
-                    <h2 className="font-playfair font-bold text-charcoal text-4xl sm:text-5xl md:text-6xl mb-12">
+                    <h2 className="font-playfair text-charcoal text-4xl sm:text-5xl md:text-6xl mb-12">
                         {contatti.headline}
                     </h2>
 

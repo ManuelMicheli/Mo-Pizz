@@ -27,7 +27,7 @@ const FidelityFaq = () => {
                     <span className="font-mono text-charcoal/50 text-xs sm:text-sm tracking-[0.2em] uppercase">
                         {fidelity.faqHeader.eyebrow}
                     </span>
-                    <h2 className="font-playfair font-bold text-charcoal text-[clamp(2rem,5vw,4rem)] leading-tight mt-4">
+                    <h2 className="font-playfair text-charcoal text-[clamp(2rem,5vw,4rem)] leading-tight mt-4">
                         {fidelity.faqHeader.headline}
                     </h2>
                     <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-charcoal/30 to-transparent mx-auto mt-6" />

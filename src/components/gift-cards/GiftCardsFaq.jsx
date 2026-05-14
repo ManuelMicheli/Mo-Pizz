@@ -22,7 +22,7 @@ const GiftCardsFaq = () => {
                     <span className="font-caveat text-gold text-xl sm:text-2xl">
                         {giftCards.faq.eyebrow}
                     </span>
-                    <h2 className="font-playfair font-black text-cream text-[clamp(1.8rem,4vw,3.5rem)] leading-tight mt-3">
+                    <h2 className="font-playfair text-cream text-[clamp(1.8rem,4vw,3.5rem)] leading-tight mt-3">
                         {giftCards.faq.headline}
                     </h2>
                 </div>

@@ -84,7 +84,7 @@ export default function RootLayout({ children }) {
         <html lang="it" className={`${geistMono.variable} ${caveat.variable}`}>
             <head>
                 {/* Preload CSCaliope display serif */}
-                <link rel="preload" href="/fonts/CSCaliope-Regular_demo-BF699bd7c121dcd.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+                <link rel="preload" href="/fonts/CSCaliope-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
                 {/* Satoshi (Fontshare) — free commercial license, body sans */}
                 <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
                 <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />

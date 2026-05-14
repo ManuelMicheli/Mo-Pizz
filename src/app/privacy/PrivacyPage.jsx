@@ -11,7 +11,7 @@ const PrivacyPage = () => {
     return (
         <div className="bg-charcoal text-cream min-h-screen">
             <div className="max-w-3xl mx-auto py-24 sm:py-32 px-4 sm:px-8">
-                <h1 className="font-playfair font-bold text-4xl sm:text-5xl mb-12">
+                <h1 className="font-playfair text-4xl sm:text-5xl mb-12">
                     Privacy Policy
                 </h1>
 

@@ -38,7 +38,7 @@ const GiftCardsCta = () => {
                 <span className="gc-cta-elem font-caveat text-flame text-xl sm:text-2xl">
                     {giftCards.cta.eyebrow}
                 </span>
-                <h2 className="gc-cta-elem font-playfair font-black text-charcoal text-[clamp(1.8rem,5vw,4rem)] leading-tight mt-3 mb-4">
+                <h2 className="gc-cta-elem font-playfair text-charcoal text-[clamp(1.8rem,5vw,4rem)] leading-tight mt-3 mb-4">
                     {giftCards.cta.headline}
                 </h2>
                 <p className="gc-cta-elem font-sans text-smoke text-base sm:text-lg leading-relaxed max-w-xl mx-auto mb-10">

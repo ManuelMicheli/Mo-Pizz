@@ -120,7 +120,7 @@ const Reviews = () => {
                 <div className="font-caveat text-gold text-2xl sm:text-3xl mb-4">
                     {recensioni.eyebrow}
                 </div>
-                <h2 className="font-playfair font-bold text-cream text-4xl sm:text-5xl md:text-6xl text-balance mb-8">
+                <h2 className="font-playfair text-cream text-4xl sm:text-5xl md:text-6xl text-balance mb-8">
                     {recensioni.headline}
                 </h2>
                 <div className="flex flex-col sm:flex-row items-center gap-3 font-sans text-sm">

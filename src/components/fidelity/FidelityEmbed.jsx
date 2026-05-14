@@ -66,7 +66,7 @@ const FidelityEmbed = () => {
                     <span className="font-mono text-flame/60 text-xs sm:text-sm tracking-[0.2em] uppercase">
                         Ci vuole meno di un minuto
                     </span>
-                    <h2 className="font-playfair font-bold text-cream text-[clamp(2rem,5vw,4.5rem)] mt-4 leading-tight">
+                    <h2 className="font-playfair text-cream text-[clamp(2rem,5vw,4.5rem)] mt-4 leading-tight">
                         Iscriviti Ora
                     </h2>
                     <p className="font-sans text-smoke/80 text-base sm:text-lg mt-5 max-w-lg mx-auto leading-relaxed">

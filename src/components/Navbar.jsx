@@ -103,7 +103,7 @@ const Navbar = () => {
                     {isInMenu ? (
                         <>
                             <span className="uppercase font-sans font-bold text-xl sm:text-2xl tracking-tighter text-cream">Mo</span>
-                            <span className="font-playfair font-black italic text-xl sm:text-2xl text-cream">Pizz</span>
+                            <span className="font-playfair italic text-xl sm:text-2xl text-cream">Pizz</span>
                         </>
                     ) : (
                         <img src="/images/logo_mopizz.webp" alt="MO PIZZ — Pizzeria Napoletana Legnano" decoding="async" width="400" height="389" className="h-8 sm:h-9 w-auto" />

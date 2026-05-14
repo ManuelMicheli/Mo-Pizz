@@ -50,7 +50,7 @@ const GiftCardsHero = () => {
                 <div className="gc-hero-elem font-caveat text-gold text-2xl sm:text-3xl mb-2">
                     {giftCards.hero.eyebrow}
                 </div>
-                <h1 className="gc-hero-elem font-playfair font-black text-cream leading-[0.95]">
+                <h1 className="gc-hero-elem font-playfair text-cream leading-[0.95]">
                     <span className="block text-[clamp(2.2rem,7vw,5.5rem)]">{giftCards.hero.headline}</span>
                     <span className="block text-[clamp(2.5rem,8vw,6.5rem)]">{giftCards.hero.headlineEm}</span>
                 </h1>

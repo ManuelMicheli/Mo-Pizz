@@ -61,7 +61,7 @@ const MenuHighlight = () => {
           <span className="font-caveat text-gold text-2xl sm:text-3xl block mb-4">
             {menuCopy.highlightEyebrow}
           </span>
-          <h2 className="font-playfair font-black text-cream text-4xl sm:text-5xl md:text-6xl">
+          <h2 className="font-playfair text-cream text-4xl sm:text-5xl md:text-6xl">
             {menuCopy.highlightHeadline}
           </h2>
         </div>
@@ -84,7 +84,7 @@ const MenuHighlight = () => {
               </div>
 
               {/* Name */}
-              <h3 className="font-playfair font-black text-cream text-2xl sm:text-3xl mb-3 group-hover:text-flame transition-colors duration-300">
+              <h3 className="font-playfair text-cream text-2xl sm:text-3xl mb-3 group-hover:text-flame transition-colors duration-300">
                 {dish.name}
               </h3>
 

@@ -49,7 +49,7 @@ const FidelityHero = () => {
             {/* Content — left aligned */}
             <div className="relative z-10 flex flex-col items-start text-left w-full max-w-2xl">
                 {/* Headline */}
-                <h1 className="fid-hero-elem font-playfair font-black text-cream leading-[0.9] tracking-tight">
+                <h1 className="fid-hero-elem font-playfair text-cream leading-[0.9] tracking-tight">
                     <span className="block text-[clamp(2.5rem,8vw,6.5rem)]">{fidelity.hero.headlinePart1}</span>
                     <span className="block italic text-[clamp(2.8rem,9vw,7.5rem)]">{fidelity.hero.headlinePart2}</span>
                 </h1>
@@ -61,17 +61,17 @@ const FidelityHero = () => {
                 {/* Counter sequence */}
                 <div className="fid-hero-elem flex flex-wrap items-center gap-2.5 sm:gap-3 mt-6">
                     <div className="flex items-center gap-2.5 bg-black/30 border border-white/10 backdrop-blur-md px-5 py-2.5 rounded-full">
-                        <span className="font-playfair font-bold text-gold text-lg sm:text-xl">10€</span>
+                        <span className="font-playfair text-gold text-lg sm:text-xl">10€</span>
                         <span className="font-sans text-smoke text-xs sm:text-sm">spesi</span>
                     </div>
                     <span className="text-gold/60 font-sans text-sm">=</span>
                     <div className="flex items-center gap-2.5 bg-black/30 border border-white/10 backdrop-blur-md px-5 py-2.5 rounded-full">
-                        <span className="font-playfair font-bold text-gold text-lg sm:text-xl">1</span>
+                        <span className="font-playfair text-gold text-lg sm:text-xl">1</span>
                         <span className="font-sans text-smoke text-xs sm:text-sm">punto</span>
                     </div>
                     <span className="text-gold/60 font-sans text-sm hidden sm:inline">&rarr;</span>
                     <div className="flex items-center gap-2.5 bg-black/30 border border-flame/20 backdrop-blur-md px-5 py-2.5 rounded-full">
-                        <span className="font-playfair font-bold text-flame text-lg sm:text-xl">10 punti</span>
+                        <span className="font-playfair text-flame text-lg sm:text-xl">10 punti</span>
                         <span className="font-sans text-cream/70 text-xs sm:text-sm">= 10% sconto</span>
                     </div>
                 </div>

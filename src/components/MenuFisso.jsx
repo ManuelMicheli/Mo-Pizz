@@ -49,13 +49,13 @@ const MenuFissoCard = ({ formula }) => {
       )}
 
       <div className="relative z-[1] flex flex-col flex-1">
-        <h3 className={`font-playfair font-black text-xl sm:text-2xl leading-tight mt-1 ${featured ? 'text-cream' : 'text-cream/90'}`}>
+        <h3 className={`font-playfair text-xl sm:text-2xl leading-tight mt-1 ${featured ? 'text-cream' : 'text-cream/90'}`}>
           {nome}
         </h3>
 
         <div className="flex items-baseline gap-0.5 mt-4 mb-5">
           <span className="font-playfair text-lg text-gold">€</span>
-          <span className="font-playfair font-black text-5xl leading-none text-cream">
+          <span className="font-playfair text-5xl leading-none text-cream">
             {prezzo}
           </span>
           <span className="font-sans text-xs ml-0.5 text-gold/40">,00</span>
@@ -125,20 +125,28 @@ const MenuFisso = () => {
   const mobileOrder = menuFissoFormule.slice().sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
 
   return (
-    <section ref={sectionRef} className="relative z-10 bg-charcoal py-12 sm:py-16 lg:py-20 overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative z-10 py-12 sm:py-16 lg:py-20 overflow-hidden"
+      style={{
+        backgroundImage: "url('/images/services-grid-bg.webp')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
       {/* Diagonal lines pattern */}
-      <div className="absolute inset-0 bg-lines-pattern bg-[length:40px_40px] opacity-[0.03] pointer-events-none" />
+      <div className="absolute inset-0 bg-lines-pattern bg-[length:40px_40px] opacity-[0.04] pointer-events-none" />
 
       {/* Radial gradient glow */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 60% 50% at 50% 40%, rgba(212,168,83,0.04) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 60% 50% at 50% 40%, rgba(212,168,83,0.06) 0%, transparent 70%)',
         }}
       />
 
       {/* Film grain */}
-      <div className="absolute inset-0 grain-texture opacity-[0.04]" />
+      <div className="absolute inset-0 grain-texture opacity-[0.04] pointer-events-none" />
 
       {/* Header */}
       <div className="relative max-w-[1000px] mx-auto px-4 sm:px-8">
@@ -146,7 +154,7 @@ const MenuFisso = () => {
           <span className="inline-block bg-gold/15 text-gold font-mono font-bold text-xs tracking-wider uppercase px-4 py-1.5 rounded-full mb-4 border border-gold/20">
             {menuFisso.badgePrezzo}
           </span>
-          <h2 className="font-playfair font-black text-cream text-[clamp(1.6rem,4vw,2.8rem)] leading-[0.95] mb-2">
+          <h2 className="font-playfair text-cream text-[clamp(1.6rem,4vw,2.8rem)] leading-[0.95] mb-2">
             {menuFisso.headline}{' '}
             <span className="italic text-gold">{menuFisso.headlineEm}</span>
           </h2>

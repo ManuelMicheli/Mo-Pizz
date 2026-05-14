@@ -35,7 +35,7 @@ const OrdCtaFinale = () => {
             <div className="absolute inset-0 bg-repeat bg-[length:40px_40px] bg-lines-pattern opacity-[0.08]" />
 
             <div className="relative max-w-[1400px] mx-auto text-center flex flex-col items-center gap-8 sm:gap-10">
-                <h2 className="cta-finale-elem font-playfair font-bold text-cream text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
+                <h2 className="cta-finale-elem font-playfair text-cream text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
                     {ordina.ctaFinale.headline}
                 </h2>
                 <p className="cta-finale-elem font-sans text-cream/80 text-lg sm:text-xl md:text-2xl max-w-2xl leading-relaxed">

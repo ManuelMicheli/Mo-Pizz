@@ -66,7 +66,7 @@ const GiftCardsHowItWorks = () => {
                     <span className="gc-step-header font-mono text-xs uppercase tracking-[0.3em] text-flame">
                         {giftCards.howItWorks.eyebrow}
                     </span>
-                    <h2 className="gc-step-header font-playfair font-black text-cream text-[clamp(2rem,5vw,4rem)] leading-tight mt-4">
+                    <h2 className="gc-step-header font-playfair text-cream text-[clamp(2rem,5vw,4rem)] leading-tight mt-4">
                         {giftCards.howItWorks.headline}
                     </h2>
                     <div className="gc-step-header w-16 h-[2px] bg-flame mx-auto mt-6" />
@@ -79,13 +79,13 @@ const GiftCardsHowItWorks = () => {
                         <div key={i} className="gc-step relative z-10 flex flex-col items-center text-center px-4">
                             {/* Large number */}
                             <div className="mb-8">
-                                <span className="font-playfair font-black text-[5rem] leading-none text-flame select-none">
+                                <span className="font-playfair text-[5rem] leading-none text-flame select-none">
                                     {step.number}
                                 </span>
                             </div>
 
                             {/* Title */}
-                            <h3 className="font-playfair font-bold text-cream text-xl sm:text-2xl mb-3">
+                            <h3 className="font-playfair text-cream text-xl sm:text-2xl mb-3">
                                 {step.title}
                             </h3>
 
@@ -105,14 +105,14 @@ const GiftCardsHowItWorks = () => {
                             <div key={i} className="gc-step relative z-10 flex items-start gap-6">
                                 {/* Number + dot */}
                                 <div className="flex flex-col items-center flex-shrink-0 w-[3.3rem]">
-                                    <span className="font-playfair font-black text-4xl leading-none text-flame select-none">
+                                    <span className="font-playfair text-4xl leading-none text-flame select-none">
                                         {step.number}
                                     </span>
                                 </div>
 
                                 {/* Content */}
                                 <div className="pt-0.5">
-                                    <h3 className="font-playfair font-bold text-cream text-xl mb-2">
+                                    <h3 className="font-playfair text-cream text-xl mb-2">
                                         {step.title}
                                     </h3>
                                     <p className="font-sans text-smoke text-sm leading-relaxed">

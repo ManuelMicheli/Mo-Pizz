@@ -54,7 +54,7 @@ const Hero = () => {
                 <div className="hero-elem font-caveat text-gold text-xl sm:text-2xl mb-1">
                     {hero.eyebrow}
                 </div>
-                <h1 className="hero-elem font-playfair font-black text-cream text-[clamp(2rem,6vw,5rem)] leading-[0.95] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
+                <h1 className="hero-elem font-playfair text-cream text-[clamp(2rem,6vw,5rem)] leading-[0.95] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
                     <span className="sr-only">{hero.h1Sr}</span>
                     <span aria-hidden="true">{hero.headline} <span className="italic">{hero.headlineEm}</span></span>
                 </h1>

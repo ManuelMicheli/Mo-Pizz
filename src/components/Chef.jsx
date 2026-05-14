@@ -76,10 +76,10 @@ const Chef = () => {
                     {chiSiamo.eyebrow}
                 </div>
 
-                <h2 className="chef-text font-playfair font-black text-cream text-[clamp(2.5rem,5vw,5rem)] leading-none mb-1 -ml-1">
+                <h2 className="chef-text font-playfair text-cream text-[clamp(2.5rem,5vw,5rem)] leading-none mb-1 -ml-1">
                     {chiSiamo.headline}
                 </h2>
-                <h2 className="chef-text font-playfair font-black italic text-flame text-[clamp(2.5rem,5vw,5rem)] leading-none mb-4 -ml-1">
+                <h2 className="chef-text font-playfair italic text-flame text-[clamp(2.5rem,5vw,5rem)] leading-none mb-4 -ml-1">
                     {chiSiamo.headlineEm}
                 </h2>
 

@@ -51,10 +51,10 @@ const OrdHero = () => {
                 </div>
 
                 <h1 className="ord-hero-elem flex flex-col -ml-1">
-                    <span className="font-playfair font-black text-cream text-[clamp(2.5rem,8vw,7rem)] leading-[0.9]">
+                    <span className="font-playfair text-cream text-[clamp(2.5rem,8vw,7rem)] leading-[0.9]">
                         {ordina.hero.headline}
                     </span>
-                    <span className="font-playfair font-black italic text-flame text-[clamp(2.5rem,9vw,8rem)] leading-[1]">
+                    <span className="font-playfair italic text-flame text-[clamp(2.5rem,9vw,8rem)] leading-[1]">
                         {ordina.hero.headlineEm}
                     </span>
                 </h1>

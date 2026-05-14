@@ -106,7 +106,7 @@ const PanelContent = ({ category, handleDishHover }) => {
                   onMouseLeave={() => handleDishHover(null)}
                 >
                   <div className="flex-1 mr-4">
-                    <span className="font-playfair font-bold text-cream text-lg sm:text-xl group-hover:text-flame transition-colors duration-300">
+                    <span className="font-playfair text-cream text-lg sm:text-xl group-hover:text-flame transition-colors duration-300">
                       {item.name}
                     </span>
                     <span className="block font-sans text-smoke text-sm italic mt-0.5 leading-relaxed">
@@ -439,7 +439,7 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
                   </div>
                   {/* Category title overlay */}
                   <div className="absolute bottom-12 left-5 right-5 z-10">
-                    <h3 className="font-playfair font-black text-cream text-3xl leading-none drop-shadow-lg">
+                    <h3 className="font-playfair text-cream text-3xl leading-none drop-shadow-lg">
                       {category.title}
                     </h3>
                   </div>
@@ -499,7 +499,7 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
                           className="flex items-baseline justify-between py-3 border-b border-white/5"
                         >
                           <div className="flex-1 mr-4">
-                            <span className="font-playfair font-bold text-cream text-base">
+                            <span className="font-playfair text-cream text-base">
                               {item.name}
                             </span>
                             <span className="block font-sans text-smoke text-xs italic mt-0.5 leading-relaxed">
@@ -623,7 +623,7 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
 
                 {/* Category title overlay */}
                 <div className="relative z-10 p-12 pb-24">
-                  <h3 className="font-playfair font-black text-cream text-[clamp(2rem,4vw,5rem)] leading-none drop-shadow-lg">
+                  <h3 className="font-playfair text-cream text-[clamp(2rem,4vw,5rem)] leading-none drop-shadow-lg">
                     {category.title}
                   </h3>
                   <p className="font-sans text-cream/60 text-sm sm:text-base mt-3 max-w-xs leading-relaxed">

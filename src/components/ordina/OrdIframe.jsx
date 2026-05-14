@@ -33,7 +33,7 @@ const OrdIframe = () => {
             <div className="max-w-[1400px] mx-auto">
                 <div className="text-center mb-12 sm:mb-16 ord-iframe-heading">
                     <span className="font-caveat text-gold text-2xl sm:text-3xl">Il nostro menu</span>
-                    <h2 className="font-playfair font-bold text-cream text-4xl sm:text-5xl md:text-6xl lg:text-7xl mt-3">
+                    <h2 className="font-playfair text-cream text-4xl sm:text-5xl md:text-6xl lg:text-7xl mt-3">
                         Ordina Online
                     </h2>
                 </div>

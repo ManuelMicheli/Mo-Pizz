@@ -86,7 +86,7 @@ const GiftCardsCards = () => {
                         <span className="inline-flex items-center rounded-full border border-charcoal/15 px-3 py-1 font-mono text-xs uppercase tracking-wider text-charcoal/60">
                             {giftCards.cards.headerBadge}
                         </span>
-                        <h2 className="max-w-2xl font-playfair font-black text-charcoal text-[clamp(1.8rem,4vw,3.5rem)] leading-tight">
+                        <h2 className="max-w-2xl font-playfair text-charcoal text-[clamp(1.8rem,4vw,3.5rem)] leading-tight">
                             {giftCards.cards.headerTitle}
                         </h2>
                         <p className="font-sans text-smoke text-base sm:text-lg">
@@ -123,7 +123,7 @@ const GiftCardsCards = () => {
                                     )}>
                                         {card.badge}
                                     </span>
-                                    <h3 className="font-playfair font-black text-cream text-2xl sm:text-3xl leading-tight">
+                                    <h3 className="font-playfair text-cream text-2xl sm:text-3xl leading-tight">
                                         {card.title}
                                     </h3>
                                     <div className={cn(

@@ -111,7 +111,7 @@ const CardItem = memo(({ card }) => {
 
                 {/* Bottom: Text */}
                 <div className="flex flex-col gap-2 mt-auto">
-                    <h3 className={`font-playfair font-black text-xl sm:text-2xl leading-tight ${isPlaceholder ? 'text-cream/30' : 'text-cream'}`}>
+                    <h3 className={`font-playfair text-xl sm:text-2xl leading-tight ${isPlaceholder ? 'text-cream/30' : 'text-cream'}`}>
                         {card.title}
                     </h3>
                     <p className={`font-sans text-sm leading-relaxed max-w-xs ${isPlaceholder ? 'text-smoke/30' : hasBg ? 'text-cream/80' : 'text-smoke'}`}>
@@ -137,10 +137,11 @@ const CardItem = memo(({ card }) => {
     );
 });
 
-const ServicesGrid = () => {
+const ServicesGrid = ({ hideHeader = false }) => {
     const sectionRef = useRef(null);
 
     useLayoutEffect(() => {
+        if (hideHeader) return; // Drawer controls its own card entrance via CSS
         const ctx = gsap.context(() => {
             gsap.from('.services-header', {
                 y: 24, opacity: 0, duration: 1.1, ease: 'power3.out',
@@ -178,37 +179,43 @@ const ServicesGrid = () => {
         }, sectionRef);
 
         return () => ctx.revert();
-    }, []);
+    }, [hideHeader]);
 
     return (
-        <section ref={sectionRef} className="relative z-10">
+        <section ref={sectionRef} className={`relative z-10 ${hideHeader ? 'h-full flex flex-col' : ''}`}>
             {/* Header — sfondo bianco, scritte arancioni */}
-            <div className="bg-cream py-14 sm:py-20 lg:pt-32 lg:pb-8 px-4 sm:px-8 md:px-12">
-                <div className="services-header flex flex-col gap-4 items-center text-center">
-                    <span className="font-mono text-charcoal text-sm tracking-widest uppercase">
-                        {services.eyebrow}
-                    </span>
-                    <h2 className="font-playfair font-black text-charcoal text-[clamp(1.8rem,4vw,3.5rem)] leading-[0.95] max-w-xl">
-                        {services.headline}<br />
-                        <span className="italic">{services.headlineEm}</span> {services.headlineSuffix}
-                    </h2>
-                    <p className="font-sans text-charcoal/70 text-base max-w-lg leading-relaxed">
-                        {services.subtext}
-                    </p>
+            {!hideHeader && (
+                <div className="bg-cream py-14 sm:py-20 lg:pt-32 lg:pb-8 px-4 sm:px-8 md:px-12">
+                    <div className="services-header flex flex-col gap-4 items-center text-center">
+                        <span className="font-mono text-charcoal text-sm tracking-widest uppercase">
+                            {services.eyebrow}
+                        </span>
+                        <h2 className="font-playfair text-charcoal text-[clamp(1.8rem,4vw,3.5rem)] leading-[0.95] max-w-xl">
+                            {services.headline}<br />
+                            <span className="italic">{services.headlineEm}</span> {services.headlineSuffix}
+                        </h2>
+                        <p className="font-sans text-charcoal/70 text-base max-w-lg leading-relaxed">
+                            {services.subtext}
+                        </p>
+                    </div>
                 </div>
-            </div>
+            )}
 
             {/* Bento Grid — sfondo arancione */}
             <div
-                className="services-grid relative flex flex-col gap-3 sm:gap-4 px-3 sm:px-4 pb-28 lg:pb-40 pt-8 lg:pt-12 overflow-hidden"
+                className={`services-grid relative flex flex-col gap-3 sm:gap-4 px-3 sm:px-4 overflow-hidden ${
+                    hideHeader ? 'flex-1 pt-16 sm:pt-20 pb-6 sm:pb-8' : 'pb-28 lg:pb-40 pt-8 lg:pt-12'
+                }`}
                 style={{
                     backgroundImage: 'url(/images/services-grid-bg.webp)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                 }}
             >
-{/* Sfumatura in basso: → charcoal */}
-                <div className="absolute bottom-0 left-0 right-0 h-32 lg:h-48 bg-gradient-to-b from-transparent to-charcoal pointer-events-none z-[1]" />
+                {/* Sfumatura in basso: → charcoal — solo home */}
+                {!hideHeader && (
+                    <div className="absolute bottom-0 left-0 right-0 h-32 lg:h-48 bg-gradient-to-b from-transparent to-charcoal pointer-events-none z-[1]" />
+                )}
                 {/* Row 1: large (2/3) + small (1/3) */}
                 <div className="relative z-[2] grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-4 auto-rows-[1fr]">
                     <div className="lg:col-span-2 svc-row1-left">

@@ -113,6 +113,11 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
 
       {/* Film grain — uses global noise overlay from index.css */}
 
+      {/* MENU title — centered between images */}
+      <h2 className="menu-hero-cta absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 font-playfair text-cream text-[clamp(3.5rem,12vw,9rem)] leading-none tracking-tight pointer-events-none select-none">
+        MENU
+      </h2>
+
       {/* CTA — bottom center */}
       <div className="menu-hero-cta absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-3">
         <button

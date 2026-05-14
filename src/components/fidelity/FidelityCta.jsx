@@ -61,7 +61,7 @@ const FidelityCta = () => {
             />
 
             <div className="relative w-full max-w-[1200px] mx-auto px-6 sm:px-12 md:px-16 lg:px-24 text-center flex flex-col items-center gap-10 sm:gap-12">
-                <h2 className="fid-cta-elem font-playfair font-bold text-cream text-[clamp(2rem,5vw,4.5rem)] leading-tight">
+                <h2 className="fid-cta-elem font-playfair text-cream text-[clamp(2rem,5vw,4.5rem)] leading-tight">
                     {fidelity.cta.headline}
                     <br />
                     <span className="italic"

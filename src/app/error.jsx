@@ -4,7 +4,7 @@ export default function Error({ reset }) {
   return (
     <div className="min-h-screen bg-charcoal flex items-center justify-center px-6">
       <div className="text-center max-w-md">
-        <h2 className="font-playfair font-bold text-cream text-3xl sm:text-4xl mb-4">
+        <h2 className="font-playfair text-cream text-3xl sm:text-4xl mb-4">
           Qualcosa è andato storto
         </h2>
         <p className="font-sans text-smoke text-base mb-8 leading-relaxed">

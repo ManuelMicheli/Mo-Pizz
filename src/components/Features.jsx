@@ -250,10 +250,10 @@ const Features = () => {
                             <span className="font-caveat text-gold text-lg sm:text-xl md:text-2xl mb-3">
                                 {chiSiamoVideo.eyebrow}
                             </span>
-                            <h2 className="font-playfair font-black text-cream text-[clamp(1.6rem,4vw,3.5rem)] leading-[0.95] mb-1">
+                            <h2 className="font-playfair text-cream text-[clamp(1.6rem,4vw,3.5rem)] leading-[0.95] mb-1">
                                 {chiSiamoVideo.headline}
                             </h2>
-                            <h2 className="font-playfair font-black italic text-flame text-[clamp(1.8rem,5vw,4.5rem)] leading-[0.95] mb-4">
+                            <h2 className="font-playfair italic text-flame text-[clamp(1.8rem,5vw,4.5rem)] leading-[0.95] mb-4">
                                 {chiSiamoVideo.headlineEm}
                             </h2>
                             <p className="font-sans text-smoke text-[clamp(0.75rem,1.1vw,1rem)] max-w-sm leading-relaxed">
