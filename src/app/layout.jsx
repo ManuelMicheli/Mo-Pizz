@@ -1,5 +1,4 @@
 import './globals.css';
-import { Playfair_Display, Inter, JetBrains_Mono, Caveat } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import Navbar from '@/components/Navbar';
@@ -8,40 +7,6 @@ import CookieBanner from '@/components/CookieBanner';
 import LenisProvider from '@/components/LenisProvider';
 import NoiseOverlay from '@/components/NoiseOverlay';
 import { schemaData, localBusinessSchema, webSiteSchema } from '@/lib/constants';
-
-// Display serif — replaces CSCaliope (Didone-style)
-const playfair = Playfair_Display({
-    subsets: ['latin'],
-    weight: ['400', '700', '900'],
-    style: ['normal', 'italic'],
-    variable: '--font-playfair',
-    display: 'swap',
-});
-
-// Body / UI sans — replaces TestTheFuture (geometric grotesk)
-const inter = Inter({
-    subsets: ['latin'],
-    weight: ['400', '500', '600', '700', '900'],
-    style: ['normal', 'italic'],
-    variable: '--font-sans',
-    display: 'swap',
-});
-
-// Mono — replaces TestTheFutureMono
-const jetbrainsMono = JetBrains_Mono({
-    subsets: ['latin'],
-    weight: ['400', '700'],
-    variable: '--font-mono',
-    display: 'swap',
-});
-
-// Caveat — handwritten accents
-const caveat = Caveat({
-    subsets: ['latin'],
-    weight: ['400', '700'],
-    variable: '--font-caveat',
-    display: 'swap',
-});
 
 export const metadata = {
     metadataBase: new URL('https://www.mopizz.it'),
@@ -97,9 +62,12 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="it" className={`${playfair.variable} ${inter.variable} ${jetbrainsMono.variable} ${caveat.variable}`}>
+        <html lang="it">
             <head>
-                {/* Hero images preloaded via next/image priority prop */}
+                {/* Preload critical fonts (WOFF2) */}
+                <link rel="preload" href="/fonts/CSCaliope-Regular_demo-BF699bd7c121dcd.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+                <link rel="preload" href="/fonts/TestTheFuture-Regular-BF6645817a3005a.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+                {/* Hero images preloaded via next/image preload prop */}
                 {/* Preconnect for iframe origins */}
                 <link rel="preconnect" href="https://www.google.com" />
                 <link rel="preconnect" href="https://mopizz.plateform.app" />
