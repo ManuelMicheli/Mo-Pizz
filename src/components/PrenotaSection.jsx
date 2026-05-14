@@ -9,37 +9,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 const PrenotaSection = () => {
     const sectionRef = useRef(null);
-    const cardRef = useRef(null);
     const [iframeLoaded, setIframeLoaded] = useState(false);
-    const [iframeVisible, setIframeVisible] = useState(false);
-
-    // Lazy-mount iframe only when card enters viewport (prevents iframe
-    // autofocus from scroll-jacking the page to #prenota on load).
-    useEffect(() => {
-        if (typeof window === 'undefined' || !cardRef.current) return;
-        if (!('IntersectionObserver' in window)) {
-            setIframeVisible(true);
-            return;
-        }
-        const io = new IntersectionObserver(
-            (entries) => {
-                if (entries.some((e) => e.isIntersecting)) {
-                    setIframeVisible(true);
-                    io.disconnect();
-                }
-            },
-            { rootMargin: '200px 0px' }
-        );
-        io.observe(cardRef.current);
-        return () => io.disconnect();
-    }, []);
 
     // Fallback: hide spinner after 4s even if onLoad doesn't fire
     useEffect(() => {
-        if (!iframeVisible) return;
         const timer = setTimeout(() => setIframeLoaded(true), 4000);
         return () => clearTimeout(timer);
-    }, [iframeVisible]);
+    }, []);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -93,12 +69,12 @@ const PrenotaSection = () => {
                 </div>
 
                 {RESERVE_MODE === 'iframe' ? (
-                    <div ref={cardRef} className="prenota-card relative w-full max-w-7xl mx-auto rounded-[1.5rem] sm:rounded-[2.5rem] border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden shadow-2xl shadow-black/30">
+                    <div className="prenota-card relative w-full max-w-7xl mx-auto rounded-[1.5rem] sm:rounded-[2.5rem] border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden shadow-2xl shadow-black/30">
                         {/* Top accent */}
                         <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-flame to-transparent" />
 
                         <div className="relative w-full overflow-hidden min-h-[400px] sm:min-h-[480px] md:min-h-[560px]">
-                            {(!iframeLoaded || !iframeVisible) && (
+                            {!iframeLoaded && (
                                 <div className="absolute inset-0 flex items-center justify-center bg-charcoal">
                                     <div className="flex flex-col items-center gap-4">
                                         <div className="w-10 h-10 border-2 border-flame border-t-transparent rounded-full animate-spin" />
@@ -106,19 +82,16 @@ const PrenotaSection = () => {
                                     </div>
                                 </div>
                             )}
-                            {iframeVisible && (
-                                <iframe
-                                    src={PLATEFORM_RESERVE_URL}
-                                    className="w-full border-0 h-[480px] sm:h-[560px] md:h-[640px]"
-                                    style={{ marginTop: '-80px' }}
-                                    sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
-                                    allow="clipboard-write; payment; web-share"
-                                    referrerPolicy="strict-origin-when-cross-origin"
-                                    loading="lazy"
-                                    onLoad={() => setIframeLoaded(true)}
-                                    title="Prenota un tavolo — Mo Pizz"
-                                />
-                            )}
+                            <iframe
+                                src={PLATEFORM_RESERVE_URL}
+                                className="w-full border-0 h-[480px] sm:h-[560px] md:h-[640px]"
+                                style={{ marginTop: '-80px' }}
+                                sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+                                allow="clipboard-write; payment; web-share"
+                                referrerPolicy="strict-origin-when-cross-origin"
+                                onLoad={() => setIframeLoaded(true)}
+                                title="Prenota un tavolo — Mo Pizz"
+                            />
                         </div>
 
                         {/* Bottom bar */}
