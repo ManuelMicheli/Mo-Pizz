@@ -62,7 +62,8 @@ const Chef = () => {
                     <img
                         src="/images/christian-moschiano.jpg"
                         alt={chiSiamo.photoAlt}
-                        loading="lazy"
+                        loading="eager"
+                        fetchPriority="high"
                         decoding="async"
                         className="absolute inset-0 w-full h-full object-cover"
                         style={{ objectPosition: 'center' }}

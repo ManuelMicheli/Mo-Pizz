@@ -9,7 +9,8 @@ const Gallery = () => {
                     alt="Sala ristorante MO PIZZ, pizzeria napoletana a Legnano — atmosfera calda e accogliente"
                     width="1920"
                     height="1080"
-                    loading="lazy"
+                    loading="eager"
+                    fetchPriority="high"
                     decoding="async"
                     className="w-full h-full object-cover"
                 />

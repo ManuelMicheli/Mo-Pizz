@@ -73,7 +73,7 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
           <img
             src="/images/menu-intro-left.webp"
             alt=""
-            loading="lazy"
+            loading="eager"
             decoding="async"
             className="w-full h-full object-cover"
           />
@@ -86,7 +86,7 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
           <img
             src="/images/menu-intro-right.webp"
             alt=""
-            loading="lazy"
+            loading="eager"
             decoding="async"
             className="w-full h-full object-cover"
           />
