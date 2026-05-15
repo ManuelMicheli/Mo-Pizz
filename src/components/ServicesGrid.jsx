@@ -7,7 +7,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Gift, ShoppingBag, CalendarHeart, Star, ArrowRight } from 'lucide-react';
 import { siteContent } from '@/data/copy';
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 const { services } = siteContent;
 

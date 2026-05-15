@@ -5,7 +5,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ExternalLink, CalendarCheck, Phone } from 'lucide-react';
 import { PLATEFORM_RESERVE_URL, RESERVE_MODE } from '@/lib/constants';
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 const PrenotaSection = () => {
     const sectionRef = useRef(null);

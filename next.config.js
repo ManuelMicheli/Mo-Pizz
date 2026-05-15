@@ -11,7 +11,7 @@ const nextConfig = {
     minimumCacheTTL: 2678400, // 31 days
   },
 
-  reactCompiler: true,
+  reactCompiler: false,
   reactStrictMode: true,
   poweredByHeader: false,
 
