@@ -137,7 +137,12 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
   const hoverImgRef = useRef(null);
   const imgXTo = useRef(null);
   const imgYTo = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
+  // Sync init prevents desktop→mobile JSX swap after mount, which used to
+  // leave GSAP pin-spacers orphaned in the DOM and crash React with
+  // NotFoundError on removeChild during the subtree teardown.
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' && (window.innerWidth < 768 || 'ontouchstart' in window)
+  );
   const scrollTriggerRef = useRef(null);
   const [mobileActiveCategory, setMobileActiveCategory] = useState(0);
   const [tabBarVisible, setTabBarVisible] = useState(false);
@@ -159,7 +164,7 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
 
   // Detect mobile — debounced resize so we don't fire 60×/sec during drag
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
+    const check = () => setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
     check();
     let t;
     const onResize = () => {

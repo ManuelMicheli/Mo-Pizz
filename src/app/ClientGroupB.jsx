@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 
 const Chef = dynamic(() => import('@/components/Chef'));
 const Staff = dynamic(() => import('@/components/Staff'));
-const Features = dynamic(() => import('@/components/Features'));
+const Features = dynamic(() => import('@/components/Features'), { ssr: false });
 
 export default function ClientGroupB() {
     return (

@@ -19,7 +19,9 @@ const Features = () => {
     const instagramRef = useRef(null);
 
     const videoWrapRef = useRef(null);
-    const [isMobile, setIsMobile] = useState(false);
+    const [isMobile, setIsMobile] = useState(() =>
+        typeof window !== 'undefined' && (window.innerWidth < 768 || 'ontouchstart' in window)
+    );
 
     // Lazy-load video when section nears viewport
     useEffect(() => {
@@ -43,7 +45,7 @@ const Features = () => {
 
     // Mobile detection — debounced resize
     useEffect(() => {
-        const check = () => setIsMobile(window.innerWidth < 768);
+        const check = () => setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
         check();
         let t;
         const onResize = () => {
