@@ -129,7 +129,7 @@ const MenuFisso = () => {
       ref={sectionRef}
       className="relative z-10 py-12 sm:py-16 lg:py-20 overflow-hidden"
       style={{
-        backgroundImage: "url('/images/menu-fisso-bg.jpg')",
+        backgroundImage: "url('/images/menu-fisso-bg.jpg?v=2')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
