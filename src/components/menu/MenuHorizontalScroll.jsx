@@ -460,31 +460,32 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
                   <p className="font-sans text-smoke text-sm">{category.subtitle}</p>
                 </div>
 
-                {/* Mini sub-tabs — sticky so they stay visible while scrolling long sections */}
+                {/* Inline sub-tabs — primary copy lives inside the card so the
+                    sticky top bar (rendered once for the whole menu, below) can
+                    mirror the same options without fighting GSAP's pinned
+                    ancestors, which break CSS sticky here. */}
                 {category.sections.length > 1 && (
-                  <div className="sticky top-16 z-20 -mx-5 px-5 pt-3 pb-3 bg-charcoal/95 backdrop-blur-md border-b border-white/5 mb-6">
-                    <div className="flex gap-2 overflow-x-auto scrollbar-hide -mx-1 px-1">
-                      {category.sections.map((sec, sIdx) => (
-                        <button
-                          key={sIdx}
-                          onClick={() => {
-                            setActiveSections(prev => ({ ...prev, [catIdx]: sIdx }));
-                            const el = mobileSectionRefsMap.current[`${catIdx}-${sIdx}`];
-                            if (el) {
-                              const y = el.getBoundingClientRect().top + window.scrollY - 80;
-                              window.scrollTo({ top: y, behavior: 'smooth' });
-                            }
-                          }}
-                          className={`flex-shrink-0 font-sans text-xs tracking-wide py-2 px-4 rounded-full border transition-all duration-300 ${
-                            (activeSections[catIdx] || 0) === sIdx
-                              ? 'bg-flame/15 border-flame/40 text-flame font-bold'
-                              : 'bg-white/5 border-white/10 text-smoke'
-                          }`}
-                        >
-                          {sec.heading}
-                        </button>
-                      ))}
-                    </div>
+                  <div className="flex gap-2 mb-8 overflow-x-auto scrollbar-hide -mx-1 px-1">
+                    {category.sections.map((sec, sIdx) => (
+                      <button
+                        key={sIdx}
+                        onClick={() => {
+                          setActiveSections(prev => ({ ...prev, [catIdx]: sIdx }));
+                          const el = mobileSectionRefsMap.current[`${catIdx}-${sIdx}`];
+                          if (el) {
+                            const y = el.getBoundingClientRect().top + window.scrollY - 80;
+                            window.scrollTo({ top: y, behavior: 'smooth' });
+                          }
+                        }}
+                        className={`flex-shrink-0 font-sans text-xs tracking-wide py-2 px-4 rounded-full border transition-all duration-300 ${
+                          (activeSections[catIdx] || 0) === sIdx
+                            ? 'bg-flame/15 border-flame/40 text-flame font-bold'
+                            : 'bg-white/5 border-white/10 text-smoke'
+                        }`}
+                      >
+                        {sec.heading}
+                      </button>
+                    ))}
                   </div>
                 )}
 
@@ -526,15 +527,57 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
           ))}
         </section>
 
+        {/* Fixed top sub-section nav — mirrors the inline pills so users always
+            see (and can jump to) sub-sections of the category they're reading.
+            Rendered as siblings to the mobile section so they're not affected
+            by GSAP's pin on individual categories. */}
+        {(() => {
+          const currentCat = menuCategories[mobileActiveCategory];
+          if (!currentCat || currentCat.sections.length < 2) return null;
+          const currentSub = activeSections[mobileActiveCategory] || 0;
+          return (
+            <div
+              className={`fixed top-16 left-0 right-0 z-30 bg-charcoal/95 backdrop-blur-md border-b border-white/10 px-4 py-2.5 transition-all duration-300 ${
+                tabBarVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'
+              }`}
+            >
+              <div className="flex gap-2 overflow-x-auto scrollbar-hide max-w-md mx-auto">
+                {currentCat.sections.map((sec, sIdx) => (
+                  <button
+                    key={sIdx}
+                    type="button"
+                    onClick={() => {
+                      setActiveSections(prev => ({ ...prev, [mobileActiveCategory]: sIdx }));
+                      const el = mobileSectionRefsMap.current[`${mobileActiveCategory}-${sIdx}`];
+                      if (el) {
+                        const y = el.getBoundingClientRect().top + window.scrollY - 110;
+                        window.scrollTo({ top: y, behavior: 'smooth' });
+                      }
+                    }}
+                    className={`flex-shrink-0 font-sans text-xs tracking-wide py-1.5 px-3.5 rounded-full border transition-all duration-300 ${
+                      currentSub === sIdx
+                        ? 'bg-flame/20 border-flame/50 text-flame font-bold'
+                        : 'bg-white/5 border-white/10 text-smoke'
+                    }`}
+                  >
+                    {sec.heading}
+                  </button>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
+
         <MobileMenuTabBar
           menuCategories={menuCategories}
           activeIndex={mobileActiveCategory}
           onTabPress={(i) => {
             const el = categoryRefs.current[i];
-            if (el) {
-              const y = el.getBoundingClientRect().top + window.scrollY - 80;
-              window.scrollTo({ top: y, behavior: 'smooth' });
-            }
+            if (!el) return;
+            // offsetTop is stable even when GSAP pins ancestor categories,
+            // unlike getBoundingClientRect which reflects fixed positioning.
+            const y = el.offsetTop - 80;
+            window.scrollTo({ top: y, behavior: 'smooth' });
           }}
           visible={tabBarVisible}
         />
