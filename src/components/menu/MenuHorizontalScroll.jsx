@@ -460,29 +460,31 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
                   <p className="font-sans text-smoke text-sm">{category.subtitle}</p>
                 </div>
 
-                {/* Mini sub-tabs for multi-section categories */}
+                {/* Mini sub-tabs — sticky so they stay visible while scrolling long sections */}
                 {category.sections.length > 1 && (
-                  <div className="flex gap-2 mb-8 overflow-x-auto scrollbar-hide -mx-1 px-1">
-                    {category.sections.map((sec, sIdx) => (
-                      <button
-                        key={sIdx}
-                        onClick={() => {
-                          setActiveSections(prev => ({ ...prev, [catIdx]: sIdx }));
-                          const el = mobileSectionRefsMap.current[`${catIdx}-${sIdx}`];
-                          if (el) {
-                            const y = el.getBoundingClientRect().top + window.scrollY - 20;
-                            window.scrollTo({ top: y, behavior: 'smooth' });
-                          }
-                        }}
-                        className={`flex-shrink-0 font-sans text-xs tracking-wide py-2 px-4 rounded-full border transition-all duration-300 ${
-                          (activeSections[catIdx] || 0) === sIdx
-                            ? 'bg-flame/15 border-flame/40 text-flame font-bold'
-                            : 'bg-white/5 border-white/10 text-smoke'
-                        }`}
-                      >
-                        {sec.heading}
-                      </button>
-                    ))}
+                  <div className="sticky top-16 z-20 -mx-5 px-5 pt-3 pb-3 bg-charcoal/95 backdrop-blur-md border-b border-white/5 mb-6">
+                    <div className="flex gap-2 overflow-x-auto scrollbar-hide -mx-1 px-1">
+                      {category.sections.map((sec, sIdx) => (
+                        <button
+                          key={sIdx}
+                          onClick={() => {
+                            setActiveSections(prev => ({ ...prev, [catIdx]: sIdx }));
+                            const el = mobileSectionRefsMap.current[`${catIdx}-${sIdx}`];
+                            if (el) {
+                              const y = el.getBoundingClientRect().top + window.scrollY - 80;
+                              window.scrollTo({ top: y, behavior: 'smooth' });
+                            }
+                          }}
+                          className={`flex-shrink-0 font-sans text-xs tracking-wide py-2 px-4 rounded-full border transition-all duration-300 ${
+                            (activeSections[catIdx] || 0) === sIdx
+                              ? 'bg-flame/15 border-flame/40 text-flame font-bold'
+                              : 'bg-white/5 border-white/10 text-smoke'
+                          }`}
+                        >
+                          {sec.heading}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 )}
 
@@ -530,7 +532,7 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
           onTabPress={(i) => {
             const el = categoryRefs.current[i];
             if (el) {
-              const y = el.getBoundingClientRect().top + window.scrollY - 10;
+              const y = el.getBoundingClientRect().top + window.scrollY - 80;
               window.scrollTo({ top: y, behavior: 'smooth' });
             }
           }}
