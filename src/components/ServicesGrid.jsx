@@ -184,35 +184,43 @@ const ServicesGrid = ({ hideHeader = false }) => {
     }, [hideHeader]);
 
     return (
-        <section ref={sectionRef} className={`relative z-10 ${hideHeader ? 'h-full flex flex-col' : ''}`}>
-            {/* Header — sfondo bianco, scritte arancioni */}
+        <section
+            ref={sectionRef}
+            className={`relative z-10 ${hideHeader ? 'h-full flex flex-col' : ''}`}
+            style={!hideHeader ? {
+                backgroundImage: 'url(/images/services-grid-bg.webp)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+            } : undefined}
+        >
+            {/* Header — stesso sfondo arancione del grid sotto */}
             {!hideHeader && (
-                <div className="bg-cream py-14 sm:py-20 lg:pt-32 lg:pb-8 px-4 sm:px-8 md:px-12">
+                <div className="py-6 sm:py-10 lg:pt-14 lg:pb-6 px-4 sm:px-8 md:px-12">
                     <div className="services-header flex flex-col gap-4 items-center text-center">
-                        <span className="font-mono text-charcoal text-sm tracking-widest uppercase">
+                        <span className="font-mono text-cream/80 text-sm tracking-widest uppercase">
                             {services.eyebrow}
                         </span>
-                        <h2 className="font-playfair text-charcoal text-[clamp(1.8rem,4vw,3.5rem)] leading-[0.95] max-w-xl">
+                        <h2 className="font-playfair text-cream text-[clamp(1.8rem,4vw,3.5rem)] leading-[0.95] max-w-xl">
                             {services.headline}<br />
                             <span className="italic">{services.headlineEm}</span> {services.headlineSuffix}
                         </h2>
-                        <p className="font-sans text-charcoal/70 text-base max-w-lg leading-relaxed">
+                        <p className="font-sans text-cream/80 text-base max-w-lg leading-relaxed">
                             {services.subtext}
                         </p>
                     </div>
                 </div>
             )}
 
-            {/* Bento Grid — sfondo arancione */}
+            {/* Bento Grid — sfondo ereditato dal section */}
             <div
                 className={`services-grid relative flex flex-col gap-3 sm:gap-4 px-3 sm:px-4 overflow-hidden ${
                     hideHeader ? 'flex-1 pt-16 sm:pt-20 pb-6 sm:pb-8' : 'pb-28 lg:pb-40 pt-8 lg:pt-12'
                 }`}
-                style={{
+                style={hideHeader ? {
                     backgroundImage: 'url(/images/services-grid-bg.webp)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                }}
+                } : undefined}
             >
                 {/* Sfumatura in basso: → charcoal — solo home */}
                 {!hideHeader && (
