@@ -418,41 +418,45 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
     return () => observer.disconnect();
   }, [isMobile]);
 
-  // IntersectionObserver for mobile tab bar visibility + active category tracking
+  // Scroll-based mobile tab bar visibility + active category tracking.
+  // We can't use IntersectionObserver here because GSAP's pin: true on each
+  // category turns them into position: fixed during pinning, which makes
+  // intersection ratios stick at constant values and stops update events.
   useEffect(() => {
     if (!isMobile) return;
-
-    // Tab bar visibility - observe the mobile section
     const section = mobileSectionRef.current;
     if (!section) return;
 
-    const sectionObserver = new IntersectionObserver(
-      ([entry]) => setTabBarVisible(entry.isIntersecting),
-      { threshold: 0.1 }
-    );
-    sectionObserver.observe(section);
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const rect = section.getBoundingClientRect();
+      const inSection = rect.top < window.innerHeight * 0.9 && rect.bottom > 80;
+      setTabBarVisible(inSection);
 
-    // Active category tracking — use negative bottom margin so only the
-    // category whose TOP portion is in view counts as active
-    const catObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const idx = Number(entry.target.dataset.catIndex);
-            if (!isNaN(idx)) setMobileActiveCategory(idx);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -60% 0px' }
-    );
+      // Active category = the one whose offsetTop is closest above the
+      // viewport's upper third. offsetTop is stable against GSAP pinning.
+      const probe = window.scrollY + window.innerHeight * 0.35;
+      let activeIdx = 0;
+      for (let i = 0; i < categoryRefs.current.length; i++) {
+        const el = categoryRefs.current[i];
+        if (el && el.offsetTop <= probe) activeIdx = i;
+      }
+      setMobileActiveCategory((prev) => (prev === activeIdx ? prev : activeIdx));
+    };
 
-    categoryRefs.current.forEach((ref) => {
-      if (ref) catObserver.observe(ref);
-    });
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(update);
+    };
 
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
     return () => {
-      sectionObserver.disconnect();
-      catObserver.disconnect();
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (raf) cancelAnimationFrame(raf);
     };
   }, [isMobile]);
 
