@@ -7,8 +7,10 @@ import MenuIntro from './MenuIntro';
 
 import MenuHorizontalScroll from './MenuHorizontalScroll';
 import MenuHighlight from './MenuHighlight';
+import CartFab from './CartFab';
 
 import { useMenu } from '../../hooks/useMenu';
+import { CartProvider } from '@/hooks/useCart';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -48,25 +50,28 @@ const MenuSection = () => {
   }, [menuUnlocked]);
 
   return (
-    <div id="menu">
-      <div ref={heroRef}>
-        <MenuIntro
-          onCtaClick={handleCtaClick}
-          menuOpen={menuUnlocked}
-        />
+    <CartProvider>
+      <div id="menu">
+        <div ref={heroRef}>
+          <MenuIntro
+            onCtaClick={handleCtaClick}
+            menuOpen={menuUnlocked}
+          />
+        </div>
+
+        {/* Scroll anchor + menu */}
+        <div ref={scrollAnchorRef} />
+
+        {menuUnlocked && (
+          <>
+            <MenuHorizontalScroll menuCategories={menuCategories} />
+            <MenuHighlight />
+            <CartFab visible={menuUnlocked} />
+          </>
+        )}
+
       </div>
-
-      {/* Scroll anchor + menu */}
-      <div ref={scrollAnchorRef} />
-
-      {menuUnlocked && (
-        <>
-          <MenuHorizontalScroll menuCategories={menuCategories} />
-          <MenuHighlight />
-        </>
-      )}
-
-    </div>
+    </CartProvider>
   );
 };
 

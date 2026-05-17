@@ -3,12 +3,52 @@ import React, { useEffect, useLayoutEffect, useRef, useState, useCallback } from
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import { Plus, Check } from 'lucide-react';
 import CustomCursor from './CustomCursor';
 import MobileMenuTabBar from './MobileMenuTabBar';
+import { useCart } from '@/hooks/useCart';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const badgeKeywords = ['DOP', 'DOCG', 'IGP', 'DOC', 'IGT', 'Slow Food'];
+
+const CartButton = ({ category, section, item, size = 'md' }) => {
+  const { add, decrement, quantityFor } = useCart();
+  const payload = {
+    categoryId: category.id,
+    categoryTitle: category.title,
+    sectionHeading: section.heading,
+    name: item.name,
+    price: item.price,
+  };
+  const qty = quantityFor(payload);
+  const inCart = qty > 0;
+  const dims = size === 'sm' ? 'w-8 h-8' : 'w-9 h-9';
+  const icon = size === 'sm' ? 'w-3.5 h-3.5' : 'w-4 h-4';
+
+  if (!inCart) {
+    return (
+      <button
+        type="button"
+        onClick={(e) => { e.stopPropagation(); add(payload); }}
+        aria-label={`Aggiungi ${item.name} alla tua selezione`}
+        className={`${dims} flex items-center justify-center rounded-full border border-gold/30 text-gold hover:bg-gold hover:text-charcoal transition-colors flex-shrink-0`}
+      >
+        <Plus className={icon} strokeWidth={2.5} />
+      </button>
+    );
+  }
+  return (
+    <button
+      type="button"
+      onClick={(e) => { e.stopPropagation(); decrement(payload); }}
+      aria-label={`Rimuovi una unità di ${item.name}`}
+      className={`${dims} flex items-center justify-center rounded-full bg-flame text-cream hover:bg-ember transition-colors flex-shrink-0 relative font-mono text-xs font-bold tabular-nums`}
+    >
+      {qty > 1 ? qty : <Check className={icon} strokeWidth={2.5} />}
+    </button>
+  );
+};
 
 const HighlightBadges = ({ text }) => {
   const regex = new RegExp(`(${badgeKeywords.join('|')})`, 'g');
@@ -101,11 +141,11 @@ const PanelContent = ({ category, handleDishHover }) => {
               {section.items.map((item, iIdx) => (
                 <div
                   key={iIdx}
-                  className="menu-item group flex items-baseline justify-between py-3 border-b border-white/5 hover:border-flame/30 transition-colors duration-300 cursor-default"
+                  className="menu-item group flex items-baseline justify-between gap-4 py-3 border-b border-white/5 hover:border-flame/30 transition-colors duration-300 cursor-default"
                   onMouseEnter={() => handleDishHover(item.hoverImage)}
                   onMouseLeave={() => handleDishHover(null)}
                 >
-                  <div className="flex-1 mr-4">
+                  <div className="flex-1 min-w-0">
                     <span className="font-playfair text-cream text-lg sm:text-xl group-hover:text-flame transition-colors duration-300">
                       {item.name}
                     </span>
@@ -113,9 +153,12 @@ const PanelContent = ({ category, handleDishHover }) => {
                       <HighlightBadges text={item.desc} />
                     </span>
                   </div>
-                  <span className="font-mono text-gold text-base sm:text-lg flex-shrink-0 tabular-nums">
-                    {item.price}
-                  </span>
+                  <div className="flex items-center gap-3 flex-shrink-0">
+                    <span className="font-mono text-gold text-base sm:text-lg tabular-nums">
+                      {item.price}
+                    </span>
+                    <CartButton category={category} section={section} item={item} />
+                  </div>
                 </div>
               ))}
             </div>
@@ -504,9 +547,9 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
                       {section.items.map((item, iIdx) => (
                         <div
                           key={iIdx}
-                          className="flex items-baseline justify-between py-3 border-b border-white/5"
+                          className="flex items-baseline justify-between gap-3 py-3 border-b border-white/5"
                         >
-                          <div className="flex-1 mr-4">
+                          <div className="flex-1 min-w-0">
                             <span className="font-playfair text-cream text-base">
                               {item.name}
                             </span>
@@ -514,9 +557,12 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
                               <HighlightBadges text={item.desc} />
                             </span>
                           </div>
-                          <span className="font-mono text-gold text-base flex-shrink-0 tabular-nums">
-                            {item.price}
-                          </span>
+                          <div className="flex items-center gap-2 flex-shrink-0">
+                            <span className="font-mono text-gold text-base tabular-nums">
+                              {item.price}
+                            </span>
+                            <CartButton category={category} section={section} item={item} size="sm" />
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -527,43 +573,58 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
           ))}
         </section>
 
-        {/* Fixed top sub-section nav — mirrors the inline pills so users always
-            see (and can jump to) sub-sections of the category they're reading.
-            Rendered as siblings to the mobile section so they're not affected
-            by GSAP's pin on individual categories. */}
+        {/* Fixed top breadcrumb + sub-section nav — always shows where you are
+            and lets you jump quickly. Lives outside the GSAP-pinned subtree. */}
         {(() => {
           const currentCat = menuCategories[mobileActiveCategory];
-          if (!currentCat || currentCat.sections.length < 2) return null;
+          if (!currentCat) return null;
           const currentSub = activeSections[mobileActiveCategory] || 0;
+          const hasSubs = currentCat.sections.length > 1;
           return (
             <div
-              className={`fixed top-16 left-0 right-0 z-30 bg-charcoal/95 backdrop-blur-md border-b border-white/10 px-4 py-2.5 transition-all duration-300 ${
+              className={`fixed top-16 left-0 right-0 z-30 bg-charcoal/95 backdrop-blur-md border-b border-white/10 transition-all duration-300 ${
                 tabBarVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'
               }`}
             >
-              <div className="flex gap-2 overflow-x-auto scrollbar-hide max-w-md mx-auto">
-                {currentCat.sections.map((sec, sIdx) => (
-                  <button
-                    key={sIdx}
-                    type="button"
-                    onClick={() => {
-                      setActiveSections(prev => ({ ...prev, [mobileActiveCategory]: sIdx }));
-                      const el = mobileSectionRefsMap.current[`${mobileActiveCategory}-${sIdx}`];
-                      if (el) {
-                        const y = el.getBoundingClientRect().top + window.scrollY - 110;
-                        window.scrollTo({ top: y, behavior: 'smooth' });
-                      }
-                    }}
-                    className={`flex-shrink-0 font-sans text-xs tracking-wide py-1.5 px-3.5 rounded-full border transition-all duration-300 ${
-                      currentSub === sIdx
-                        ? 'bg-flame/20 border-flame/50 text-flame font-bold'
-                        : 'bg-white/5 border-white/10 text-smoke'
-                    }`}
-                  >
-                    {sec.heading}
-                  </button>
-                ))}
+              {/* Breadcrumb */}
+              <div className="px-4 pt-2 pb-1 flex items-center justify-between max-w-md mx-auto">
+                <p className="font-sans text-[11px] tracking-wide text-cream/90 truncate">
+                  <span className="text-smoke">Stai vedendo</span>{' '}
+                  <span className="font-bold">{currentCat.title}</span>
+                  {hasSubs && (
+                    <>
+                      <span className="text-smoke mx-1">›</span>
+                      <span className="text-flame font-bold">{currentCat.sections[currentSub]?.heading}</span>
+                    </>
+                  )}
+                </p>
               </div>
+              {/* Sub-section pills */}
+              {hasSubs && (
+                <div className="px-4 pb-2.5 flex gap-2 overflow-x-auto scrollbar-hide max-w-md mx-auto">
+                  {currentCat.sections.map((sec, sIdx) => (
+                    <button
+                      key={sIdx}
+                      type="button"
+                      onClick={() => {
+                        setActiveSections(prev => ({ ...prev, [mobileActiveCategory]: sIdx }));
+                        const el = mobileSectionRefsMap.current[`${mobileActiveCategory}-${sIdx}`];
+                        if (el) {
+                          const y = el.getBoundingClientRect().top + window.scrollY - 130;
+                          window.scrollTo({ top: y, behavior: 'smooth' });
+                        }
+                      }}
+                      className={`flex-shrink-0 font-sans text-xs tracking-wide py-1.5 px-3.5 rounded-full border transition-all duration-300 ${
+                        currentSub === sIdx
+                          ? 'bg-flame/20 border-flame/50 text-flame font-bold'
+                          : 'bg-white/5 border-white/10 text-smoke'
+                      }`}
+                    >
+                      {sec.heading}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           );
         })()}
@@ -572,6 +633,8 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
           menuCategories={menuCategories}
           activeIndex={mobileActiveCategory}
           onTabPress={(i) => {
+            // Update immediately so breadcrumb + sub-nav switch before scroll lands
+            setMobileActiveCategory(i);
             const el = categoryRefs.current[i];
             if (!el) return;
             // offsetTop is stable even when GSAP pins ancestor categories,
