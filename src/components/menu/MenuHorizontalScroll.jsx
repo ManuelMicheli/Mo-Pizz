@@ -494,25 +494,66 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
     };
   }, [isMobile]);
 
-  const scrollToCategory = useCallback((i) => {
-    const y = baselineY.current.cats[i];
-    if (typeof y !== 'number') return;
+  const smoothScrollTo = useCallback((targetY) => {
+    const y = Math.max(0, targetY);
+    const lenis = typeof window !== 'undefined' ? window.__lenis : null;
+    if (lenis && typeof lenis.scrollTo === 'function') {
+      // Lenis owns scroll on this site; bypass it and gsap ScrollToPlugin
+      // would otherwise be reset by Lenis's next raf tick.
+      lenis.scrollTo(y, { duration: 0.9, immediate: false });
+      return;
+    }
     gsap.to(window, {
-      scrollTo: { y: Math.max(0, y - 80), autoKill: true },
+      scrollTo: { y, autoKill: true },
       duration: 0.7,
       ease: 'power2.inOut',
     });
   }, []);
 
-  const scrollToSub = useCallback((catIdx, sIdx) => {
-    const y = baselineY.current.subs[`${catIdx}-${sIdx}`];
-    if (typeof y !== 'number') return;
-    gsap.to(window, {
-      scrollTo: { y: Math.max(0, y - 140), autoKill: true },
-      duration: 0.7,
-      ease: 'power2.inOut',
-    });
+  // Fallback: if a baseline entry is missing or 0 (capture happened before
+  // refs were ready, or the element is currently pinned), re-derive it from
+  // the section's known Y plus offsetHeights of preceding categories.
+  const resolveCategoryY = useCallback((i) => {
+    const cached = baselineY.current.cats[i];
+    if (cached && cached > 0) return cached;
+    const section = mobileSectionRef.current;
+    if (!section) return 0;
+    let y = section.getBoundingClientRect().top + window.scrollY;
+    for (let k = 0; k < i; k++) {
+      const el = categoryRefs.current[k];
+      if (el && el.offsetHeight) y += el.offsetHeight;
+      // Account for the -mt-12 (=-48px) negative margin on categories k>=1
+      if (k >= 1) y -= 48;
+    }
+    return y;
   }, []);
+
+  const scrollToCategory = useCallback((i) => {
+    const y = resolveCategoryY(i);
+    if (!y || y <= 0) return;
+    smoothScrollTo(y - 80);
+  }, [smoothScrollTo, resolveCategoryY]);
+
+  const scrollToSub = useCallback((catIdx, sIdx) => {
+    let y = baselineY.current.subs[`${catIdx}-${sIdx}`];
+    if (!y) {
+      // Recompute on demand: category Y + sub element's offsetTop within card
+      const subEl = mobileSectionRefsMap.current[`${catIdx}-${sIdx}`];
+      const catY = resolveCategoryY(catIdx);
+      if (subEl && catY) {
+        let offset = subEl.offsetTop;
+        let p = subEl.offsetParent;
+        const catEl = categoryRefs.current[catIdx];
+        while (p && p !== catEl && p !== document.body) {
+          offset += p.offsetTop;
+          p = p.offsetParent;
+        }
+        y = catY + offset;
+      }
+    }
+    if (!y || y <= 0) return smoothScrollTo(resolveCategoryY(catIdx) - 80);
+    smoothScrollTo(y - 140);
+  }, [smoothScrollTo, resolveCategoryY]);
 
   // ─── Mobile Layout ───────────────────────────────────────────────────────────
   if (isMobile) {
