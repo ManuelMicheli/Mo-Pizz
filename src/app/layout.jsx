@@ -81,8 +81,11 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="it" className={`${geistMono.variable} ${caveat.variable}`}>
+        <html lang="it" translate="no" className={`${geistMono.variable} ${caveat.variable}`}>
             <head>
+                {/* Opt out of mobile browser auto-translation — Google Translate / Safari Translate
+                    mutate text nodes and break React reconciliation (NotFoundError on removeChild). */}
+                <meta name="google" content="notranslate" />
                 {/* Preload CSCaliope display serif */}
                 <link rel="preload" href="/fonts/CSCaliope-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
                 {/* Preload hero + critical near-fold images so they appear immediately */}
@@ -115,7 +118,7 @@ export default function RootLayout({ children }) {
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
                 />
             </head>
-            <body className="bg-charcoal text-cream antialiased overflow-x-hidden selection:bg-flame selection:text-cream font-sans">
+            <body className="notranslate bg-charcoal text-cream antialiased overflow-x-hidden selection:bg-flame selection:text-cream font-sans">
                 <LenisProvider>
                     <div className="relative w-full min-h-screen bg-charcoal font-sans text-cream selection:bg-flame flex flex-col">
                         <Navbar />
