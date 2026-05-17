@@ -24,7 +24,7 @@ export default function CartFab({ visible = true }) {
                 type="button"
                 onClick={() => setOpen(true)}
                 aria-label={`Apri lista ordine (${totalCount} elementi)`}
-                className={`fixed z-40 right-4 bottom-20 md:bottom-6 flex items-center gap-2 bg-flame hover:bg-ember text-cream font-sans font-bold py-3 px-4 rounded-full shadow-2xl shadow-flame/30 transition-all duration-300 ${
+                className={`fixed z-50 right-3 bottom-3 md:right-4 md:bottom-4 flex items-center gap-2 bg-flame hover:bg-ember text-cream font-sans font-bold py-3 px-4 rounded-full shadow-2xl shadow-flame/30 transition-all duration-300 ${
                     visible ? 'translate-y-0 opacity-100' : 'translate-y-24 opacity-0 pointer-events-none'
                 }`}
             >
