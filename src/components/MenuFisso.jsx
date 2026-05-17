@@ -129,11 +129,14 @@ const MenuFisso = () => {
       ref={sectionRef}
       className="relative z-10 py-12 sm:py-16 lg:py-20 overflow-hidden"
       style={{
-        backgroundImage: "url('/images/menu-fisso-bg.jpg?v=2')",
+        backgroundImage: "url('/images/menu-fisso-bg.jpg?v=3')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
+      {/* Dark overlay so the kitchen photo reads as atmosphere, not subject */}
+      <div className="absolute inset-0 bg-charcoal/65 pointer-events-none" />
+
       {/* Diagonal lines pattern */}
       <div className="absolute inset-0 bg-lines-pattern bg-[length:40px_40px] opacity-[0.04] pointer-events-none" />
 
