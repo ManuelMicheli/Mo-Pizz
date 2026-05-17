@@ -192,6 +192,10 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
   const categoryRefs = useRef([]);
   const [activeSections, setActiveSections] = useState({});
   const mobileSectionRefsMap = useRef({});
+  // Cached absolute Y positions (page-relative). Computed once before GSAP
+  // pins activate, because pinned elements get position: fixed and report
+  // offsetParent === null, which makes offsetTop unreliable.
+  const baselineY = useRef({ cats: [], subs: {} });
 
   // Navigate to a specific category panel
   const goToCategory = useCallback((index) => {
@@ -418,6 +422,35 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
     return () => observer.disconnect();
   }, [isMobile]);
 
+  // Capture absolute Y positions for every category + sub-section once at
+  // mount (before GSAP pins activate), and re-capture on resize. We use
+  // getBoundingClientRect + scrollY, which works correctly while elements
+  // are still in normal flow.
+  const captureBaseline = useCallback(() => {
+    if (!isMobile) return;
+    const cats = categoryRefs.current.map((el) =>
+      el ? el.getBoundingClientRect().top + window.scrollY : 0
+    );
+    const subs = {};
+    for (const [key, el] of Object.entries(mobileSectionRefsMap.current)) {
+      if (el) subs[key] = el.getBoundingClientRect().top + window.scrollY;
+    }
+    baselineY.current = { cats, subs };
+  }, [isMobile]);
+
+  // Run capture after layout settles, then again on resize. Also refresh
+  // when ScrollTrigger reports a layout change so pin-driven reflows don't
+  // poison our baseline.
+  useLayoutEffect(() => {
+    if (!isMobile) return;
+    const id1 = requestAnimationFrame(() => requestAnimationFrame(captureBaseline));
+    window.addEventListener('resize', captureBaseline);
+    return () => {
+      cancelAnimationFrame(id1);
+      window.removeEventListener('resize', captureBaseline);
+    };
+  }, [isMobile, captureBaseline]);
+
   // Scroll-based mobile tab bar visibility + active category tracking.
   // We can't use IntersectionObserver here because GSAP's pin: true on each
   // category turns them into position: fixed during pinning, which makes
@@ -434,13 +467,14 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
       const inSection = rect.top < window.innerHeight * 0.9 && rect.bottom > 80;
       setTabBarVisible(inSection);
 
-      // Active category = the one whose offsetTop is closest above the
-      // viewport's upper third. offsetTop is stable against GSAP pinning.
+      // Active category = the one whose cached Y is closest above the
+      // viewport's upper third. Using cached Ys (not live offsetTop)
+      // because pinned categories have offsetParent === null.
       const probe = window.scrollY + window.innerHeight * 0.35;
       let activeIdx = 0;
-      for (let i = 0; i < categoryRefs.current.length; i++) {
-        const el = categoryRefs.current[i];
-        if (el && el.offsetTop <= probe) activeIdx = i;
+      const ys = baselineY.current.cats;
+      for (let i = 0; i < ys.length; i++) {
+        if (ys[i] && ys[i] <= probe) activeIdx = i;
       }
       setMobileActiveCategory((prev) => (prev === activeIdx ? prev : activeIdx));
     };
@@ -459,6 +493,26 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
       if (raf) cancelAnimationFrame(raf);
     };
   }, [isMobile]);
+
+  const scrollToCategory = useCallback((i) => {
+    const y = baselineY.current.cats[i];
+    if (typeof y !== 'number') return;
+    gsap.to(window, {
+      scrollTo: { y: Math.max(0, y - 80), autoKill: true },
+      duration: 0.7,
+      ease: 'power2.inOut',
+    });
+  }, []);
+
+  const scrollToSub = useCallback((catIdx, sIdx) => {
+    const y = baselineY.current.subs[`${catIdx}-${sIdx}`];
+    if (typeof y !== 'number') return;
+    gsap.to(window, {
+      scrollTo: { y: Math.max(0, y - 140), autoKill: true },
+      duration: 0.7,
+      ease: 'power2.inOut',
+    });
+  }, []);
 
   // ─── Mobile Layout ───────────────────────────────────────────────────────────
   if (isMobile) {
@@ -518,11 +572,7 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
                         key={sIdx}
                         onClick={() => {
                           setActiveSections(prev => ({ ...prev, [catIdx]: sIdx }));
-                          const el = mobileSectionRefsMap.current[`${catIdx}-${sIdx}`];
-                          if (el) {
-                            const y = el.getBoundingClientRect().top + window.scrollY - 80;
-                            window.scrollTo({ top: y, behavior: 'smooth' });
-                          }
+                          scrollToSub(catIdx, sIdx);
                         }}
                         className={`flex-shrink-0 font-sans text-xs tracking-wide py-2 px-4 rounded-full border transition-all duration-300 ${
                           (activeSections[catIdx] || 0) === sIdx
@@ -612,11 +662,7 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
                       type="button"
                       onClick={() => {
                         setActiveSections(prev => ({ ...prev, [mobileActiveCategory]: sIdx }));
-                        const el = mobileSectionRefsMap.current[`${mobileActiveCategory}-${sIdx}`];
-                        if (el) {
-                          const y = el.getBoundingClientRect().top + window.scrollY - 130;
-                          window.scrollTo({ top: y, behavior: 'smooth' });
-                        }
+                        scrollToSub(mobileActiveCategory, sIdx);
                       }}
                       className={`flex-shrink-0 font-sans text-xs tracking-wide py-1.5 px-3.5 rounded-full border transition-all duration-300 ${
                         currentSub === sIdx
@@ -639,12 +685,7 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
           onTabPress={(i) => {
             // Update immediately so breadcrumb + sub-nav switch before scroll lands
             setMobileActiveCategory(i);
-            const el = categoryRefs.current[i];
-            if (!el) return;
-            // offsetTop is stable even when GSAP pins ancestor categories,
-            // unlike getBoundingClientRect which reflects fixed positioning.
-            const y = el.offsetTop - 80;
-            window.scrollTo({ top: y, behavior: 'smooth' });
+            scrollToCategory(i);
           }}
           visible={tabBarVisible}
         />
