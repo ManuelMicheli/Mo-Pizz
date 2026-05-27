@@ -61,8 +61,8 @@ const Chef = () => {
             </div>
 
             {/* Left side: Photo — desktop only (mobile photo lives between Chef and Staff) */}
-            <div className="hidden md:flex w-full md:w-[45%] bg-charcoal items-center justify-center md:p-12 lg:p-16 relative overflow-hidden">
-                <div className="chef-photo w-full md:max-w-[520px] lg:max-w-[610px] aspect-square rounded-full border-2 border-gold/60 shadow-2xl relative overflow-hidden">
+            <div className="hidden md:flex w-full md:w-[45%] bg-charcoal items-center justify-center md:px-12 md:pt-28 md:pb-12 lg:px-16 lg:pt-36 lg:pb-16 relative overflow-hidden">
+                <div className="chef-photo w-full md:max-w-[580px] lg:max-w-[680px] aspect-square rounded-full border-2 border-gold/60 shadow-2xl relative overflow-hidden">
                     <img
                         src="/images/christian-moschiano.jpg?v=2"
                         alt={chiSiamo.photoAlt}
