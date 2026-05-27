@@ -88,6 +88,17 @@ const Chef = () => {
                     {chiSiamo.headlineEm}
                 </h2>
 
+                {/* Mobile-only inline photo */}
+                <div className="chef-text md:hidden mx-auto w-full max-w-[420px] aspect-[4/5] rounded-2xl overflow-hidden mb-8 mt-2">
+                    <img
+                        src="/images/christian-moschiano.jpg?v=2"
+                        alt={chiSiamo.photoAlt}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                    />
+                </div>
+
                 <h3 className="chef-text font-caveat text-gold text-2xl sm:text-3xl mb-10">
                     {chiSiamo.subheadline}
                 </h3>
