@@ -163,7 +163,7 @@ export default function ServicesDrawer() {
                     aria-modal={isOpen}
                     aria-hidden={!isOpen}
                     aria-label="Servizi Mo Pizz"
-                    className={`pointer-events-auto relative w-[min(1320px,96vw)] max-h-[90vh] flex flex-col overflow-hidden rounded-[2rem] bg-charcoal border border-cream/10 shadow-[0_40px_120px_-20px_rgba(0,0,0,0.85),0_0_0_1px_rgba(232,93,38,0.18)] transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                    className={`pointer-events-auto relative w-[min(1480px,97vw)] max-h-[90vh] flex flex-col overflow-hidden rounded-[2rem] bg-charcoal border border-cream/10 shadow-[0_40px_120px_-20px_rgba(0,0,0,0.85),0_0_0_1px_rgba(232,93,38,0.18)] transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                         isOpen ? 'scale-100 translate-y-0 opacity-100' : 'scale-95 translate-y-4 opacity-0'
                     }`}
                 >
