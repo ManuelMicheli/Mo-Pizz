@@ -120,9 +120,11 @@ export const siteContent = {
     headline: 'Cosa Dicono i Nostri Clienti',
     badge1: '4.2/5 su Google — 620+ recensioni',
     badge2: "Travellers' Choice Tripadvisor",
-    ctaReviewBody: 'Ti è piaciuta l\'esperienza da Mo Pizz? Raccontalo agli altri!',
-    ctaGoogle: 'Recensione su Google',
-    ctaTripadvisor: 'Recensione su Tripadvisor',
+    ctaReviewEyebrow: 'Aiutaci a Crescere',
+    ctaReviewHeadline: 'Lascia la tua recensione',
+    ctaReviewBody: 'Ti è piaciuta l\'esperienza da Mo Pizz? Raccontalo agli altri — bastano due minuti.',
+    ctaGoogle: 'Recensisci su Google',
+    ctaTripadvisor: 'Recensisci su Tripadvisor',
   },
 
   // ─── SEO CONTENT (Homepage) ─────────────────────────
