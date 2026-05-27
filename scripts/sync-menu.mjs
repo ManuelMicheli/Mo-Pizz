@@ -11,8 +11,7 @@
  * The script exits 0 even on fetch failures so it never blocks a build.
  */
 
-import { load } from 'cheerio';
-import { writeFileSync, readFileSync } from 'fs';
+import { writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -20,39 +19,43 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const MENU_DATA_PATH = join(__dirname, '..', 'src', 'data', 'menuData.js');
 const DRY_RUN = process.argv.includes('--dry');
 
-const BASE_URL = 'https://mopizz.plateform.app/takeaway';
-const FETCH_HEADERS = {
-  'Cookie': 'frontpageLanguage=it',
-  'Accept-Language': 'it-IT,it;q=0.9',
-  'User-Agent': 'MoPizz-MenuSync/1.0',
-};
+// ─── Plateform JSON API ────────────────────────────────────────────────────
+// The Plateform takeaway page is a Vue SPA — the initial HTML no longer
+// contains any menu markup. The SPA boots and POSTs to a backend JSON API
+// using a static Bearer token extracted from its bundle. We call the same
+// endpoint directly; no headless browser needed.
+const API_URL = 'https://mopizz.plateform.app/backend/api/frontpage/menu/detail';
+const API_BEARER = 'Bearer Kwgu@7!XW8kQ@yP6';
+const ID_MENU = 'momenu';
+const MENU_CONTEXT = 'takeaway';
 
 // ─── Plateform category IDs → site structure mapping ───────────────────────
-// Each entry maps a Plateform category ID to:
-//   - siteCategory: which main category it belongs to in menuData.js
-//   - heading: the section heading displayed on the site
-const CATEGORY_MAP = [
+// CATEGORY_ORDER drives both the order of sections inside each site
+// category and which API categories are included. Section headings are
+// taken straight from the API's `nome` field; only the site bucket and
+// ordering are hardcoded here. IDs not listed below are skipped (e.g.
+// 46541946 "Menù fisso pranzo" is surfaced via menuFissoData.js, not the
+// main horizontal-scroll menu).
+const CATEGORY_ORDER = [
   // La Pizzeria
-  { catId: '46263768', siteCategory: 'pizzeria', heading: 'Le Classiche' },
-  { catId: '46263769', siteCategory: 'pizzeria', heading: 'Le Mo Pizz dello Chef' },
-  { catId: '46289265', siteCategory: 'pizzeria', heading: 'Fritti' },
-  { catId: '46289264', siteCategory: 'pizzeria', heading: 'Ripieni al Forno' },
+  { catId: 46263768, siteCategory: 'pizzeria' }, // Pizze classiche
+  { catId: 46263769, siteCategory: 'pizzeria' }, // Pizze di chef Moschiano
+  { catId: 46289265, siteCategory: 'pizzeria' }, // Ripieni fritti
+  { catId: 46289264, siteCategory: 'pizzeria' }, // Ripieni al forno
   // La Cucina
-  { catId: '46263507', siteCategory: 'cucina', heading: 'Antipasti di Mare' },
-  { catId: '48485609', siteCategory: 'cucina', heading: 'Antipasti, Sfizi e Fritti' },
-  { catId: '46263734', siteCategory: 'cucina', heading: 'Primi di Mare' },
-  { catId: '48486023', siteCategory: 'cucina', heading: 'Primi della Tradizione' },
-  { catId: '46263735', siteCategory: 'cucina', heading: 'Secondi di Pesce' },
-  { catId: '48486385', siteCategory: 'cucina', heading: 'Secondi di Carne' },
-  { catId: '46263736', siteCategory: 'cucina', heading: 'Contorni' },
-  { catId: '46263774', siteCategory: 'cucina', heading: 'Per i Bambini' },
+  { catId: 48485609, siteCategory: 'cucina' },   // Antipasti
+  { catId: 46263507, siteCategory: 'cucina' },   // Friggitoria
+  { catId: 48486023, siteCategory: 'cucina' },   // Primi della tradizione
+  { catId: 48486385, siteCategory: 'cucina' },   // Secondi piatti
+  { catId: 46263736, siteCategory: 'cucina' },   // Contorni
+  { catId: 46263774, siteCategory: 'cucina' },   // Bambini
   // I Dolci
-  { catId: '46263770', siteCategory: 'dolci', heading: 'Dolci della Tradizione' },
+  { catId: 46263770, siteCategory: 'dolci' },    // Dolci
   // Birre & Vini
-  { catId: '46263771', siteCategory: 'bevande', heading: 'Birre Artigianali' },
-  { catId: '46290917', siteCategory: 'bevande', heading: 'La Cantinetta' },
-  { catId: '46263772', siteCategory: 'bevande', heading: 'Bevande' },
-  { catId: '46263773', siteCategory: 'bevande', heading: 'Caffè e Amari' },
+  { catId: 46263771, siteCategory: 'bevande' },  // Birre artigianali
+  { catId: 46290917, siteCategory: 'bevande' },  // La cantinetta
+  { catId: 46263772, siteCategory: 'bevande' },  // Bevande
+  { catId: 46263773, siteCategory: 'bevande' },  // Caffè e amari
 ];
 
 // ─── Site main categories (top-level structure) ────────────────────────────
@@ -120,6 +123,13 @@ function toTitleCase(str) {
   if (!str) return str;
   // If the string is NOT all-caps, leave it as-is (already properly cased)
   if (str !== str.toUpperCase()) return str;
+  return forceTitleCase(str);
+}
+
+// Always Title Case every significant word (used for category headings,
+// which come from the API in arbitrary casing like "Pizze classiche").
+function forceTitleCase(str) {
+  if (!str) return str;
   return str
     .toLowerCase()
     .split(/(\s+|')/)
@@ -143,47 +153,46 @@ function cleanDesc(desc) {
     .trim();
 }
 
-// ─── Scraping logic ────────────────────────────────────────────────────────
+// ─── API client ────────────────────────────────────────────────────────────
 
-async function fetchCategory(catId) {
-  const url = `${BASE_URL}?takeaway=&cat=${catId}`;
-  const res = await fetch(url, { headers: FETCH_HEADERS });
-  if (!res.ok) throw new Error(`HTTP ${res.status} for cat ${catId}`);
-  return res.text();
+async function fetchMenuDetail() {
+  const body = new URLSearchParams({
+    idMenu: ID_MENU,
+    language: 'it',
+    menuContext: MENU_CONTEXT,
+  }).toString();
+  const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': API_BEARER,
+      'Accept-Language': 'it-IT,it;q=0.9',
+      'User-Agent': 'MoPizz-MenuSync/1.0',
+    },
+    body,
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status} from menu/detail`);
+  const json = await res.json();
+  if (!json.status) throw new Error(`API error: ${json.message}`);
+  if (!json.data || !Array.isArray(json.data.categories)) {
+    throw new Error('Unexpected response shape (missing data.categories)');
+  }
+  return json.data.categories;
 }
 
-function parseItems(html) {
-  const $ = load(html);
-  const items = [];
+// Convert one API piatto to our internal item shape. Returns null for
+// items that shouldn't be displayed (no/zero price, unavailable).
+function piattoToItem(piatto) {
+  const rawPrice = piatto.prezzoString || (piatto.prezzo != null ? String(piatto.prezzo) : '');
+  // "13,00" → "13.00"
+  let price = rawPrice.replace(',', '.').trim();
+  if (price && !price.includes('.')) price = `${price}.00`;
+  if (!price || price === '0.00' || piatto.disponibilita === 0) return null;
 
-  $('.div-dettaglio-piatto').each((_i, el) => {
-    // Name: first .fs-6.fw-semibold inside the flex container, minus child elements (icons)
-    const nameEl = $(el).find('.fs-6.fw-semibold').first();
-    const rawName = nameEl.clone().children().remove().end().text().trim();
-    if (!rawName) return;
-    const name = toTitleCase(rawName);
-
-    // Price: the badge element with price text
-    const priceRaw = $(el).find('.badge.text-dark').text().trim();
-    // Convert "7,00€" → "7.00"
-    const price = priceRaw.replace('€', '').replace(',', '.').trim() || null;
-
-    // Description — clean up whitespace
-    const desc = cleanDesc($(el).find('.text-muted.text-start').text());
-
-    // Tags from Plateform (Più venduto, Specialità, Novità, Vegetariano, Piccante)
-    const tags = [];
-    $(el).find('label.badge.rounded-pill').each((_j, t) => {
-      tags.push($(t).text().trim());
-    });
-
-    // Skip items with no price (not available for ordering / display)
-    if (!price || price === '0.00') return;
-
-    items.push({ name, price, desc, tags });
-  });
-
-  return items;
+  const name = toTitleCase((piatto.nome || '').trim());
+  if (!name) return null;
+  const desc = cleanDesc(piatto.descrizione || '');
+  return { name, price, desc, tags: [] };
 }
 
 function detectBadges(desc, name) {
@@ -205,48 +214,47 @@ function getHoverImage(name) {
 // ─── Main ──────────────────────────────────────────────────────────────────
 
 async function main() {
-  console.log('[sync-menu] Fetching menu from Plateform...');
+  console.log('[sync-menu] Fetching menu from Plateform API...');
 
-  // Fetch all categories in parallel
-  const results = await Promise.allSettled(
-    CATEGORY_MAP.map(async (cat) => {
-      const html = await fetchCategory(cat.catId);
-      const items = parseItems(html);
-      return { ...cat, items };
-    })
-  );
-
-  // Check for failures
-  const succeeded = [];
-  const failed = [];
-  for (const [i, result] of results.entries()) {
-    if (result.status === 'fulfilled') {
-      succeeded.push(result.value);
-    } else {
-      failed.push({ cat: CATEGORY_MAP[i], error: result.reason.message });
-    }
-  }
-
-  if (failed.length > 0) {
-    console.warn(`[sync-menu] WARNING: ${failed.length} categories failed to fetch:`);
-    for (const f of failed) {
-      console.warn(`  - ${f.cat.heading} (${f.cat.catId}): ${f.error}`);
-    }
-  }
-
-  if (succeeded.length === 0) {
-    console.error('[sync-menu] All fetches failed. Keeping existing menuData.js.');
+  let apiCategories;
+  try {
+    apiCategories = await fetchMenuDetail();
+  } catch (err) {
+    console.error(`[sync-menu] Fetch failed: ${err.message}`);
+    console.error('[sync-menu] Keeping existing menuData.js.');
     return;
   }
 
-  // Group sections by site category
+  // Index API categories by id for lookup
+  const apiById = new Map();
+  for (const cat of apiCategories) apiById.set(cat.id, cat);
+
+  // Group sections by site category, preserving CATEGORY_ORDER order
   const sectionsByCategory = {};
-  for (const { siteCategory, heading, items } of succeeded) {
-    if (!sectionsByCategory[siteCategory]) sectionsByCategory[siteCategory] = [];
-    if (items.length > 0) {
-      sectionsByCategory[siteCategory].push({ heading, items });
+  const missing = [];
+  for (const { catId, siteCategory } of CATEGORY_ORDER) {
+    const apiCat = apiById.get(catId);
+    if (!apiCat) {
+      missing.push(catId);
+      continue;
     }
+    const items = (apiCat.piatti || [])
+      .map(piattoToItem)
+      .filter(Boolean);
+    if (items.length === 0) continue;
+    if (!sectionsByCategory[siteCategory]) sectionsByCategory[siteCategory] = [];
+    sectionsByCategory[siteCategory].push({
+      heading: forceTitleCase(apiCat.nome.trim()),
+      items,
+    });
   }
+
+  if (missing.length > 0) {
+    console.warn(`[sync-menu] WARNING: ${missing.length} expected categories not returned by API: ${missing.join(', ')}`);
+  }
+
+  // Synthesise the succeeded[] shape that buildSignatureDishes still expects
+  const succeeded = Object.values(sectionsByCategory).flat();
 
   // Build the menuCategories array
   const menuCategories = SITE_CATEGORIES.map((cat) => {
@@ -277,12 +285,12 @@ async function main() {
   );
   console.log(`[sync-menu] Fetched ${totalItems} items across ${menuCategories.length} categories.`);
 
-  // Sanity guard: refuse to write if the scrape returned suspiciously few
-  // items. Plateform HTML changes have silently emptied menuData before,
-  // which left the site rendering blank gray panels in production.
+  // Sanity guard: refuse to write if the API returned suspiciously few
+  // items. A silent wipe (sections: [] across the board) once shipped to
+  // prod and left the site rendering blank gray panels — never again.
   const MIN_ITEMS_THRESHOLD = 20;
   if (totalItems < MIN_ITEMS_THRESHOLD) {
-    console.error(`[sync-menu] ABORT: only ${totalItems} items parsed (threshold ${MIN_ITEMS_THRESHOLD}). Plateform HTML likely changed — selectors in parseItems() may need updating. Keeping existing menuData.js intact.`);
+    console.error(`[sync-menu] ABORT: only ${totalItems} items parsed (threshold ${MIN_ITEMS_THRESHOLD}). API contract or category IDs likely changed. Keeping existing menuData.js intact.`);
     // Exit 0 so the build proceeds with the previous menuData.js. The loud
     // stderr above is the signal to investigate.
     return;
