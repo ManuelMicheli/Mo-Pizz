@@ -20,7 +20,7 @@ const Navbar = () => {
 
     useEffect(() => {
         let heroEl = null;
-        let menuHorizEl = null;
+        let menuEl = null;
         let ticking = false;
 
         const handleScroll = () => {
@@ -33,7 +33,7 @@ const Navbar = () => {
 
                 // Lazy-cache DOM refs (re-query only while not yet found)
                 if (!heroEl) heroEl = document.getElementById('home');
-                if (!menuHorizEl) menuHorizEl = document.getElementById('menu-horizontal');
+                if (!menuEl) menuEl = document.getElementById('menu');
 
                 if (heroEl) {
                     setIsScrolled(heroEl.getBoundingClientRect().bottom <= 80);
@@ -41,8 +41,9 @@ const Navbar = () => {
                     setIsScrolled(y > window.innerHeight * 0.55);
                 }
 
-                if (menuHorizEl) {
-                    const rect = menuHorizEl.getBoundingClientRect();
+                // Hide navbar while #menu section is on screen — only on home
+                if (isHomePage && menuEl) {
+                    const rect = menuEl.getBoundingClientRect();
                     setIsInMenu(rect.top < 80 && rect.bottom > 0);
                 } else {
                     setIsInMenu(false);
@@ -54,7 +55,7 @@ const Navbar = () => {
 
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [isHomePage]);
 
     // Scroll lock: add/remove body.menu-open and save/restore scrollY
     useEffect(() => {
@@ -90,12 +91,12 @@ const Navbar = () => {
         <nav ref={navRef} className="fixed top-0 left-0 w-full z-50 flex justify-center pt-4 sm:pt-6 px-4 pointer-events-none">
 
             <div
-                className={`pointer-events-auto mx-auto rounded-[3rem] transition-all duration-500 flex items-center ${
+                className={`mx-auto rounded-[3rem] transition-all duration-500 flex items-center ${
                     isInMenu
-                        ? 'justify-center max-w-[160px] px-5 py-2 bg-charcoal/90 backdrop-blur-xl border border-white/10 shadow-lg scale-95 opacity-90 hover:opacity-100'
+                        ? 'opacity-0 -translate-y-[120%] pointer-events-none'
                         : isScrolled
-                            ? 'justify-between w-full max-w-6xl px-4 sm:px-6 py-4 bg-cream/90 backdrop-blur-xl border border-smoke/20 shadow-lg'
-                            : 'justify-between w-full max-w-6xl px-4 sm:px-6 py-4 bg-transparent border border-transparent'
+                            ? 'pointer-events-auto justify-between w-full max-w-6xl px-4 sm:px-6 py-4 bg-cream/90 backdrop-blur-xl border border-smoke/20 shadow-lg'
+                            : 'pointer-events-auto justify-between w-full max-w-6xl px-4 sm:px-6 py-4 bg-transparent border border-transparent'
                 }`}
             >
                 {/* Logo — hidden only during home hero (transparent navbar), visible everywhere else */}
