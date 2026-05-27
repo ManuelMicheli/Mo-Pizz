@@ -33,22 +33,26 @@ const Chef = () => {
                 force3D: true,
             });
 
-            gsap.to('.chef-photo', {
-                scrollTrigger: {
-                    trigger: cRef.current,
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: true
-                },
-                y: -50,
-                ease: 'none'
+            // Photo parallax: desktop only (mobile hides the photo column)
+            const mm = gsap.matchMedia();
+            mm.add('(min-width: 768px)', () => {
+                gsap.to('.chef-photo', {
+                    scrollTrigger: {
+                        trigger: cRef.current,
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: true,
+                    },
+                    y: -50,
+                    ease: 'none',
+                });
             });
         }, cRef);
         return () => ctx.revert();
     }, []);
 
     return (
-        <section id="chi-siamo" ref={cRef} className="w-full relative flex flex-col md:flex-row min-h-[80vh] overflow-hidden bg-flour md:bg-transparent">
+        <section id="chi-siamo" ref={cRef} className="w-full relative flex flex-col md:flex-row md:min-h-[80vh] overflow-hidden bg-flour md:bg-transparent">
             {/* Desktop Background Split - Hidden on Mobile */}
             <div className="absolute inset-0 hidden md:flex pointer-events-none -z-10">
                 <div className="w-[45%] h-full bg-flour"></div>
