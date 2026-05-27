@@ -153,12 +153,30 @@ const ServicesGrid = ({ hideHeader = false }) => {
                 scrollTrigger: { trigger: sectionRef.current, start: 'top 85%', once: true },
             });
 
-            // Single batched reveal — opacity + y only (no xPercent/scale → less compositor work)
-            gsap.from('.service-card', {
-                y: 24, opacity: 0, duration: 0.8, ease: 'power3.out',
-                stagger: 0.08,
+            // Directional reveal — opacity + y + xPercent only (no scale → no repaint of bg images)
+            gsap.from('.svc-row1-left', {
+                xPercent: -6, y: 24, opacity: 0,
+                duration: 1, ease: 'power3.out',
                 force3D: true,
                 scrollTrigger: { trigger: '.services-grid', start: 'top 85%', once: true },
+            });
+            gsap.from('.svc-row1-right', {
+                xPercent: 6, y: 24, opacity: 0,
+                duration: 1, delay: 0.12, ease: 'power3.out',
+                force3D: true,
+                scrollTrigger: { trigger: '.services-grid', start: 'top 85%', once: true },
+            });
+            gsap.from('.svc-row2-left', {
+                xPercent: -6, y: 24, opacity: 0,
+                duration: 1, ease: 'power3.out',
+                force3D: true,
+                scrollTrigger: { trigger: '.svc-row2-left', start: 'top 90%', once: true },
+            });
+            gsap.from('.svc-row2-right', {
+                xPercent: 6, y: 24, opacity: 0,
+                duration: 1, delay: 0.12, ease: 'power3.out',
+                force3D: true,
+                scrollTrigger: { trigger: '.svc-row2-right', start: 'top 90%', once: true },
             });
         }, sectionRef);
 
