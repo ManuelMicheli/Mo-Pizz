@@ -78,7 +78,7 @@ export const siteContent = {
     subheadline: 'A Legnano — passione, visione e fuoco.',
     paragraphs: [
       '**Mo Pizz** nasce dall\'idea della **famiglia Moschiano**: creare a Legnano un locale dove la pizza verace incontra una cucina di tradizione curata nei minimi dettagli. Dal primo giorno, ogni scelta, dalle farine ai fornitori, dal servizio all\'atmosfera, è pensata per offrire un\'esperienza che va oltre il piatto.',
-      'In cucina lavora un team affiatato: la **famiglia Moschiano** segue il forno e gli impasti, **Christian**, di formazione campana, firma antipasti, primi e secondi, mentre **Carmine e Alessia** curano la visione e la gestione del brand. Attorno a loro, uno staff giovane e professionale che trasforma ogni serata in qualcosa da ricordare.',
+      'In cucina lavora un team affiatato: **Christian**, di formazione campana, segue il forno e gli impasti e firma anche antipasti, primi e secondi, mentre **Carmine e Alessia** curano la visione e la gestione del brand. Attorno a loro, uno staff giovane e professionale che trasforma ogni serata in qualcosa da ricordare.',
     ],
     quote: 'La pizza è rispetto per la materia prima e amore per il fuoco.',
     photoAlt: 'Il team di MO PIZZ, pizzeria napoletana a Legnano — famiglia Moschiano e lo staff',
