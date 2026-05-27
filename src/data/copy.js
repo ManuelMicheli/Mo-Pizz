@@ -33,6 +33,7 @@ export const siteContent = {
       { label: 'Home', href: '/#' },
       { label: 'Chi Siamo', href: '/#chi-siamo' },
       { label: 'Menu', href: '/#menu' },
+      { label: 'Asporto', href: '/asporto', isRoute: true },
       { label: 'Gift Card', href: '/gift-cards', isRoute: true },
       { label: 'Fidelity', href: '/fidelity', isRoute: true },
       { label: 'Contatti', href: '/#contatti' },
@@ -175,6 +176,7 @@ export const siteContent = {
     ],
     ctaPrenota: 'Prenota',
     ctaOrdina: 'Ordina Online',
+    ctaAsporto: 'Asporto',
     ctaGiftCard: 'Gift Card',
     ctaFidelity: 'Fidelity',
     statusOpen: 'Forno Operativo',
@@ -287,6 +289,27 @@ export const siteContent = {
       body: 'La tua pizza preferita ti aspetta. Ordina online o chiamaci direttamente.',
       ctaPrimary: 'Ordina Ora',
       ctaSecondary: 'Chiama per Ordinare',
+    },
+  },
+
+  // ─── ASPORTO ──────────────────────────────────────────
+  asporto: {
+    hero: {
+      eyebrow: 'Asporto • Pronto in pochi minuti',
+      headline: 'Il forno a legna,',
+      headlineEm: 'da portare a casa.',
+      body: 'Pizza napoletana, antipasti e piatti della tradizione preparati al momento e pronti da ritirare. Componi l\'ordine in un attimo, paga online e passa a prenderlo caldo in Via Cadore 4.',
+      ctaPrimary: 'Ordina Asporto',
+      ctaSecondary: 'Vedi il Menu',
+    },
+    comeFunziona: {
+      eyebrow: 'In tre passi',
+      headline: 'Come Funziona',
+      steps: [
+        { num: '01', title: 'Componi l\'ordine', desc: 'Sfoglia il menu, scegli pizze e piatti e personalizza come preferisci.' },
+        { num: '02', title: 'Paga in sicurezza', desc: 'Conferma online con carta o paga al ritiro. Ricevi la conferma via email.' },
+        { num: '03', title: 'Ritira caldo', desc: 'Passa in pizzeria all\'orario indicato. Il tuo ordine ti aspetta pronto.' },
+      ],
     },
   },
 

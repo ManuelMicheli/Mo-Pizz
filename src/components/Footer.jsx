@@ -74,6 +74,7 @@ const Footer = () => {
                                 <Link key={i} href={`/${link.href}`} className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{link.label}</Link>
                             ))}
                             <Link href="/#prenota" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300 flex items-center gap-2"><Phone size={18} />{footer.ctaPrenota}</Link>
+                            <Link href="/asporto" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaAsporto}</Link>
                             <Link href="/ordina" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaOrdina}</Link>
                             <Link href="/gift-cards" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaGiftCard}</Link>
                             <Link href="/fidelity" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaFidelity}</Link>
