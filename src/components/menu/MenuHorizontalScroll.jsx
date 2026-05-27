@@ -323,31 +323,28 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
         );
       });
 
-      // Stagger item entrance per panel.
-      // immediateRender:false + fromTo: items stay visible if the trigger
-      // never fires (panel 0's left edge starts at 0% and only moves left,
-      // so 'left 80%' never crosses — without this guard panel 0 stuck at
-      // opacity 0 and looked like a gray void).
-      panels.forEach((panel) => {
+      // Stagger item entrance per panel — SKIP panel 0. Its left edge starts
+      // at viewport 0% and only moves left as the track scrolls, so any
+      // 'left X%' trigger never crosses. Panel 0 items must rely on the
+      // natural CSS state (visible). Animating them at all risks leaving
+      // them at opacity 0 forever if the trigger never fires.
+      panels.forEach((panel, idx) => {
+        if (idx === 0) return;
         const items = panel.querySelectorAll('.menu-item');
-        gsap.fromTo(items,
-          { y: 20, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            stagger: 0.03,
-            duration: 0.6,
-            ease: 'power3.out',
-            force3D: true,
-            immediateRender: false,
-            scrollTrigger: {
-              trigger: panel,
-              containerAnimation: scrollTween,
-              start: 'left 90%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
+        gsap.from(items, {
+          y: 20,
+          opacity: 0,
+          stagger: 0.03,
+          duration: 0.6,
+          ease: 'power3.out',
+          force3D: true,
+          scrollTrigger: {
+            trigger: panel,
+            containerAnimation: scrollTween,
+            start: 'left 90%',
+            toggleActions: 'play none none none',
+          },
+        });
       });
     }, container);
 
