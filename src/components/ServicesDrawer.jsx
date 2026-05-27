@@ -104,7 +104,7 @@ export default function ServicesDrawer() {
     const close = useCallback(() => setIsOpen(false), []);
 
     return (
-        <div className="block">
+        <div className="hidden md:block">
             {/* Side tab handle */}
             <button
                 type="button"
