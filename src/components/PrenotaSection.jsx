@@ -1,9 +1,10 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ExternalLink, CalendarCheck, Phone } from 'lucide-react';
 import { PLATEFORM_RESERVE_URL, RESERVE_MODE } from '@/lib/constants';
+import PlateformIframe from '@/components/ui/PlateformIframe';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
@@ -11,13 +12,6 @@ if (typeof window !== 'undefined') {
 
 const PrenotaSection = () => {
     const sectionRef = useRef(null);
-    const [iframeLoaded, setIframeLoaded] = useState(false);
-
-    // Fallback: hide spinner after 4s even if onLoad doesn't fire
-    useEffect(() => {
-        const timer = setTimeout(() => setIframeLoaded(true), 4000);
-        return () => clearTimeout(timer);
-    }, []);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -72,31 +66,18 @@ const PrenotaSection = () => {
 
                 {RESERVE_MODE === 'iframe' ? (
                     <div className="prenota-card relative w-full max-w-7xl mx-auto rounded-[1.5rem] sm:rounded-[2.5rem] border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden shadow-2xl shadow-black/30">
-                        {/* Top accent */}
                         <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-flame to-transparent" />
 
-                        <div className="relative w-full overflow-hidden min-h-[400px] sm:min-h-[480px] md:min-h-[560px]">
-                            {!iframeLoaded && (
-                                <div className="absolute inset-0 flex items-center justify-center bg-charcoal">
-                                    <div className="flex flex-col items-center gap-4">
-                                        <div className="w-10 h-10 border-2 border-flame border-t-transparent rounded-full animate-spin" />
-                                        <span className="font-sans text-smoke/60 text-sm">Caricamento prenotazione...</span>
-                                    </div>
-                                </div>
-                            )}
-                            <iframe
-                                src={PLATEFORM_RESERVE_URL}
-                                className="w-full border-0 h-[480px] sm:h-[560px] md:h-[640px]"
-                                style={{ marginTop: '-80px' }}
-                                sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
-                                allow="clipboard-write; payment; web-share"
-                                referrerPolicy="strict-origin-when-cross-origin"
-                                onLoad={() => setIframeLoaded(true)}
-                                title="Prenota un tavolo — Mo Pizz"
-                            />
-                        </div>
+                        <PlateformIframe
+                            src={PLATEFORM_RESERVE_URL}
+                            title="Prenota un tavolo — Mo Pizz"
+                            allow="clipboard-write; payment; web-share"
+                            theme="dark"
+                            iframeMarginTop={-80}
+                            showBottomBar={false}
+                            sizeClassName="h-[80svh] min-h-[440px] sm:h-[520px] md:h-[600px]"
+                        />
 
-                        {/* Bottom bar */}
                         <div className="p-4 text-center border-t border-white/5">
                             <a
                                 href={PLATEFORM_RESERVE_URL}

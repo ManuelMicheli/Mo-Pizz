@@ -1,15 +1,15 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ExternalLink, ArrowRight, Shield } from 'lucide-react';
 import { PLATEFORM_FIDELITY_URL, FIDELITY_MODE } from '@/lib/constants';
+import PlateformIframe from '@/components/ui/PlateformIframe';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const FidelityEmbed = () => {
     const sectionRef = useRef(null);
-    const [iframeLoaded, setIframeLoaded] = useState(false);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -77,31 +77,18 @@ const FidelityEmbed = () => {
 
                 {FIDELITY_MODE === 'iframe' ? (
                     <div className="fid-embed-card relative w-full max-w-7xl mx-auto rounded-[1.5rem] sm:rounded-[2.5rem] border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden shadow-2xl shadow-black/30">
-                        {/* Top accent line */}
                         <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-flame to-transparent" />
 
-                        <div className="relative w-full overflow-hidden min-h-[420px] sm:min-h-[520px] md:min-h-[620px]">
-                            {!iframeLoaded && (
-                                <div className="absolute inset-0 flex items-center justify-center bg-charcoal">
-                                    <div className="flex flex-col items-center gap-4">
-                                        <div className="w-10 h-10 border-2 border-gold border-t-transparent rounded-full animate-spin" />
-                                        <span className="font-sans text-smoke/60 text-sm">Caricamento form...</span>
-                                    </div>
-                                </div>
-                            )}
-                            <iframe
-                                src={PLATEFORM_FIDELITY_URL}
-                                className="w-full border-0 h-[540px] sm:h-[640px] md:h-[740px]"
-                                style={{ marginTop: '-120px' }}
-                                sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
-                                allow="clipboard-write"
-                                referrerPolicy="strict-origin-when-cross-origin"
-                                onLoad={() => setIframeLoaded(true)}
-                                title="Iscrizione Fidelity MO PIZZ"
-                            />
-                        </div>
+                        <PlateformIframe
+                            src={PLATEFORM_FIDELITY_URL}
+                            title="Iscrizione Fidelity MO PIZZ"
+                            allow="clipboard-write"
+                            theme="dark"
+                            iframeMarginTop={-120}
+                            showBottomBar={false}
+                            sizeClassName="h-[82svh] min-h-[480px] sm:h-[560px] md:h-[660px]"
+                        />
 
-                        {/* Bottom bar */}
                         <div className="p-4 text-center border-t border-white/5">
                             <a
                                 href={PLATEFORM_FIDELITY_URL}

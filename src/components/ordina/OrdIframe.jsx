@@ -1,16 +1,16 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ExternalLink } from 'lucide-react';
 import { PLATEFORM_ORDER_URL, ORDER_MODE } from '@/lib/constants';
 import { LinesPatternCard, LinesPatternCardBody } from '@/components/ui/LinesPatternCard';
+import PlateformIframe from '@/components/ui/PlateformIframe';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const OrdIframe = () => {
     const sectionRef = useRef(null);
-    const [iframeLoaded, setIframeLoaded] = useState(false);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -44,34 +44,23 @@ const OrdIframe = () => {
                         patternClassName="bg-lines-pattern"
                         gradientClassName="from-white/90 via-white/70 to-white/50"
                     >
-                        <div className="relative w-full min-h-[500px] sm:min-h-[600px] md:min-h-[700px]">
-                            {!iframeLoaded && (
-                                <div className="absolute inset-0 flex items-center justify-center bg-flour rounded-[2rem]">
-                                    <div className="flex flex-col items-center gap-4">
-                                        <div className="w-12 h-12 border-4 border-flame border-t-transparent rounded-full animate-spin" />
-                                        <span className="font-sans text-smoke">Caricamento menu...</span>
-                                    </div>
-                                </div>
-                            )}
-                            <iframe
-                                src={PLATEFORM_ORDER_URL}
-                                className="w-full border-0 h-[500px] sm:h-[600px] md:h-[700px]"
-                                sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
-                                allow="payment; clipboard-write"
-                                referrerPolicy="strict-origin-when-cross-origin"
-                                onLoad={() => setIframeLoaded(true)}
-                                title="Menu Mo Pizz — Ordina Online"
-                            />
-                            <div className="p-4 text-center bg-flour">
-                                <a
-                                    href={PLATEFORM_ORDER_URL}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="font-sans text-smoke text-sm hover:text-flame transition-colors inline-flex items-center gap-1"
-                                >
-                                    Problemi? Apri il menu in una nuova finestra <ExternalLink size={14} />
-                                </a>
-                            </div>
+                        <PlateformIframe
+                            src={PLATEFORM_ORDER_URL}
+                            title="Menu Mo Pizz — Ordina Online"
+                            allow="payment; clipboard-write"
+                            theme="light"
+                            showBottomBar={false}
+                            sizeClassName="h-[82svh] min-h-[540px] sm:h-[620px] md:h-[720px]"
+                        />
+                        <div className="p-4 text-center bg-flour">
+                            <a
+                                href={PLATEFORM_ORDER_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="font-sans text-smoke text-sm hover:text-flame transition-colors inline-flex items-center gap-1"
+                            >
+                                Problemi? Apri il menu in una nuova finestra <ExternalLink size={14} />
+                            </a>
                         </div>
                     </LinesPatternCard>
                 ) : (

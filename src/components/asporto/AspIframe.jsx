@@ -1,15 +1,15 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ExternalLink, Lock } from 'lucide-react';
 import { PLATEFORM_ORDER_URL, ORDER_MODE } from '@/lib/constants';
+import PlateformIframe from '@/components/ui/PlateformIframe';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const AspIframe = () => {
     const sectionRef = useRef(null);
-    const [iframeLoaded, setIframeLoaded] = useState(false);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -58,30 +58,16 @@ const AspIframe = () => {
 
                 {ORDER_MODE === 'iframe' ? (
                     <div className="asp-iframe-card relative w-full max-w-6xl mx-auto rounded-[1.5rem] sm:rounded-[2.5rem] border border-charcoal/10 bg-white overflow-hidden shadow-2xl shadow-charcoal/20">
-                        {/* Top accent line */}
                         <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-flame to-transparent" />
 
-                        <div className="relative w-full min-h-[520px] sm:min-h-[640px] md:min-h-[740px]">
-                            {!iframeLoaded && (
-                                <div className="absolute inset-0 flex items-center justify-center bg-cream z-10">
-                                    <div className="flex flex-col items-center gap-4">
-                                        <div className="w-12 h-12 border-4 border-flame border-t-transparent rounded-full animate-spin" />
-                                        <span className="font-sans text-smoke text-sm">Caricamento menu...</span>
-                                    </div>
-                                </div>
-                            )}
-                            <iframe
-                                src={PLATEFORM_ORDER_URL}
-                                className="w-full border-0 h-[520px] sm:h-[640px] md:h-[740px]"
-                                sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
-                                allow="payment; clipboard-write"
-                                referrerPolicy="strict-origin-when-cross-origin"
-                                onLoad={() => setIframeLoaded(true)}
-                                title="MO PIZZ — Consegna a domicilio, ordina online"
-                            />
-                        </div>
+                        <PlateformIframe
+                            src={PLATEFORM_ORDER_URL}
+                            title="MO PIZZ — Consegna a domicilio, ordina online"
+                            allow="payment; clipboard-write"
+                            theme="light"
+                            showBottomBar={false}
+                        />
 
-                        {/* Bottom bar */}
                         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-5 py-4 border-t border-charcoal/10 bg-cream/60">
                             <div className="flex items-center gap-2 text-smoke text-xs sm:text-sm font-sans">
                                 <Lock size={14} />

@@ -90,12 +90,12 @@ const Navbar = () => {
         <nav ref={navRef} className="fixed top-0 left-0 w-full z-50 flex justify-center pt-4 sm:pt-6 px-4 pointer-events-none">
 
             <div
-                className={`pointer-events-auto mx-auto rounded-[3rem] transition-all duration-500 flex items-center justify-between ${
+                className={`pointer-events-auto mx-auto rounded-[3rem] transition-all duration-500 flex items-center ${
                     isInMenu
-                        ? 'max-w-xs px-4 py-2 bg-charcoal/90 backdrop-blur-xl border border-white/10 shadow-lg scale-95 opacity-90 hover:opacity-100'
+                        ? 'justify-center max-w-[160px] px-5 py-2 bg-charcoal/90 backdrop-blur-xl border border-white/10 shadow-lg scale-95 opacity-90 hover:opacity-100'
                         : isScrolled
-                            ? 'w-full max-w-6xl px-4 sm:px-6 py-4 bg-cream/90 backdrop-blur-xl border border-smoke/20 shadow-lg'
-                            : 'w-full max-w-6xl px-4 sm:px-6 py-4 bg-transparent border border-transparent'
+                            ? 'justify-between w-full max-w-6xl px-4 sm:px-6 py-4 bg-cream/90 backdrop-blur-xl border border-smoke/20 shadow-lg'
+                            : 'justify-between w-full max-w-6xl px-4 sm:px-6 py-4 bg-transparent border border-transparent'
                 }`}
             >
                 {/* Logo — hidden only during home hero (transparent navbar), visible everywhere else */}
@@ -140,9 +140,11 @@ const Navbar = () => {
                     </a>
                 </div>
 
-                {/* Mobile Toggle — larger tap target, correct color for X */}
+                {/* Mobile Toggle — hidden in home menu section unless overlay open */}
                 <button
-                    className="md:hidden p-3 relative z-50"
+                    className={`md:hidden p-3 relative z-50 transition-all duration-500 ${
+                        isInMenu && !isMobileMenuOpen ? 'opacity-0 w-0 overflow-hidden pointer-events-none p-0' : 'opacity-100'
+                    }`}
                     onClick={toggleMenu}
                     aria-label={isMobileMenuOpen ? nav.ariaCloseMenu : nav.ariaOpenMenu}
                 >
