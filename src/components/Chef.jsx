@@ -52,16 +52,16 @@ const Chef = () => {
     }, []);
 
     return (
-        <section id="chi-siamo" ref={cRef} className="w-full relative flex flex-col md:flex-row md:min-h-[80vh] overflow-hidden bg-flour md:bg-transparent">
+        <section id="chi-siamo" ref={cRef} className="w-full relative flex flex-col md:flex-row md:min-h-[80vh] overflow-hidden bg-charcoal md:bg-transparent">
             {/* Desktop Background Split - Hidden on Mobile */}
             <div className="absolute inset-0 hidden md:flex pointer-events-none -z-10">
-                <div className="w-[45%] h-full bg-flour"></div>
+                <div className="w-[45%] h-full bg-charcoal"></div>
                 <div className="w-[55%] h-full bg-charcoal mix-blend-multiply opacity-5 noise-overlay"></div>
                 <div className="absolute top-0 right-0 w-[55%] h-full bg-charcoal -z-20"></div>
             </div>
 
             {/* Left side: Photo — desktop only (mobile photo lives between Chef and Staff) */}
-            <div className="hidden md:flex w-full md:w-[45%] bg-flour items-center justify-center md:p-12 lg:p-16 relative overflow-hidden">
+            <div className="hidden md:flex w-full md:w-[45%] bg-charcoal items-center justify-center md:p-12 lg:p-16 relative overflow-hidden">
                 <div className="chef-photo w-full md:max-w-[520px] lg:max-w-[610px] aspect-square rounded-full border-2 border-gold/60 shadow-2xl relative overflow-hidden">
                     <img
                         src="/images/christian-moschiano.jpg?v=2"
