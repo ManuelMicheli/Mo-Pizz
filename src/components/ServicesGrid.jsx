@@ -211,16 +211,11 @@ const ServicesGrid = ({ hideHeader = false }) => {
                 </div>
             )}
 
-            {/* Bento Grid — sfondo ereditato dal section */}
+            {/* Bento Grid — sfondo ereditato dal section (parent drawer provides atmosphere in hideHeader mode) */}
             <div
                 className={`services-grid relative flex flex-col gap-3 sm:gap-4 px-3 sm:px-4 overflow-hidden ${
-                    hideHeader ? 'flex-1 pt-16 sm:pt-20 pb-6 sm:pb-8' : 'pb-28 lg:pb-40 pt-8 lg:pt-12'
+                    hideHeader ? 'flex-1 pt-6 sm:pt-8 pb-6 sm:pb-8' : 'pb-28 lg:pb-40 pt-8 lg:pt-12'
                 }`}
-                style={hideHeader ? {
-                    backgroundImage: 'url(/images/services-grid-bg.webp)',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                } : undefined}
             >
                 {/* Sfumatura in basso: → charcoal — solo home */}
                 {!hideHeader && (
