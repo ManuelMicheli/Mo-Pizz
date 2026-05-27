@@ -23,7 +23,7 @@ const cards = [
         to: '/gift-cards',
         badge: 'Novità',
         badgeColor: 'bg-gold text-charcoal',
-        image: '/images/gift-card-envelope.webp',
+        image: '/images/services/gift-dining.webp',
     },
     {
         title: services.cards[1].title,
@@ -33,7 +33,7 @@ const cards = [
         to: '/ordina',
         badge: 'Ordina Online',
         badgeColor: 'bg-flame text-cream',
-        image: '/images/pizza-box-color.webp',
+        image: '/images/services/ordina-pizza-box.webp',
     },
     {
         title: services.cards[2].title,
@@ -53,7 +53,7 @@ const cards = [
         to: '/fidelity',
         badge: 'Novità',
         badgeColor: 'bg-gold text-charcoal',
-        image: '/images/pizza-forno-bw.webp',
+        image: '/images/services/fidelity-wine-toast.webp',
     },
 ];
 
