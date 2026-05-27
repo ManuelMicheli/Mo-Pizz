@@ -149,9 +149,9 @@ export const siteContent = {
     orariTitle: 'Orari di Apertura',
     orari: [
       { giorno: 'Lunedì', ore: 'Chiuso', isChiuso: true },
-      { giorno: 'Martedì — Giovedì', ore: '18:00 – 22:30' },
-      { giorno: 'Venerdì — Sabato', ore: '12:00 – 14:30\n18:00 – 22:30' },
-      { giorno: 'Domenica', ore: '18:00 – 22:30' },
+      { giorno: 'Martedì — Venerdì', ore: '12:00 – 14:30\n19:00 – 22:30' },
+      { giorno: 'Sabato', ore: '19:00 – 23:00' },
+      { giorno: 'Domenica', ore: '12:00 – 14:30\n19:00 – 22:30' },
     ],
     ctaChiama: 'Chiama Ora',
     ctaMappa: 'Indicazioni Stradali',
@@ -257,7 +257,7 @@ export const siteContent = {
       cards: [
         {
           title: 'Orari Asporto',
-          lines: ['Lunedì: Chiuso', 'Mar – Gio: 18:00 – 22:30', 'Ven – Sab: 12:00 – 14:30 / 18:00 – 22:30', 'Domenica: 18:00 – 22:30'],
+          lines: ['Lunedì: Chiuso', 'Mar – Ven, Dom: 12:00 – 14:30 / 19:00 – 22:30', 'Sabato: 19:00 – 23:00'],
         },
         {
           title: 'Tempo di Preparazione',
@@ -338,7 +338,7 @@ export const siteContent = {
       cards: [
         {
           title: 'Orari Prenotabili',
-          lines: ['Lunedì: Chiuso', 'Mar – Gio: 18:00 – 22:30', 'Ven – Sab: 12:00 – 14:30 / 18:00 – 22:30', 'Domenica: 18:00 – 22:30'],
+          lines: ['Lunedì: Chiuso', 'Mar – Ven, Dom: 12:00 – 14:30 / 19:00 – 22:30', 'Sabato: 19:00 – 23:00'],
         },
         {
           title: 'Coperti Disponibili',

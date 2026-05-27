@@ -16,14 +16,14 @@ const getIsOpen = () => {
     // Lunedì chiuso
     if (day === 1) return false;
 
-    // Venerdì (5) e Sabato (6): 12:00–14:30 + 18:00–22:30
-    if (day === 5 || day === 6) {
-        return (currentMinutes >= 720 && currentMinutes <= 870) ||
-               (currentMinutes >= 1080 && currentMinutes <= 1350);
+    // Sabato (6): solo cena 19:00–23:00
+    if (day === 6) {
+        return currentMinutes >= 1140 && currentMinutes <= 1380;
     }
 
-    // Mar–Gio (2-4), Domenica (0): 18:00–22:30
-    return currentMinutes >= 1080 && currentMinutes <= 1350;
+    // Mar–Ven (2-5), Domenica (0): 12:00–14:30 + 19:00–22:30
+    return (currentMinutes >= 720 && currentMinutes <= 870) ||
+           (currentMinutes >= 1140 && currentMinutes <= 1350);
 };
 
 const Footer = () => {

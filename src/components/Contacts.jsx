@@ -49,16 +49,16 @@ const Contacts = () => {
                                 <span className="text-ember font-bold">Chiuso</span>
                             </div>
                             <div className="flex justify-between items-center py-2 border-b border-smoke/10">
-                                <span className="font-medium">Martedì — Giovedì</span>
-                                <span>18:00 – 22:30</span>
+                                <span className="font-medium">Martedì — Venerdì</span>
+                                <span className="text-right">12:00 – 14:30 <br /> 19:00 – 22:30</span>
                             </div>
                             <div className="flex justify-between items-center py-2 border-b border-smoke/10">
-                                <span className="font-medium">Venerdì — Sabato</span>
-                                <span className="text-right">12:00 – 14:30 <br /> 18:00 – 22:30</span>
+                                <span className="font-medium">Sabato</span>
+                                <span>19:00 – 23:00</span>
                             </div>
                             <div className="flex justify-between items-center py-2">
                                 <span className="font-medium">Domenica</span>
-                                <span>18:00 – 22:30</span>
+                                <span className="text-right">12:00 – 14:30 <br /> 19:00 – 22:30</span>
                             </div>
                         </div>
                     </div>
