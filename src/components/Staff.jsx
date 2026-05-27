@@ -3,7 +3,6 @@
 import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Users } from 'lucide-react';
 import { siteContent } from '@/data/copy';
 
 const { staff } = siteContent;
@@ -45,18 +44,6 @@ const Staff = () => {
                 stagger: 0.03,
                 ease: 'none',
             });
-
-            // Image parallax
-            gsap.to('.staff-photo', {
-                scrollTrigger: {
-                    trigger: '.staff-photo',
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: true,
-                },
-                y: -40,
-                ease: 'none',
-            });
         }, sRef);
 
         return () => ctx.revert();
@@ -69,18 +56,6 @@ const Staff = () => {
         >
             {/* Noise overlay */}
             <div className="absolute inset-0 opacity-5 mix-blend-multiply noise-overlay pointer-events-none" />
-
-            {/* Staff image — full width, taller on mobile */}
-            <div className="staff-photo relative w-full aspect-[4/3] sm:aspect-[16/6] md:aspect-[16/4] lg:aspect-[16/3.5] overflow-hidden mb-16 sm:mb-20 bg-charcoal border-y border-cream/10">
-                {/* Placeholder gradient + icon */}
-                <div className="absolute inset-0 bg-gradient-to-br from-ember/30 via-charcoal to-flame/20" />
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-                    <Users size={64} className="text-cream/20" />
-                    <span className="font-mono text-cream/20 text-sm tracking-widest uppercase">
-                        Foto Staff
-                    </span>
-                </div>
-            </div>
 
             <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16">
 
