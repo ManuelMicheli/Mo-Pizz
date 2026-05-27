@@ -323,22 +323,31 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
         );
       });
 
-      // Stagger item entrance per panel
+      // Stagger item entrance per panel.
+      // immediateRender:false + fromTo: items stay visible if the trigger
+      // never fires (panel 0's left edge starts at 0% and only moves left,
+      // so 'left 80%' never crosses — without this guard panel 0 stuck at
+      // opacity 0 and looked like a gray void).
       panels.forEach((panel) => {
         const items = panel.querySelectorAll('.menu-item');
-        gsap.from(items, {
-          y: 20,
-          opacity: 0,
-          stagger: 0.03,
-          duration: 0.6,
-          ease: 'power3.out',
-          force3D: true,
-          scrollTrigger: {
-            trigger: panel,
-            containerAnimation: scrollTween,
-            start: 'left 80%',
-          },
-        });
+        gsap.fromTo(items,
+          { y: 20, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.03,
+            duration: 0.6,
+            ease: 'power3.out',
+            force3D: true,
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: panel,
+              containerAnimation: scrollTween,
+              start: 'left 90%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
       });
     }, container);
 
