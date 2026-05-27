@@ -277,6 +277,17 @@ async function main() {
   );
   console.log(`[sync-menu] Fetched ${totalItems} items across ${menuCategories.length} categories.`);
 
+  // Sanity guard: refuse to write if the scrape returned suspiciously few
+  // items. Plateform HTML changes have silently emptied menuData before,
+  // which left the site rendering blank gray panels in production.
+  const MIN_ITEMS_THRESHOLD = 20;
+  if (totalItems < MIN_ITEMS_THRESHOLD) {
+    console.error(`[sync-menu] ABORT: only ${totalItems} items parsed (threshold ${MIN_ITEMS_THRESHOLD}). Plateform HTML likely changed — selectors in parseItems() may need updating. Keeping existing menuData.js intact.`);
+    // Exit 0 so the build proceeds with the previous menuData.js. The loud
+    // stderr above is the signal to investigate.
+    return;
+  }
+
   // Generate JS file content
   const jsContent = generateMenuDataJS(menuCategories, signatureDishes);
 
