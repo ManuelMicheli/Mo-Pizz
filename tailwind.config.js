@@ -17,6 +17,7 @@ export default {
             },
             fontFamily: {
                 playfair: ['"CSCaliope"', 'Georgia', 'serif'],
+                'playfair-reverse': ['"CSCaliopeReverse"', '"CSCaliope"', 'Georgia', 'serif'],
                 sans: ['"Satoshi"', 'system-ui', '-apple-system', 'sans-serif'],
                 caveat: ['var(--font-caveat)', 'cursive'],
                 mono: ['var(--font-geist-mono)', 'ui-monospace', 'monospace'],

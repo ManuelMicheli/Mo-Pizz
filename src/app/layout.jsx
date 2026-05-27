@@ -116,6 +116,7 @@ export default function RootLayout({ children }) {
                 <meta name="google" content="notranslate" />
                 {/* Preload CSCaliope display serif */}
                 <link rel="preload" href="/fonts/CSCaliope-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+                <link rel="preload" href="/fonts/CSCaliope-ReverseItalic.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
                 {/* Preload hero + critical near-fold images so they appear immediately */}
                 <link rel="preload" as="image" href="/images/hero-home-v2.webp" fetchPriority="high" />
                 <link rel="preload" as="image" href="/images/logo_mopizz.webp" fetchPriority="high" />

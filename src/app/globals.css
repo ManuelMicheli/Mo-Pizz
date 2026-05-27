@@ -26,6 +26,16 @@
   font-display: swap;
 }
 
+/* Reverse italic — backslant display variant. Use via .font-playfair-reverse */
+@font-face {
+  font-family: 'CSCaliopeReverse';
+  src: url('/fonts/CSCaliope-ReverseItalic.woff2') format('woff2'),
+       url('/fonts/CSCaliope-ReverseItalic.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer utilities {
   .noise-overlay {
     mix-blend-mode: overlay;
