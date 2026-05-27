@@ -61,13 +61,13 @@ const AsportoPage = () => {
                         rel="noopener noreferrer"
                         className="flex-1 bg-flame hover:bg-ember text-cream font-sans font-bold py-3 rounded-full text-center flex items-center justify-center gap-2 transition-colors duration-300"
                     >
-                        Ordina Asporto
+                        Ordina a Domicilio
                         <ExternalLink size={18} />
                     </a>
                     <a
                         href="tel:+390331024363"
                         className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-cream hover:bg-white/10 transition-colors duration-300 shrink-0"
-                        aria-label="Chiama per ordinare l'asporto"
+                        aria-label="Chiama per ordinare a domicilio"
                     >
                         <Phone size={20} />
                     </a>

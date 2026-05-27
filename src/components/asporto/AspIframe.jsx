@@ -47,11 +47,11 @@ const AspIframe = () => {
                         Componi il tuo ordine
                     </span>
                     <h2 className="font-playfair text-charcoal text-4xl sm:text-5xl md:text-6xl lg:text-7xl mt-4 leading-tight">
-                        Ordina <span className="italic text-flame">Asporto</span>
+                        Ordina <span className="italic text-flame">a Domicilio</span>
                     </h2>
                     <p className="font-sans text-smoke text-base sm:text-lg mt-5 max-w-xl mx-auto leading-relaxed">
                         Sfoglia il menu, scegli i tuoi piatti e completa l'ordine in pochi click.
-                        Riceverai una conferma via email con l'orario di ritiro.
+                        Riceverai una conferma via email con l'orario di consegna stimato.
                     </p>
                     <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-flame to-transparent mx-auto mt-6" />
                 </div>
@@ -77,7 +77,7 @@ const AspIframe = () => {
                                 allow="payment; clipboard-write"
                                 referrerPolicy="strict-origin-when-cross-origin"
                                 onLoad={() => setIframeLoaded(true)}
-                                title="MO PIZZ — Asporto, ordina online"
+                                title="MO PIZZ — Consegna a domicilio, ordina online"
                             />
                         </div>
 
@@ -105,7 +105,7 @@ const AspIframe = () => {
                                 <ExternalLink className="text-flame" size={36} />
                             </div>
                             <p className="font-sans text-charcoal/80 text-lg sm:text-xl max-w-lg leading-relaxed">
-                                Componi il tuo ordine d'asporto su Plateform e ritira in Via Cadore 4.
+                                Componi il tuo ordine su Plateform: lo consegniamo noi direttamente a casa tua.
                             </p>
                             <a
                                 href={PLATEFORM_ORDER_URL}

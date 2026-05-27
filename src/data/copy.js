@@ -78,7 +78,7 @@ export const siteContent = {
     subheadline: 'A Legnano — passione, visione e fuoco.',
     paragraphs: [
       '**Mo Pizz** nasce dall\'idea della **famiglia Moschiano**: creare a Legnano un locale dove la pizza verace incontra una cucina di tradizione curata nei minimi dettagli. Dal primo giorno, ogni scelta, dalle farine ai fornitori, dal servizio all\'atmosfera, è pensata per offrire un\'esperienza che va oltre il piatto.',
-      'In cucina lavora un team affiatato: la **famiglia Moschiano** segue il forno e gli impasti, **il cuoco**, di formazione campana, firma antipasti, primi e secondi, mentre **Carmine e Alessia** curano la visione e la gestione del brand. Attorno a loro, uno staff giovane e professionale che trasforma ogni serata in qualcosa da ricordare.',
+      'In cucina lavora un team affiatato: la **famiglia Moschiano** segue il forno e gli impasti, **Christian**, di formazione campana, firma antipasti, primi e secondi, mentre **Carmine e Alessia** curano la visione e la gestione del brand. Attorno a loro, uno staff giovane e professionale che trasforma ogni serata in qualcosa da ricordare.',
     ],
     quote: 'La pizza è rispetto per la materia prima e amore per il fuoco.',
     photoAlt: 'Il team di MO PIZZ, pizzeria napoletana a Legnano — famiglia Moschiano e lo staff',
@@ -89,7 +89,7 @@ export const siteContent = {
     eyebrow: 'Lo Staff',
     paragraphs: [
       'Varcare la soglia di **Mo Pizz** significa lasciarsi alle spalle il rumore della città e ritrovarsi immersi in un\'atmosfera sospesa tra il contemporaneo e la **tradizione** più genuina. Le luci soffuse avvolgono la sala come un abbraccio, calde e ambrate, mentre il profumo della legna che brucia nel forno si mescola all\'aria con la stessa naturalezza di un ricordo d\'infanzia.',
-      'Al centro del progetto c\'è una squadra che lavora con lo stesso ritmo: la **famiglia Moschiano** al forno, **Carmine e Alessia** dietro le quinte, **il cuoco** che porta la sua formazione del sud tra primi di mare e secondi di terra, e uno **staff giovane** che ha costruito, sera dopo sera, un modo tutto suo di accogliere le persone, diretto, autentico, senza copione.',
+      'Al centro del progetto c\'è una squadra che lavora con lo stesso ritmo: **Christian** al forno e in cucina, **Carmine e Alessia** dietro le quinte a curare visione e accoglienza, e uno **staff giovane** che ha costruito, sera dopo sera, un modo tutto suo di accogliere le persone, diretto, autentico, senza copione.',
       'Attorno si muove un **gruppo affiatato**, cresciuto nel tempo come si cresce in una famiglia, con fiducia, rispetto e qualche litigata bonaria a fine servizio. C\'è chi accoglie con una battuta pronta, chi ricorda le preferenze dei clienti abituali senza che nessuno glielo abbia chiesto, chi porta i piatti con quella leggerezza elegante che non si insegna sui manuali.',
       'La sala è pensata per farti **stare bene** senza chiederti di cambiare registro: tavoli in legno scuro, linee pulite, dettagli curati con quella sobria eleganza che non urla ma si fa notare. In sottofondo, una selezione musicale che scorre senza imporsi, jazz, soul, qualche traccia indie italiana, a volte il silenzio quasi perfetto di una serata infrasettimanale dove ogni parola sembra più vera.',
       'Essere un cliente di **Mo Pizz** non significa sedersi, ordinare e andarsene: significa entrare a far parte, anche per un\'ora sola, di qualcosa di più grande di una cena fuori. Lo staff lavora perché tu ti senta **visto, non solo servito**, e c\'è una differenza enorme tra le due cose.',
@@ -292,14 +292,14 @@ export const siteContent = {
     },
   },
 
-  // ─── ASPORTO ──────────────────────────────────────────
+  // ─── ASPORTO (Consegna a domicilio) ───────────────────
   asporto: {
     hero: {
-      eyebrow: 'Asporto • Pronto in pochi minuti',
+      eyebrow: 'Consegna a domicilio • Legnano',
       headline: 'Il forno a legna,',
-      headlineEm: 'da portare a casa.',
-      body: 'Pizza napoletana, antipasti e piatti della tradizione preparati al momento e pronti da ritirare. Componi l\'ordine in un attimo, paga online e passa a prenderlo caldo in Via Cadore 4.',
-      ctaPrimary: 'Ordina Asporto',
+      headlineEm: 'direttamente a casa tua.',
+      body: 'Pizza napoletana, antipasti e piatti della tradizione preparati al momento e consegnati caldi direttamente a casa tua. Componi l\'ordine, paga online e pensiamo a tutto noi.',
+      ctaPrimary: 'Ordina a Domicilio',
       ctaSecondary: 'Vedi il Menu',
     },
     comeFunziona: {
@@ -307,8 +307,8 @@ export const siteContent = {
       headline: 'Come Funziona',
       steps: [
         { num: '01', title: 'Componi l\'ordine', desc: 'Sfoglia il menu, scegli pizze e piatti e personalizza come preferisci.' },
-        { num: '02', title: 'Paga in sicurezza', desc: 'Conferma online con carta o paga al ritiro. Ricevi la conferma via email.' },
-        { num: '03', title: 'Ritira caldo', desc: 'Passa in pizzeria all\'orario indicato. Il tuo ordine ti aspetta pronto.' },
+        { num: '02', title: 'Paga in sicurezza', desc: 'Conferma online con carta o alla consegna. Ricevi la conferma via email.' },
+        { num: '03', title: 'Ricevi a casa', desc: 'Pensiamo noi alla consegna: il tuo ordine arriva caldo direttamente al tuo indirizzo.' },
       ],
     },
   },

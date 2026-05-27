@@ -2,21 +2,21 @@ import AsportoPage from './AsportoPage';
 import { buildBreadcrumb } from '@/lib/constants';
 
 export const metadata = {
-    title: 'Asporto a Legnano — Pizza Napoletana da Portar via | MO PIZZ',
-    description: 'Asporto MO PIZZ a Legnano: pizza napoletana cotta nel forno a legna, antipasti e piatti della tradizione pronti da ritirare. Ordina online, paga in sicurezza e ritira in Via Cadore 4.',
-    keywords: 'asporto legnano, pizza asporto legnano, asporto pizzeria legnano, take away pizza legnano, ritiro pizza legnano, ordina pizza asporto, pizza da portar via legnano',
+    title: 'Consegna a Domicilio a Legnano — Pizza Napoletana | MO PIZZ',
+    description: 'Consegna a domicilio MO PIZZ a Legnano: pizza napoletana cotta nel forno a legna, antipasti e piatti della tradizione consegnati caldi direttamente a casa tua. Ordina online e paga in sicurezza.',
+    keywords: 'consegna a domicilio legnano, pizza a domicilio legnano, delivery pizza legnano, pizza a casa legnano, ordina pizza domicilio, consegna pizza napoletana legnano, food delivery legnano',
     alternates: {
         canonical: 'https://www.mopizz.it/asporto',
     },
     openGraph: {
-        title: 'Asporto a Legnano — MO PIZZ',
-        description: 'Pizza napoletana e piatti tradizionali pronti da ritirare. Ordina online e passa a prenderli in Via Cadore 4, Legnano.',
+        title: 'Consegna a Domicilio a Legnano — MO PIZZ',
+        description: 'Pizza napoletana e piatti tradizionali consegnati caldi direttamente a casa tua. Ordina online da MO PIZZ Legnano.',
         url: 'https://www.mopizz.it/asporto',
-        images: [{ url: '/images/ordina-hero.webp', width: 1920, height: 1080, alt: 'Asporto MO PIZZ Legnano — Pizza napoletana da portar via' }],
+        images: [{ url: '/images/asporto-hero.webp', width: 1920, height: 1080, alt: 'Consegna a domicilio MO PIZZ Legnano — Pizza napoletana a casa' }],
     },
     twitter: {
-        title: 'Asporto a Legnano — MO PIZZ',
-        description: 'Pizza napoletana e piatti tradizionali pronti da ritirare in Via Cadore 4, Legnano.',
+        title: 'Consegna a Domicilio a Legnano — MO PIZZ',
+        description: 'Pizza napoletana e piatti tradizionali consegnati caldi direttamente a casa tua. Ordina online.',
     },
 };
 
