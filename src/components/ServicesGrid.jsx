@@ -144,39 +144,21 @@ const ServicesGrid = ({ hideHeader = false }) => {
 
     useLayoutEffect(() => {
         if (hideHeader) return; // Drawer controls its own card entrance via CSS
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
         const ctx = gsap.context(() => {
             gsap.from('.services-header', {
-                y: 24, opacity: 0, duration: 1.1, ease: 'power3.out',
+                y: 20, opacity: 0, duration: 0.8, ease: 'power3.out',
                 force3D: true,
-                scrollTrigger: { trigger: sectionRef.current, start: 'top 85%' },
+                scrollTrigger: { trigger: sectionRef.current, start: 'top 85%', once: true },
             });
 
-            // Row 1: large card from left, small card from right
-            gsap.from('.svc-row1-left', {
-                xPercent: -4, y: 30, opacity: 0, scale: 0.97,
-                duration: 1.4, ease: 'expo.out',
+            // Single batched reveal — opacity + y only (no xPercent/scale → less compositor work)
+            gsap.from('.service-card', {
+                y: 24, opacity: 0, duration: 0.8, ease: 'power3.out',
+                stagger: 0.08,
                 force3D: true,
-                scrollTrigger: { trigger: '.services-grid', start: 'top 85%' },
-            });
-            gsap.from('.svc-row1-right', {
-                xPercent: 4, y: 30, opacity: 0, scale: 0.97,
-                duration: 1.4, delay: 0.15, ease: 'expo.out',
-                force3D: true,
-                scrollTrigger: { trigger: '.services-grid', start: 'top 85%' },
-            });
-
-            // Row 2: small card from left, large card from right
-            gsap.from('.svc-row2-left', {
-                xPercent: -4, y: 30, opacity: 0, scale: 0.97,
-                duration: 1.4, ease: 'expo.out',
-                force3D: true,
-                scrollTrigger: { trigger: '.svc-row2-left', start: 'top 90%' },
-            });
-            gsap.from('.svc-row2-right', {
-                xPercent: 4, y: 30, opacity: 0, scale: 0.97,
-                duration: 1.4, delay: 0.15, ease: 'expo.out',
-                force3D: true,
-                scrollTrigger: { trigger: '.svc-row2-right', start: 'top 90%' },
+                scrollTrigger: { trigger: '.services-grid', start: 'top 85%', once: true },
             });
         }, sectionRef);
 

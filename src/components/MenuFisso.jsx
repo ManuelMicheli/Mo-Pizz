@@ -8,7 +8,9 @@ import Link from 'next/link';
 import { siteContent } from '@/data/copy';
 import { menuFissoFormule } from '@/data/menuFissoData';
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const { menuFisso } = siteContent;
 
@@ -103,19 +105,17 @@ const MenuFisso = () => {
   const sectionRef = useRef(null);
 
   useLayoutEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const ctx = gsap.context(() => {
-      const els = gsap.utils.toArray('.mf-anim');
-      els.forEach((el) => {
-        gsap.fromTo(el,
-          { y: 25, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.7,
-            ease: 'power3.out',
-            scrollTrigger: { trigger: el, start: 'top 92%' },
-          }
-        );
+      gsap.from('.mf-anim', {
+        y: 20,
+        opacity: 0,
+        duration: 0.7,
+        ease: 'power3.out',
+        stagger: 0.08,
+        force3D: true,
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 85%', once: true },
       });
     }, sectionRef);
 
