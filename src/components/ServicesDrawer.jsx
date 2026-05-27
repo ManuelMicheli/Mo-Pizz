@@ -144,24 +144,30 @@ export default function ServicesDrawer() {
                 }`}
                 style={{
                     background:
-                        'radial-gradient(ellipse 90% 70% at 70% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,0.95) 100%)',
-                    backdropFilter: 'blur(6px)',
-                    WebkitBackdropFilter: 'blur(6px)',
+                        'radial-gradient(ellipse 90% 70% at 50% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,0.96) 100%)',
+                    backdropFilter: 'blur(8px)',
+                    WebkitBackdropFilter: 'blur(8px)',
                 }}
             />
 
-            {/* Panel */}
-            <aside
-                ref={drawerRef}
-                id="services-drawer"
-                role="dialog"
-                aria-modal={isOpen}
-                aria-hidden={!isOpen}
-                aria-label="Servizi Mo Pizz"
-                className={`fixed top-0 right-0 z-50 h-full w-[min(680px,92vw)] flex flex-col overflow-hidden bg-charcoal shadow-[-30px_0_80px_-20px_rgba(0,0,0,0.75)] transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                    isOpen ? 'translate-x-0' : 'translate-x-full'
+            {/* Centered popup wrapper */}
+            <div
+                className={`fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 pointer-events-none transition-opacity duration-500 ${
+                    isOpen ? 'opacity-100' : 'opacity-0'
                 }`}
             >
+                {/* Panel */}
+                <aside
+                    ref={drawerRef}
+                    id="services-drawer"
+                    role="dialog"
+                    aria-modal={isOpen}
+                    aria-hidden={!isOpen}
+                    aria-label="Servizi Mo Pizz"
+                    className={`pointer-events-auto relative w-[min(1100px,95vw)] max-h-[90vh] flex flex-col overflow-hidden rounded-[2rem] bg-charcoal border border-cream/10 shadow-[0_40px_120px_-20px_rgba(0,0,0,0.85),0_0_0_1px_rgba(232,93,38,0.18)] transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                        isOpen ? 'scale-100 translate-y-0 opacity-100' : 'scale-95 translate-y-4 opacity-0'
+                    }`}
+                >
                 {/* Atmospheric backdrop layers */}
                 <div className="pointer-events-none absolute inset-0 z-0">
                     <div
@@ -226,7 +232,8 @@ export default function ServicesDrawer() {
                         04 servizi
                     </span>
                 </footer>
-            </aside>
+                </aside>
+            </div>
         </div>
     );
 }
