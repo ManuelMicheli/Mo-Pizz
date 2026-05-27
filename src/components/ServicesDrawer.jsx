@@ -50,16 +50,15 @@ export default function ServicesDrawer() {
         setIsOpen(false);
     }, [pathname]);
 
-    // Scroll lock + Lenis stop while drawer open
+    // Scroll lock while drawer open. We DON'T stop Lenis — instead we mark the
+    // inner scrollable div with data-lenis-prevent so the wheel events inside
+    // the modal go through native scroll while the page underneath stays still.
     useEffect(() => {
         if (!isOpen) return;
-        const lenis = typeof window !== 'undefined' ? window.__lenis : null;
-        if (lenis) lenis.stop();
         const prevOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
         return () => {
             document.body.style.overflow = prevOverflow;
-            if (lenis) lenis.start();
         };
     }, [isOpen]);
 
@@ -164,7 +163,7 @@ export default function ServicesDrawer() {
                     aria-modal={isOpen}
                     aria-hidden={!isOpen}
                     aria-label="Servizi Mo Pizz"
-                    className={`pointer-events-auto relative w-[min(1100px,95vw)] max-h-[90vh] flex flex-col overflow-hidden rounded-[2rem] bg-charcoal border border-cream/10 shadow-[0_40px_120px_-20px_rgba(0,0,0,0.85),0_0_0_1px_rgba(232,93,38,0.18)] transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                    className={`pointer-events-auto relative w-[min(1320px,96vw)] max-h-[90vh] flex flex-col overflow-hidden rounded-[2rem] bg-charcoal border border-cream/10 shadow-[0_40px_120px_-20px_rgba(0,0,0,0.85),0_0_0_1px_rgba(232,93,38,0.18)] transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                         isOpen ? 'scale-100 translate-y-0 opacity-100' : 'scale-95 translate-y-4 opacity-0'
                     }`}
                 >
@@ -215,8 +214,11 @@ export default function ServicesDrawer() {
                 {/* Gradient divider */}
                 <div className="relative z-10 h-px mx-8 lg:mx-12 bg-gradient-to-r from-transparent via-cream/20 to-transparent" />
 
-                {/* Body — grid (scrollable) */}
-                <div className="relative z-10 flex-1 overflow-y-auto overflow-x-hidden">
+                {/* Body — grid (scrollable, bypasses Lenis) */}
+                <div
+                    data-lenis-prevent
+                    className="relative z-10 flex-1 overflow-y-auto overflow-x-hidden overscroll-contain"
+                >
                     <div className="drawer-reveal">
                         <ServicesGrid hideHeader={true} />
                     </div>
