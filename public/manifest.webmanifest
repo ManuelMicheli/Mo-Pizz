@@ -1,0 +1,39 @@
+{
+  "name": "MO PIZZ — Pizzeria Napoletana Legnano",
+  "short_name": "MO PIZZ",
+  "description": "Pizzeria napoletana autentica a Legnano. Pizza con forno a legna, asporto, consegna a domicilio.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1A1A1A",
+  "theme_color": "#1A1A1A",
+  "lang": "it-IT",
+  "dir": "ltr",
+  "categories": ["food", "lifestyle"],
+  "icons": [
+    {
+      "src": "/images/logo_mopizz.webp",
+      "sizes": "400x389",
+      "type": "image/webp",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ordina Asporto",
+      "short_name": "Asporto",
+      "url": "/ordina"
+    },
+    {
+      "name": "Consegna a Domicilio",
+      "short_name": "Domicilio",
+      "url": "/asporto"
+    },
+    {
+      "name": "Prenota un Tavolo",
+      "short_name": "Prenota",
+      "url": "/#prenota"
+    }
+  ]
+}

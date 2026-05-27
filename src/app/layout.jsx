@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import CookieBanner from '@/components/CookieBanner';
 import LenisProvider from '@/components/LenisProvider';
 import NoiseOverlay from '@/components/NoiseOverlay';
-import { schemaData, localBusinessSchema, webSiteSchema } from '@/lib/constants';
+import { schemaData, localBusinessSchema, webSiteSchema, GEO } from '@/lib/constants';
 
 // Mono — replaces TestTheFutureMono
 const geistMono = Geist_Mono({
@@ -33,8 +33,30 @@ export const metadata = {
         default: 'MO PIZZ | Pizzeria Napoletana a Legnano — Pizza con Forno a Legna',
         template: '%s | MO PIZZ',
     },
-    description: 'MO PIZZ è la pizzeria napoletana autentica a Legnano. Pizza con forno a legna, cucina tradizionale, menu fisso pranzo da €9, asporto e gift card. Via Cadore 4.',
-    keywords: 'pizzeria legnano, ristorante legnano, pizza napoletana legnano, miglior pizzeria legnano, ristorante napoletano legnano, pizza forno a legna legnano, menu fisso pranzo legnano, asporto legnano, pizzeria vicino a me',
+    description: 'MO PIZZ è la pizzeria napoletana autentica a Legnano. Pizza con forno a legna, cucina tradizionale, menu fisso pranzo da €9, asporto, consegna a domicilio e gift card. Via Cadore 4, Legnano (MI).',
+    keywords: 'mopizz, mo pizz, mopizz legnano, mopizz.it, mo pizz legnano, pizzeria legnano, ristorante legnano, pizza napoletana legnano, miglior pizzeria legnano, ristorante napoletano legnano, pizza forno a legna legnano, menu fisso pranzo legnano, asporto legnano, consegna a domicilio legnano, pizzeria vicino a me, pizzeria via cadore legnano',
+    applicationName: 'MO PIZZ',
+    authors: [{ name: 'MO PIZZ', url: 'https://www.mopizz.it' }],
+    creator: 'MO PIZZ',
+    publisher: 'MO PIZZ',
+    category: 'restaurant',
+    manifest: '/manifest.webmanifest',
+    other: {
+        'geo.region': GEO.region,
+        'geo.placename': GEO.placename,
+        'geo.position': `${GEO.latitude};${GEO.longitude}`,
+        ICBM: `${GEO.latitude}, ${GEO.longitude}`,
+    },
+    // Set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION / NEXT_PUBLIC_BING_SITE_VERIFICATION
+    // in Vercel project env vars to inject verification meta tags.
+    verification: {
+        ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && {
+            google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+        }),
+        ...(process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION && {
+            other: { 'msvalidate.01': process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION },
+        }),
+    },
     robots: {
         index: true,
         follow: true,
@@ -70,6 +92,10 @@ export const metadata = {
     },
     alternates: {
         canonical: 'https://www.mopizz.it',
+        languages: {
+            'it-IT': 'https://www.mopizz.it',
+            'x-default': 'https://www.mopizz.it',
+        },
     },
 };
 
@@ -77,6 +103,8 @@ export const viewport = {
     width: 'device-width',
     initialScale: 1,
     viewportFit: 'cover',
+    themeColor: '#1A1A1A',
+    colorScheme: 'dark',
 };
 
 export default function RootLayout({ children }) {

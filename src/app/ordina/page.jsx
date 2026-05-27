@@ -1,5 +1,5 @@
 import OrdinaPage from './OrdinaPage';
-import { buildBreadcrumb } from '@/lib/constants';
+import { buildBreadcrumb, takeawayServiceSchema } from '@/lib/constants';
 
 export const metadata = {
     title: 'Ordina Pizza per Asporto a Legnano — Forno a Legna',
@@ -28,6 +28,10 @@ export default function Page() {
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(takeawayServiceSchema) }}
             />
             <OrdinaPage />
         </>

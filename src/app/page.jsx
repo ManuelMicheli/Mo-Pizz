@@ -7,10 +7,19 @@ import Contacts from '@/components/Contacts';
 import ClientGroupA from './ClientGroupA';
 import ClientGroupB from './ClientGroupB';
 import ClientGroupC from './ClientGroupC';
+import { homeFaqSchema, homeBreadcrumbSchema } from '@/lib/constants';
 
 export default function HomePage() {
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(homeBreadcrumbSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFaqSchema) }}
+            />
             <Hero />
             <ClientGroupA />
             <Statement />

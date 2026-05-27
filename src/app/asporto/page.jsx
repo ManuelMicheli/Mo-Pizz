@@ -1,5 +1,5 @@
 import AsportoPage from './AsportoPage';
-import { buildBreadcrumb } from '@/lib/constants';
+import { buildBreadcrumb, deliveryServiceSchema } from '@/lib/constants';
 
 export const metadata = {
     title: 'Consegna a Domicilio a Legnano — Pizza Napoletana | MO PIZZ',
@@ -28,6 +28,10 @@ export default function Page() {
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(deliveryServiceSchema) }}
             />
             <AsportoPage />
         </>
