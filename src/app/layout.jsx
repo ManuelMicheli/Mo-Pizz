@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import CookieBanner from '@/components/CookieBanner';
 import LenisProvider from '@/components/LenisProvider';
 import NoiseOverlay from '@/components/NoiseOverlay';
+import ServicesDrawer from '@/components/ServicesDrawer';
 import { schemaData, localBusinessSchema, webSiteSchema, GEO } from '@/lib/constants';
 
 // Mono — replaces TestTheFutureMono
@@ -160,6 +161,7 @@ export default function RootLayout({ children }) {
                         <Footer />
                         <CookieBanner />
                     </div>
+                    <ServicesDrawer />
                 </LenisProvider>
                 <NoiseOverlay />
                 <Analytics />

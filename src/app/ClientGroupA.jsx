@@ -9,7 +9,10 @@ const MenuSection = dynamic(() => import('@/components/menu/MenuSection'), { ssr
 export default function ClientGroupA() {
     return (
         <>
-            <ServicesGrid />
+            {/* Mobile keeps the inline grid; desktop reaches it through the global ServicesDrawer */}
+            <div className="md:hidden">
+                <ServicesGrid />
+            </div>
             <MenuFisso />
             <MenuSection />
         </>
