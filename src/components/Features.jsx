@@ -145,11 +145,6 @@ const Features = () => {
                     force3D: true,
                     scrollTrigger: { trigger: sectionRef.current, start: 'top 85%' },
                 });
-                gsap.from('.features-mobile-img', {
-                    y: 30, opacity: 0, scale: 0.98, duration: 1.3, ease: 'expo.out',
-                    force3D: true,
-                    scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' },
-                });
             });
         }, sectionRef);
 
@@ -267,22 +262,6 @@ const Features = () => {
                     </div>
                 </div>
 
-                {/* Mobile: Single color image */}
-                {isMobile && (
-                    <div className="w-full px-4 mt-16">
-                        <div className="features-mobile-img rounded-2xl overflow-hidden aspect-[4/3]">
-                            <img
-                                src="/images/features-chi-siamo.webp"
-                                alt="Chi Siamo — Mo Pizz"
-                                width="1200"
-                                height="900"
-                                loading="lazy"
-                                decoding="async"
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
-                    </div>
-                )}
             </div>
 
             {/* ── Instagram Gallery ── */}
