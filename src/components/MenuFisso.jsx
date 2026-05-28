@@ -225,7 +225,7 @@ const MenuFisso = () => {
         <div className="mf-anim flex flex-col items-center mt-6">
           <a
             href="/#prenota"
-            className="magnetic-btn inline-flex items-center gap-2 bg-flame hover:bg-ember text-cream font-sans font-bold text-sm py-3 px-8 rounded-full transition-colors duration-300 shadow-lg shadow-flame/20"
+            className="magnetic-btn inline-flex items-center gap-2 bg-flameDark hover:bg-ember text-cream font-sans font-bold text-sm py-3 px-8 rounded-full transition-colors duration-300 shadow-lg shadow-flame/20"
           >
             {menuFisso.ctaPrenota}
             <ArrowRight className="w-4 h-4" />

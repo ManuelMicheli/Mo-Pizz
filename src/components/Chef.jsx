@@ -1,9 +1,7 @@
 'use client';
 
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { siteContent } from '@/data/copy';
 
 const { chiSiamo } = siteContent;
@@ -19,37 +17,53 @@ const renderHighlighted = (text) =>
 const Chef = () => {
     const cRef = useRef(null);
 
-    useLayoutEffect(() => {
-        let ctx = gsap.context(() => {
-            gsap.from('.chef-text', {
-                scrollTrigger: {
-                    trigger: cRef.current,
-                    start: 'top 70%',
-                },
-                y: 30,
-                opacity: 0,
-                stagger: 0.12,
-                duration: 1.3,
-                ease: 'expo.out',
-                force3D: true,
-            });
+    useEffect(() => {
+        let ctx;
+        let cancelled = false;
 
-            // Photo parallax: desktop only (mobile hides the photo column)
-            const mm = gsap.matchMedia();
-            mm.add('(min-width: 768px)', () => {
-                gsap.to('.chef-photo', {
-                    scrollTrigger: {
-                        trigger: cRef.current,
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: true,
-                    },
-                    y: -50,
-                    ease: 'none',
-                });
-            });
-        }, cRef);
-        return () => ctx.revert();
+        // Load GSAP lazily so it stays out of the initial hydration bundle.
+        // This is a below-the-fold scroll animation — keeping GSAP off the main
+        // thread during first load protects Total Blocking Time.
+        Promise.all([import('gsap'), import('gsap/ScrollTrigger')]).then(
+            ([{ default: gsap }, { ScrollTrigger }]) => {
+                if (cancelled) return;
+                gsap.registerPlugin(ScrollTrigger);
+                ctx = gsap.context(() => {
+                    gsap.from('.chef-text', {
+                        scrollTrigger: {
+                            trigger: cRef.current,
+                            start: 'top 70%',
+                        },
+                        y: 30,
+                        opacity: 0,
+                        stagger: 0.12,
+                        duration: 1.3,
+                        ease: 'expo.out',
+                        force3D: true,
+                    });
+
+                    // Photo parallax: desktop only (mobile hides the photo column)
+                    const mm = gsap.matchMedia();
+                    mm.add('(min-width: 768px)', () => {
+                        gsap.to('.chef-photo', {
+                            scrollTrigger: {
+                                trigger: cRef.current,
+                                start: 'top bottom',
+                                end: 'bottom top',
+                                scrub: true,
+                            },
+                            y: -50,
+                            ease: 'none',
+                        });
+                    });
+                }, cRef);
+            }
+        );
+
+        return () => {
+            cancelled = true;
+            if (ctx) ctx.revert();
+        };
     }, []);
 
     return (

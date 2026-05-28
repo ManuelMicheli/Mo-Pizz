@@ -1,8 +1,6 @@
 'use client';
 
-import React, { useLayoutEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useEffect, useRef } from 'react';
 import { siteContent } from '@/data/copy';
 
 const { staff } = siteContent;
@@ -24,29 +22,43 @@ const splitIntoWords = (text) => {
 const Staff = () => {
     const sRef = useRef(null);
 
-    useLayoutEffect(() => {
-        const ctx = gsap.context(() => {
-            const words = gsap.utils.toArray('.staff-word');
+    useEffect(() => {
+        let ctx;
+        let cancelled = false;
 
-            // Set initial state
-            gsap.set(words, { opacity: 0.08, y: 12 });
+        // Load GSAP lazily so it stays out of the initial hydration bundle —
+        // below-the-fold scroll animation, no need to block first load.
+        Promise.all([import('gsap'), import('gsap/ScrollTrigger')]).then(
+            ([{ default: gsap }, { ScrollTrigger }]) => {
+                if (cancelled) return;
+                gsap.registerPlugin(ScrollTrigger);
+                ctx = gsap.context(() => {
+                    const words = gsap.utils.toArray('.staff-word');
 
-            // Animate each word appearing on scroll
-            gsap.to(words, {
-                scrollTrigger: {
-                    trigger: sRef.current,
-                    start: 'top 80%',
-                    end: 'bottom 40%',
-                    scrub: 0.6,
-                },
-                opacity: 1,
-                y: 0,
-                stagger: 0.03,
-                ease: 'none',
-            });
-        }, sRef);
+                    // Set initial state
+                    gsap.set(words, { opacity: 0.08, y: 12 });
 
-        return () => ctx.revert();
+                    // Animate each word appearing on scroll
+                    gsap.to(words, {
+                        scrollTrigger: {
+                            trigger: sRef.current,
+                            start: 'top 80%',
+                            end: 'bottom 40%',
+                            scrub: 0.6,
+                        },
+                        opacity: 1,
+                        y: 0,
+                        stagger: 0.03,
+                        ease: 'none',
+                    });
+                }, sRef);
+            }
+        );
+
+        return () => {
+            cancelled = true;
+            if (ctx) ctx.revert();
+        };
     }, []);
 
     return (

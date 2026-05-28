@@ -1,16 +1,10 @@
 'use client';
 
-import React, { useLayoutEffect, useRef, memo } from 'react';
+import React, { useEffect, useRef, memo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Gift, ShoppingBag, CalendarHeart, Star, ArrowRight } from 'lucide-react';
 import { siteContent } from '@/data/copy';
-
-if (typeof window !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger);
-}
 
 const { services } = siteContent;
 
@@ -33,7 +27,7 @@ const cards = [
         icon: ShoppingBag,
         to: '/ordina',
         badge: 'Ordina Online',
-        badgeColor: 'bg-flame text-cream',
+        badgeColor: 'bg-flameDark text-cream',
         image: '/images/asporto-hero.webp',
     },
     {
@@ -149,12 +143,22 @@ const CardItem = memo(({ card }) => {
 const ServicesGrid = ({ hideHeader = false }) => {
     const sectionRef = useRef(null);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (hideHeader) return; // Drawer controls its own card entrance via CSS
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-        const ctx = gsap.context(() => {
-            gsap.from('.services-header', {
+        let ctx;
+        let cancelled = false;
+
+        // Load GSAP lazily. On desktop this inline grid is CSS-hidden (md:hidden)
+        // but still hydrates — keeping GSAP out of the eager bundle stops it from
+        // blocking the main thread during initial load.
+        Promise.all([import('gsap'), import('gsap/ScrollTrigger')]).then(
+            ([{ default: gsap }, { ScrollTrigger }]) => {
+                if (cancelled) return;
+                gsap.registerPlugin(ScrollTrigger);
+                ctx = gsap.context(() => {
+                    gsap.from('.services-header', {
                 y: 20, opacity: 0, duration: 0.8, ease: 'power3.out',
                 force3D: true,
                 scrollTrigger: { trigger: sectionRef.current, start: 'top 85%', once: true },
@@ -185,9 +189,14 @@ const ServicesGrid = ({ hideHeader = false }) => {
                 force3D: true,
                 scrollTrigger: { trigger: '.svc-row2-right', start: 'top 90%', once: true },
             });
-        }, sectionRef);
+                }, sectionRef);
+            }
+        );
 
-        return () => ctx.revert();
+        return () => {
+            cancelled = true;
+            if (ctx) ctx.revert();
+        };
     }, [hideHeader]);
 
     return (
