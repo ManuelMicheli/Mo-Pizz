@@ -13,14 +13,17 @@ if (typeof window !== 'undefined') {
 
 const LenisProvider = ({ children }) => {
     useEffect(() => {
-        const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
+        // Mobile (phones) use native scroll: smoothTouch was already off, so Lenis
+        // changed nothing there while still running a per-frame raf + a scroll listener
+        // that forces layout (ScrollTrigger.update) every scroll. Desktop keeps Lenis.
+        if (window.matchMedia('(max-width: 767px)').matches) return;
 
         const lenis = new Lenis({
-            duration: isMobile ? 0.8 : 1.4,
+            duration: 1.4,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             smoothWheel: true,
             smoothTouch: false,
-            touchMultiplier: isMobile ? 2.0 : 1.2,
+            touchMultiplier: 1.2,
             wheelMultiplier: 1,
         });
 
