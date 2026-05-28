@@ -9,15 +9,7 @@ const AspComeFunziona = () => {
     const { steps, eyebrow, headline } = asporto.comeFunziona;
 
     return (
-        <section className="relative w-full bg-charcoal pt-36 sm:pt-44 pb-24 sm:pb-32 px-4 sm:px-8 md:px-12 lg:px-20 overflow-hidden -mt-px">
-            {/* Diagonal transition from flame — identical to gift-cards HowItWorks */}
-            <div
-                className="absolute top-0 left-0 right-0 bg-flame"
-                style={{
-                    height: '6vw',
-                    clipPath: 'polygon(0 0, 100% 0, 100% 1%, 0 100%)',
-                }}
-            />
+        <section className="relative w-full bg-charcoal py-24 sm:py-32 px-4 sm:px-8 md:px-12 lg:px-20 overflow-hidden">
             <div className="max-w-[1400px] mx-auto">
                 <div className="text-center mb-14 sm:mb-20">
                     <span className="font-caveat text-flame text-2xl sm:text-3xl">{eyebrow}</span>
