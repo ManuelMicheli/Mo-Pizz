@@ -32,9 +32,13 @@ const Navbar = () => {
                 const y = window.scrollY;
                 setIsGathering(y > 40);
 
-                // Lazy-cache DOM refs (re-query only while not yet found)
-                if (!heroEl) heroEl = document.getElementById('home');
-                if (!menuEl) menuEl = document.getElementById('menu');
+                // Lazy-cache DOM refs (re-query only while not yet found).
+                // #menu is mounted lazily via DeferMount: the placeholder we
+                // first cache gets detached when MenuSection swaps in (its own
+                // id="menu"), and a detached node reports an all-zero rect — so
+                // re-query whenever the cached node is no longer connected.
+                if (!heroEl || !heroEl.isConnected) heroEl = document.getElementById('home');
+                if (!menuEl || !menuEl.isConnected) menuEl = document.getElementById('menu');
 
                 if (heroEl) {
                     setIsScrolled(heroEl.getBoundingClientRect().bottom <= 80);
