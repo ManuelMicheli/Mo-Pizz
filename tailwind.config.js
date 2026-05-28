@@ -8,6 +8,7 @@ export default {
             colors: {
                 charcoal: '#1A1A1A',
                 flame: '#E85D26',
+                flameDark: '#B8410F',
                 cream: '#FFF8F0',
                 ember: '#C94A1A',
                 gold: '#D4A853',

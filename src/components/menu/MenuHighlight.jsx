@@ -110,7 +110,7 @@ const MenuHighlight = () => {
             href="/brand-assets/mo pizza menu 2026 WEB.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="magnetic-btn w-full sm:w-auto text-center bg-flame hover:bg-ember text-cream font-sans font-bold py-4 px-10 rounded-full transition-colors duration-300 text-lg"
+            className="magnetic-btn w-full sm:w-auto text-center bg-flameDark hover:bg-ember text-cream font-sans font-bold py-4 px-10 rounded-full transition-colors duration-300 text-lg"
           >
             {menuCopy.highlightCtaLabel}
           </a>

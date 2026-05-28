@@ -35,9 +35,9 @@ const cards = [
         subtitle: services.cards[2].subtitle,
         description: services.cards[2].description,
         icon: CalendarHeart,
-        to: null,
-        badge: 'Coming Soon',
-        badgeColor: 'bg-smoke/30 text-cream/70',
+        to: '/#prenota',
+        badge: 'Ogni Venerdì',
+        badgeColor: 'bg-flameDark text-cream',
         image: '/images/services/eventi-speciali.webp',
     },
     {
@@ -107,9 +107,14 @@ const CardItem = memo(({ card }) => {
 
             {/* Content */}
             <div className="relative z-10 flex flex-col h-full justify-between">
-                {/* Top: Icon */}
-                <div>
+                {/* Top: Icon + Badge */}
+                <div className="flex items-start justify-between gap-2">
                     <Icon className={`w-7 h-7 sm:w-8 sm:h-8 stroke-[1.5] ${isPlaceholder && !hasBg ? 'text-cream/20' : hasBg ? 'text-cream/70 group-hover:text-cream transition-colors duration-300' : 'text-cream/40 group-hover:text-gold transition-colors duration-300'}`} />
+                    {card.badge && (
+                        <span className={`font-mono text-[0.65rem] sm:text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full ${card.badgeColor}`}>
+                            {card.badge}
+                        </span>
+                    )}
                 </div>
 
                 {/* Bottom: Text */}

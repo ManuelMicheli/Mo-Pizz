@@ -65,7 +65,7 @@ const Contacts = () => {
 
                     {/* CTAs */}
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <a href={contatti.telefonoHref} className="magnetic-btn w-full sm:w-auto bg-flame hover:bg-ember text-cream font-sans font-semibold py-4 px-8 rounded-full flex items-center justify-center gap-2 transition-colors duration-300">
+                        <a href={contatti.telefonoHref} className="magnetic-btn w-full sm:w-auto bg-flameDark hover:bg-ember text-cream font-sans font-semibold py-4 px-8 rounded-full flex items-center justify-center gap-2 transition-colors duration-300">
                             <Phone size={20} />
                             {contatti.ctaChiama}
                         </a>

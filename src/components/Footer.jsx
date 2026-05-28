@@ -107,7 +107,7 @@ const Footer = () => {
                 {/* Bottom Status Indicator */}
                 <div className="flex items-center justify-center gap-3">
                     <span className={`w-2.5 h-2.5 rounded-full transition-colors duration-700 ${isOpen ? 'bg-flame shadow-[0_0_10px_#E85D26] animate-[pulse_2s_infinite]' : 'bg-smoke/50'}`}></span>
-                    <span className={`font-caveat text-2xl transition-colors duration-700 ${isOpen ? 'text-smoke' : 'text-smoke/40'}`}>
+                    <span className={`font-caveat text-2xl transition-colors duration-700 ${isOpen ? 'text-smoke' : 'text-smoke/70'}`}>
                         {isOpen ? footer.statusOpen : footer.statusClosed}
                     </span>
                 </div>

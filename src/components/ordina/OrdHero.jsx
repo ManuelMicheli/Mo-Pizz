@@ -67,7 +67,7 @@ const OrdHero = () => {
                 <div className="ord-hero-elem flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
                     <a
                         href="#ord-iframe"
-                        className="magnetic-btn w-full sm:w-auto text-center bg-flame hover:bg-ember text-cream font-sans font-bold py-3 px-6 sm:py-4 sm:px-10 text-sm sm:text-lg rounded-full transition-colors duration-300"
+                        className="magnetic-btn w-full sm:w-auto text-center bg-flameDark hover:bg-ember text-cream font-sans font-bold py-3 px-6 sm:py-4 sm:px-10 text-sm sm:text-lg rounded-full transition-colors duration-300"
                     >
                         {ordina.hero.ctaPrimary}
                     </a>

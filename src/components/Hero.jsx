@@ -46,7 +46,7 @@ const Hero = () => {
                 <a href="#menu" className="hero-elem magnetic-btn text-center bg-charcoal border border-charcoal text-cream hover:bg-cream hover:text-charcoal font-sans font-bold py-3 px-6 sm:py-4 sm:px-8 text-sm sm:text-base rounded-full transition-colors duration-300" style={{ animationDelay: '0.51s' }}>
                     {hero.ctaMenu}
                 </a>
-                <a href="#prenota" className="hero-elem magnetic-btn text-center bg-flame hover:bg-ember text-cream font-sans font-bold py-3 px-6 sm:py-4 sm:px-8 text-sm sm:text-base rounded-full transition-colors duration-300" style={{ animationDelay: '0.63s' }}>
+                <a href="#prenota" className="hero-elem magnetic-btn text-center bg-flameDark hover:bg-ember text-cream font-sans font-bold py-3 px-6 sm:py-4 sm:px-8 text-sm sm:text-base rounded-full transition-colors duration-300" style={{ animationDelay: '0.63s' }}>
                     {hero.ctaPrenota}
                 </a>
             </div>

@@ -118,7 +118,7 @@ const GiftCardsCards = () => {
                                     <span className={cn(
                                         'inline-block self-start font-mono text-xs uppercase tracking-wider px-4 py-1.5 rounded-full border',
                                         card.featured
-                                            ? 'bg-flame/10 border-flame/20 text-flame'
+                                            ? 'bg-flame/10 border-flame/20 text-flameDark'
                                             : 'bg-smoke/5 border-smoke/15 text-smoke'
                                     )}>
                                         {card.badge}
@@ -140,7 +140,7 @@ const GiftCardsCards = () => {
                                         href={`https://wa.me/390331024363?text=${encodeURIComponent(card.waMessage)}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="magnetic-btn mt-2 w-fit inline-flex items-center gap-2 bg-flame hover:bg-ember text-cream font-sans font-semibold py-3.5 px-8 rounded-full transition-colors duration-300"
+                                        className="magnetic-btn mt-2 w-fit inline-flex items-center gap-2 bg-flameDark hover:bg-ember text-cream font-sans font-semibold py-3.5 px-8 rounded-full transition-colors duration-300"
                                     >
                                         {giftCards.cards.ctaLabel}
                                     </a>

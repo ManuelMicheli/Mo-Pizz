@@ -54,7 +54,7 @@ const CookieBanner = () => {
                 <div className="flex flex-col sm:flex-row gap-3">
                     <button
                         onClick={handleAccept}
-                        className="magnetic-btn bg-flame hover:bg-ember text-cream font-sans font-semibold py-3 px-6 rounded-full transition-colors duration-300 text-sm sm:text-base"
+                        className="magnetic-btn bg-flameDark hover:bg-ember text-cream font-sans font-semibold py-3 px-6 rounded-full transition-colors duration-300 text-sm sm:text-base"
                     >
                         Accetta Tutto
                     </button>

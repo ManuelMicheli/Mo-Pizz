@@ -30,7 +30,7 @@ const OrdCtaFinale = () => {
     }, []);
 
     return (
-        <section ref={sectionRef} className="relative py-24 sm:py-36 px-4 sm:px-8 md:px-12 lg:px-20 bg-flame overflow-hidden">
+        <section ref={sectionRef} className="relative py-24 sm:py-36 px-4 sm:px-8 md:px-12 lg:px-20 bg-flameDark overflow-hidden">
             {/* Diagonal lines overlay */}
             <div className="absolute inset-0 bg-repeat bg-[length:40px_40px] bg-lines-pattern opacity-[0.08]" />
 

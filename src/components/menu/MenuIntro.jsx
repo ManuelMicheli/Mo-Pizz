@@ -125,7 +125,7 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
           onClick={onCtaClick}
           className={`magnetic-btn border font-sans font-bold py-3.5 px-10 rounded-full transition-colors duration-300 text-base tracking-wide cursor-pointer ${
             menuOpen
-              ? 'border-flame/60 text-flame hover:bg-flame hover:text-cream'
+              ? 'border-flame/60 text-flameDark hover:bg-flame hover:text-cream'
               : 'border-cream/60 text-cream hover:bg-cream hover:text-charcoal'
           }`}
         >

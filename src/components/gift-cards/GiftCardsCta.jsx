@@ -50,7 +50,7 @@ const GiftCardsCta = () => {
                         href="https://wa.me/390331024363?text=Ciao!%20Vorrei%20acquistare%20una%20Gift%20Card%20di%20Mo%20Pizz.%20Potete%20darmi%20maggiori%20informazioni%3F"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="magnetic-btn w-full sm:w-auto text-center bg-flame hover:bg-ember text-cream font-sans font-semibold py-4 px-10 rounded-full transition-colors duration-300"
+                        className="magnetic-btn w-full sm:w-auto text-center bg-flameDark hover:bg-ember text-cream font-sans font-semibold py-4 px-10 rounded-full transition-colors duration-300"
                     >
                         {giftCards.cta.ctaPrimary}
                     </a>

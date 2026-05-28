@@ -47,7 +47,7 @@ const ReviewCta = () => (
                         href={GOOGLE_REVIEW_URL}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="magnetic-btn bg-flame hover:bg-ember text-cream font-sans font-bold py-4 px-7 rounded-full text-base flex items-center justify-center gap-2.5 transition-colors duration-300 shadow-[0_8px_28px_rgba(232,93,38,0.35)]"
+                        className="magnetic-btn bg-flameDark hover:bg-ember text-cream font-sans font-bold py-4 px-7 rounded-full text-base flex items-center justify-center gap-2.5 transition-colors duration-300 shadow-[0_8px_28px_rgba(232,93,38,0.35)]"
                     >
                         <PenLine className="w-5 h-5" strokeWidth={2.5} />
                         {recensioni.ctaGoogle}

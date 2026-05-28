@@ -103,7 +103,7 @@ const AspIframe = () => {
                                 href={PLATEFORM_ORDER_URL}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="magnetic-btn bg-flame hover:bg-ember text-cream font-sans font-bold py-4 px-12 rounded-full text-lg flex items-center gap-3 transition-colors duration-300"
+                                className="magnetic-btn bg-flameDark hover:bg-ember text-cream font-sans font-bold py-4 px-12 rounded-full text-lg flex items-center gap-3 transition-colors duration-300"
                             >
                                 Ordina su Plateform
                                 <ExternalLink size={20} />

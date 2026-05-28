@@ -64,7 +64,7 @@ const OrdinaPage = () => {
                         href={PLATEFORM_ORDER_URL}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 bg-flame hover:bg-ember text-cream font-sans font-bold py-3 rounded-full text-center flex items-center justify-center gap-2 transition-colors duration-300"
+                        className="flex-1 bg-flameDark hover:bg-ember text-cream font-sans font-bold py-3 rounded-full text-center flex items-center justify-center gap-2 transition-colors duration-300"
                     >
                         Ordina Ora
                         <ExternalLink size={18} />

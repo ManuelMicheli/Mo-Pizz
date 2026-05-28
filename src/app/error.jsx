@@ -45,7 +45,7 @@ export default function Error({ error, reset }) {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
             onClick={reset}
-            className="magnetic-btn bg-flame hover:bg-ember text-cream font-sans font-bold py-3 px-8 rounded-full transition-colors duration-300"
+            className="magnetic-btn bg-flameDark hover:bg-ember text-cream font-sans font-bold py-3 px-8 rounded-full transition-colors duration-300"
           >
             Riprova
           </button>

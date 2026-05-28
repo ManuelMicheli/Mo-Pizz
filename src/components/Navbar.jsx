@@ -140,7 +140,7 @@ const Navbar = () => {
                     >
                         {nav.ctaOrdina}
                     </Link>
-                    <a href="/#prenota" className="magnetic-btn bg-flame hover:bg-ember text-cream font-sans font-semibold py-3 px-6 rounded-full flex items-center gap-2 transition-colors duration-300">
+                    <a href="/#prenota" className="magnetic-btn bg-flameDark hover:bg-ember text-cream font-sans font-semibold py-3 px-6 rounded-full flex items-center gap-2 transition-colors duration-300">
                         <Phone size={18} />
                         {nav.ctaPrenota}
                     </a>
@@ -244,7 +244,7 @@ const Navbar = () => {
                     <a
                         href="/#prenota"
                         onClick={closeMenu}
-                        className="mobile-link mt-8 bg-flame hover:bg-ember text-cream font-sans font-semibold py-4 px-10 rounded-full flex items-center gap-2 text-xl"
+                        className="mobile-link mt-8 bg-flameDark hover:bg-ember text-cream font-sans font-semibold py-4 px-10 rounded-full flex items-center gap-2 text-xl"
                         style={{
                             opacity: isMobileMenuOpen ? 1 : 0,
                             transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(30px)',

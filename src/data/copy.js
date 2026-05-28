@@ -224,8 +224,8 @@ export const siteContent = {
       },
       {
         title: 'Eventi Speciali',
-        subtitle: 'Prossimamente',
-        description: 'Festeggia le tue occasioni speciali con noi. Cene private e celebrazioni su misura.',
+        subtitle: 'Serate a tema ricorrenti',
+        description: 'Appuntamenti fissi da vivere insieme: ogni venerdì la cena cantata, più serate a tema durante l\'anno.',
       },
       {
         title: 'Fidelity',
