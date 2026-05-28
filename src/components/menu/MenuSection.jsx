@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -17,8 +17,30 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const MenuSection = () => {
   const { menuCategories } = useMenu();
   const [menuUnlocked, setMenuUnlocked] = useState(true);
+  // The 120-item menu + GSAP pins are the heaviest thing on the page. Don't
+  // mount them at initial hydration — wait until the intro nears the viewport.
+  // Cuts initial main-thread (hydration) work; content grows below the fold so
+  // there's no layout shift, and the menu is client-only (ssr:false) regardless.
+  const [nearView, setNearView] = useState(false);
   const scrollAnchorRef = useRef(null);
   const heroRef = useRef(null);
+
+  useEffect(() => {
+    if (nearView) return;
+    const el = heroRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setNearView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: '800px 0px' }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [nearView]);
 
   const handleCtaClick = useCallback(() => {
     if (menuUnlocked) {
@@ -62,7 +84,7 @@ const MenuSection = () => {
         {/* Scroll anchor + menu */}
         <div ref={scrollAnchorRef} />
 
-        {menuUnlocked && (
+        {menuUnlocked && nearView && (
           <>
             <MenuHorizontalScroll menuCategories={menuCategories} />
             <MenuHighlight />

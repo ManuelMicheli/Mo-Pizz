@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import DeferMount from '@/components/DeferMount';
 
 const ServicesGrid = dynamic(() => import('@/components/ServicesGrid'));
 const MenuFisso = dynamic(() => import('@/components/MenuFisso'));
@@ -14,7 +15,9 @@ export default function ClientGroupA() {
                 <ServicesGrid />
             </div>
             <MenuFisso />
-            <MenuSection />
+            <DeferMount anchorId="menu" rootMargin="1200px 0px">
+                <MenuSection />
+            </DeferMount>
         </>
     );
 }

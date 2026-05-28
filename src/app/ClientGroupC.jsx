@@ -1,15 +1,14 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import DeferMount from '@/components/DeferMount';
 
-const Reviews = dynamic(() => import('@/components/Reviews'));
 const PrenotaSection = dynamic(() => import('@/components/PrenotaSection'));
 
 export default function ClientGroupC() {
     return (
-        <>
-            <Reviews />
+        <DeferMount anchorId="prenota" rootMargin="1200px 0px">
             <PrenotaSection />
-        </>
+        </DeferMount>
     );
 }

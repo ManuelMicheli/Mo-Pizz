@@ -13,8 +13,9 @@ const LenisProvider = ({ children }) => {
         let tickerCb;
         let removeTicker;
         let cancelled = false;
+        let idleHandle;
 
-        (async () => {
+        const init = async () => {
             const [{ default: Lenis }, { default: gsap }, { ScrollTrigger }] = await Promise.all([
                 import('lenis'),
                 import('gsap'),
@@ -45,10 +46,24 @@ const LenisProvider = ({ children }) => {
             gsap.ticker.add(tickerCb);
             gsap.ticker.lagSmoothing(0);
             removeTicker = () => gsap.ticker.remove(tickerCb);
-        })();
+        };
+
+        // Defer init past the initial hydration/paint window so loading Lenis +
+        // GSAP + ScrollTrigger (and ScrollTrigger's layout measurement) doesn't
+        // add to Total Blocking Time. Smooth scroll only matters once the user
+        // can actually scroll.
+        if (typeof requestIdleCallback === 'function') {
+            idleHandle = requestIdleCallback(() => init(), { timeout: 2000 });
+        } else {
+            idleHandle = setTimeout(init, 200);
+        }
 
         return () => {
             cancelled = true;
+            if (idleHandle) {
+                if (typeof cancelIdleCallback === 'function') cancelIdleCallback(idleHandle);
+                clearTimeout(idleHandle);
+            }
             if (removeTicker) removeTicker();
             if (lenis) {
                 lenis.destroy();

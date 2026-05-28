@@ -7,10 +7,21 @@ const CookieBanner = () => {
     const [visible, setVisible] = useState(false);
 
     useEffect(() => {
-        const consent = localStorage.getItem('mopizz-consent');
-        if (!consent) {
-            setVisible(true);
+        if (localStorage.getItem('mopizz-consent')) return;
+        // Show after the page settles. The banner is a large fixed card; if it
+        // painted during the initial load it became the LCP element (only Google
+        // Maps below the fold needs consent, so a brief delay is harmless).
+        let handle;
+        const show = () => setVisible(true);
+        if (typeof requestIdleCallback === 'function') {
+            handle = requestIdleCallback(show, { timeout: 3000 });
+        } else {
+            handle = setTimeout(show, 1500);
         }
+        return () => {
+            if (typeof cancelIdleCallback === 'function' && handle) cancelIdleCallback(handle);
+            clearTimeout(handle);
+        };
     }, []);
 
     const handleAccept = () => {

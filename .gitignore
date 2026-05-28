@@ -22,5 +22,8 @@ FONT/
 # Development prompts
 prompt-*.md
 mo-pizz-*.md
+
+# Lighthouse / perf report dumps
+lh-*.json
 .vercel
 .env*.local
