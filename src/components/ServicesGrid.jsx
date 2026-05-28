@@ -23,7 +23,7 @@ const cards = [
         to: '/gift-cards',
         badge: 'Novità',
         badgeColor: 'bg-gold text-charcoal',
-        image: '/images/services/gift-dining.webp?v=2',
+        image: '/images/gift-card-hero.webp',
     },
     {
         title: services.cards[1].title,

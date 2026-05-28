@@ -122,7 +122,7 @@ export default function RootLayout({ children }) {
                 <link rel="preload" as="image" href="/images/hero-home-v2.webp" fetchPriority="high" />
                 <link rel="preload" as="image" href="/images/logo_mopizz.webp" fetchPriority="high" />
                 <link rel="preload" as="image" href="/images/services-grid-bg.webp" />
-                <link rel="preload" as="image" href="/images/services/gift-dining.webp?v=2" fetchPriority="low" />
+                <link rel="preload" as="image" href="/images/gift-card-hero.webp" fetchPriority="low" />
                 <link rel="preload" as="image" href="/images/asporto-hero.webp" fetchPriority="low" />
                 <link rel="preload" as="image" href="/images/gallery-main.webp" />
                 <link rel="preload" as="image" href="/images/christian-moschiano.jpg?v=2" />
