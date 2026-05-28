@@ -46,7 +46,7 @@ const nextConfig = {
           { key: 'X-Permitted-Cross-Domain-Policies', value: 'none' },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://mopizz.plateform.app; style-src 'self' 'unsafe-inline' https://mopizz.plateform.app https://api.fontshare.com; font-src 'self' https://mopizz.plateform.app https://cdn.fontshare.com; img-src 'self' data: https://www.mopizz.it https://mopizz.plateform.app; frame-src https://www.google.com https://mopizz.plateform.app; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://mopizz.plateform.app; connect-src 'self' https://mopizz.plateform.app; upgrade-insecure-requests",
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://mopizz.plateform.app https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline' https://mopizz.plateform.app https://api.fontshare.com; font-src 'self' https://mopizz.plateform.app https://cdn.fontshare.com; img-src 'self' data: https://www.mopizz.it https://mopizz.plateform.app; frame-src https://www.google.com https://mopizz.plateform.app; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://mopizz.plateform.app; connect-src 'self' https://mopizz.plateform.app https://va.vercel-scripts.com; upgrade-insecure-requests",
           },
         ],
       },
