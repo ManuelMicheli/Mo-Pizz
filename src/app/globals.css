@@ -5,7 +5,7 @@
 /* Fonts:
    - CSCaliope (display serif) → @font-face below, self-hosted from /public/fonts
    - Geist Mono, Caveat → next/font/google (self-hosted, no CLS)
-   - Satoshi → Fontshare CDN <link> in layout.jsx (free commercial license)
+   - Satoshi → self-hosted variable font via next/font/local in layout.jsx (free commercial license)
    All wired into Tailwind fontFamily keys: playfair, sans, mono, caveat. */
 
 @font-face {

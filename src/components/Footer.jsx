@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Instagram, Facebook, Phone } from 'lucide-react';
 import { siteContent } from '@/data/copy';
@@ -56,7 +57,7 @@ const Footer = () => {
                     {/* Brand Col */}
                     <div className="flex flex-col items-center md:items-start gap-3">
                         <Link href="/" className="mb-2 group">
-                            <img src="/images/logo_mopizz.webp" alt="MO PIZZ — Pizzeria Napoletana a Legnano" width="400" height="389" loading="lazy" decoding="async" className="h-10 sm:h-12 w-auto" />
+                            <Image src="/images/logo_mopizz.webp" alt="MO PIZZ — Pizzeria Napoletana a Legnano" width={64} height={62} loading="lazy" className="h-10 sm:h-12 w-auto" />
                         </Link>
                         <div className="font-sans text-smoke text-sm uppercase tracking-wide">
                             {footer.subTagline}

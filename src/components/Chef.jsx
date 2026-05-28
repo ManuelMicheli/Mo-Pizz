@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useLayoutEffect, useRef } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { siteContent } from '@/data/copy';
@@ -63,13 +64,12 @@ const Chef = () => {
             {/* Left side: Photo — desktop only (mobile photo lives between Chef and Staff) */}
             <div className="hidden md:flex w-full md:w-[45%] bg-charcoal items-center justify-center md:px-12 md:pt-28 md:pb-12 lg:px-16 lg:pt-36 lg:pb-16 relative overflow-hidden">
                 <div className="chef-photo w-full md:max-w-[580px] lg:max-w-[680px] aspect-square rounded-full border-2 border-gold/60 shadow-2xl relative overflow-hidden">
-                    <img
-                        src="/images/christian-moschiano.jpg?v=2"
+                    <Image
+                        src="/images/christian-moschiano.jpg"
                         alt={chiSiamo.photoAlt}
-                        loading="lazy"
-                        decoding="async"
-                        className="absolute inset-0 w-full h-full object-cover"
-                        style={{ objectPosition: 'center' }}
+                        fill
+                        sizes="(min-width: 1280px) 680px, (min-width: 768px) 580px, 0px"
+                        className="object-cover object-center"
                     />
                 </div>
             </div>
@@ -88,13 +88,13 @@ const Chef = () => {
                 </h2>
 
                 {/* Mobile-only inline photo */}
-                <div className="chef-text md:hidden mx-auto w-full max-w-[360px] aspect-square rounded-full border-2 border-gold/60 shadow-2xl overflow-hidden mb-8 mt-8">
-                    <img
-                        src="/images/christian-moschiano.jpg?v=2"
+                <div className="chef-text md:hidden relative mx-auto w-full max-w-[360px] aspect-square rounded-full border-2 border-gold/60 shadow-2xl overflow-hidden mb-8 mt-8">
+                    <Image
+                        src="/images/christian-moschiano.jpg"
                         alt={chiSiamo.photoAlt}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover"
+                        fill
+                        sizes="(max-width: 767px) 360px, 0px"
+                        className="object-cover"
                     />
                 </div>
 

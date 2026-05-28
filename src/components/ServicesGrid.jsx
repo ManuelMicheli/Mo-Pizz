@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useLayoutEffect, useRef, memo } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -90,14 +91,20 @@ const CardItem = memo(({ card }) => {
                 </>
             ) : card.image ? (
                 <>
-                    <div
-                        className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-                        style={{ backgroundImage: `url('${card.image}')` }}
+                    <Image
+                        src={card.image}
+                        alt=""
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 66vw"
+                        className="object-cover object-center z-0"
                     />
                     {card.hoverImage && (
-                        <div
-                            className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                            style={{ backgroundImage: `url('${card.hoverImage}')` }}
+                        <Image
+                            src={card.hoverImage}
+                            alt=""
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 66vw"
+                            className="object-cover object-center z-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                         />
                     )}
                     <div className="absolute inset-0 z-[1] bg-gradient-to-t from-charcoal via-charcoal/55 to-charcoal/25" />

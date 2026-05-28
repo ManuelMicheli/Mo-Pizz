@@ -1,5 +1,6 @@
 import './globals.css';
 import { Geist_Mono, Caveat } from 'next/font/google';
+import localFont from 'next/font/local';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import Navbar from '@/components/Navbar';
@@ -26,7 +27,15 @@ const caveat = Caveat({
     display: 'swap',
 });
 
-// Satoshi (Fontshare) loaded via <link> in <head> — free commercial license
+// Satoshi (Fontshare, free commercial license) — self-hosted variable font, body sans
+const satoshi = localFont({
+    src: [
+        { path: '../../public/fonts/Satoshi-Variable.woff2', weight: '300 900', style: 'normal' },
+        { path: '../../public/fonts/Satoshi-VariableItalic.woff2', weight: '300 900', style: 'italic' },
+    ],
+    variable: '--font-satoshi',
+    display: 'swap',
+});
 
 export const metadata = {
     metadataBase: new URL('https://www.mopizz.it'),
@@ -110,7 +119,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="it" translate="no" className={`${geistMono.variable} ${caveat.variable}`}>
+        <html lang="it" translate="no" className={`${geistMono.variable} ${caveat.variable} ${satoshi.variable}`}>
             <head>
                 {/* Opt out of mobile browser auto-translation — Google Translate / Safari Translate
                     mutate text nodes and break React reconciliation (NotFoundError on removeChild). */}
@@ -118,32 +127,9 @@ export default function RootLayout({ children }) {
                 {/* Preload CSCaliope display serif (heading font, above the fold) */}
                 <link rel="preload" href="/fonts/CSCaliope-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
                 <link rel="preload" href="/fonts/CSCaliope-ReverseItalic.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-                {/* Preload above-the-fold raster images. Hero bg is handled by next/image
-                    priority (it injects its own preload of the OPTIMIZED url) — preloading
-                    the raw source here would double-download it, so it is intentionally absent. */}
-                <link rel="preload" as="image" href="/images/logo_mopizz.webp" />
-                <link rel="preload" as="image" href="/images/services-grid-bg.webp" />
-                {/* Satoshi (Fontshare) — free commercial license, body sans.
-                    Loaded async (media=print → all) so it never blocks first render. */}
-                <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
-                <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
-                <link
-                    rel="stylesheet"
-                    href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900,1,2&display=swap"
-                    media="print"
-                    data-satoshi=""
-                />
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: "(function(){var l=document.querySelector('link[data-satoshi]');if(l)l.media='all';})();",
-                    }}
-                />
-                <noscript>
-                    <link
-                        rel="stylesheet"
-                        href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900,1,2&display=swap"
-                    />
-                </noscript>
+                {/* Above-the-fold raster images (hero bg, logo) are handled by next/image
+                    priority, which injects its own preload of the OPTIMIZED url — preloading
+                    the raw sources here would double-download them, so they are intentionally absent. */}
                 {/* dns-prefetch (not preconnect) for below-the-fold iframe origins —
                     keeps the page under the 4-preconnect budget Lighthouse warns about. */}
                 <link rel="dns-prefetch" href="https://www.google.com" />

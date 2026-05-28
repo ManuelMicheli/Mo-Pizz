@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import Image from 'next/image';
 import { Phone, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -107,7 +108,7 @@ const Navbar = () => {
                             <span className="font-playfair italic text-xl sm:text-2xl text-cream">Pizz</span>
                         </>
                     ) : (
-                        <img src="/images/logo_mopizz.webp" alt="MO PIZZ — Pizzeria Napoletana Legnano" decoding="async" width="400" height="389" className="h-8 sm:h-9 w-auto" />
+                        <Image src="/images/logo_mopizz.webp" alt="MO PIZZ — Pizzeria Napoletana Legnano" width={48} height={47} priority className="h-8 sm:h-9 w-auto" />
                     )}
                 </a>
 

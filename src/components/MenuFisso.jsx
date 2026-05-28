@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useLayoutEffect, useRef } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Calendar, MapPin, Coffee, Check, ArrowRight } from 'lucide-react';
@@ -30,9 +31,12 @@ const MenuFissoCard = ({ formula }) => {
           aria-hidden="true"
           className="absolute inset-0 rounded-[1.2rem] overflow-hidden pointer-events-none"
         >
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-30 group-hover:opacity-45 transition-opacity duration-700 ease-out"
-            style={{ backgroundImage: `url('${bgImage}')` }}
+          <Image
+            src={bgImage}
+            alt=""
+            fill
+            sizes="(max-width: 767px) 100vw, 33vw"
+            className="object-cover object-center opacity-30 group-hover:opacity-45 transition-opacity duration-700 ease-out"
           />
           <div
             className="absolute inset-0"
@@ -128,12 +132,16 @@ const MenuFisso = () => {
     <section
       ref={sectionRef}
       className="relative z-10 py-12 sm:py-16 lg:py-20 overflow-hidden"
-      style={{
-        backgroundImage: "url('/images/menu-fisso-bg.jpg?v=3')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
     >
+      {/* Section background — kitchen atmosphere */}
+      <Image
+        src="/images/menu-fisso-bg.jpg"
+        alt=""
+        fill
+        sizes="100vw"
+        className="object-cover object-center -z-10"
+      />
+
       {/* Dark overlay so the kitchen photo reads as atmosphere, not subject */}
       <div className="absolute inset-0 bg-charcoal/65 pointer-events-none" />
 
