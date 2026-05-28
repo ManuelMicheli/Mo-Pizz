@@ -2,7 +2,6 @@
 
 import React, { useEffect } from 'react';
 import { ShoppingBag, X, Minus, Plus, Trash2, Phone } from 'lucide-react';
-import Link from 'next/link';
 import { useCart } from '@/hooks/useCart';
 
 const eur = (n) => n.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -154,14 +153,14 @@ export default function CartFab({ visible = true }) {
                                 >
                                     Svuota
                                 </button>
-                                <Link
+                                <a
                                     href="/#prenota"
                                     onClick={() => setOpen(false)}
                                     className="flex-[2] inline-flex items-center justify-center gap-2 bg-flame hover:bg-ember text-cream font-sans font-bold py-3 px-4 rounded-full transition-colors"
                                 >
                                     <Phone className="w-4 h-4" />
                                     Prenota tavolo
-                                </Link>
+                                </a>
                             </div>
                         </div>
                     )}

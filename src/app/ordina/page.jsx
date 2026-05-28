@@ -12,7 +12,7 @@ export const metadata = {
         title: 'Ordina Pizza per Asporto a Legnano — MO PIZZ',
         description: 'Pizza napoletana e cucina tradizionale da asporto. Ordina online, prepariamo tutto al momento con forno a legna. Ritira in Via Cadore 4, Legnano.',
         url: 'https://www.mopizz.it/ordina',
-        images: [{ url: '/images/ordina-hero.webp', width: 1920, height: 1080, alt: 'Ordina pizza per asporto da MO PIZZ Legnano' }],
+        images: [{ url: '/images/ordina-hero-photo.webp', width: 1600, height: 1068, alt: 'Ordina pizza per asporto da MO PIZZ Legnano' }],
     },
     twitter: {
         title: 'Ordina Pizza per Asporto a Legnano — MO PIZZ',

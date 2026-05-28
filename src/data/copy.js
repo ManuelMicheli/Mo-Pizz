@@ -206,6 +206,7 @@ export const siteContent = {
   // ─── SERVICES GRID ──────────────────────────────────
   services: {
     eyebrow: 'I Nostri Servizi',
+    drawerTab: 'Scopri tutto quello che Mo Pizz ha da offrirti',
     headline: 'Scopri tutto quello che',
     headlineEm: 'Mo Pizz',
     headlineSuffix: 'ha da offrirti',

@@ -30,10 +30,11 @@ const OrdHero = () => {
             {/* Background */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-                style={{ backgroundImage: `url('/images/ordina-hero.webp')` }}
+                style={{ backgroundImage: `url('/images/ordina-hero-photo.webp')` }}
             />
-            {/* Mobile-only dark overlay */}
-            <div className="absolute inset-0 bg-black/50 z-[1] md:hidden" />
+            {/* Cinematic legibility gradients — left fade carries the text, bottom grounds it */}
+            <div className="absolute inset-0 z-[1] bg-gradient-to-r from-charcoal via-charcoal/75 to-charcoal/30 md:via-charcoal/55 md:to-transparent" />
+            <div className="absolute inset-0 z-[1] bg-gradient-to-t from-charcoal/90 via-transparent to-transparent" />
 
             {/* Film grain */}
             <div

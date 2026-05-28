@@ -1,17 +1,10 @@
 'use client';
 
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Calendar, MapPin, Coffee, Check, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
 import { siteContent } from '@/data/copy';
 import { menuFissoFormule } from '@/data/menuFissoData';
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 const { menuFisso } = siteContent;
 
@@ -88,7 +81,7 @@ const MenuFissoCard = ({ formula }) => {
           {menuFisso.notaEscluso}
         </p>
 
-        <Link
+        <a
           href="/#prenota"
           aria-label={`Prenota per ${nome}`}
           className={`magnetic-btn mt-5 flex items-center justify-center gap-2 py-3 px-6 rounded-full font-sans font-bold text-sm transition-all duration-300 ${
@@ -99,7 +92,7 @@ const MenuFissoCard = ({ formula }) => {
         >
           Vieni a pranzo
           <ArrowRight className="w-3.5 h-3.5" />
-        </Link>
+        </a>
       </div>
     </div>
   );
@@ -108,22 +101,37 @@ const MenuFissoCard = ({ formula }) => {
 const MenuFisso = () => {
   const sectionRef = useRef(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const ctx = gsap.context(() => {
-      gsap.from('.mf-anim', {
-        y: 20,
-        opacity: 0,
-        duration: 0.7,
-        ease: 'power3.out',
-        stagger: 0.08,
-        force3D: true,
-        scrollTrigger: { trigger: sectionRef.current, start: 'top 85%', once: true },
-      });
-    }, sectionRef);
+    let ctx;
+    let cancelled = false;
 
-    return () => ctx.revert();
+    // Load GSAP lazily (not in the initial hydration bundle) — this is a
+    // below-the-fold scroll-triggered fade, so it can wait. Keeps GSAP off the
+    // main thread during first load to protect Total Blocking Time.
+    Promise.all([import('gsap'), import('gsap/ScrollTrigger')]).then(
+      ([{ default: gsap }, { ScrollTrigger }]) => {
+        if (cancelled) return;
+        gsap.registerPlugin(ScrollTrigger);
+        ctx = gsap.context(() => {
+          gsap.from('.mf-anim', {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+            ease: 'power3.out',
+            stagger: 0.08,
+            force3D: true,
+            scrollTrigger: { trigger: sectionRef.current, start: 'top 85%', once: true },
+          });
+        }, sectionRef);
+      }
+    );
+
+    return () => {
+      cancelled = true;
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   const mobileOrder = menuFissoFormule.slice().sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
@@ -215,13 +223,13 @@ const MenuFisso = () => {
 
         {/* CTA */}
         <div className="mf-anim flex flex-col items-center mt-6">
-          <Link
+          <a
             href="/#prenota"
             className="magnetic-btn inline-flex items-center gap-2 bg-flame hover:bg-ember text-cream font-sans font-bold text-sm py-3 px-8 rounded-full transition-colors duration-300 shadow-lg shadow-flame/20"
           >
             {menuFisso.ctaPrenota}
             <ArrowRight className="w-4 h-4" />
-          </Link>
+          </a>
           <p className="font-sans text-white text-xs mt-3 text-center max-w-xs">
             {menuFisso.ctaWalkin}
           </p>
