@@ -36,13 +36,13 @@ const AspIframe = () => {
         <section
             ref={sectionRef}
             id="asp-iframe"
-            className="relative z-10 -mt-[12vw] pt-[calc(6rem+12vw)] sm:pt-[calc(9rem+12vw)] pb-24 sm:pb-36 px-4 sm:px-8 md:px-12 lg:px-20 bg-flour overflow-hidden"
-            style={{ clipPath: 'polygon(0 12vw, 100% 0, 100% 100%, 0 100%)' }}
+            className="relative z-10 -mt-[8vw] pt-[calc(6rem+8vw)] sm:pt-[calc(9rem+8vw)] pb-24 sm:pb-36 px-4 sm:px-8 md:px-12 lg:px-20 bg-flour overflow-hidden"
+            style={{ clipPath: 'polygon(0 8vw, 100% 0, 100% 100%, 0 100%)' }}
         >
             {/* Oblique flame band dividing the charcoal "Come Funziona" from this white section */}
             <div
-                className="absolute top-0 inset-x-0 h-[16vw] bg-flame pointer-events-none"
-                style={{ clipPath: 'polygon(0 12vw, 100% 0, 100% 2.2vw, 0 calc(12vw + 2.2vw))' }}
+                className="absolute top-0 inset-x-0 h-[calc(8vw+16px)] bg-flame pointer-events-none"
+                style={{ clipPath: 'polygon(0 8vw, 100% 0, 100% 14px, 0 calc(8vw + 14px))' }}
             />
             {/* Subtle pattern */}
             <div className="absolute inset-0 opacity-[0.04] bg-lines-pattern pointer-events-none" />

@@ -9,7 +9,7 @@ const AspComeFunziona = () => {
     const { steps, eyebrow, headline } = asporto.comeFunziona;
 
     return (
-        <section className="relative w-full bg-charcoal py-24 sm:py-32 px-4 sm:px-8 md:px-12 lg:px-20 overflow-hidden">
+        <section className="relative w-full bg-charcoal pt-24 sm:pt-32 pb-[22vw] sm:pb-[15vw] px-4 sm:px-8 md:px-12 lg:px-20 overflow-hidden">
             <div className="max-w-[1400px] mx-auto">
                 <div className="text-center mb-14 sm:mb-20">
                     <span className="font-caveat text-flame text-2xl sm:text-3xl">{eyebrow}</span>
