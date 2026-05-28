@@ -43,7 +43,7 @@ const cards = [
         to: null,
         badge: 'Coming Soon',
         badgeColor: 'bg-smoke/30 text-cream/70',
-        image: null,
+        image: '/images/services/eventi-speciali.webp',
     },
     {
         title: services.cards[3].title,
@@ -100,7 +100,7 @@ const CardItem = memo(({ card }) => {
                             style={{ backgroundImage: `url('${card.hoverImage}')` }}
                         />
                     )}
-                    <div className="absolute inset-0 bg-charcoal/50 z-[1]" />
+                    <div className="absolute inset-0 z-[1] bg-gradient-to-t from-charcoal via-charcoal/55 to-charcoal/25" />
                 </>
             ) : null}
 
@@ -108,15 +108,15 @@ const CardItem = memo(({ card }) => {
             <div className="relative z-10 flex flex-col h-full justify-between">
                 {/* Top: Icon */}
                 <div>
-                    <Icon className={`w-7 h-7 sm:w-8 sm:h-8 stroke-[1.5] ${isPlaceholder ? 'text-cream/20' : hasBg ? 'text-cream/70 group-hover:text-cream transition-colors duration-300' : 'text-cream/40 group-hover:text-gold transition-colors duration-300'}`} />
+                    <Icon className={`w-7 h-7 sm:w-8 sm:h-8 stroke-[1.5] ${isPlaceholder && !hasBg ? 'text-cream/20' : hasBg ? 'text-cream/70 group-hover:text-cream transition-colors duration-300' : 'text-cream/40 group-hover:text-gold transition-colors duration-300'}`} />
                 </div>
 
                 {/* Bottom: Text */}
                 <div className="flex flex-col gap-2 mt-auto">
-                    <h3 className={`font-playfair text-xl sm:text-2xl leading-tight ${isPlaceholder ? 'text-cream/30' : 'text-cream'}`}>
+                    <h3 className={`font-playfair text-xl sm:text-2xl leading-tight ${isPlaceholder && !hasBg ? 'text-cream/30' : 'text-cream'}`}>
                         {card.title}
                     </h3>
-                    <p className={`font-sans text-sm leading-relaxed max-w-xs ${isPlaceholder ? 'text-smoke/30' : hasBg ? 'text-cream/80' : 'text-smoke'}`}>
+                    <p className={`font-sans text-sm leading-relaxed max-w-xs ${isPlaceholder && !hasBg ? 'text-smoke/30' : hasBg ? 'text-cream/80' : 'text-smoke'}`}>
                         {card.description}
                     </p>
                     {!isPlaceholder && (

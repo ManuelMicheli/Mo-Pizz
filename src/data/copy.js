@@ -222,7 +222,7 @@ export const siteContent = {
         description: 'Ordina le nostre specialità e ritira al locale. Tutto preparato al momento.',
       },
       {
-        title: 'Eventi Privati',
+        title: 'Eventi Speciali',
         subtitle: 'Prossimamente',
         description: 'Festeggia le tue occasioni speciali con noi. Cene private e celebrazioni su misura.',
       },
