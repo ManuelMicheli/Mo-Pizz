@@ -4,7 +4,7 @@ import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import gsap from 'gsap';
-import { X, ChevronLeft } from 'lucide-react';
+import { X, ChevronRight } from 'lucide-react';
 import { siteContent } from '@/data/copy';
 
 const ServicesGrid = dynamic(() => import('@/components/ServicesGrid'));
@@ -112,23 +112,23 @@ export default function ServicesDrawer() {
                 aria-label={`Apri ${services.eyebrow}`}
                 aria-expanded={isOpen}
                 aria-controls="services-drawer"
-                className={`group fixed right-0 top-1/2 -translate-y-1/2 z-40 transition-all duration-500 ease-out ${
+                className={`group fixed left-0 top-1/2 -translate-y-1/2 z-40 transition-all duration-500 ease-out ${
                     isOpen || isOverMenu
-                        ? 'translate-x-full opacity-0 pointer-events-none'
+                        ? '-translate-x-full opacity-0 pointer-events-none'
                         : 'translate-x-0 opacity-100'
                 }`}
             >
-                <span className="relative flex flex-col items-center gap-3 bg-gradient-to-l from-flame via-flame to-ember text-cream font-mono font-bold text-[11px] tracking-[0.3em] uppercase pl-3.5 pr-3 py-7 rounded-l-2xl shadow-[0_8px_40px_-4px_rgba(232,93,38,0.55)] border border-r-0 border-cream/15 transition-all duration-300 group-hover:pl-5 group-hover:shadow-[0_12px_50px_-4px_rgba(232,93,38,0.75)]">
-                    <ChevronLeft
+                <span className="relative flex flex-col items-center gap-3 bg-gradient-to-r from-flame via-flame to-ember text-cream font-mono font-bold text-[11px] tracking-[0.3em] uppercase pr-3.5 pl-3 py-7 rounded-r-2xl shadow-[0_8px_40px_-4px_rgba(232,93,38,0.55)] border border-l-0 border-cream/15 transition-all duration-300 group-hover:pr-5 group-hover:shadow-[0_12px_50px_-4px_rgba(232,93,38,0.75)]">
+                    <ChevronRight
                         size={16}
                         strokeWidth={2.5}
-                        className="transition-transform duration-300 group-hover:-translate-x-1 animate-[pulse_2.4s_ease-in-out_infinite]"
+                        className="transition-transform duration-300 group-hover:translate-x-1 animate-[pulse_2.4s_ease-in-out_infinite]"
                     />
                     <span style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
                         {services.eyebrow}
                     </span>
                     {/* Inner highlight line */}
-                    <span className="pointer-events-none absolute inset-y-2 left-1 w-px bg-gradient-to-b from-transparent via-cream/30 to-transparent" />
+                    <span className="pointer-events-none absolute inset-y-2 right-1 w-px bg-gradient-to-b from-transparent via-cream/30 to-transparent" />
                 </span>
             </button>
 

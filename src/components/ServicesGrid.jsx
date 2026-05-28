@@ -33,7 +33,7 @@ const cards = [
         to: '/ordina',
         badge: 'Ordina Online',
         badgeColor: 'bg-flame text-cream',
-        image: '/images/services/ordina-pizza-box.webp',
+        image: '/images/asporto-hero.webp',
     },
     {
         title: services.cards[2].title,
@@ -53,7 +53,7 @@ const cards = [
         to: '/fidelity',
         badge: 'Novità',
         badgeColor: 'bg-gold text-charcoal',
-        image: '/images/services/fidelity-wine-toast.webp?v=2',
+        image: '/images/fidelity-hero.webp',
     },
 ];
 
