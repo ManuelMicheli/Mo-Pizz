@@ -9,6 +9,10 @@ import MobileMenuTabBar from './MobileMenuTabBar';
 import { useCart } from '@/hooks/useCart';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+// Set here (not in LenisProvider) because LenisProvider no longer loads GSAP on
+// mobile — this is where the mobile category pins are created, so the config
+// must be applied wherever ScrollTrigger is actually used on phones.
+ScrollTrigger.config({ ignoreMobileResize: true });
 
 const badgeKeywords = ['DOP', 'DOCG', 'IGP', 'DOC', 'IGT', 'Slow Food'];
 

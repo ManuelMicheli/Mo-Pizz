@@ -120,6 +120,19 @@ body {
   animation: bounce 2s infinite;
 }
 
+/* Hero entrance — CSS-driven (was GSAP) so it costs zero JS on the critical path.
+   Per-element stagger comes from inline animation-delay. Reduced-motion is handled
+   by the global block below (duration collapses to 0.01ms → snaps to visible). */
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-elem {
+  opacity: 0;
+  animation: heroFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 /* Magnetic Button Base Styles */
 .magnetic-btn {
   position: relative;

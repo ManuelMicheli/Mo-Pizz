@@ -1,6 +1,5 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
 import { cn } from '@/lib/utils';
 
 export const wrap = (min, max, v) => {
@@ -39,20 +38,25 @@ export function ParallaxText({ children, baseVelocity = 100, className }) {
     }, [children]);
 
     useEffect(() => {
-        if (!innerRef.current || repetitions <= 1) return;
+        const inner = innerRef.current;
+        const container = containerRef.current;
+        if (!inner || !container || repetitions <= 1) return;
+        // Decorative motion only — skip entirely under reduced-motion.
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
         let lastScrollY = window.scrollY;
-        let scrollVelocity = 0;
         let smoothVelocity = 0;
+        let lastTime = 0;
+        let rafId = 0;
+        let running = false;
 
-        const setter = gsap.quickSetter(innerRef.current, 'x', '%');
-
-        const onTick = (_time, deltaTime) => {
-            const dt = deltaTime / 1000;
+        const frame = (time) => {
+            const dt = lastTime ? (time - lastTime) / 1000 : 0;
+            lastTime = time;
 
             // Track scroll velocity
             const currentScrollY = window.scrollY;
-            scrollVelocity = dt > 0 ? (currentScrollY - lastScrollY) / dt : 0;
+            const scrollVelocity = dt > 0 ? (currentScrollY - lastScrollY) / dt : 0;
             lastScrollY = currentScrollY;
 
             // Smooth the velocity (spring-like damping)
@@ -73,13 +77,33 @@ export function ParallaxText({ children, baseVelocity = 100, className }) {
             xRef.current += moveBy;
             xRef.current = wrap(-100 / repetitions, 0, xRef.current);
 
-            setter(xRef.current);
+            inner.style.transform = `translateX(${xRef.current}%)`;
+            rafId = requestAnimationFrame(frame);
         };
 
-        gsap.ticker.add(onTick);
+        const start = () => {
+            if (running) return;
+            running = true;
+            lastTime = 0;
+            lastScrollY = window.scrollY;
+            rafId = requestAnimationFrame(frame);
+        };
+        const stop = () => {
+            running = false;
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = 0;
+        };
+
+        // Only animate while the marquee is on screen — no main-thread work otherwise.
+        const io = new IntersectionObserver(
+            ([entry]) => (entry.isIntersecting ? start() : stop()),
+            { threshold: 0 }
+        );
+        io.observe(container);
 
         return () => {
-            gsap.ticker.remove(onTick);
+            io.disconnect();
+            stop();
         };
     }, [baseVelocity, repetitions]);
 

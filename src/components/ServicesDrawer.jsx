@@ -3,7 +3,6 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import dynamic from 'next/dynamic';
-import gsap from 'gsap';
 import { X, ChevronRight } from 'lucide-react';
 import { siteContent } from '@/data/copy';
 
@@ -70,34 +69,43 @@ export default function ServicesDrawer() {
         return () => window.removeEventListener('keydown', onKey);
     }, [isOpen]);
 
-    // Entrance stagger of cards every time drawer opens
+    // Entrance stagger of cards every time drawer opens. GSAP is loaded lazily
+    // here (only when the drawer opens) so it stays out of the initial bundle.
     useEffect(() => {
         if (!isOpen || !drawerRef.current) return;
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-        const ctx = gsap.context(() => {
-            gsap.from('.drawer-reveal', {
-                y: 24,
-                opacity: 0,
-                duration: 0.8,
-                stagger: 0.08,
-                ease: 'power3.out',
-                delay: 0.25,
-                force3D: true,
-                clearProps: 'transform,opacity',
-            });
-            gsap.from('.service-card', {
-                y: 32,
-                opacity: 0,
-                duration: 0.9,
-                stagger: 0.09,
-                ease: 'power3.out',
-                delay: 0.45,
-                force3D: true,
-                clearProps: 'transform,opacity',
-            });
-        }, drawerRef);
-        return () => ctx.revert();
+        let ctx;
+        let cancelled = false;
+        import('gsap').then(({ default: gsap }) => {
+            if (cancelled || !drawerRef.current) return;
+            ctx = gsap.context(() => {
+                gsap.from('.drawer-reveal', {
+                    y: 24,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.08,
+                    ease: 'power3.out',
+                    delay: 0.25,
+                    force3D: true,
+                    clearProps: 'transform,opacity',
+                });
+                gsap.from('.service-card', {
+                    y: 32,
+                    opacity: 0,
+                    duration: 0.9,
+                    stagger: 0.09,
+                    ease: 'power3.out',
+                    delay: 0.45,
+                    force3D: true,
+                    clearProps: 'transform,opacity',
+                });
+            }, drawerRef);
+        });
+        return () => {
+            cancelled = true;
+            if (ctx) ctx.revert();
+        };
     }, [isOpen]);
 
     const open = useCallback(() => setIsOpen(true), []);
