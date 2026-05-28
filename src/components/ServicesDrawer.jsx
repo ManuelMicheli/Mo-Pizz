@@ -132,7 +132,7 @@ export default function ServicesDrawer() {
                         strokeWidth={2.5}
                         className="transition-transform duration-300 group-hover:translate-x-1 animate-[pulse_2.4s_ease-in-out_infinite]"
                     />
-                    <span className="text-[9px] tracking-[0.1em] normal-case" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
+                    <span className="text-[12px] tracking-[0.1em] normal-case" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
                         {services.drawerTab}
                     </span>
                     {/* Inner highlight line */}
