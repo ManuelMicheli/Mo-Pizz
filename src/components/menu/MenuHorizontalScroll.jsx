@@ -175,6 +175,60 @@ const PanelContent = ({ category, handleDishHover }) => {
   );
 };
 
+/* ── Floating mobile sub-section nav ──────────────────────────────────────────
+   One slim pill row near the top. The strip auto-centers the active pill as you
+   scroll the page, so the tab "follows" the section you're looking at.
+   Keyed by category outside, so refs/scroll reset cleanly on category change. */
+const MobileSubNav = ({ category, currentSub, visible, onSelect }) => {
+  const scrollerRef = useRef(null);
+  const pillRefs = useRef([]);
+  const hasSubs = category.sections.length > 1;
+
+  useEffect(() => {
+    if (!hasSubs) return;
+    const scroller = scrollerRef.current;
+    const pill = pillRefs.current[currentSub];
+    if (!scroller || !pill) return;
+    const target = pill.offsetLeft - (scroller.clientWidth - pill.clientWidth) / 2;
+    scroller.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
+  }, [currentSub, hasSubs]);
+
+  return (
+    <div
+      className={`fixed top-3 left-0 right-0 z-40 px-3 transition-all duration-300 ${
+        visible ? 'translate-y-0 opacity-100' : '-translate-y-3 opacity-0 pointer-events-none'
+      }`}
+    >
+      <div className="max-w-md mx-auto flex items-center gap-2 rounded-full bg-charcoal/90 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/40 pl-3 pr-2 py-1.5">
+        <span className="flex-shrink-0 font-mono text-[10px] uppercase tracking-wider text-flame truncate max-w-[26vw]">
+          {category.title}
+        </span>
+        {hasSubs && (
+          <>
+            <span aria-hidden className="flex-shrink-0 w-px h-4 bg-white/15" />
+            <div ref={scrollerRef} className="flex gap-1.5 overflow-x-auto scrollbar-hide scroll-smooth">
+              {category.sections.map((sec, sIdx) => (
+                <button
+                  key={sIdx}
+                  ref={(el) => (pillRefs.current[sIdx] = el)}
+                  type="button"
+                  onClick={() => onSelect(sIdx)}
+                  className={`flex-shrink-0 font-sans text-[11px] tracking-wide py-1 px-3 rounded-full whitespace-nowrap transition-colors duration-300 ${
+                    currentSub === sIdx ? 'bg-flame text-cream font-bold' : 'text-smoke'
+                  }`}
+                  aria-current={currentSub === sIdx ? 'true' : undefined}
+                >
+                  {sec.heading}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const MenuHorizontalScroll = ({ menuCategories }) => {
   const containerRef = useRef(null);
   const trackRef = useRef(null);
@@ -573,54 +627,22 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
           ))}
         </section>
 
-        {/* Floating sub-section nav — one slim pill row, sits high (the navbar
-            hides inside #menu) and appears as you scroll the menu. Active pill
-            is driven by live-rect tracking, so it stays exact in every
-            category. Lives outside the GSAP-pinned subtree. */}
-        {(() => {
-          const currentCat = menuCategories[mobileActiveCategory];
-          if (!currentCat) return null;
-          const currentSub = activeSections[mobileActiveCategory] || 0;
-          const hasSubs = currentCat.sections.length > 1;
-          return (
-            <div
-              className={`fixed top-3 left-0 right-0 z-40 px-3 transition-all duration-300 ${
-                tabBarVisible ? 'translate-y-0 opacity-100' : '-translate-y-3 opacity-0 pointer-events-none'
-              }`}
-            >
-              <div className="max-w-md mx-auto flex items-center gap-2 rounded-full bg-charcoal/90 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/40 pl-3 pr-2 py-1.5">
-                <span className="flex-shrink-0 font-mono text-[10px] uppercase tracking-wider text-flame truncate max-w-[26vw]">
-                  {currentCat.title}
-                </span>
-                {hasSubs && (
-                  <>
-                    <span aria-hidden className="flex-shrink-0 w-px h-4 bg-white/15" />
-                    <div className="flex gap-1.5 overflow-x-auto scrollbar-hide">
-                      {currentCat.sections.map((sec, sIdx) => (
-                        <button
-                          key={sIdx}
-                          type="button"
-                          onClick={() => {
-                            setActiveSections(prev => ({ ...prev, [mobileActiveCategory]: sIdx }));
-                            scrollToSub(mobileActiveCategory, sIdx);
-                          }}
-                          className={`flex-shrink-0 font-sans text-[11px] tracking-wide py-1 px-3 rounded-full whitespace-nowrap transition-colors duration-300 ${
-                            currentSub === sIdx
-                              ? 'bg-flame text-cream font-bold'
-                              : 'text-smoke'
-                          }`}
-                          aria-current={currentSub === sIdx ? 'true' : undefined}
-                        >
-                          {sec.heading}
-                        </button>
-                      ))}
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
-          );
-        })()}
+        {/* Floating sub-section nav — slim pill row, sits high (navbar hides
+            inside #menu), appears on scroll. Keyed by category so the strip's
+            scroll position + pill refs reset cleanly when the category changes.
+            Active pill is driven by live-rect tracking and auto-centers. */}
+        {menuCategories[mobileActiveCategory] && (
+          <MobileSubNav
+            key={mobileActiveCategory}
+            category={menuCategories[mobileActiveCategory]}
+            currentSub={activeSections[mobileActiveCategory] || 0}
+            visible={tabBarVisible}
+            onSelect={(sIdx) => {
+              setActiveSections((prev) => ({ ...prev, [mobileActiveCategory]: sIdx }));
+              scrollToSub(mobileActiveCategory, sIdx);
+            }}
+          />
+        )}
 
         <MobileMenuTabBar
           menuCategories={menuCategories}
