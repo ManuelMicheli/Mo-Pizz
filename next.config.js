@@ -8,7 +8,7 @@ const nextConfig = {
     deviceSizes: [640, 768, 1024, 1280, 1536, 1920],
     imageSizes: [32, 48, 64, 96, 128, 192, 256, 384],
     qualities: [60, 75, 85, 95],
-    minimumCacheTTL: 2678400, // 31 days
+    minimumCacheTTL: 31536000, // 1 year — Lighthouse "efficient cache lifetime"
   },
 
   reactCompiler: false,

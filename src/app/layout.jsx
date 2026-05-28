@@ -115,27 +115,39 @@ export default function RootLayout({ children }) {
                 {/* Opt out of mobile browser auto-translation — Google Translate / Safari Translate
                     mutate text nodes and break React reconciliation (NotFoundError on removeChild). */}
                 <meta name="google" content="notranslate" />
-                {/* Preload CSCaliope display serif */}
+                {/* Preload CSCaliope display serif (heading font, above the fold) */}
                 <link rel="preload" href="/fonts/CSCaliope-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
                 <link rel="preload" href="/fonts/CSCaliope-ReverseItalic.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-                {/* Preload hero + critical near-fold images so they appear immediately */}
-                <link rel="preload" as="image" href="/images/hero-home-v2.webp" fetchPriority="high" />
-                <link rel="preload" as="image" href="/images/logo_mopizz.webp" fetchPriority="high" />
+                {/* Preload above-the-fold raster images. Hero bg is handled by next/image
+                    priority (it injects its own preload of the OPTIMIZED url) — preloading
+                    the raw source here would double-download it, so it is intentionally absent. */}
+                <link rel="preload" as="image" href="/images/logo_mopizz.webp" />
                 <link rel="preload" as="image" href="/images/services-grid-bg.webp" />
-                <link rel="preload" as="image" href="/images/gift-card-hero.webp" fetchPriority="low" />
-                <link rel="preload" as="image" href="/images/asporto-hero.webp" fetchPriority="low" />
-                <link rel="preload" as="image" href="/images/gallery-main.webp" />
-                <link rel="preload" as="image" href="/images/christian-moschiano.jpg?v=2" />
-                {/* Satoshi (Fontshare) — free commercial license, body sans */}
+                {/* Satoshi (Fontshare) — free commercial license, body sans.
+                    Loaded async (media=print → all) so it never blocks first render. */}
                 <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
                 <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
                 <link
                     rel="stylesheet"
                     href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900,1,2&display=swap"
+                    media="print"
+                    data-satoshi=""
                 />
-                {/* Preconnect for iframe origins */}
-                <link rel="preconnect" href="https://www.google.com" />
-                <link rel="preconnect" href="https://mopizz.plateform.app" />
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: "(function(){var l=document.querySelector('link[data-satoshi]');if(l)l.media='all';})();",
+                    }}
+                />
+                <noscript>
+                    <link
+                        rel="stylesheet"
+                        href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900,1,2&display=swap"
+                    />
+                </noscript>
+                {/* dns-prefetch (not preconnect) for below-the-fold iframe origins —
+                    keeps the page under the 4-preconnect budget Lighthouse warns about. */}
+                <link rel="dns-prefetch" href="https://www.google.com" />
+                <link rel="dns-prefetch" href="https://mopizz.plateform.app" />
                 {/* Schema.org JSON-LD */}
                 <script
                     type="application/ld+json"

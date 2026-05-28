@@ -27,6 +27,13 @@
   "overrides": {
     "minimatch": "^10.2.1"
   },
+  "browserslist": [
+    "chrome >= 87",
+    "edge >= 88",
+    "firefox >= 78",
+    "safari >= 14",
+    "not dead"
+  ],
   "devDependencies": {
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
