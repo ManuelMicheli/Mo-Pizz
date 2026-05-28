@@ -23,7 +23,7 @@ const cards = [
         to: '/gift-cards',
         badge: 'Novità',
         badgeColor: 'bg-gold text-charcoal',
-        image: '/images/services/gift-dining.webp',
+        image: '/images/services/gift-dining.webp?v=2',
     },
     {
         title: services.cards[1].title,
@@ -53,7 +53,7 @@ const cards = [
         to: '/fidelity',
         badge: 'Novità',
         badgeColor: 'bg-gold text-charcoal',
-        image: '/images/services/fidelity-wine-toast.webp',
+        image: '/images/services/fidelity-wine-toast.webp?v=2',
     },
 ];
 
