@@ -565,7 +565,7 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
                     <img
                       src={category.heroImage}
                       alt={category.title}
-                      loading={catIdx === 0 ? 'eager' : 'lazy'}
+                      loading="lazy"
                       decoding="async"
                       className="w-full h-[120%] object-cover"
                     />

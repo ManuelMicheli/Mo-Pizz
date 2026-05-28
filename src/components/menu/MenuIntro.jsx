@@ -1,5 +1,6 @@
 'use client';
 import React, { useLayoutEffect, useRef } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChevronDown } from 'lucide-react';
@@ -70,12 +71,12 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
       <div className="relative z-10 w-full h-full flex">
         {/* Left half */}
         <div className="menu-hero-img w-1/2 h-full relative overflow-hidden">
-          <img
+          <Image
             src="/images/menu-intro-left.webp"
             alt=""
-            loading="eager"
-            decoding="async"
-            className="w-full h-full object-cover"
+            fill
+            sizes="50vw"
+            className="object-cover"
           />
           {/* Inner edge fade */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-charcoal/60" />
@@ -83,12 +84,12 @@ const MenuIntro = ({ onCtaClick, menuOpen }) => {
 
         {/* Right half */}
         <div className="menu-hero-img w-1/2 h-full relative overflow-hidden">
-          <img
+          <Image
             src="/images/menu-intro-right.webp"
             alt=""
-            loading="eager"
-            decoding="async"
-            className="w-full h-full object-cover"
+            fill
+            sizes="50vw"
+            className="object-cover"
           />
           {/* Inner edge fade */}
           <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-charcoal/60" />

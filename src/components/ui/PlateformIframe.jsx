@@ -105,6 +105,7 @@ export default function PlateformIframe({
                     title={title}
                     sandbox={sandbox}
                     allow={allow}
+                    loading="lazy"
                     referrerPolicy="strict-origin-when-cross-origin"
                     onLoad={() => setLoaded(true)}
                     style={iframeStyle}
