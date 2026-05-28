@@ -51,7 +51,7 @@ const CartButton = ({ category, section, item, size = 'md' }) => {
       type="button"
       onClick={(e) => { e.stopPropagation(); decrement(payload); }}
       aria-label={`Rimuovi una unità di ${item.name}`}
-      className={`${dims} flex items-center justify-center rounded-full bg-flame text-cream hover:bg-ember transition-colors flex-shrink-0 relative font-mono text-xs font-bold tabular-nums`}
+      className={`${dims} flex items-center justify-center rounded-full bg-flameDark text-cream hover:bg-ember transition-colors flex-shrink-0 relative font-mono text-xs font-bold tabular-nums`}
     >
       {qty > 1 ? qty : <Check className={icon} strokeWidth={2.5} />}
     </button>
@@ -114,7 +114,7 @@ const PanelContent = ({ category, handleDishHover }) => {
           onClick={() => scrollToSection(navIdx)}
           className={`flex-shrink-0 font-sans text-[11px] tracking-wide py-1.5 px-3.5 rounded-full border transition-all duration-300 cursor-pointer whitespace-nowrap ${
             currentSIdx === navIdx
-              ? 'bg-flame/15 border-flame/40 text-flame font-bold'
+              ? 'bg-flame/15 border-flame/40 text-flameDark font-bold'
               : 'bg-white/5 border-white/10 text-smoke hover:text-cream hover:border-white/20'
           }`}
         >
@@ -218,7 +218,7 @@ const MobileSubNav = ({ category, currentSub, visible, onSelect }) => {
                   type="button"
                   onClick={() => onSelect(sIdx)}
                   className={`flex-shrink-0 font-sans text-[11px] tracking-wide py-1 px-3 rounded-full whitespace-nowrap transition-colors duration-300 ${
-                    currentSub === sIdx ? 'bg-flame text-cream font-bold' : 'text-smoke'
+                    currentSub === sIdx ? 'bg-flameDark text-cream font-bold' : 'text-smoke'
                   }`}
                   aria-current={currentSub === sIdx ? 'true' : undefined}
                 >
@@ -518,13 +518,22 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
     const y = Math.max(0, targetY);
     const lenis = typeof window !== 'undefined' ? window.__lenis : null;
     if (lenis && typeof lenis.scrollTo === 'function') {
-      // Lenis owns scroll on this site; bypass it and gsap ScrollToPlugin
-      // would otherwise be reset by Lenis's next raf tick.
+      // Desktop: Lenis owns scroll. Bypass it directly — a gsap ScrollToPlugin
+      // tween would be reset by Lenis's next raf tick.
       lenis.scrollTo(y, { duration: 0.9, immediate: false });
       return;
     }
+    // Mobile: Lenis is disabled (native scroll). Use the browser's own smooth
+    // scroll — compositor-driven, so it stays fluid while the category pins
+    // reflow. A gsap window tween with autoKill gets killed mid-flight by those
+    // pin reflows (reads as a janky half-jump), so don't use it on mobile.
+    if (typeof window !== 'undefined' && 'scrollBehavior' in document.documentElement.style) {
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      return;
+    }
+    // Last resort (no native smooth-scroll support): plain gsap tween, no autoKill.
     gsap.to(window, {
-      scrollTo: { y, autoKill: true },
+      scrollTo: { y },
       duration: 0.7,
       ease: 'power2.inOut',
     });
