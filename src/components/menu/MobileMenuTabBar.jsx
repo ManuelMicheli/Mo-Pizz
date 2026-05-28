@@ -1,13 +1,11 @@
 'use client';
-import { useEffect, useRef } from 'react';
 
 /**
  * MobileMenuTabBar — fixed bottom tab bar for mobile menu navigation.
  *
- * Tabs are wider than the viewport (each ~36vw), so the strip is
- * horizontally scrollable. On activeIndex change the active tab is
- * smoothly centered in view, so the strip "follows" the user as they
- * progress through the menu sections.
+ * The category set is small and fixed (4), so tabs are distributed evenly and
+ * centered (flex-1, capped to max-w-md) rather than living in a wider-than-
+ * viewport scroll strip — which used to start off-centre on the right.
  *
  * Props:
  *   menuCategories (array)  — menu category objects (from useMenu hook)
@@ -16,18 +14,6 @@ import { useEffect, useRef } from 'react';
  *   visible     (boolean)   — whether the tab bar should be shown
  */
 export default function MobileMenuTabBar({ menuCategories, activeIndex, onTabPress, visible }) {
-  const scrollerRef = useRef(null);
-  const tabRefs = useRef([]);
-
-  // Smooth-scroll active tab into center as activeIndex changes
-  useEffect(() => {
-    const scroller = scrollerRef.current;
-    const tab = tabRefs.current[activeIndex];
-    if (!scroller || !tab) return;
-    const target = tab.offsetLeft - (scroller.clientWidth - tab.clientWidth) / 2;
-    scroller.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
-  }, [activeIndex]);
-
   return (
     <nav
       className={`
@@ -42,26 +28,18 @@ export default function MobileMenuTabBar({ menuCategories, activeIndex, onTabPre
       `}
       aria-label="Menu categories"
     >
-      <div
-        ref={scrollerRef}
-        className="flex items-stretch overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory"
-      >
-        {/* spacer so the first tab can center */}
-        <div aria-hidden className="flex-shrink-0 w-[32vw]" />
-
+      <div className="flex items-stretch max-w-md mx-auto">
         {menuCategories.map((cat, i) => {
           const isActive = i === activeIndex;
           return (
             <button
               key={cat.id}
-              ref={(el) => (tabRefs.current[i] = el)}
               type="button"
               onClick={() => onTabPress(i)}
               className={`
-                relative flex-shrink-0 w-[36vw] py-3
-                font-sans text-xs tracking-wide
+                relative flex-1 min-w-0 py-3 px-1
+                font-sans text-[11px] tracking-wide text-center
                 whitespace-nowrap truncate
-                snap-center
                 transition-colors duration-300
                 ${isActive ? 'text-cream font-bold' : 'text-smoke'}
               `}
@@ -80,9 +58,6 @@ export default function MobileMenuTabBar({ menuCategories, activeIndex, onTabPre
             </button>
           );
         })}
-
-        {/* trailing spacer so the last tab can center */}
-        <div aria-hidden className="flex-shrink-0 w-[32vw]" />
       </div>
     </nav>
   );

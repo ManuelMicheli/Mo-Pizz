@@ -12,6 +12,10 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const badgeKeywords = ['DOP', 'DOCG', 'IGP', 'DOC', 'IGT', 'Slow Food'];
 
+// px from the top where a category/sub-section counts as "active" and where
+// tapped sections land — sits just under the floating sub-nav pill.
+const ACTIVE_LINE = 88;
+
 const CartButton = ({ category, section, item, size = 'md' }) => {
   const { add, decrement, quantityFor } = useCart();
   const payload = {
@@ -192,10 +196,6 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
   const categoryRefs = useRef([]);
   const [activeSections, setActiveSections] = useState({});
   const mobileSectionRefsMap = useRef({});
-  // Cached absolute Y positions (page-relative). Computed once before GSAP
-  // pins activate, because pinned elements get position: fixed and report
-  // offsetParent === null, which makes offsetTop unreliable.
-  const baselineY = useRef({ cats: [], subs: {} });
 
   // Navigate to a specific category panel
   const goToCategory = useCallback((index) => {
@@ -403,64 +403,11 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
     return () => ctx.revert();
   }, [isMobile]);
 
-  // IntersectionObserver for sub-section tracking (all multi-section categories)
-  useEffect(() => {
-    if (!isMobile) return;
-    const elements = Object.values(mobileSectionRefsMap.current).filter(Boolean);
-    if (!elements.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const catIdx = Number(entry.target.dataset.catIdx);
-            const sIdx = Number(entry.target.dataset.sIdx);
-            if (!isNaN(catIdx) && !isNaN(sIdx)) {
-              setActiveSections(prev => ({ ...prev, [catIdx]: sIdx }));
-            }
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    elements.forEach((ref) => observer.observe(ref));
-    return () => observer.disconnect();
-  }, [isMobile]);
-
-  // Capture absolute Y positions for every category + sub-section once at
-  // mount (before GSAP pins activate), and re-capture on resize. We use
-  // getBoundingClientRect + scrollY, which works correctly while elements
-  // are still in normal flow.
-  const captureBaseline = useCallback(() => {
-    if (!isMobile) return;
-    const cats = categoryRefs.current.map((el) =>
-      el ? el.getBoundingClientRect().top + window.scrollY : 0
-    );
-    const subs = {};
-    for (const [key, el] of Object.entries(mobileSectionRefsMap.current)) {
-      if (el) subs[key] = el.getBoundingClientRect().top + window.scrollY;
-    }
-    baselineY.current = { cats, subs };
-  }, [isMobile]);
-
-  // Run capture after layout settles, then again on resize. Also refresh
-  // when ScrollTrigger reports a layout change so pin-driven reflows don't
-  // poison our baseline.
-  useLayoutEffect(() => {
-    if (!isMobile) return;
-    const id1 = requestAnimationFrame(() => requestAnimationFrame(captureBaseline));
-    window.addEventListener('resize', captureBaseline);
-    return () => {
-      cancelAnimationFrame(id1);
-      window.removeEventListener('resize', captureBaseline);
-    };
-  }, [isMobile, captureBaseline]);
-
-  // Scroll-based mobile tab bar visibility + active category tracking.
-  // We can't use IntersectionObserver here because GSAP's pin: true on each
-  // category turns them into position: fixed during pinning, which makes
-  // intersection ratios stick at constant values and stops update events.
+  // Live scroll-driven tracking: active category, active sub-section, and bar
+  // visibility — all from getBoundingClientRect each frame (rAF-throttled).
+  // Reading live rects stays accurate even while GSAP pins categories
+  // (pinned = position: fixed), so there are no cached baselines to drift out
+  // of sync the way the old offsetTop/probe approach did.
   useEffect(() => {
     if (!isMobile) return;
     const section = mobileSectionRef.current;
@@ -469,20 +416,29 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
     let raf = 0;
     const update = () => {
       raf = 0;
-      const rect = section.getBoundingClientRect();
-      const inSection = rect.top < window.innerHeight * 0.9 && rect.bottom > 80;
-      setTabBarVisible(inSection);
+      const secRect = section.getBoundingClientRect();
+      // Visible once the menu has scrolled up under the line, hidden again
+      // once its bottom rises past it — "appears as you scroll the menu".
+      setTabBarVisible(secRect.top <= ACTIVE_LINE && secRect.bottom > ACTIVE_LINE);
 
-      // Active category = the one whose cached Y is closest above the
-      // viewport's upper third. Using cached Ys (not live offsetTop)
-      // because pinned categories have offsetParent === null.
-      const probe = window.scrollY + window.innerHeight * 0.35;
-      let activeIdx = 0;
-      const ys = baselineY.current.cats;
-      for (let i = 0; i < ys.length; i++) {
-        if (ys[i] && ys[i] <= probe) activeIdx = i;
+      // Active category = deepest one whose top has crossed the line.
+      let catIdx = 0;
+      for (let i = 0; i < categoryRefs.current.length; i++) {
+        const el = categoryRefs.current[i];
+        if (el && el.getBoundingClientRect().top <= ACTIVE_LINE) catIdx = i;
       }
-      setMobileActiveCategory((prev) => (prev === activeIdx ? prev : activeIdx));
+      setMobileActiveCategory((prev) => (prev === catIdx ? prev : catIdx));
+
+      // Active sub-section within that category, same live-rect rule.
+      const cat = menuCategories[catIdx];
+      if (cat && cat.sections.length > 1) {
+        let sIdx = 0;
+        for (let s = 0; s < cat.sections.length; s++) {
+          const el = mobileSectionRefsMap.current[`${catIdx}-${s}`];
+          if (el && el.getBoundingClientRect().top <= ACTIVE_LINE + 16) sIdx = s;
+        }
+        setActiveSections((prev) => (prev[catIdx] === sIdx ? prev : { ...prev, [catIdx]: sIdx }));
+      }
     };
 
     const onScroll = () => {
@@ -498,7 +454,7 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
       window.removeEventListener('resize', onScroll);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [isMobile]);
+  }, [isMobile, menuCategories]);
 
   const smoothScrollTo = useCallback((targetY) => {
     const y = Math.max(0, targetY);
@@ -516,50 +472,21 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
     });
   }, []);
 
-  // Fallback: if a baseline entry is missing or 0 (capture happened before
-  // refs were ready, or the element is currently pinned), re-derive it from
-  // the section's known Y plus offsetHeights of preceding categories.
-  const resolveCategoryY = useCallback((i) => {
-    const cached = baselineY.current.cats[i];
-    if (cached && cached > 0) return cached;
-    const section = mobileSectionRef.current;
-    if (!section) return 0;
-    let y = section.getBoundingClientRect().top + window.scrollY;
-    for (let k = 0; k < i; k++) {
-      const el = categoryRefs.current[k];
-      if (el && el.offsetHeight) y += el.offsetHeight;
-      // Account for the -mt-12 (=-48px) negative margin on categories k>=1
-      if (k >= 1) y -= 48;
-    }
-    return y;
-  }, []);
-
+  // Jump targets read live: getBoundingClientRect + scrollY gives the element's
+  // current absolute Y regardless of pin state, so taps land precisely.
   const scrollToCategory = useCallback((i) => {
-    const y = resolveCategoryY(i);
-    if (!y || y <= 0) return;
-    smoothScrollTo(y - 80);
-  }, [smoothScrollTo, resolveCategoryY]);
+    const el = categoryRefs.current[i];
+    if (!el) return;
+    const y = el.getBoundingClientRect().top + window.scrollY - 72;
+    smoothScrollTo(y);
+  }, [smoothScrollTo]);
 
   const scrollToSub = useCallback((catIdx, sIdx) => {
-    let y = baselineY.current.subs[`${catIdx}-${sIdx}`];
-    if (!y) {
-      // Recompute on demand: category Y + sub element's offsetTop within card
-      const subEl = mobileSectionRefsMap.current[`${catIdx}-${sIdx}`];
-      const catY = resolveCategoryY(catIdx);
-      if (subEl && catY) {
-        let offset = subEl.offsetTop;
-        let p = subEl.offsetParent;
-        const catEl = categoryRefs.current[catIdx];
-        while (p && p !== catEl && p !== document.body) {
-          offset += p.offsetTop;
-          p = p.offsetParent;
-        }
-        y = catY + offset;
-      }
-    }
-    if (!y || y <= 0) return smoothScrollTo(resolveCategoryY(catIdx) - 80);
-    smoothScrollTo(y - 140);
-  }, [smoothScrollTo, resolveCategoryY]);
+    const el = mobileSectionRefsMap.current[`${catIdx}-${sIdx}`];
+    if (!el) return scrollToCategory(catIdx);
+    const y = el.getBoundingClientRect().top + window.scrollY - ACTIVE_LINE;
+    smoothScrollTo(y);
+  }, [smoothScrollTo, scrollToCategory]);
 
   // ─── Mobile Layout ───────────────────────────────────────────────────────────
   if (isMobile) {
@@ -570,7 +497,6 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
             <div
               key={category.id}
               ref={(el) => (categoryRefs.current[catIdx] = el)}
-              data-cat-index={catIdx}
               className={`mobile-category relative bg-charcoal ${
                 catIdx > 0 ? 'rounded-t-[2rem] -mt-12 shadow-[0_-20px_60px_rgba(0,0,0,0.8)]' : ''
               }`}
@@ -608,40 +534,13 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
                   <p className="font-sans text-smoke text-sm">{category.subtitle}</p>
                 </div>
 
-                {/* Inline sub-tabs — primary copy lives inside the card so the
-                    sticky top bar (rendered once for the whole menu, below) can
-                    mirror the same options without fighting GSAP's pinned
-                    ancestors, which break CSS sticky here. */}
-                {category.sections.length > 1 && (
-                  <div className="flex gap-2 mb-8 overflow-x-auto scrollbar-hide -mx-1 px-1">
-                    {category.sections.map((sec, sIdx) => (
-                      <button
-                        key={sIdx}
-                        onClick={() => {
-                          setActiveSections(prev => ({ ...prev, [catIdx]: sIdx }));
-                          scrollToSub(catIdx, sIdx);
-                        }}
-                        className={`flex-shrink-0 font-sans text-xs tracking-wide py-2 px-4 rounded-full border transition-all duration-300 ${
-                          (activeSections[catIdx] || 0) === sIdx
-                            ? 'bg-flame/15 border-flame/40 text-flame font-bold'
-                            : 'bg-white/5 border-white/10 text-smoke'
-                        }`}
-                      >
-                        {sec.heading}
-                      </button>
-                    ))}
-                  </div>
-                )}
-
                 {category.sections.map((section, sIdx) => (
                   <div
                     key={sIdx}
                     ref={category.sections.length > 1 ? (el) => {
                       mobileSectionRefsMap.current[`${catIdx}-${sIdx}`] = el;
                     } : undefined}
-                    data-cat-idx={catIdx}
-                    data-s-idx={sIdx}
-                    className="mb-8"
+                    className="mb-8 scroll-mt-24"
                   >
                     <h4 className="font-caveat text-gold text-2xl mb-4">{section.heading}</h4>
                     <div className="space-y-1">
@@ -674,8 +573,10 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
           ))}
         </section>
 
-        {/* Fixed top breadcrumb + sub-section nav — always shows where you are
-            and lets you jump quickly. Lives outside the GSAP-pinned subtree. */}
+        {/* Floating sub-section nav — one slim pill row, sits high (the navbar
+            hides inside #menu) and appears as you scroll the menu. Active pill
+            is driven by live-rect tracking, so it stays exact in every
+            category. Lives outside the GSAP-pinned subtree. */}
         {(() => {
           const currentCat = menuCategories[mobileActiveCategory];
           if (!currentCat) return null;
@@ -683,45 +584,40 @@ const MenuHorizontalScroll = ({ menuCategories }) => {
           const hasSubs = currentCat.sections.length > 1;
           return (
             <div
-              className={`fixed top-16 left-0 right-0 z-30 bg-charcoal/95 backdrop-blur-md border-b border-white/10 transition-all duration-300 ${
-                tabBarVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'
+              className={`fixed top-3 left-0 right-0 z-40 px-3 transition-all duration-300 ${
+                tabBarVisible ? 'translate-y-0 opacity-100' : '-translate-y-3 opacity-0 pointer-events-none'
               }`}
             >
-              {/* Breadcrumb */}
-              <div className="px-4 pt-2 pb-1 flex items-center justify-between max-w-md mx-auto">
-                <p className="font-sans text-[11px] tracking-wide text-cream/90 truncate">
-                  <span className="text-smoke">Stai vedendo</span>{' '}
-                  <span className="font-bold">{currentCat.title}</span>
-                  {hasSubs && (
-                    <>
-                      <span className="text-smoke mx-1">›</span>
-                      <span className="text-flame font-bold">{currentCat.sections[currentSub]?.heading}</span>
-                    </>
-                  )}
-                </p>
+              <div className="max-w-md mx-auto flex items-center gap-2 rounded-full bg-charcoal/90 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/40 pl-3 pr-2 py-1.5">
+                <span className="flex-shrink-0 font-mono text-[10px] uppercase tracking-wider text-flame truncate max-w-[26vw]">
+                  {currentCat.title}
+                </span>
+                {hasSubs && (
+                  <>
+                    <span aria-hidden className="flex-shrink-0 w-px h-4 bg-white/15" />
+                    <div className="flex gap-1.5 overflow-x-auto scrollbar-hide">
+                      {currentCat.sections.map((sec, sIdx) => (
+                        <button
+                          key={sIdx}
+                          type="button"
+                          onClick={() => {
+                            setActiveSections(prev => ({ ...prev, [mobileActiveCategory]: sIdx }));
+                            scrollToSub(mobileActiveCategory, sIdx);
+                          }}
+                          className={`flex-shrink-0 font-sans text-[11px] tracking-wide py-1 px-3 rounded-full whitespace-nowrap transition-colors duration-300 ${
+                            currentSub === sIdx
+                              ? 'bg-flame text-cream font-bold'
+                              : 'text-smoke'
+                          }`}
+                          aria-current={currentSub === sIdx ? 'true' : undefined}
+                        >
+                          {sec.heading}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
               </div>
-              {/* Sub-section pills */}
-              {hasSubs && (
-                <div className="px-4 pb-2.5 flex gap-2 overflow-x-auto scrollbar-hide max-w-md mx-auto">
-                  {currentCat.sections.map((sec, sIdx) => (
-                    <button
-                      key={sIdx}
-                      type="button"
-                      onClick={() => {
-                        setActiveSections(prev => ({ ...prev, [mobileActiveCategory]: sIdx }));
-                        scrollToSub(mobileActiveCategory, sIdx);
-                      }}
-                      className={`flex-shrink-0 font-sans text-xs tracking-wide py-1.5 px-3.5 rounded-full border transition-all duration-300 ${
-                        currentSub === sIdx
-                          ? 'bg-flame/20 border-flame/50 text-flame font-bold'
-                          : 'bg-white/5 border-white/10 text-smoke'
-                      }`}
-                    >
-                      {sec.heading}
-                    </button>
-                  ))}
-                </div>
-              )}
             </div>
           );
         })()}

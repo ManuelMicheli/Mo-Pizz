@@ -89,7 +89,7 @@ const Chef = () => {
                 </h2>
 
                 {/* Mobile-only inline photo */}
-                <div className="chef-text md:hidden mx-auto w-full max-w-[480px] aspect-[4/5] rounded-2xl overflow-hidden mb-8 mt-8">
+                <div className="chef-text md:hidden mx-auto w-full max-w-[360px] aspect-square rounded-full border-2 border-gold/60 shadow-2xl overflow-hidden mb-8 mt-8">
                     <img
                         src="/images/christian-moschiano.jpg?v=2"
                         alt={chiSiamo.photoAlt}
