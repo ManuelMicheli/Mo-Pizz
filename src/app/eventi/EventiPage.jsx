@@ -95,6 +95,11 @@ const EventiPage = () => {
                     style={{ background: 'radial-gradient(ellipse 80% 60% at 70% 30%, rgba(232,93,38,0.16) 0%, transparent 60%)' }}
                 />
                 <div className="absolute inset-0 pointer-events-none opacity-[0.04] z-[3]" style={grain} />
+                {/* Glow caldo sul bordo inferiore — continuità di luce col palcoscenico */}
+                <div
+                    className="absolute inset-x-0 bottom-0 h-40 z-[2] pointer-events-none"
+                    style={{ background: 'radial-gradient(60% 100% at 50% 100%, rgba(232,93,38,0.12) 0%, transparent 70%)' }}
+                />
 
                 <div className="relative z-10 flex flex-col items-start text-left w-full max-w-4xl">
                     <span className="ev-hero-elem font-mono text-flame text-sm tracking-[0.25em] uppercase mb-5">
@@ -141,9 +146,18 @@ const EventiPage = () => {
                 />
                 <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.05]" style={grain} />
 
+                {/* Sfumature di giunzione — fondono questa sezione con hero (sopra) e menù (sotto) */}
+                <div className="absolute inset-x-0 top-0 h-32 sm:h-40 z-[1] pointer-events-none bg-gradient-to-b from-charcoal to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 h-32 sm:h-40 z-[1] pointer-events-none bg-gradient-to-t from-charcoal to-transparent" />
+                {/* Glow caldo sulla giunzione superiore (continuità di luce con l'hero) */}
+                <div
+                    className="absolute inset-x-0 top-0 h-40 z-[1] pointer-events-none"
+                    style={{ background: 'radial-gradient(60% 100% at 50% 0%, rgba(232,93,38,0.14) 0%, transparent 70%)' }}
+                />
+
                 {/* Note musicali decorative (richiamo locandina) */}
-                <Music2 className="absolute top-[12%] left-[7%] w-8 h-8 text-gold/15 -rotate-12 hidden lg:block" />
-                <Music className="absolute bottom-[16%] right-[8%] w-10 h-10 text-flame/15 rotate-12 hidden lg:block" />
+                <Music2 className="absolute top-[12%] left-[7%] w-8 h-8 text-gold/15 -rotate-12 hidden lg:block z-[2]" />
+                <Music className="absolute bottom-[16%] right-[8%] w-10 h-10 text-flame/15 rotate-12 hidden lg:block z-[2]" />
 
                 <div className="relative z-10 w-full max-w-[1600px] mx-auto px-5 sm:px-10 md:px-16 lg:px-24 xl:px-32 py-20 sm:py-28">
                     {/* Eyebrow ornamentale */}
@@ -246,7 +260,7 @@ const EventiPage = () => {
 
             {/* ─── MENU — All You Can Napoli (biglietto serata) ─── */}
             <section className="ev-menu relative w-full overflow-hidden py-20 sm:py-28 px-5 sm:px-10">
-                {/* Banda ambiente — foto festa al ristorante sotto un velo caldo, stacco netto dal palcoscenico */}
+                {/* Banda ambiente — foto festa al ristorante sotto un velo caldo, collegata al palcoscenico */}
                 <div className="absolute inset-0 z-0 bg-charcoal" />
                 <Image
                     src="/images/eventi/bg-ristorante-festa.webp"
@@ -264,6 +278,14 @@ const EventiPage = () => {
                     style={{ background: 'radial-gradient(60% 50% at 50% 42%, rgba(232,93,38,0.16) 0%, transparent 65%)' }}
                 />
                 <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.05]" style={grain} />
+
+                {/* Sfumature di giunzione — fondono con il palcoscenico (sopra) e il footer (sotto) */}
+                <div className="absolute inset-x-0 top-0 h-32 sm:h-40 z-[1] pointer-events-none bg-gradient-to-b from-charcoal to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 h-32 sm:h-40 z-[1] pointer-events-none bg-gradient-to-t from-charcoal to-transparent" />
+                <div
+                    className="absolute inset-x-0 top-0 h-40 z-[1] pointer-events-none"
+                    style={{ background: 'radial-gradient(60% 100% at 50% 0%, rgba(232,93,38,0.12) 0%, transparent 70%)' }}
+                />
 
                 {/* Biglietto crema — forte contrasto, leggibile, premium */}
                 <div className="ev-menu-elem relative z-10 max-w-[560px] mx-auto">

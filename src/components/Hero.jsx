@@ -41,6 +41,10 @@ const Hero = () => {
                 </h1>
             </div>
 
+            {/* Sfumatura di giunzione con la sezione sotto — verso l'arancione dei servizi (mobile) / charcoal del menù fisso (desktop) */}
+            <div className="absolute inset-x-0 bottom-0 h-40 sm:h-52 z-10 pointer-events-none bg-gradient-to-b from-transparent to-[#9d4305] md:hidden" />
+            <div className="absolute inset-x-0 bottom-0 h-40 sm:h-52 z-10 pointer-events-none bg-gradient-to-b from-transparent to-charcoal hidden md:block" />
+
             {/* CTAs — centered bottom */}
             <div className="absolute bottom-20 sm:bottom-24 left-0 right-0 z-20 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-6">
                 <a href="#menu" className="hero-elem magnetic-btn text-center bg-charcoal border border-charcoal text-cream hover:bg-cream hover:text-charcoal font-sans font-bold py-3 px-6 sm:py-4 sm:px-8 text-sm sm:text-base rounded-full transition-colors duration-300" style={{ animationDelay: '0.51s' }}>

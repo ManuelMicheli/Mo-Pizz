@@ -167,6 +167,9 @@ const MenuFisso = () => {
       {/* Film grain */}
       <div className="absolute inset-0 grain-texture opacity-[0.04] pointer-events-none" />
 
+      {/* Sfumatura di giunzione in alto — la sezione emerge dal charcoal (hero su desktop / servizi su mobile) */}
+      <div className="absolute inset-x-0 top-0 h-28 sm:h-36 z-0 pointer-events-none bg-gradient-to-b from-charcoal to-transparent" />
+
       {/* Header */}
       <div className="relative max-w-[1000px] mx-auto px-4 sm:px-8">
         <div className="mf-anim text-center mb-8 sm:mb-8">
