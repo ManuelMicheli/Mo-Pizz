@@ -76,15 +76,16 @@ const EventiPage = () => {
         <main ref={rootRef} className="relative bg-charcoal text-cream overflow-hidden">
             {/* ─── HERO ─────────────────────────────── */}
             <section className="relative w-full min-h-[70vh] flex items-center pt-28 sm:pt-32 pb-16 px-5 sm:px-10 md:px-20 lg:px-32 xl:px-40">
-                {/* Background image — cover image della card "Eventi Speciali" */}
-                <Image
-                    src="/images/services/eventi-speciali.webp"
-                    alt=""
-                    fill
-                    priority
-                    sizes="100vw"
-                    className="object-cover object-center z-0"
-                />
+                {/* Background image — art direction: ritaglio verticale su mobile, orizzontale su desktop */}
+                <picture>
+                    <source media="(min-width: 768px)" srcSet="/images/services/eventi-speciali.webp" />
+                    <img
+                        src="/images/services/eventi-speciali-portrait.webp"
+                        alt=""
+                        fetchPriority="high"
+                        className="absolute inset-0 w-full h-full object-cover object-center z-0"
+                    />
+                </picture>
                 {/* Overlay scuro per leggibilità + sfumatura verso charcoal in basso */}
                 <div className="absolute inset-0 z-[1] bg-gradient-to-r from-charcoal via-charcoal/80 to-charcoal/40" />
                 <div className="absolute inset-0 z-[1] bg-gradient-to-t from-charcoal via-transparent to-charcoal/30" />
