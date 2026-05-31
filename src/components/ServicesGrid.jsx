@@ -39,6 +39,7 @@ const cards = [
         badge: 'Ogni Venerdì',
         badgeColor: 'bg-flameDark text-cream',
         image: '/images/services/eventi-speciali.webp',
+        mobileImage: '/images/services/eventi-speciali-portrait.webp',
     },
     {
         title: services.cards[3].title,
@@ -85,13 +86,28 @@ const CardItem = memo(({ card }) => {
                 </>
             ) : card.image ? (
                 <>
-                    <Image
-                        src={card.image}
-                        alt=""
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 66vw"
-                        className="object-cover object-center z-0"
-                    />
+                    {card.mobileImage ? (
+                        // Art direction: ritaglio verticale su mobile, orizzontale da md in su
+                        <picture>
+                            <source media="(min-width: 768px)" srcSet={card.image} />
+                            <img
+                                src={card.mobileImage}
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                                className="absolute inset-0 w-full h-full object-cover z-0"
+                                style={{ objectPosition: '50% 32%' }}
+                            />
+                        </picture>
+                    ) : (
+                        <Image
+                            src={card.image}
+                            alt=""
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 66vw"
+                            className="object-cover object-center z-0"
+                        />
+                    )}
                     {card.hoverImage && (
                         <Image
                             src={card.hoverImage}
