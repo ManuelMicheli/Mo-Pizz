@@ -7,6 +7,7 @@ export default function sitemap() {
         { url: `${baseUrl}/asporto`, lastModified: today, changeFrequency: 'weekly', priority: 0.9 },
         { url: `${baseUrl}/gift-cards`, lastModified: today, changeFrequency: 'monthly', priority: 0.7 },
         { url: `${baseUrl}/fidelity`, lastModified: today, changeFrequency: 'monthly', priority: 0.7 },
+        { url: `${baseUrl}/eventi`, lastModified: today, changeFrequency: 'weekly', priority: 0.8 },
         { url: `${baseUrl}/privacy`, lastModified: today, changeFrequency: 'yearly', priority: 0.3 },
     ];
 }

@@ -33,6 +33,7 @@ export const siteContent = {
       { label: 'Home', href: '/#' },
       { label: 'Chi Siamo', href: '/#chi-siamo' },
       { label: 'Menu', href: '/#menu' },
+      { label: 'Eventi', href: '/eventi', isRoute: true },
       { label: 'Asporto', href: '/asporto', isRoute: true },
       { label: 'Gift Card', href: '/gift-cards', isRoute: true },
       { label: 'Fidelity', href: '/fidelity', isRoute: true },
@@ -181,6 +182,7 @@ export const siteContent = {
     ctaAsporto: 'Asporto',
     ctaGiftCard: 'Gift Card',
     ctaFidelity: 'Fidelity',
+    ctaEventi: 'Eventi',
     statusOpen: 'Forno Operativo',
     statusClosed: 'Forno Spento',
     legal: `© ${new Date().getFullYear()} Mo Pizz Legnano SRL`,
@@ -233,6 +235,43 @@ export const siteContent = {
         description: 'Iscriviti al programma fedeltà: ogni 10€ spesi guadagni 1 punto. Raggiungi 10 punti e ottieni il 10% di sconto.',
       },
     ],
+  },
+
+  // ─── EVENTI (Serate a tema) ─────────────────────────
+  eventi: {
+    hero: {
+      eyebrow: 'Eventi • Serate a tema a Legnano',
+      headline: 'Le nostre',
+      headlineEm: 'serate speciali.',
+      body: 'Da Mo Pizz non si mangia soltanto: ci si diverte. Appuntamenti fissi e serate a tema per vivere la pizzeria in compagnia, con musica e buon cibo.',
+    },
+    cenaCantata: {
+      badge: 'Ogni Venerdì',
+      title: 'Cena Cantata',
+      subtitle: 'Una serata di musica, buon cibo e divertimento',
+      by: 'con Il Matto e la Volpe',
+      poster: '/images/eventi/cena-cantata.webp',
+      posterAlt: 'Locandina Cena Cantata da Mo Pizz — ogni venerdì sera, formula All You Can Napoli a 25€ a persona',
+      details: [
+        { label: 'Quando', value: 'Ogni venerdì sera' },
+        { label: 'Orario', value: 'Dalle 21:00' },
+        { label: 'Dove', value: 'Legnano, Via Cadore 4' },
+        { label: 'Prezzo', value: '25€ a persona' },
+      ],
+      menuTitle: 'All You Can Napoli',
+      menuIntro: 'La formula della serata, una bevanda inclusa:',
+      menu: [
+        'Antipasti misti',
+        'Fritti tipici campani',
+        'Pizze no limit',
+        'Primi piatti della tradizione',
+        'Graffe con Nutella',
+      ],
+      menuNote: 'Bevanda inclusa: birra, ¼ di vino, bibita o acqua.',
+      phone: '0331 024363',
+      ctaPrimary: 'Prenota un tavolo',
+      ctaSecondary: 'Chiama ora',
+    },
   },
 
   // ─── ORDINA (Asporto) ──────────────────────────────

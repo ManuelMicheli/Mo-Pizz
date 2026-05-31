@@ -79,6 +79,7 @@ const Footer = () => {
                             <Link href="/ordina" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaOrdina}</Link>
                             <Link href="/gift-cards" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaGiftCard}</Link>
                             <Link href="/fidelity" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaFidelity}</Link>
+                            <Link href="/eventi" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaEventi}</Link>
                         </div>
                     </div>
 

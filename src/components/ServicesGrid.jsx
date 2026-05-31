@@ -35,7 +35,7 @@ const cards = [
         subtitle: services.cards[2].subtitle,
         description: services.cards[2].description,
         icon: CalendarHeart,
-        to: '/#prenota',
+        to: '/eventi',
         badge: 'Ogni Venerdì',
         badgeColor: 'bg-flameDark text-cream',
         image: '/images/services/eventi-speciali.webp',
