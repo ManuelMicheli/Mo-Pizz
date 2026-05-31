@@ -198,21 +198,23 @@ const EventiPage = () => {
                                 {ev.subtitle}
                             </p>
 
-                            {/* Griglia dettagli — chip premium con icona in cerchio dorato */}
-                            <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-9">
+                            {/* Griglia dettagli — schede vetro scuro, leggibili sopra la foto */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-9">
                                 {ev.details.map((d, i) => {
                                     const Icon = detailIcons[i];
                                     return (
                                         <div
                                             key={d.label}
-                                            className="ev-detail group flex items-center gap-3.5 bg-gradient-to-br from-white/[0.07] to-white/[0.02] border border-white/10 rounded-2xl px-4 py-4 transition-colors duration-300 hover:border-gold/30"
+                                            className="ev-detail group relative flex items-center gap-4 bg-charcoal/70 backdrop-blur-md border border-white/12 rounded-2xl px-5 py-4 shadow-[0_12px_30px_-12px_rgba(0,0,0,0.7)] transition-colors duration-300 hover:border-gold/40"
                                         >
-                                            <span className="shrink-0 grid place-items-center w-10 h-10 rounded-full bg-flame/10 ring-1 ring-gold/25">
-                                                <Icon className="w-[18px] h-[18px] text-gold stroke-[1.5]" />
+                                            {/* Accento dorato a sinistra */}
+                                            <span className="absolute left-0 top-1/2 -translate-y-1/2 h-7 w-[3px] rounded-full bg-gradient-to-b from-gold to-flame" />
+                                            <span className="shrink-0 grid place-items-center w-11 h-11 rounded-xl bg-flame/15 ring-1 ring-gold/30">
+                                                <Icon className="w-5 h-5 text-gold stroke-[1.75]" />
                                             </span>
                                             <div className="flex flex-col min-w-0">
-                                                <span className="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-smoke">{d.label}</span>
-                                                <span className="font-sans text-cream font-medium text-sm sm:text-[0.95rem] leading-snug truncate">{d.value}</span>
+                                                <span className="font-mono text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-gold/80">{d.label}</span>
+                                                <span className="font-sans text-cream font-semibold text-base sm:text-lg leading-tight mt-0.5">{d.value}</span>
                                             </div>
                                         </div>
                                     );
