@@ -104,11 +104,19 @@ export const schemaData = {
   acceptsReservations: true,
   aggregateRating: {
     '@type': 'AggregateRating',
-    ratingValue: '4.2',
-    reviewCount: '620',
+    ratingValue: '4.3',
+    reviewCount: '625',
     bestRating: '5',
     worstRating: '1',
   },
+  areaServed: [
+    { '@type': 'City', name: 'Legnano' },
+    { '@type': 'City', name: 'San Giorgio su Legnano' },
+    { '@type': 'City', name: 'Canegrate' },
+    { '@type': 'City', name: 'Cerro Maggiore' },
+    { '@type': 'City', name: 'Rescaldina' },
+    { '@type': 'City', name: 'Nerviano' },
+  ],
   sameAs: [
     'https://www.instagram.com/mo_pizz/',
     'https://www.facebook.com/MOPIZZ.IT/?locale=it_IT',
@@ -136,50 +144,6 @@ export const schemaData = {
         name: 'Prenota un Tavolo',
       },
     },
-  ],
-};
-
-// LocalBusiness schema (supplements Restaurant schema)
-export const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  '@id': 'https://www.mopizz.it/#localbusiness',
-  name: 'MO PIZZ — Pizzeria Napoletana Legnano',
-  image: 'https://www.mopizz.it/images/hero-home-v2.webp',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Via Cadore 4',
-    addressLocality: 'Legnano',
-    addressRegion: 'Lombardia',
-    postalCode: '20025',
-    addressCountry: 'IT',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: GEO.latitude,
-    longitude: GEO.longitude,
-  },
-  url: 'https://www.mopizz.it',
-  telephone: '+390331024363',
-  email: 'info@mopizz.it',
-  priceRange: '€€',
-  openingHoursSpecification: [
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Sunday'], opens: '12:00', closes: '14:30' },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Sunday'], opens: '19:00', closes: '22:30' },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '19:00', closes: '23:00' },
-  ],
-  sameAs: [
-    'https://www.instagram.com/mo_pizz/',
-    'https://www.facebook.com/MOPIZZ.IT/?locale=it_IT',
-    'https://www.tripadvisor.com/Restaurant_Review-g670658-d19352966-Reviews-Mo_Pizz-Legnano_Province_of_Milan_Lombardy.html',
-  ],
-  areaServed: [
-    { '@type': 'City', name: 'Legnano' },
-    { '@type': 'City', name: 'San Giorgio su Legnano' },
-    { '@type': 'City', name: 'Canegrate' },
-    { '@type': 'City', name: 'Cerro Maggiore' },
-    { '@type': 'City', name: 'Rescaldina' },
-    { '@type': 'City', name: 'Nerviano' },
   ],
 };
 

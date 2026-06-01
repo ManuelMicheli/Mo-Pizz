@@ -1,9 +1,11 @@
 import React from 'react';
-import { Star } from 'lucide-react';
+import { Star, Sparkles } from 'lucide-react';
 import { siteContent } from '@/data/copy';
 
 const { recensioni } = siteContent;
 
+// ⚠️ NUOVE RECENSIONI: aggiungile SEMPRE in cima a questo array.
+// La prima viene messa in evidenza come "Ultima recensione".
 const reviewsData = [
     {
         text: "Sabato sera ho cercato su Google 'pizza napoletana' e sono capitata per caso da Mo Pizz: una vera scoperta! Locale super accogliente, atmosfera familiare e rilassante, e soprattutto una pizza eccezionale, con ingredienti di altissima qualità e un impasto davvero perfetto.",
@@ -83,14 +85,70 @@ function ReviewCard({ review }) {
     );
 }
 
+function FeaturedReview({ review }) {
+    return (
+        <div className="relative max-w-2xl mx-auto">
+            {/* Gold glow halo */}
+            <div
+                aria-hidden
+                className="absolute -inset-4 rounded-[2.5rem] bg-gold/[0.07] blur-2xl"
+            />
+
+            <div className="relative bg-gradient-to-br from-[#262320] to-[#1a1a1a] rounded-[2rem] p-8 sm:p-10 overflow-hidden border border-gold/25 shadow-[0_16px_60px_rgba(212,168,83,0.12)]">
+                {/* Top accent */}
+                <div className="absolute top-0 left-10 right-10 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
+
+                {/* "Ultima recensione" badge */}
+                <div className="flex items-center justify-center gap-2 mb-6">
+                    <span className="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 text-gold font-mono text-[11px] sm:text-xs uppercase tracking-[0.15em] px-4 py-2 rounded-full">
+                        <Sparkles className="w-3.5 h-3.5 animate-pulse" />
+                        {recensioni.featuredLabel}
+                    </span>
+                </div>
+
+                {/* Stars */}
+                <div className="flex justify-center mb-6 space-x-1">
+                    {[...Array(5)].map((_, j) => (
+                        <Star key={j} className="fill-gold stroke-gold w-5 h-5" />
+                    ))}
+                </div>
+
+                {/* Quote */}
+                <p className="font-playfair text-cream text-xl sm:text-2xl leading-[1.6] text-center text-balance mb-8">
+                    &ldquo;{review.text}&rdquo;
+                </p>
+
+                {/* Author */}
+                <div className="flex items-center justify-center gap-3">
+                    <div className="w-11 h-11 rounded-full bg-gold/15 flex items-center justify-center shrink-0">
+                        <span className="text-gold font-sans text-base font-bold leading-none">
+                            {review.author[0]}
+                        </span>
+                    </div>
+                    <div className="text-left">
+                        <div className="font-sans text-cream text-sm font-medium">{review.author}</div>
+                        <div className="font-sans text-smoke text-xs">{review.source}</div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Nudge */}
+            <p className="font-caveat text-gold/70 text-xl sm:text-2xl text-center mt-6">
+                {recensioni.featuredNudge}
+            </p>
+        </div>
+    );
+}
+
 const Reviews = () => {
-    // Triple reviews for seamless infinite loop on all screen sizes
-    const tripled = [...reviewsData, ...reviewsData, ...reviewsData];
+    const [featured, ...rest] = reviewsData;
+    // Triple remaining reviews for seamless infinite loop on all screen sizes
+    const tripled = [...rest, ...rest, ...rest];
 
     return (
         <section id="reviews" className="pt-2 sm:pt-4 pb-16 sm:pb-24 md:pb-32 bg-charcoal relative overflow-hidden">
             {/* Header */}
-            <div className="px-6 sm:px-12 md:px-20 lg:px-32 max-w-7xl mx-auto flex flex-col items-center text-center mb-14">
+            <div className="px-6 sm:px-12 md:px-20 lg:px-32 max-w-7xl mx-auto flex flex-col items-center text-center mb-12">
                 <div className="font-caveat text-gold text-2xl sm:text-3xl mb-4">
                     {recensioni.eyebrow}
                 </div>
@@ -107,18 +165,27 @@ const Reviews = () => {
                 </div>
             </div>
 
-            {/* Infinite marquee — edge to edge */}
-            <div className="relative">
-                {/* Soft edge fades */}
-                <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-r from-charcoal to-transparent z-10 pointer-events-none" />
-                <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-l from-charcoal to-transparent z-10 pointer-events-none" />
-
-                <div className="flex gap-5 animate-marquee w-max">
-                    {tripled.map((review, i) => (
-                        <ReviewCard key={i} review={review} />
-                    ))}
+            {/* Featured — latest review spotlight */}
+            {featured && (
+                <div className="px-6 sm:px-12 mb-14 sm:mb-16">
+                    <FeaturedReview review={featured} />
                 </div>
-            </div>
+            )}
+
+            {/* Infinite marquee — edge to edge */}
+            {rest.length > 0 && (
+                <div className="relative">
+                    {/* Soft edge fades */}
+                    <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-r from-charcoal to-transparent z-10 pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-l from-charcoal to-transparent z-10 pointer-events-none" />
+
+                    <div className="flex gap-5 animate-marquee w-max">
+                        {tripled.map((review, i) => (
+                            <ReviewCard key={i} review={review} />
+                        ))}
+                    </div>
+                </div>
+            )}
         </section>
     );
 };

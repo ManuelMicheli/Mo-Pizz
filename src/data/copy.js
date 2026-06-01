@@ -119,7 +119,9 @@ export const siteContent = {
   recensioni: {
     eyebrow: 'Dicono Di Noi',
     headline: 'Cosa Dicono i Nostri Clienti',
-    badge1: '4.2/5 su Google — 620+ recensioni',
+    featuredLabel: 'Ultima recensione',
+    featuredNudge: 'La prossima potrebbe essere la tua',
+    badge1: '4.3/5 su Google — 625+ recensioni',
     badge2: "Travellers' Choice Tripadvisor",
     ctaReviewEyebrow: 'Aiutaci a Crescere',
     ctaReviewHeadline: 'Lascia la tua recensione',

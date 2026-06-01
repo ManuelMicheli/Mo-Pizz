@@ -10,7 +10,7 @@ import LenisProvider from '@/components/LenisProvider';
 import NoiseOverlay from '@/components/NoiseOverlay';
 import ServicesDrawer from '@/components/ServicesDrawer';
 import IdleMount from '@/components/IdleMount';
-import { schemaData, localBusinessSchema, webSiteSchema, GEO } from '@/lib/constants';
+import { schemaData, webSiteSchema, GEO } from '@/lib/constants';
 
 // Mono — replaces TestTheFutureMono
 const geistMono = Geist_Mono({
@@ -139,10 +139,6 @@ export default function RootLayout({ children }) {
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-                />
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
                 />
                 <script
                     type="application/ld+json"
