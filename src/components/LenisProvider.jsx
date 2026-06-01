@@ -28,11 +28,11 @@ const LenisProvider = ({ children }) => {
             ScrollTrigger.config({ ignoreMobileResize: true });
 
             lenis = new Lenis({
-                duration: 1.4,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                // lerp (frame-rate adaptive) instead of duration: snappier, no long
+                // glide tail, smoother on high-refresh monitors. 0.1 ≈ premium fluid.
+                lerp: 0.1,
                 smoothWheel: true,
-                smoothTouch: false,
-                touchMultiplier: 1.2,
+                syncTouch: false,
                 wheelMultiplier: 1,
             });
 

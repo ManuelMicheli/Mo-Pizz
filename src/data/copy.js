@@ -109,9 +109,10 @@ export const siteContent = {
   // ─── INSTAGRAM ──────────────────────────────────────
   instagram: {
     handle: '@mo_pizz',
-    eyebrow: 'Seguici su Instagram',
+    eyebrow: 'Vivi Mo Pizz, ogni giorno',
     body: 'Le nostre creazioni, il dietro le quinte e l\'atmosfera che ci rende unici.',
-    cta: 'Vedi il profilo',
+    highlights: ['Le nostre creazioni', 'Pizze appena sfornate', 'Il dietro le quinte del forno', 'Le serate da non perdere'],
+    cta: 'Seguici ora',
     ctaMobile: 'Seguici su Instagram',
   },
 
