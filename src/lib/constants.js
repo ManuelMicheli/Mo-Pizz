@@ -1,3 +1,6 @@
+// ===== MENU (sempre aggiornato su Plateform) =====
+export const PLATEFORM_MENU_URL = 'https://mopizz.plateform.app/menu/momenu';
+
 // ===== ORDINA (ASPORTO) =====
 export const PLATEFORM_ORDER_URL = 'https://mopizz.plateform.app/takeaway';
 export const ORDER_MODE = 'iframe'; // 'iframe' | 'link'

@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { signatureDishes } from '../../data/menuData';
 import { siteContent } from '@/data/copy';
+import { PLATEFORM_MENU_URL } from '@/lib/constants';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -107,7 +108,7 @@ const MenuHighlight = () => {
             {menuCopy.highlightCtaEyebrow}
           </span>
           <a
-            href="/brand-assets/mo pizza menu 2026 WEB.pdf"
+            href={PLATEFORM_MENU_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="magnetic-btn w-full sm:w-auto text-center bg-flameDark hover:bg-ember text-cream font-sans font-bold py-4 px-10 rounded-full transition-colors duration-300 text-lg"

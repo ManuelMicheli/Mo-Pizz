@@ -68,7 +68,7 @@ export const siteContent = {
     highlightEyebrow: 'La Firma dello Chef',
     highlightHeadline: 'I Piatti Iconici',
     highlightCtaEyebrow: 'Vuoi scoprire tutto?',
-    highlightCtaLabel: 'Scarica il Menu Completo',
+    highlightCtaLabel: 'Sfoglia il Menu Completo',
   },
 
   // ─── CHI SIAMO (ex Chef) ───────────────────────────
