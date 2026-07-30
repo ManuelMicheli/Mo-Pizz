@@ -262,7 +262,7 @@ export const siteContent = {
 
   // ─── FIDELITY (Programma fedeltà — xMenu) ───────────
   fidelity: {
-    rewardsUrl: 'https://mopizz.order.xmenu.it/profile/rewards',
+    rewardsUrl: 'https://mopizz.xmenu.it/loyalty-signup',
     hero: {
       headlinePart1: 'La tua fedeltà',
       headlinePart2: 'merita un premio.',
