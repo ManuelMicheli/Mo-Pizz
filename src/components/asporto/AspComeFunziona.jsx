@@ -5,8 +5,7 @@ import { cn } from '@/lib/utils';
 import { siteContent } from '@/data/copy';
 
 const AspComeFunziona = () => {
-    const { asporto } = siteContent;
-    const { steps, eyebrow, headline } = asporto.comeFunziona;
+    const { steps, eyebrow, headline } = siteContent.servizi.asporto.comeFunziona;
 
     return (
         <section className="relative w-full bg-charcoal pt-24 sm:pt-32 pb-[22vw] sm:pb-[15vw] px-4 sm:px-8 md:px-12 lg:px-20 overflow-hidden">

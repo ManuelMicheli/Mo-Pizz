@@ -1,22 +1,21 @@
 import AsportoPage from './AsportoPage';
-import { buildBreadcrumb, deliveryServiceSchema } from '@/lib/constants';
+import { buildBreadcrumb } from '@/lib/constants';
 
 export const metadata = {
-    title: 'Consegna a Domicilio a Legnano — Pizza Napoletana | MO PIZZ',
-    description: 'Consegna a domicilio MO PIZZ a Legnano: pizza napoletana cotta nel forno a legna, antipasti e piatti della tradizione consegnati caldi direttamente a casa tua. Ordina online e paga in sicurezza.',
-    keywords: 'consegna a domicilio legnano, pizza a domicilio legnano, delivery pizza legnano, pizza a casa legnano, ordina pizza domicilio, consegna pizza napoletana legnano, food delivery legnano',
+    title: 'Pizza da Asporto a Legnano — Ordina e Ritira',
+    description: 'Pizza napoletana da asporto a Legnano. Ordina la tua pizza cotta nel forno a legna e ritirala calda in Via Cadore 4. Aperti a cena dal martedì alla domenica.',
+    keywords: 'pizza asporto legnano, pizza da asporto legnano, asporto pizzeria legnano, ritiro pizza legnano, pizza napoletana asporto',
     alternates: {
         canonical: 'https://www.mopizz.it/asporto',
     },
     openGraph: {
-        title: 'Consegna a Domicilio a Legnano — MO PIZZ',
-        description: 'Pizza napoletana e piatti tradizionali consegnati caldi direttamente a casa tua. Ordina online da MO PIZZ Legnano.',
+        title: 'Pizza da Asporto — MO PIZZ Legnano',
+        description: 'Ordina la tua pizza napoletana e ritirala calda in Via Cadore 4, a Legnano. Cotta al momento nel forno a legna.',
         url: 'https://www.mopizz.it/asporto',
-        images: [{ url: '/images/asporto-hero.webp', width: 1920, height: 1080, alt: 'Consegna a domicilio MO PIZZ Legnano — Pizza napoletana a casa' }],
     },
     twitter: {
-        title: 'Consegna a Domicilio a Legnano — MO PIZZ',
-        description: 'Pizza napoletana e piatti tradizionali consegnati caldi direttamente a casa tua. Ordina online.',
+        title: 'Pizza da Asporto — MO PIZZ Legnano',
+        description: 'Ordina la tua pizza napoletana e ritirala calda in Via Cadore 4, a Legnano.',
     },
 };
 
@@ -28,10 +27,6 @@ export default function Page() {
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-            />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(deliveryServiceSchema) }}
             />
             <AsportoPage />
         </>

@@ -5,7 +5,7 @@ import { ChevronDown } from 'lucide-react';
 import { siteContent } from '@/data/copy';
 
 const AspHero = () => {
-    const { asporto } = siteContent;
+    const { hero } = siteContent.servizi.asporto;
     const containerRef = useRef(null);
 
     useEffect(() => {
@@ -48,14 +48,14 @@ const AspHero = () => {
             {/* Content */}
             <div className="relative z-10 flex flex-col items-start text-left gap-2 max-w-3xl">
                 <div className="asp-hero-elem font-caveat text-gold text-2xl sm:text-3xl mb-2">
-                    {asporto.hero.eyebrow}
+                    {hero.eyebrow}
                 </div>
                 <h1 className="asp-hero-elem font-playfair text-cream leading-[0.95]">
-                    <span className="block text-[clamp(2.2rem,7vw,5.5rem)]">{asporto.hero.headline}</span>
-                    <span className="block italic text-[clamp(2.5rem,8vw,6.5rem)]">{asporto.hero.headlineEm}</span>
+                    <span className="block text-[clamp(2.2rem,7vw,5.5rem)]">{hero.headline}</span>
+                    <span className="block italic text-[clamp(2.5rem,8vw,6.5rem)]">{hero.headlineEm}</span>
                 </h1>
                 <p className="asp-hero-elem font-sans text-cream/70 text-[clamp(1rem,1.5vw,1.25rem)] max-w-[550px] mt-2 leading-relaxed">
-                    {asporto.hero.body}
+                    {hero.body}
                 </p>
             </div>
 

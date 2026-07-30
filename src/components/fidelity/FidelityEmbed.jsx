@@ -2,13 +2,16 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ExternalLink, ArrowRight, Shield } from 'lucide-react';
-import { PLATEFORM_FIDELITY_URL, FIDELITY_MODE } from '@/lib/constants';
-import PlateformIframe from '@/components/ui/PlateformIframe';
+import { ExternalLink, Shield } from 'lucide-react';
+import { siteContent } from '@/data/copy';
+import EmbedIframe from '@/components/ui/EmbedIframe';
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 const FidelityEmbed = () => {
+    const { rewardsUrl } = siteContent.fidelity;
     const sectionRef = useRef(null);
 
     useEffect(() => {
@@ -64,69 +67,40 @@ const FidelityEmbed = () => {
                 {/* Section Header */}
                 <div className="text-center mb-14 sm:mb-20 fid-embed-heading">
                     <span className="font-mono text-flame/60 text-xs sm:text-sm tracking-[0.2em] uppercase">
-                        Ci vuole meno di un minuto
+                        Iscriviti e controlla i tuoi punti
                     </span>
                     <h2 className="font-playfair text-cream text-[clamp(2rem,5vw,4.5rem)] mt-4 leading-tight">
-                        Iscriviti Ora
+                        I Tuoi Premi
                     </h2>
                     <p className="font-sans text-smoke/80 text-base sm:text-lg mt-5 max-w-lg mx-auto leading-relaxed">
-                        Compila il form e inizia ad accumulare punti alla tua prossima visita.
+                        Accedi al tuo profilo Fidelity per iscriverti, vedere il saldo punti e riscattare i premi.
                     </p>
                     <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-flame to-transparent mx-auto mt-6" />
                 </div>
 
-                {FIDELITY_MODE === 'iframe' ? (
-                    <div className="fid-embed-card relative w-full max-w-7xl mx-auto rounded-[1.5rem] sm:rounded-[2.5rem] border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden shadow-2xl shadow-black/30">
-                        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-flame to-transparent" />
+                <div className="fid-embed-card relative w-full max-w-4xl mx-auto rounded-[1.5rem] sm:rounded-[2.5rem] border border-white/10 bg-white overflow-hidden shadow-2xl shadow-black/30">
+                    <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-flame to-transparent" />
 
-                        <PlateformIframe
-                            src={PLATEFORM_FIDELITY_URL}
-                            title="Iscrizione Fidelity MO PIZZ"
-                            allow="clipboard-write"
-                            theme="dark"
-                            iframeMarginTop={-120}
-                            showBottomBar={false}
-                            sizeClassName="h-[82svh] min-h-[480px] sm:h-[560px] md:h-[660px]"
-                        />
+                    <EmbedIframe
+                        src={rewardsUrl}
+                        title="Programma Fidelity MO PIZZ — I tuoi premi"
+                        allow="clipboard-write"
+                        theme="light"
+                        showBottomBar={false}
+                        sizeClassName="h-[82svh] min-h-[560px] sm:h-[680px] md:h-[780px]"
+                    />
 
-                        <div className="p-4 text-center border-t border-white/5">
-                            <a
-                                href={PLATEFORM_FIDELITY_URL}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="font-sans text-smoke/50 text-sm hover:text-cream transition-colors inline-flex items-center gap-2"
-                            >
-                                Problemi? Apri il form in una nuova finestra <ExternalLink size={13} />
-                            </a>
-                        </div>
+                    <div className="p-4 text-center border-t border-charcoal/10 bg-cream/60">
+                        <a
+                            href={rewardsUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-sans text-smoke text-sm hover:text-flame transition-colors inline-flex items-center gap-2"
+                        >
+                            Apri il profilo in una nuova finestra <ExternalLink size={13} />
+                        </a>
                     </div>
-                ) : (
-                    <div className="fid-embed-card w-full max-w-3xl mx-auto rounded-[2.5rem] border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden">
-                        {/* Top accent line */}
-                        <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-flame to-transparent" />
-
-                        <div className="flex flex-col items-center text-center gap-8 py-16 sm:py-24 px-8">
-                            {/* Icon */}
-                            <div className="w-20 h-20 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center">
-                                <ExternalLink className="text-gold" size={36} />
-                            </div>
-
-                            <p className="font-sans text-cream/80 text-lg sm:text-xl max-w-lg leading-relaxed">
-                                Iscriviti al programma Fidelity MO PIZZ su Plateform. È gratuito e ci vuole meno di un minuto!
-                            </p>
-
-                            <a
-                                href={PLATEFORM_FIDELITY_URL}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="magnetic-btn bg-gradient-to-r from-gold to-[#c4943d] text-charcoal font-sans font-bold py-4 px-12 rounded-full text-lg flex items-center gap-3 transition-all duration-300 hover:shadow-[0_0_40px_rgba(212,168,83,0.25)]"
-                            >
-                                Iscriviti su Plateform
-                                <ArrowRight size={20} />
-                            </a>
-                        </div>
-                    </div>
-                )}
+                </div>
 
                 {/* Trust bar */}
                 <div className="fid-embed-trust-bar mt-12 sm:mt-16 flex flex-wrap items-center justify-center gap-6 sm:gap-10">

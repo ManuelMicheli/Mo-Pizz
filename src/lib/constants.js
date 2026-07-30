@@ -1,18 +1,3 @@
-// ===== MENU (sempre aggiornato su Plateform) =====
-export const PLATEFORM_MENU_URL = 'https://mopizz.plateform.app/menu/momenu';
-
-// ===== ORDINA (ASPORTO) =====
-export const PLATEFORM_ORDER_URL = 'https://mopizz.plateform.app/takeaway';
-export const ORDER_MODE = 'iframe'; // 'iframe' | 'link'
-
-// ===== PRENOTAZIONE TAVOLO =====
-export const PLATEFORM_RESERVE_URL = 'https://mopizz.plateform.app/reserve';
-export const RESERVE_MODE = 'iframe'; // 'iframe' | 'link'
-
-// ===== FIDELITY =====
-export const PLATEFORM_FIDELITY_URL = 'https://mopizz.plateform.app/fidelity';
-export const FIDELITY_MODE = 'iframe'; // 'iframe' | 'link'
-
 // ===== RECENSIONI =====
 export const GOOGLE_REVIEW_URL = 'https://www.google.com/maps/place/Mo+Pizz+Pizzeria+Napoletana/@45.55597,8.9253119,13z/data=!4m8!3m7!1s0x47868d9bf3567e25:0x6c09ada059a69fd2!8m2!3d45.6028006!4d8.9061923!9m1!1b1!16s%2Fg%2F11fmzsf1lh';
 export const TRIPADVISOR_REVIEW_URL = 'https://www.tripadvisor.com/Restaurant_Review-g670658-d19352966-Reviews-Mo_Pizz-Legnano_Province_of_Milan_Lombardy.html';
@@ -32,7 +17,7 @@ export const schemaData = {
   '@id': 'https://www.mopizz.it/#restaurant',
   name: 'MO PIZZ',
   alternateName: ['Mo Pizz', 'MoPizz', 'Mo Pizz Legnano', 'Mo Pizz Pizzeria Napoletana', 'mopizz.it'],
-  description: 'Pizzeria napoletana autentica a Legnano con forno a legna. Cucina tradizionale napoletana, pizza artigianale, menu fisso pranzo, asporto, consegna a domicilio e gift card.',
+  description: 'Pizzeria napoletana autentica a Legnano con forno a legna. Cucina tradizionale napoletana e pizza artigianale, aperti a cena dal martedì alla domenica. Prenota il tuo tavolo in Via Cadore 4.',
   slogan: 'Pizza verace, cucina autentica, forno a legna.',
   url: 'https://www.mopizz.it',
   telephone: '+390331024363',
@@ -63,47 +48,14 @@ export const schemaData = {
   },
   hasMap: `https://www.google.com/maps/place/Mo+Pizz+Pizzeria+Napoletana/@${GEO.latitude},${GEO.longitude},17z`,
   openingHoursSpecification: [
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Sunday'], opens: '12:00', closes: '14:30' },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Sunday'], opens: '19:00', closes: '22:30' },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '19:00', closes: '23:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Sunday'], opens: '19:00', closes: '22:30' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Friday', 'Saturday'], opens: '19:00', closes: '23:00' },
   ],
   servesCuisine: ['Napoletana', 'Italiana', 'Pizza'],
   priceRange: '€€',
   paymentAccepted: 'Cash, Credit Card, Debit Card, Satispay',
   currenciesAccepted: 'EUR',
   menu: 'https://www.mopizz.it/#menu',
-  hasMenu: {
-    '@type': 'Menu',
-    name: 'Menu MO PIZZ',
-    url: 'https://www.mopizz.it/#menu',
-    hasMenuSection: [
-      {
-        '@type': 'MenuSection',
-        name: 'Menu Fisso Pranzo',
-        description: 'Menu fisso pranzo da martedì a venerdì. A partire da €9. Acqua, servizio e caffè inclusi.',
-        hasMenuItem: [
-          {
-            '@type': 'MenuItem',
-            name: 'Menu Completo',
-            description: 'Un primo a scelta, un secondo a scelta, un contorno a scelta. Acqua, servizio e caffè inclusi.',
-            offers: { '@type': 'Offer', price: '13.00', priceCurrency: 'EUR', availability: 'https://schema.org/InStock' },
-          },
-          {
-            '@type': 'MenuItem',
-            name: 'Menu Primo e Contorno',
-            description: 'Un primo a scelta, un contorno a scelta. Acqua, servizio e caffè inclusi.',
-            offers: { '@type': 'Offer', price: '9.00', priceCurrency: 'EUR', availability: 'https://schema.org/InStock' },
-          },
-          {
-            '@type': 'MenuItem',
-            name: 'Menu Secondo e Contorno',
-            description: 'Un secondo a scelta, un contorno a scelta. Acqua, servizio e caffè inclusi.',
-            offers: { '@type': 'Offer', price: '11.00', priceCurrency: 'EUR', availability: 'https://schema.org/InStock' },
-          },
-        ],
-      },
-    ],
-  },
   acceptsReservations: true,
   aggregateRating: {
     '@type': 'AggregateRating',
@@ -126,15 +78,6 @@ export const schemaData = {
     'https://www.tripadvisor.com/Restaurant_Review-g670658-d19352966-Reviews-Mo_Pizz-Legnano_Province_of_Milan_Lombardy.html',
   ],
   potentialAction: [
-    {
-      '@type': 'OrderAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: 'https://www.mopizz.it/ordina',
-        actionPlatform: ['http://schema.org/DesktopWebPlatform', 'http://schema.org/MobileWebPlatform'],
-      },
-      deliveryMethod: 'http://purl.org/goodrelations/v1#DeliveryModePickUp',
-    },
     {
       '@type': 'ReserveAction',
       target: {
@@ -170,55 +113,6 @@ export const webSiteSchema = {
   },
 };
 
-// Service schemas — takeaway + delivery (boost local "asporto"/"domicilio" queries)
-const SERVICE_AREA = [
-  { '@type': 'City', name: 'Legnano' },
-  { '@type': 'City', name: 'San Giorgio su Legnano' },
-  { '@type': 'City', name: 'Canegrate' },
-  { '@type': 'City', name: 'Cerro Maggiore' },
-  { '@type': 'City', name: 'Rescaldina' },
-  { '@type': 'City', name: 'Nerviano' },
-  { '@type': 'City', name: 'Castellanza' },
-  { '@type': 'City', name: 'Busto Arsizio' },
-  { '@type': 'City', name: 'Parabiago' },
-];
-
-export const takeawayServiceSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  '@id': 'https://www.mopizz.it/ordina#service',
-  name: 'Pizza Asporto Legnano — MO PIZZ',
-  serviceType: 'Take Away',
-  description: 'Ordina pizza napoletana e cucina tradizionale per asporto da MO PIZZ Legnano. Pizza con forno a legna, ritiro in Via Cadore 4.',
-  url: 'https://www.mopizz.it/ordina',
-  provider: { '@id': 'https://www.mopizz.it/#restaurant' },
-  areaServed: SERVICE_AREA,
-  availableChannel: {
-    '@type': 'ServiceChannel',
-    serviceUrl: 'https://www.mopizz.it/ordina',
-    serviceLocation: { '@id': 'https://www.mopizz.it/#restaurant' },
-  },
-  offers: { '@type': 'Offer', priceCurrency: 'EUR', availability: 'https://schema.org/InStock' },
-};
-
-export const deliveryServiceSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  '@id': 'https://www.mopizz.it/asporto#service',
-  name: 'Consegna a Domicilio Legnano — MO PIZZ',
-  serviceType: 'Food Delivery',
-  description: 'Consegna a domicilio MO PIZZ: pizza napoletana cotta nel forno a legna, antipasti e piatti tradizionali consegnati caldi a Legnano e comuni limitrofi.',
-  url: 'https://www.mopizz.it/asporto',
-  provider: { '@id': 'https://www.mopizz.it/#restaurant' },
-  areaServed: SERVICE_AREA,
-  availableChannel: {
-    '@type': 'ServiceChannel',
-    serviceUrl: 'https://www.mopizz.it/asporto',
-    serviceLocation: { '@id': 'https://www.mopizz.it/#restaurant' },
-  },
-  offers: { '@type': 'Offer', priceCurrency: 'EUR', availability: 'https://schema.org/InStock' },
-};
-
 // Home FAQ (questions Google + AI engines answer directly with brand)
 export const homeFaqSchema = {
   '@context': 'https://schema.org',
@@ -238,23 +132,7 @@ export const homeFaqSchema = {
       name: 'Quali sono gli orari di apertura di MO PIZZ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'MO PIZZ è aperta da martedì a venerdì 12:00–14:30 e 19:00–22:30, sabato 19:00–23:00, domenica 12:00–14:30 e 19:00–22:30. Chiuso il lunedì.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Quanto costa il menu fisso pranzo di MO PIZZ?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Il menu fisso pranzo MO PIZZ parte da €9 (primo + contorno), €11 (secondo + contorno) o €13 (primo + secondo + contorno). Acqua, servizio e caffè sempre inclusi. Disponibile da martedì a venerdì.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'MO PIZZ fa consegna a domicilio o asporto?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Sì. MO PIZZ offre asporto e consegna a domicilio a Legnano e comuni limitrofi. Ordini online da mopizz.it/ordina (asporto) o mopizz.it/asporto (consegna a casa).',
+        text: 'MO PIZZ è aperta solo a cena: da martedì a giovedì e la domenica 19:00–22:30, venerdì e sabato 19:00–23:00. Chiuso il lunedì.',
       },
     },
     {
@@ -262,7 +140,7 @@ export const homeFaqSchema = {
       name: 'Come si prenota un tavolo da MO PIZZ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Prenoti un tavolo direttamente online su mopizz.it nella sezione Prenota, oppure chiamando lo 0331 024363. Conferma immediata data, orario e numero di coperti.',
+        text: 'Prenoti un tavolo online in pochi secondi con TheFork dalla sezione Prenota, oppure chiamando lo 0331 024363. Ti confermiamo subito data, orario e numero di coperti.',
       },
     },
     {

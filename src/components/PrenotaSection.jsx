@@ -2,9 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ExternalLink, CalendarCheck, Phone } from 'lucide-react';
-import { PLATEFORM_RESERVE_URL, RESERVE_MODE } from '@/lib/constants';
-import PlateformIframe from '@/components/ui/PlateformIframe';
+import { Phone, Clock } from 'lucide-react';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
@@ -60,68 +58,41 @@ const PrenotaSection = () => {
                         Prenota il Tuo Tavolo
                     </h2>
                     <p className="font-sans text-smoke/80 text-base sm:text-lg mt-4 max-w-lg mx-auto leading-relaxed">
-                        Scegli data, orario e numero di coperti. Ricevi la conferma in pochi istanti.
+                        Scegli data, orario e numero di coperti: prenota online in pochi secondi con TheFork.
                     </p>
                 </div>
 
-                {RESERVE_MODE === 'iframe' ? (
-                    <div className="prenota-card relative w-full max-w-7xl mx-auto rounded-[1.5rem] sm:rounded-[2.5rem] border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden shadow-2xl shadow-black/30">
-                        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-flame to-transparent" />
-
-                        <PlateformIframe
-                            src={PLATEFORM_RESERVE_URL}
-                            title="Prenota un tavolo — Mo Pizz"
-                            allow="clipboard-write; payment; web-share"
-                            theme="dark"
-                            iframeMarginTop={-80}
-                            showBottomBar={false}
-                            sizeClassName="h-[80svh] min-h-[440px] sm:h-[520px] md:h-[600px]"
+                {/* TheFork reservation widget */}
+                <div className="prenota-card w-full max-w-3xl mx-auto rounded-[2.5rem] border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden">
+                    <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-flame to-transparent" />
+                    <div className="p-4 sm:p-6">
+                        <iframe
+                            src="https://widget.thefork.com/it/a047ef49-75f5-45c6-be7e-4b1e82b44648?step=date"
+                            title="Prenota un tavolo da Mo Pizz con TheFork"
+                            className="w-full rounded-[1.5rem] bg-white"
+                            style={{ height: 'min(720px, 90vh)', border: '0' }}
+                            loading="lazy"
+                            allow="payment"
                         />
-
-                        <div className="p-4 text-center border-t border-white/5">
-                            <a
-                                href={PLATEFORM_RESERVE_URL}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="font-sans text-smoke/50 text-sm hover:text-cream transition-colors inline-flex items-center gap-2"
-                            >
-                                Problemi? Apri in una nuova finestra <ExternalLink size={13} />
-                            </a>
-                        </div>
                     </div>
-                ) : (
-                    <div className="prenota-card w-full max-w-3xl mx-auto rounded-[2.5rem] border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden">
-                        <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-flame to-transparent" />
-                        <div className="flex flex-col items-center text-center gap-6 py-14 sm:py-20 px-8">
-                            <div className="w-16 h-16 rounded-2xl bg-flame/10 border border-flame/20 flex items-center justify-center">
-                                <CalendarCheck className="text-flame" size={32} />
-                            </div>
-                            <p className="font-sans text-cream/80 text-lg sm:text-xl max-w-lg leading-relaxed">
-                                Prenota il tuo tavolo da Mo Pizz su Plateform.
-                            </p>
-                            <a
-                                href={PLATEFORM_RESERVE_URL}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="magnetic-btn bg-flameDark hover:bg-ember text-cream font-sans font-bold py-4 px-12 rounded-full text-lg flex items-center gap-3 transition-colors duration-300"
-                            >
-                                Prenota su Plateform
-                                <ExternalLink size={20} />
-                            </a>
-                        </div>
-                    </div>
-                )}
+                </div>
 
-                {/* Fallback CTA under iframe */}
-                <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
-                    <span className="font-sans text-smoke/50 text-sm">Preferisci chiamare?</span>
+                {/* Phone fallback */}
+                <div className="mt-8 flex flex-col items-center text-center gap-4">
+                    <p className="font-sans text-smoke/70 text-base">
+                        Preferisci il telefono? Chiamaci, ti confermiamo subito la disponibilità.
+                    </p>
                     <a
                         href="tel:+390331024363"
-                        className="font-sans text-cream/70 hover:text-flame text-sm font-medium flex items-center gap-1.5 transition-colors"
+                        className="magnetic-btn bg-flameDark hover:bg-ember text-cream font-sans font-bold py-3.5 px-10 rounded-full text-lg flex items-center gap-3 transition-colors duration-300"
                     >
-                        <Phone size={14} />
+                        <Phone size={20} />
                         0331 024363
                     </a>
+                    <div className="flex items-center gap-2 text-smoke/60 mt-1">
+                        <Clock size={15} />
+                        <span className="font-sans text-sm">Mar–Gio e Dom 19:00–22:30 · Ven–Sab 19:00–23:00 · Lun chiuso</span>
+                    </div>
                 </div>
             </div>
         </section>

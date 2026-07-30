@@ -130,16 +130,6 @@ const Navbar = () => {
 
                 {/* Desktop CTAs — hidden during menu horizontal scroll and home hero */}
                 <div className={`hidden md:flex items-center gap-3 transition-all duration-500 ${isInMenu || (!isScrolled && isHomePage) ? 'opacity-0 w-0 overflow-hidden pointer-events-none' : 'opacity-100'}`}>
-                    <Link
-                        href="/ordina"
-                        className={`magnetic-btn font-sans font-semibold py-2.5 px-5 rounded-full flex items-center gap-1.5 transition-colors duration-300 border ${
-                            isScrolled
-                                ? 'border-flame text-flame hover:bg-flame hover:text-cream'
-                                : 'border-cream/60 text-cream hover:bg-cream hover:text-charcoal'
-                        }`}
-                    >
-                        {nav.ctaOrdina}
-                    </Link>
                     <a href="/#prenota" className="magnetic-btn bg-flameDark hover:bg-ember text-cream font-sans font-semibold py-3 px-6 rounded-full flex items-center gap-2 transition-colors duration-300">
                         <Phone size={18} />
                         {nav.ctaPrenota}
@@ -186,21 +176,12 @@ const Navbar = () => {
                     );
                 })}
                 <div className={`h-px bg-cream/20 transition-all duration-500 ${isGathering ? 'w-0 opacity-0' : 'w-8 opacity-100'}`} style={{ transitionDelay: `${navLinks.length * 35}ms` }} />
-                <Link
-                    href="/ordina"
-                    className={`font-sans text-[11px] uppercase tracking-[0.25em] transition-all duration-500 ${
-                        isGathering && !isScrolled ? 'text-gold/10 scale-90' : 'text-gold/70 hover:text-gold scale-100'
-                    }`}
-                    style={{ transitionDelay: `${(navLinks.length + 1) * 35}ms` }}
-                >
-                    {nav.ctaOrdina}
-                </Link>
                 <a
                     href="/#prenota"
                     className={`font-sans text-[11px] uppercase tracking-[0.25em] flex items-center gap-1.5 transition-all duration-500 ${
                         isGathering && !isScrolled ? 'text-flame/10 scale-90' : 'text-flame/70 hover:text-flame scale-100'
                     }`}
-                    style={{ transitionDelay: `${(navLinks.length + 2) * 35}ms` }}
+                    style={{ transitionDelay: `${(navLinks.length + 1) * 35}ms` }}
                 >
                     <Phone size={11} />
                     {nav.ctaPrenota}
@@ -229,18 +210,6 @@ const Navbar = () => {
                             <a key={i} href={link.href} onClick={closeMenu} className={cls} style={style}>{link.label}</a>
                         );
                     })}
-                    <Link
-                        href="/ordina"
-                        onClick={closeMenu}
-                        className="mobile-link text-3xl font-sans font-bold text-gold hover:text-flame transition-colors"
-                        style={{
-                            opacity: isMobileMenuOpen ? 1 : 0,
-                            transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(30px)',
-                            transition: `opacity 0.4s ease ${200 + navLinks.length * 80}ms, transform 0.4s ease ${200 + navLinks.length * 80}ms`,
-                        }}
-                    >
-                        {nav.ctaOrdina}
-                    </Link>
                     <a
                         href="/#prenota"
                         onClick={closeMenu}
@@ -248,7 +217,7 @@ const Navbar = () => {
                         style={{
                             opacity: isMobileMenuOpen ? 1 : 0,
                             transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(30px)',
-                            transition: `opacity 0.4s ease ${200 + (navLinks.length + 1) * 80}ms, transform 0.4s ease ${200 + (navLinks.length + 1) * 80}ms`,
+                            transition: `opacity 0.4s ease ${200 + navLinks.length * 80}ms, transform 0.4s ease ${200 + navLinks.length * 80}ms`,
                         }}
                     >
                         <Phone size={24} />

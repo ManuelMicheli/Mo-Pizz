@@ -46,7 +46,7 @@ const nextConfig = {
           { key: 'X-Permitted-Cross-Domain-Policies', value: 'none' },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://mopizz.plateform.app https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline' https://mopizz.plateform.app; font-src 'self' https://mopizz.plateform.app; img-src 'self' data: https://www.mopizz.it https://mopizz.plateform.app; frame-src https://www.google.com https://mopizz.plateform.app; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://mopizz.plateform.app; connect-src 'self' https://mopizz.plateform.app https://va.vercel-scripts.com; upgrade-insecure-requests",
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://www.mopizz.it; frame-src https://www.google.com https://widget.thefork.com https://*.thefork.com https://*.xmenu.it; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; connect-src 'self' https://va.vercel-scripts.com; upgrade-insecure-requests",
           },
         ],
       },
@@ -65,6 +65,10 @@ const nextConfig = {
         destination: '/#prenota',
         permanent: true,
       },
+      // Vecchia pagina ordine a domicilio (Plateform) → nuova pagina Consegne (TheFork).
+      { source: '/ordina', destination: '/consegne', permanent: true },
+      // Servizi non più attivi → home per non perdere il traffico indicizzato.
+      { source: '/gift-cards', destination: '/', permanent: true },
     ];
   },
 };

@@ -3,26 +3,19 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ExternalLink, Maximize2, Minimize2 } from 'lucide-react';
 
 /**
- * Shared Plateform iframe wrapper.
- * - Loading spinner (with 5s fallback)
- * - Fullscreen toggle via Fullscreen API (fallback: open in new tab)
- * - Mobile-tall sizing (svh) for easier interaction
+ * Generic third-party embed iframe (ordering widgets, ecc.).
+ * - Loading spinner (con fallback 5s)
+ * - Toggle schermo intero via Fullscreen API (fallback: apre in nuova scheda)
+ * - Sizing alto su mobile (svh) per interazione più comoda
  *
- * Props:
- *   src, title, sandbox, allow
- *   iframeMarginTop (number) — negative px to crop iframe top (hides Plateform header)
- *   sizeClassName — Tailwind classes controlling iframe height when NOT fullscreen
- *   theme — 'dark' | 'light' (affects spinner + bottom bar colors)
- *   showBottomBar — show "Open in new window" footer (default true)
+ * Props: src, title, allow, sizeClassName, theme ('dark'|'light'), showBottomBar
  */
-export default function PlateformIframe({
+export default function EmbedIframe({
     src,
     title,
-    sandbox = 'allow-same-origin allow-scripts allow-forms allow-popups',
-    allow = 'clipboard-write',
-    iframeMarginTop = 0,
-    sizeClassName = 'h-[82svh] min-h-[560px] sm:h-[640px] md:h-[740px]',
-    theme = 'dark',
+    allow = 'payment; clipboard-write',
+    sizeClassName = 'h-[82svh] min-h-[560px] sm:h-[640px] md:h-[760px]',
+    theme = 'light',
     showBottomBar = true,
 }) {
     const [loaded, setLoaded] = useState(false);
@@ -57,7 +50,6 @@ export default function PlateformIframe({
                 else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
             }
         } catch {
-            // iOS Safari <16.4 + some embedded browsers — fallback
             window.open(src, '_blank', 'noopener,noreferrer');
         }
     }, [src]);
@@ -68,17 +60,10 @@ export default function PlateformIframe({
     const barBg = theme === 'dark' ? 'bg-charcoal/40' : 'bg-cream/60';
     const linkColor = theme === 'dark' ? 'text-smoke/60 hover:text-cream' : 'text-smoke hover:text-flame';
 
-    const iframeStyle = iframeMarginTop
-        ? {
-              marginTop: `${iframeMarginTop}px`,
-              height: `calc(100% + ${Math.abs(iframeMarginTop)}px)`,
-          }
-        : undefined;
-
     return (
         <div
             ref={containerRef}
-            className={`relative w-full bg-charcoal ${isFullscreen ? 'h-screen flex flex-col' : ''}`}
+            className={`relative w-full bg-white ${isFullscreen ? 'h-screen flex flex-col' : ''}`}
         >
             <div className={`relative w-full overflow-hidden ${isFullscreen ? 'flex-1' : sizeClassName}`}>
                 {!loaded && (
@@ -103,13 +88,11 @@ export default function PlateformIframe({
                 <iframe
                     src={src}
                     title={title}
-                    sandbox={sandbox}
                     allow={allow}
                     loading="lazy"
                     referrerPolicy="strict-origin-when-cross-origin"
                     onLoad={() => setLoaded(true)}
-                    style={iframeStyle}
-                    className={`w-full border-0 ${iframeMarginTop ? '' : 'h-full'}`}
+                    className="w-full h-full border-0"
                 />
             </div>
 

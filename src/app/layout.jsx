@@ -8,7 +8,6 @@ import Footer from '@/components/Footer';
 import CookieBanner from '@/components/CookieBanner';
 import LenisProvider from '@/components/LenisProvider';
 import NoiseOverlay from '@/components/NoiseOverlay';
-import ServicesDrawer from '@/components/ServicesDrawer';
 import IdleMount from '@/components/IdleMount';
 import { schemaData, webSiteSchema, GEO } from '@/lib/constants';
 
@@ -44,8 +43,8 @@ export const metadata = {
         default: 'MO PIZZ | Pizzeria Napoletana a Legnano — Pizza con Forno a Legna',
         template: '%s | MO PIZZ',
     },
-    description: 'MO PIZZ è la pizzeria napoletana autentica a Legnano. Pizza con forno a legna, cucina tradizionale, menu fisso pranzo da €9, asporto, consegna a domicilio e gift card. Via Cadore 4, Legnano (MI).',
-    keywords: 'mopizz, mo pizz, mopizz legnano, mopizz.it, mo pizz legnano, pizzeria legnano, ristorante legnano, pizza napoletana legnano, miglior pizzeria legnano, ristorante napoletano legnano, pizza forno a legna legnano, menu fisso pranzo legnano, asporto legnano, consegna a domicilio legnano, pizzeria vicino a me, pizzeria via cadore legnano',
+    description: 'MO PIZZ è la pizzeria napoletana autentica a Legnano. Pizza con forno a legna e cucina tradizionale, aperti a cena dal martedì alla domenica. Via Cadore 4, Legnano (MI).',
+    keywords: 'mopizz, mo pizz, mopizz legnano, mopizz.it, mo pizz legnano, pizzeria legnano, ristorante legnano, pizza napoletana legnano, miglior pizzeria legnano, ristorante napoletano legnano, pizza forno a legna legnano, pizzeria vicino a me, pizzeria via cadore legnano',
     applicationName: 'MO PIZZ',
     authors: [{ name: 'MO PIZZ', url: 'https://www.mopizz.it' }],
     creator: 'MO PIZZ',
@@ -77,7 +76,7 @@ export const metadata = {
     },
     openGraph: {
         title: 'MO PIZZ | Pizzeria Napoletana a Legnano',
-        description: 'Pizza napoletana autentica con forno a legna a Legnano. Cucina tradizionale, menu fisso pranzo, asporto e gift card.',
+        description: 'Pizza napoletana autentica con forno a legna a Legnano. Cucina tradizionale, aperti a cena dal martedì alla domenica.',
         siteName: 'MO PIZZ',
         url: 'https://www.mopizz.it',
         locale: 'it_IT',
@@ -95,7 +94,7 @@ export const metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'MO PIZZ | Pizzeria Napoletana a Legnano',
-        description: 'Pizza napoletana autentica con forno a legna a Legnano. Cucina tradizionale, menu fisso pranzo, asporto e gift card.',
+        description: 'Pizza napoletana autentica con forno a legna a Legnano. Cucina tradizionale, aperti a cena dal martedì alla domenica.',
         images: [{
             url: '/images/hero-home-v2.webp',
             alt: 'MO PIZZ — Pizzeria Napoletana a Legnano',
@@ -134,7 +133,6 @@ export default function RootLayout({ children }) {
                 {/* dns-prefetch (not preconnect) for below-the-fold iframe origins —
                     keeps the page under the 4-preconnect budget Lighthouse warns about. */}
                 <link rel="dns-prefetch" href="https://www.google.com" />
-                <link rel="dns-prefetch" href="https://mopizz.plateform.app" />
                 {/* Schema.org JSON-LD */}
                 <script
                     type="application/ld+json"
@@ -157,9 +155,6 @@ export default function RootLayout({ children }) {
                             <CookieBanner />
                         </IdleMount>
                     </div>
-                    <IdleMount>
-                        <ServicesDrawer />
-                    </IdleMount>
                 </LenisProvider>
                 <NoiseOverlay />
                 <Analytics />

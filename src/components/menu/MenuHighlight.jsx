@@ -4,7 +4,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { signatureDishes } from '../../data/menuData';
 import { siteContent } from '@/data/copy';
-import { PLATEFORM_MENU_URL } from '@/lib/constants';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,17 +28,6 @@ const MenuHighlight = () => {
         },
       });
 
-      gsap.from('.menu-cta', {
-        y: 24,
-        opacity: 0,
-        duration: 1.2,
-        ease: 'expo.out',
-        force3D: true,
-        scrollTrigger: {
-          trigger: '.menu-cta',
-          start: 'top 88%',
-        },
-      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -100,21 +88,6 @@ const MenuHighlight = () => {
               </span>
             </div>
           ))}
-        </div>
-
-        {/* CTA */}
-        <div className="menu-cta flex flex-col items-center text-center">
-          <span className="font-caveat text-gold text-xl sm:text-2xl mb-6">
-            {menuCopy.highlightCtaEyebrow}
-          </span>
-          <a
-            href={PLATEFORM_MENU_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="magnetic-btn w-full sm:w-auto text-center bg-flameDark hover:bg-ember text-cream font-sans font-bold py-4 px-10 rounded-full transition-colors duration-300 text-lg"
-          >
-            {menuCopy.highlightCtaLabel}
-          </a>
         </div>
       </div>
     </section>

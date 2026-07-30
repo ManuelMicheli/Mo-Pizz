@@ -17,14 +17,11 @@ const SeoContent = () => {
                     ))}
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 mt-8 font-sans text-sm sm:text-base">
-                    <Link href="/ordina" className="text-flameDark hover:text-ember font-medium transition-colors underline underline-offset-4">
-                        {seoContent.ctaOrdina}
+                    <Link href="/#menu" className="text-flameDark hover:text-ember font-medium transition-colors underline underline-offset-4">
+                        {seoContent.ctaMenu}
                     </Link>
-                    <Link href="/gift-cards" className="text-flameDark hover:text-ember font-medium transition-colors underline underline-offset-4">
-                        {seoContent.ctaGiftCard}
-                    </Link>
-                    <Link href="/fidelity" className="text-flameDark hover:text-ember font-medium transition-colors underline underline-offset-4">
-                        {seoContent.ctaFidelity}
+                    <Link href="/#prenota" className="text-flameDark hover:text-ember font-medium transition-colors underline underline-offset-4">
+                        {seoContent.ctaPrenota}
                     </Link>
                 </div>
             </div>

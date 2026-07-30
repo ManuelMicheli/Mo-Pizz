@@ -296,6 +296,12 @@ const EventiPage = () => {
                         <div className="absolute inset-0 pointer-events-none opacity-[0.04]" style={grain} />
 
                         <div className="relative px-7 pt-9 pb-9 sm:px-12 sm:pt-12 sm:pb-12 text-center">
+                            {/* Riga di controllo — come un vero biglietto */}
+                            <div className="flex items-center justify-between font-mono text-wood/50 text-[0.6rem] tracking-[0.2em] uppercase mb-6">
+                                <span>N° 0025</span>
+                                <span>Venerdì · 21:00</span>
+                            </div>
+
                             {/* Intestazione */}
                             <span className="inline-flex items-center gap-2 font-mono text-flameDark text-[0.7rem] tracking-[0.25em] uppercase">
                                 <Ticket size={15} /> Menù della serata
@@ -313,11 +319,11 @@ const EventiPage = () => {
                             </h3>
                             <p className="font-sans text-wood/70 text-sm sm:text-base mt-3">{ev.menuIntro}</p>
 
-                            {/* Linea perforata (strappo biglietto) */}
-                            <div className="relative my-7 flex items-center justify-center">
-                                <span className="absolute -left-7 sm:-left-12 w-7 h-7 rounded-full bg-[#241410]" />
-                                <span className="w-full border-t-2 border-dashed border-wood/25" />
-                                <span className="absolute -right-7 sm:-right-12 w-7 h-7 rounded-full bg-[#241410]" />
+                            {/* Linea perforata (strappo biglietto) con tacche laterali */}
+                            <div className="relative -mx-7 sm:-mx-12 my-7">
+                                <div className="mx-4 border-t-2 border-dashed border-wood/25" />
+                                <span className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-[#241410] shadow-[inset_-2px_0_4px_rgba(0,0,0,0.45)]" />
+                                <span className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-[#241410] shadow-[inset_2px_0_4px_rgba(0,0,0,0.45)]" />
                             </div>
 
                             {/* Portate */}
@@ -335,11 +341,11 @@ const EventiPage = () => {
                                 ))}
                             </ul>
 
-                            {/* Linea perforata */}
-                            <div className="relative my-7 flex items-center justify-center">
-                                <span className="absolute -left-7 sm:-left-12 w-7 h-7 rounded-full bg-[#241410]" />
-                                <span className="w-full border-t-2 border-dashed border-wood/25" />
-                                <span className="absolute -right-7 sm:-right-12 w-7 h-7 rounded-full bg-[#241410]" />
+                            {/* Linea perforata con tacche laterali */}
+                            <div className="relative -mx-7 sm:-mx-12 my-7">
+                                <div className="mx-4 border-t-2 border-dashed border-wood/25" />
+                                <span className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-[#241410] shadow-[inset_-2px_0_4px_rgba(0,0,0,0.45)]" />
+                                <span className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-[#241410] shadow-[inset_2px_0_4px_rgba(0,0,0,0.45)]" />
                             </div>
 
                             {/* Prezzo — timbro */}
@@ -349,6 +355,32 @@ const EventiPage = () => {
                                     <span className="font-mono text-wood/70 text-xs uppercase tracking-widest">a persona</span>
                                 </div>
                                 <p className="font-sans text-wood/70 text-xs sm:text-sm max-w-xs leading-relaxed">{ev.menuNote}</p>
+                            </div>
+                        </div>
+
+                        {/* Matrice — tagliando inferiore con codice a barre */}
+                        <div className="relative -mt-3">
+                            {/* Strappo finale con tacche */}
+                            <div className="relative">
+                                <div className="mx-4 border-t-2 border-dashed border-wood/25" />
+                                <span className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-[#241410] shadow-[inset_-2px_0_4px_rgba(0,0,0,0.45)]" />
+                                <span className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-[#241410] shadow-[inset_2px_0_4px_rgba(0,0,0,0.45)]" />
+                            </div>
+
+                            <div className="flex items-center justify-between gap-4 px-7 sm:px-12 py-6">
+                                <div className="text-left">
+                                    <p className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-wood/50">Ammissione</p>
+                                    <p className="font-sans font-bold text-charcoal text-sm">Cena Cantata</p>
+                                </div>
+                                {/* Codice a barre */}
+                                <div
+                                    className="h-11 w-32 sm:w-40 rounded-[2px]"
+                                    style={{
+                                        backgroundImage:
+                                            'repeating-linear-gradient(90deg, #1A1A1A 0, #1A1A1A 1px, transparent 1px, transparent 3px, #1A1A1A 3px, #1A1A1A 5px, transparent 5px, transparent 6px, #1A1A1A 6px, #1A1A1A 9px, transparent 9px, transparent 11px)',
+                                    }}
+                                    aria-hidden="true"
+                                />
                             </div>
                         </div>
                     </div>

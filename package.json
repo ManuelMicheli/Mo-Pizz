@@ -5,8 +5,6 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "sync-menu": "node scripts/sync-menu.mjs",
-    "prebuild": "node scripts/sync-menu.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

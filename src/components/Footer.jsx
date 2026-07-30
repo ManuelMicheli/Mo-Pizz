@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Instagram, Facebook, Phone } from 'lucide-react';
+import { Instagram, Facebook, Phone, Tag } from 'lucide-react';
 import { siteContent } from '@/data/copy';
 
 const { footer } = siteContent;
@@ -17,14 +17,13 @@ const getIsOpen = () => {
     // Lunedì chiuso
     if (day === 1) return false;
 
-    // Sabato (6): solo cena 19:00–23:00
-    if (day === 6) {
+    // Venerdì (5) e Sabato (6): cena 19:00–23:00
+    if (day === 5 || day === 6) {
         return currentMinutes >= 1140 && currentMinutes <= 1380;
     }
 
-    // Mar–Ven (2-5), Domenica (0): 12:00–14:30 + 19:00–22:30
-    return (currentMinutes >= 720 && currentMinutes <= 870) ||
-           (currentMinutes >= 1140 && currentMinutes <= 1350);
+    // Mar–Gio (2-4) e Domenica (0): cena 19:00–22:30
+    return currentMinutes >= 1140 && currentMinutes <= 1350;
 };
 
 const Footer = () => {
@@ -75,11 +74,9 @@ const Footer = () => {
                                 <Link key={i} href={`/${link.href}`} className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{link.label}</Link>
                             ))}
                             <Link href="/#prenota" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300 flex items-center gap-2"><Phone size={18} />{footer.ctaPrenota}</Link>
-                            <Link href="/asporto" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaAsporto}</Link>
-                            <Link href="/ordina" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaOrdina}</Link>
-                            <Link href="/gift-cards" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaGiftCard}</Link>
-                            <Link href="/fidelity" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaFidelity}</Link>
                             <Link href="/eventi" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaEventi}</Link>
+                            <Link href="/fidelity" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300">{footer.ctaFidelity}</Link>
+                            <a href={footer.promozioniUrl} target="_blank" rel="noopener noreferrer" className="py-1 hover:text-cream hover:-translate-y-[1px] transition-all duration-300 flex items-center gap-2"><Tag size={18} />{footer.ctaPromozioni}</a>
                         </div>
                     </div>
 
