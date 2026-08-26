@@ -2,7 +2,9 @@
 
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
-const STORAGE_KEY = 'mopizz-cart-v1';
+// v2: bumped col menu 2026 — svuota le selezioni salvate che puntavano a piatti
+// non più in carta (prezzi e categorie sono cambiati).
+const STORAGE_KEY = 'mopizz-cart-v2';
 const CartContext = createContext(null);
 
 const parsePrice = (price) => {

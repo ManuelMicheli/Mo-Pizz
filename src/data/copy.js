@@ -53,6 +53,45 @@ export const siteContent = {
     introCtaClose: 'Chiudi il Menu',
     highlightEyebrow: 'La Firma dello Chef',
     highlightHeadline: 'I Piatti Iconici',
+    copertoNote: 'Coperto e servizio 2,00 € a persona',
+  },
+
+  // ─── OFFERTE (promo settimanali) ────────────────────
+  offerte: {
+    eyebrow: 'Le Nostre Offerte',
+    headline: 'Ogni sera',
+    headlineEm: 'ha la sua promo.',
+    body: 'Gli appuntamenti fissi della settimana da Mo Pizz. Qualcosa in più nel piatto, senza sorprese sul conto.',
+    items: [
+      {
+        day: 'Ogni martedì',
+        title: 'MarteBirra',
+        price: 'In omaggio',
+        desc: 'Prima consumazione in omaggio, a scelta tra birra o bibita.',
+        note: 'Offerta valida per ogni commensale che consuma.',
+      },
+      {
+        day: 'Ogni mercoledì',
+        title: 'MercolePizza',
+        price: '15,00 €',
+        desc: '1 pizza a scelta tra le classiche + dolce a scelta + bibita o birra media + limoncello e coperto.',
+        note: '',
+      },
+      {
+        day: 'Ogni giovedì',
+        title: 'GioveDolce',
+        price: 'In omaggio',
+        desc: 'Dolce a scelta in omaggio.',
+        note: '',
+      },
+    ],
+    disclaimer: 'Le offerte non sono cumulabili con altre promo, coupon o buoni sconto.',
+    club: {
+      title: 'Club Mo Pizz',
+      body: 'Fidelity card con raccolta punti, ordini da asporto e delivery, coupon esclusivi, sconti dedicati agli iscritti e promozioni sempre aggiornate.',
+      cta: 'Entra nel Club',
+      href: '/fidelity',
+    },
   },
 
   // ─── CHI SIAMO (ex Chef) ───────────────────────────
@@ -63,7 +102,7 @@ export const siteContent = {
     subheadline: 'A Legnano — passione, visione e fuoco.',
     paragraphs: [
       '**Mo Pizz** nasce dall\'idea della **famiglia Moschiano**: creare a Legnano un locale dove la pizza verace incontra una cucina di tradizione curata nei minimi dettagli. Dal primo giorno, ogni scelta, dalle farine ai fornitori, dal servizio all\'atmosfera, è pensata per offrire un\'esperienza che va oltre il piatto.',
-      'In cucina lavora un team affiatato: **Christian**, di formazione campana, segue il forno e gli impasti e firma anche antipasti, primi e secondi, mentre **Carmine e Alessia** curano la visione e la gestione del brand. Attorno a loro, uno staff giovane e professionale che trasforma ogni serata in qualcosa da ricordare.',
+      'In cucina lavora un team affiatato: **Christian**, di formazione campana, segue il forno e gli impasti e firma anche antipasti, fritti e dolci, mentre **Carmine e Alessia** curano la visione e la gestione del brand. Attorno a loro, uno staff giovane e professionale che trasforma ogni serata in qualcosa da ricordare.',
     ],
     quote: 'La pizza è rispetto per la materia prima e amore per il fuoco.',
     photoAlt: 'Il team di MO PIZZ, pizzeria napoletana a Legnano — famiglia Moschiano e lo staff',
@@ -120,7 +159,7 @@ export const siteContent = {
     headline: 'Dove Siamo a Legnano',
     paragraphs: [
       'MO PIZZ è la pizzeria napoletana di Legnano dove la tradizione incontra l\'autenticità. In Via Cadore 4, nel cuore di Legnano, prepariamo ogni giorno pizza napoletana con forno a legna, impasto a lunga lievitazione e ingredienti selezionati direttamente dalla Campania.',
-      'Il nostro ristorante a Legnano offre un\'esperienza culinaria completa: dalla pizza margherita alla cucina tradizionale napoletana con primi, secondi, fritti e dolci della casa. Siamo aperti a cena dal martedì alla domenica, con il forno a legna sempre acceso.',
+      'Il nostro ristorante a Legnano offre un\'esperienza culinaria completa: dalla pizza margherita alle pizze d\'autore dello chef, con antipasti e fritti della tradizione napoletana, panuozzi e dolci della casa. Siamo aperti a cena dal martedì alla domenica, con il forno a legna sempre acceso.',
       'Cerchi una pizzeria a Legnano per una serata speciale, una cena con amici o semplicemente la miglior pizza napoletana della zona? Vieni a trovarci in Via Cadore 4. Accogliamo con piacere anche i clienti dei comuni limitrofi: San Giorgio su Legnano, Canegrate, Cerro Maggiore, Rescaldina e Nerviano. MO PIZZ: il sapore di Napoli a Legnano.',
     ],
     ctaMenu: 'Scopri il nostro menu',
@@ -160,6 +199,7 @@ export const siteContent = {
     navLinks: [
       { label: 'Home', href: '#' },
       { label: 'Menu', href: '#menu' },
+      { label: 'Offerte', href: '#offerte' },
       { label: 'Chi Siamo', href: '#chi-siamo' },
       { label: 'Asporto', href: 'asporto' },
       { label: 'Consegne', href: 'consegne' },

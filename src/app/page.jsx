@@ -1,5 +1,6 @@
 import Hero from '@/components/Hero';
 import Statement from '@/components/Statement';
+import Offerte from '@/components/Offerte';
 import Gallery from '@/components/Gallery';
 import ReviewCta from '@/components/ReviewCta';
 import Reviews from '@/components/Reviews';
@@ -23,6 +24,7 @@ export default function HomePage() {
             />
             <Hero />
             <ClientGroupA />
+            <Offerte />
             <Statement />
             <Gallery />
             <ClientGroupB />

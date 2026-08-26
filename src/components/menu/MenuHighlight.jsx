@@ -89,6 +89,11 @@ const MenuHighlight = () => {
             </div>
           ))}
         </div>
+
+        {/* Nota coperto — chiude il menu */}
+        <p className="text-center font-sans text-smoke/70 text-xs sm:text-sm">
+          {menuCopy.copertoNote}
+        </p>
       </div>
     </section>
   );

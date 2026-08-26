@@ -27,3 +27,4 @@ mo-pizz-*.md
 lh-*.json
 .vercel
 .env*.local
+.gstack/
