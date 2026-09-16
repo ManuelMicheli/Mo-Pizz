@@ -11,7 +11,7 @@ const ICONS = { asporto: ShoppingBag, consegne: Bike };
 
 /**
  * Pagina servizio ordine (Asporto / Consegne a domicilio).
- * Mostra il widget TheFork se `service.theForkUrl` è valorizzato,
+ * Mostra il widget xMenu embeddato se `service.orderUrl` è valorizzato,
  * altrimenti un fallback telefonico (placeholder finché arriva il link).
  */
 const OrderServicePage = ({ service }) => {
@@ -51,7 +51,7 @@ const OrderServicePage = ({ service }) => {
         };
     }, []);
 
-    const hasWidget = Boolean(service.theForkUrl);
+    const hasWidget = Boolean(service.orderUrl);
 
     return (
         <main ref={rootRef} className="relative bg-charcoal text-cream overflow-hidden">
@@ -85,7 +85,7 @@ const OrderServicePage = ({ service }) => {
                         {hasWidget ? (
                             <div className="p-4 sm:p-6">
                                 <iframe
-                                    src={service.theForkUrl}
+                                    src={service.orderUrl}
                                     title={service.widgetTitle}
                                     className="w-full rounded-[1.5rem] bg-white"
                                     style={{ height: 'min(720px, 90vh)', border: '0' }}

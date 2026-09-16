@@ -1,3 +1,7 @@
+// ===== APP =====
+export const APP_STORE_URL = 'https://apps.apple.com/pk/app/mo-pizz/id6756309191';
+export const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=it.xmenu.mopizz';
+
 // ===== RECENSIONI =====
 export const GOOGLE_REVIEW_URL = 'https://www.google.com/maps/place/Mo+Pizz+Pizzeria+Napoletana/@45.55597,8.9253119,13z/data=!4m8!3m7!1s0x47868d9bf3567e25:0x6c09ada059a69fd2!8m2!3d45.6028006!4d8.9061923!9m1!1b1!16s%2Fg%2F11fmzsf1lh';
 export const TRIPADVISOR_REVIEW_URL = 'https://www.tripadvisor.com/Restaurant_Review-g670658-d19352966-Reviews-Mo_Pizz-Legnano_Province_of_Milan_Lombardy.html';

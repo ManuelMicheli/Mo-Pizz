@@ -47,6 +47,13 @@ export const siteContent = {
     marquee: 'Mo Pizz — pizza verace, cucina di tradizione, forno a legna.',
   },
 
+  // ─── APP BANNER (Hero → Menu) ────────────────────────
+  appBanner: {
+    text: 'Scarica l\'app Mo Pizz: ordina, ritira o ricevi a domicilio, accumula punti fedeltà.',
+    ctaAppStore: 'App Store',
+    ctaGooglePlay: 'Google Play',
+  },
+
   // ─── MENU ───────────────────────────────────────────
   menu: {
     introCta: 'Esplora il Menu',
@@ -54,44 +61,6 @@ export const siteContent = {
     highlightEyebrow: 'La Firma dello Chef',
     highlightHeadline: 'I Piatti Iconici',
     copertoNote: 'Coperto e servizio 2,00 € a persona',
-  },
-
-  // ─── OFFERTE (promo settimanali) ────────────────────
-  offerte: {
-    eyebrow: 'Le Nostre Offerte',
-    headline: 'Ogni sera',
-    headlineEm: 'ha la sua promo.',
-    body: 'Gli appuntamenti fissi della settimana da Mo Pizz. Qualcosa in più nel piatto, senza sorprese sul conto.',
-    items: [
-      {
-        day: 'Ogni martedì',
-        title: 'MarteBirra',
-        price: 'In omaggio',
-        desc: 'Prima consumazione in omaggio, a scelta tra birra o bibita.',
-        note: 'Offerta valida per ogni commensale che consuma.',
-      },
-      {
-        day: 'Ogni mercoledì',
-        title: 'MercolePizza',
-        price: '15,00 €',
-        desc: '1 pizza a scelta tra le classiche + dolce a scelta + bibita o birra media + limoncello e coperto.',
-        note: '',
-      },
-      {
-        day: 'Ogni giovedì',
-        title: 'GioveDolce',
-        price: 'In omaggio',
-        desc: 'Dolce a scelta in omaggio.',
-        note: '',
-      },
-    ],
-    disclaimer: 'Le offerte non sono cumulabili con altre promo, coupon o buoni sconto.',
-    club: {
-      title: 'Club Mo Pizz',
-      body: 'Fidelity card con raccolta punti, ordini da asporto e delivery, coupon esclusivi, sconti dedicati agli iscritti e promozioni sempre aggiornate.',
-      cta: 'Entra nel Club',
-      href: '/fidelity',
-    },
   },
 
   // ─── CHI SIAMO (ex Chef) ───────────────────────────
@@ -199,7 +168,7 @@ export const siteContent = {
     navLinks: [
       { label: 'Home', href: '#' },
       { label: 'Menu', href: '#menu' },
-      { label: 'Offerte', href: '#offerte' },
+      { label: 'Offerte', href: 'eventi#settimana' },
       { label: 'Chi Siamo', href: '#chi-siamo' },
       { label: 'Asporto', href: 'asporto' },
       { label: 'Consegne', href: 'consegne' },
@@ -208,6 +177,7 @@ export const siteContent = {
     ctaPrenota: 'Prenota',
     ctaEventi: 'Eventi',
     ctaFidelity: 'Fidelity',
+    appHeading: 'Scarica l\'app',
     ctaPromozioni: 'Promozioni & Info',
     promozioniUrl: 'https://mopizz.order.xmenu.it/',
     statusOpen: 'Forno Operativo',
@@ -216,9 +186,8 @@ export const siteContent = {
     piva: 'P.IVA 10529490960',
   },
 
-  // ─── SERVIZI (Asporto + Consegne a domicilio via TheFork) ──
-  // theForkUrl: incolla qui il link widget.thefork.com del servizio.
-  // Finché è vuoto, la pagina mostra il fallback telefonico.
+  // ─── SERVIZI (Asporto + Consegne a domicilio via xMenu) ──
+  // orderUrl: link xmenu embeddato in iframe. Finché è vuoto, la pagina mostra il fallback telefonico.
   servizi: {
     placeholderNote: 'L\'ordine online sarà attivo a breve. Nel frattempo ordina con una telefonata: ti prepariamo tutto al momento.',
     fallbackLead: 'Preferisci il telefono? Chiamaci, prepariamo il tuo ordine al momento.',
@@ -227,7 +196,7 @@ export const siteContent = {
     telefonoHref: 'tel:+390331024363',
     asporto: {
       slug: 'asporto',
-      orderUrl: 'https://mopizz.order.xmenu.it/order',
+      orderUrl: 'https://mopizz.order.xmenu.it/',
       hero: {
         eyebrow: 'Asporto • Legnano',
         headline: 'Il forno a legna,',
@@ -258,18 +227,120 @@ export const siteContent = {
       headline: 'Consegna a',
       headlineEm: 'domicilio.',
       body: 'La vera pizza napoletana a casa tua. Ordina online e ricevi la consegna comodamente a domicilio.',
-      widgetTitle: 'Ordina la consegna a domicilio da Mo Pizz con TheFork',
-      theForkUrl: '',
+      widgetTitle: 'Ordina la consegna a domicilio da Mo Pizz con xMenu',
+      orderUrl: 'https://mopizz.order.xmenu.it/',
     },
   },
 
   // ─── EVENTI (Serate a tema) ─────────────────────────
   eventi: {
     hero: {
-      eyebrow: 'Eventi • Serate a tema a Legnano',
-      headline: 'Le nostre',
-      headlineEm: 'serate speciali.',
-      body: 'Da Mo Pizz non si mangia soltanto: ci si diverte. Appuntamenti fissi e serate a tema per vivere la pizzeria in compagnia, con musica e buon cibo.',
+      kicker: 'Serate a tema a Legnano',
+      headline: 'Le nostre serate speciali',
+      body: 'Da Mo Pizz non si mangia soltanto: ci si diverte, tra musica, buon cibo e appuntamenti fissi.',
+    },
+    // Promo settimanali. `weekday` segue Date#getDay (0 = domenica): il popup
+    // del giorno si apre solo quando il giorno a Legnano (Europe/Rome) coincide.
+    settimana: {
+      kicker: 'Da martedì a venerdì',
+      headline: 'La settimana di Mo Pizz',
+      body: 'Quattro sere, quattro appuntamenti fissi. Qualcosa in più sul tavolo, senza sorprese sul conto, e il venerdì si canta.',
+      todayLabel: 'Stasera',
+      ctaPrenota: 'Prenota un tavolo',
+      disclaimer: 'Le offerte non sono cumulabili con altre promo, coupon o buoni sconto.',
+      clubLead: 'Iscritto al Club Mo Pizz? Coupon e sconti esclusivi ti aspettano anche le altre sere.',
+      clubCta: 'Entra nel Club',
+      clubHref: '/fidelity',
+      items: [
+        {
+          slug: 'martebirra',
+          weekday: 2,
+          day: 'Martedì',
+          dayShort: 'Mar',
+          title: 'MarteBirra',
+          titleParts: ['Marte', 'Birra'],
+          price: 'Omaggio',
+          priceLabel: 'la prima consumazione',
+          desc: 'La prima consumazione la offriamo noi: birra alla spina o bibita, a scelta.',
+          note: 'Valida per ogni commensale che consuma.',
+          popupLead: 'Il primo giro lo offriamo noi.',
+          image: '/images/eventi/promo-birra.webp',
+          imageAlt: 'Birra alla spina versata in un bicchiere al bancone',
+          imagePosition: '38% 50%',
+          accent: '#D4A853',
+          tint: '58, 36, 12',
+        },
+        {
+          slug: 'mercolepizza',
+          weekday: 3,
+          day: 'Mercoledì',
+          dayShort: 'Mer',
+          title: 'MercolePizza',
+          titleParts: ['Mercole', 'Pizza'],
+          price: '15€',
+          priceLabel: 'tutto compreso',
+          desc: 'Una pizza classica a scelta, un dolce, bibita o birra media, limoncello e coperto.',
+          note: '',
+          popupLead: 'Cena completa a 15€, limoncello compreso.',
+          image: '/images/eventi/promo-pizza.webp',
+          imageAlt: 'Pizza sulla pala davanti alle braci del forno a legna',
+          imagePosition: '50% 62%',
+          accent: '#E85D26',
+          tint: '70, 26, 8',
+        },
+        {
+          slug: 'giovedolce',
+          weekday: 4,
+          day: 'Giovedì',
+          dayShort: 'Gio',
+          title: 'GioveDolce',
+          titleParts: ['Giove', 'Dolce'],
+          price: 'Omaggio',
+          priceLabel: 'il dolce a fine cena',
+          desc: 'Il dolce è un regalo della casa: tiramisù, cannolo, babà o quello che ti ispira di più.',
+          note: '',
+          popupLead: 'Il dolce stasera lo offriamo noi.',
+          image: '/images/eventi/promo-dolce.webp',
+          imageAlt: 'Coppette di tiramisù spolverate di cacao su un tagliere di legno',
+          imagePosition: '45% 55%',
+          accent: '#F2C9B0',
+          tint: '64, 10, 14',
+        },
+        {
+          slug: 'cena-cantata',
+          weekday: 5,
+          day: 'Venerdì',
+          dayShort: 'Ven',
+          title: 'Cena Cantata',
+          titleParts: ['Cena', 'Cantata'],
+          price: '25€',
+          priceLabel: 'a persona, bevanda inclusa',
+          desc: 'Dalle 21:00 si canta con Il Matto e la Volpe. In tavola, si mangia senza limiti.',
+          note: '',
+          formula: {
+            title: 'All You Can Napoli',
+            items: [
+              'Antipasti misti',
+              'Fritti tipici campani',
+              'Pizze no limit',
+              'Primi della tradizione',
+              'Graffe con Nutella',
+            ],
+            note: 'Una bevanda inclusa: birra, ¼ di vino, bibita o acqua.',
+          },
+          popupLead: 'Una serata di musica, buon cibo e divertimento.',
+          image: '/images/eventi/promo-cantata.webp',
+          imageAlt: 'Microfono sul palco davanti alle luci della sala',
+          imagePosition: '55% 48%',
+          accent: '#AFC2FF',
+          tint: '12, 16, 58',
+        },
+      ],
+      popup: {
+        kicker: 'Stasera da Mo Pizz',
+        ctaEvento: 'Dettagli',
+        close: 'Chiudi',
+      },
     },
     cenaCantata: {
       badge: 'Ogni Venerdì',

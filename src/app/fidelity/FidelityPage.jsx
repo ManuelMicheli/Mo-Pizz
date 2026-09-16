@@ -7,6 +7,7 @@ import FidelityEmbed from '@/components/fidelity/FidelityEmbed';
 import FidelityRegolamento from '@/components/fidelity/FidelityRegolamento';
 import FidelityFaq from '@/components/fidelity/FidelityFaq';
 import FidelityCta from '@/components/fidelity/FidelityCta';
+import AppBanner from '@/components/AppBanner';
 
 const FidelityPage = () => {
     useEffect(() => {
@@ -21,6 +22,7 @@ const FidelityPage = () => {
             <FidelityRegolamento />
             <FidelityFaq />
             <FidelityCta />
+            <AppBanner />
         </>
     );
 };

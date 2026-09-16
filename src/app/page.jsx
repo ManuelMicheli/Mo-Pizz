@@ -1,6 +1,6 @@
 import Hero from '@/components/Hero';
+import AppBanner from '@/components/AppBanner';
 import Statement from '@/components/Statement';
-import Offerte from '@/components/Offerte';
 import Gallery from '@/components/Gallery';
 import ReviewCta from '@/components/ReviewCta';
 import Reviews from '@/components/Reviews';
@@ -23,8 +23,8 @@ export default function HomePage() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFaqSchema) }}
             />
             <Hero />
+            <AppBanner />
             <ClientGroupA />
-            <Offerte />
             <Statement />
             <Gallery />
             <ClientGroupB />

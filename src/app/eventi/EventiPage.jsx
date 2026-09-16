@@ -18,8 +18,11 @@ import {
     Ticket,
 } from 'lucide-react';
 import { siteContent } from '@/data/copy';
+import SettimanaPromo from '@/components/eventi/SettimanaPromo';
 
 const detailIcons = [CalendarHeart, Clock, MapPin, Wallet];
+
+const MOSTRA_VECCHIA_CENA_CANTATA = false;
 
 const grain = {
     backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
@@ -32,7 +35,13 @@ const EventiPage = () => {
     const rootRef = useRef(null);
 
     useEffect(() => {
-        window.scrollTo(0, 0);
+        // Con un'ancora (/eventi#martebirra, dal popup o dal footer) si va alla serata, altrimenti in cima.
+        const target = window.location.hash && document.getElementById(window.location.hash.slice(1));
+        if (target) {
+            requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
+        } else {
+            window.scrollTo(0, 0);
+        }
     }, []);
 
     useEffect(() => {
@@ -50,6 +59,7 @@ const EventiPage = () => {
                         y: 50, opacity: 0, duration: 1.2, stagger: 0.12,
                         ease: 'power3.out', delay: 0.2,
                     });
+                    if (!MOSTRA_VECCHIA_CENA_CANTATA) return;
                     gsap.from('.ev-poster', {
                         opacity: 0, y: 40, duration: 1.1, ease: 'power3.out',
                         scrollTrigger: { trigger: '.ev-feature', start: 'top 80%', once: true },
@@ -73,54 +83,61 @@ const EventiPage = () => {
     }, []);
 
     return (
-        <main ref={rootRef} className="relative bg-charcoal text-cream overflow-hidden">
+        // overflow-x-clip (non hidden): hidden creerebbe un contenitore di scroll e romperebbe le card sticky
+        <main ref={rootRef} className="relative bg-charcoal text-cream overflow-x-clip">
             {/* ─── HERO ─────────────────────────────── */}
-            <section className="relative w-full min-h-[70vh] flex items-center pt-28 sm:pt-32 pb-16 px-5 sm:px-10 md:px-20 lg:px-32 xl:px-40">
-                {/* Background image — art direction: ritaglio verticale su mobile, orizzontale su desktop */}
-                <picture>
-                    <source media="(min-width: 768px)" srcSet="/images/services/eventi-speciali.webp" />
-                    <img
-                        src="/images/services/eventi-speciali-portrait.webp"
-                        alt=""
-                        fetchPriority="high"
-                        className="absolute inset-0 w-full h-full object-cover object-center z-0"
-                    />
-                </picture>
+            <section className="relative w-full min-h-[72svh] md:min-h-[82svh] flex items-end pt-32 pb-20 sm:pb-24 px-5 sm:px-10 md:px-16 lg:px-24 xl:px-32">
+                {/* Brindisi a tavola: i calici restano nel terzo alto, il testo centrato in basso */}
+                <Image
+                    src="/images/eventi/hero-serate.webp"
+                    alt=""
+                    fill
+                    priority
+                    sizes="100vw"
+                    className="object-cover object-[50%_40%] md:object-[50%_22%] z-0"
+                />
                 {/* Overlay scuro per leggibilità + sfumatura verso charcoal in basso */}
-                <div className="absolute inset-0 z-[1] bg-gradient-to-r from-charcoal via-charcoal/80 to-charcoal/40" />
-                <div className="absolute inset-0 z-[1] bg-gradient-to-t from-charcoal via-transparent to-charcoal/30" />
+                <div
+                    className="absolute inset-0 z-[1]"
+                    style={{ background: 'radial-gradient(ellipse 75% 55% at 50% 78%, rgba(26,26,26,0.75) 0%, rgba(26,26,26,0.35) 60%, rgba(26,26,26,0.15) 100%)' }}
+                />
+                <div className="absolute inset-0 z-[1] bg-gradient-to-t from-charcoal via-charcoal/30 to-charcoal/50" />
                 {/* Ambient glow */}
                 <div
                     className="absolute inset-0 z-[2] pointer-events-none"
                     style={{ background: 'radial-gradient(ellipse 80% 60% at 70% 30%, rgba(232,93,38,0.16) 0%, transparent 60%)' }}
                 />
                 <div className="absolute inset-0 pointer-events-none opacity-[0.04] z-[3]" style={grain} />
-                {/* Glow caldo sul bordo inferiore — continuità di luce col palcoscenico */}
-                <div
-                    className="absolute inset-x-0 bottom-0 h-40 z-[2] pointer-events-none"
-                    style={{ background: 'radial-gradient(60% 100% at 50% 100%, rgba(232,93,38,0.12) 0%, transparent 70%)' }}
-                />
+                {/* Chiusura netta sul charcoal: nessuno stacco con la sezione sotto */}
+                <div className="absolute inset-x-0 bottom-0 h-32 z-[2] pointer-events-none bg-gradient-to-t from-charcoal to-transparent" />
 
-                <div className="relative z-10 flex flex-col items-start text-left w-full max-w-4xl">
-                    <span className="ev-hero-elem font-mono text-flame text-sm tracking-[0.25em] uppercase mb-5">
-                        {eventi.hero.eyebrow}
-                    </span>
-                    <h1 className="ev-hero-elem font-playfair text-cream leading-[0.92] tracking-tight">
-                        <span className="block text-[clamp(2.4rem,7vw,5.5rem)]">{eventi.hero.headline}</span>
-                        <span className="block italic text-[clamp(2.6rem,8vw,6.5rem)]">{eventi.hero.headlineEm}</span>
+                <div className="relative z-10 flex flex-col items-center text-center w-full max-w-[1600px] mx-auto">
+                    <p className="ev-hero-elem font-caveat text-gold text-2xl sm:text-3xl leading-none mb-3">
+                        {eventi.hero.kicker}
+                    </p>
+                    <h1 className="ev-hero-elem font-playfair text-cream text-[clamp(2.6rem,6.2vw,6rem)] leading-[0.95] tracking-tight">
+                        {eventi.hero.headline}
                     </h1>
-                    <p className="ev-hero-elem font-sans text-cream/80 text-[clamp(1rem,1.5vw,1.25rem)] max-w-[520px] mt-6 leading-relaxed">
+                    <p className="ev-hero-elem font-sans text-cream/85 text-base sm:text-lg max-w-[46ch] md:max-w-[64ch] mt-5 leading-relaxed">
                         {eventi.hero.body}
                     </p>
                 </div>
 
-                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2">
-                    <span className="font-mono text-cream/30 text-[10px] tracking-[0.25em] uppercase">Scopri</span>
-                    <ChevronDown size={20} className="text-cream/30 animate-bounce-slow" />
-                </div>
+                <a
+                    href="#settimana"
+                    aria-label="Vai agli appuntamenti della settimana"
+                    className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 p-2 text-cream/40 hover:text-cream transition-colors"
+                >
+                    <ChevronDown size={22} className="animate-bounce-slow" />
+                </a>
             </section>
 
-            {/* ─── CENA CANTATA — feature (palcoscenico) ─── */}
+            {/* ─── LA SETTIMANA — promo martedì / mercoledì / giovedì ─── */}
+            <SettimanaPromo />
+
+            {/* ─── Versione precedente di Cena Cantata (locandina + biglietto) ───
+                Sostituita dalla card nella pila della settimana. MOSTRA_VECCHIA_CENA_CANTATA = true per ripristinarla. */}
+            {MOSTRA_VECCHIA_CENA_CANTATA && (<>
             <section className="ev-feature relative w-full overflow-hidden">
                 {/* Atmosfera: foto gente che balla (luci/fumo) + faro dall'alto + bagliore caldo a terra + vignette */}
                 <div className="absolute inset-0 z-0 bg-charcoal" />
@@ -404,6 +421,7 @@ const EventiPage = () => {
                     </div>
                 </div>
             </section>
+            </>)}
         </main>
     );
 };

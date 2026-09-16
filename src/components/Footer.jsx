@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Instagram, Facebook, Phone, Tag } from 'lucide-react';
+import { Instagram, Facebook, Phone, Tag, Apple, PlayCircle } from 'lucide-react';
 import { siteContent } from '@/data/copy';
+import { APP_STORE_URL, GOOGLE_PLAY_URL } from '@/lib/constants';
 
 const { footer } = siteContent;
 
@@ -90,6 +91,17 @@ const Footer = () => {
                             <a href="https://www.facebook.com/MOPIZZ.IT/?locale=it_IT" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-12 h-12 rounded-full border border-smoke/30 flex items-center justify-center text-smoke hover:border-flame hover:bg-flame hover:text-cream transition-all duration-300">
                                 <Facebook size={20} />
                             </a>
+                        </div>
+                        <div className="flex flex-col items-center md:items-end gap-2">
+                            <span className="font-sans text-smoke text-xs uppercase tracking-wide">{footer.appHeading}</span>
+                            <div className="flex items-center gap-3">
+                                <a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer" aria-label="Scarica su App Store" className="w-10 h-10 rounded-full border border-smoke/30 flex items-center justify-center text-smoke hover:border-flame hover:bg-flame hover:text-cream transition-all duration-300">
+                                    <Apple size={18} />
+                                </a>
+                                <a href={GOOGLE_PLAY_URL} target="_blank" rel="noopener noreferrer" aria-label="Scarica su Google Play" className="w-10 h-10 rounded-full border border-smoke/30 flex items-center justify-center text-smoke hover:border-flame hover:bg-flame hover:text-cream transition-all duration-300">
+                                    <PlayCircle size={18} />
+                                </a>
+                            </div>
                         </div>
                         <Link href="/privacy" className="font-sans text-smoke text-sm hover:text-cream transition-colors duration-300">
                             Privacy Policy

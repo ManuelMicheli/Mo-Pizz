@@ -2,9 +2,9 @@ import EventiPage from './EventiPage';
 import { buildBreadcrumb } from '@/lib/constants';
 
 export const metadata = {
-    title: 'Eventi e Serate a Tema — Cena Cantata ogni Venerdì',
-    description: 'Cena Cantata da MO PIZZ: ogni venerdì sera musica, buon cibo e divertimento con la formula All You Can Napoli a 25€ a persona. Pizzeria napoletana a Legnano, Via Cadore 4.',
-    keywords: 'cena cantata legnano, serate a tema pizzeria legnano, eventi pizzeria legnano, all you can eat pizza legnano, musica dal vivo ristorante legnano',
+    title: 'Eventi e Offerte — MarteBirra, MercolePizza, GioveDolce e Cena Cantata',
+    description: 'Ogni sera un appuntamento da MO PIZZ a Legnano: MarteBirra con la prima consumazione in omaggio, MercolePizza a 15€ tutto compreso, GioveDolce con il dolce offerto e la Cena Cantata del venerdì con All You Can Napoli a 25€.',
+    keywords: 'offerte pizzeria legnano, martebirra, mercolepizza, giovedolce, promo pizza legnano, cena cantata legnano, serate a tema pizzeria legnano, eventi pizzeria legnano, all you can eat pizza legnano',
     alternates: {
         canonical: 'https://www.mopizz.it/eventi',
     },

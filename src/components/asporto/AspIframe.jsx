@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ExternalLink, ShoppingBag, Lock } from 'lucide-react';
+import { ExternalLink, Lock } from 'lucide-react';
 import { siteContent } from '@/data/copy';
 
 if (typeof window !== 'undefined') {
@@ -61,25 +61,28 @@ const AspIframe = () => {
                     <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-flame to-transparent mx-auto mt-6" />
                 </div>
 
-                {/* CTA card — apre il menu ordinazioni xMenu in una nuova scheda */}
-                <div className="asp-iframe-card relative w-full max-w-3xl mx-auto rounded-[2rem] sm:rounded-[2.5rem] border border-charcoal/10 bg-white overflow-hidden shadow-2xl shadow-charcoal/20">
+                {/* Card — menu ordinazioni xMenu embeddato in iframe */}
+                <div className="asp-iframe-card relative w-full max-w-6xl mx-auto rounded-[2rem] sm:rounded-[2.5rem] border border-charcoal/10 bg-white overflow-hidden shadow-2xl shadow-charcoal/20">
                     <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-flame to-transparent" />
-                    <div className="flex flex-col items-center text-center gap-7 py-14 sm:py-20 px-8">
-                        <div className="w-20 h-20 rounded-2xl bg-flame/10 border border-flame/20 flex items-center justify-center">
-                            <ShoppingBag className="text-flame" size={36} />
-                        </div>
-                        <p className="font-sans text-charcoal/80 text-lg sm:text-xl max-w-lg leading-relaxed">
-                            Apri il menu, componi il tuo ordine e scegli l&apos;orario di ritiro. Ti prepariamo tutto al momento in Via Cadore 4.
-                        </p>
+                    <div className="p-3 sm:p-5">
+                        <iframe
+                            src={orderUrl}
+                            title={iframe.title}
+                            className="w-full rounded-[1.25rem] sm:rounded-[1.5rem] bg-white"
+                            style={{ height: 'min(720px, 90vh)', border: '0' }}
+                            loading="lazy"
+                            allow="payment"
+                        />
+                    </div>
+                    <div className="flex flex-col items-center text-center gap-3 pb-8 sm:pb-10 px-8">
                         <a
                             href={orderUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="magnetic-btn bg-flameDark hover:bg-ember text-cream font-sans font-bold py-4 px-12 rounded-full text-lg flex items-center gap-3 transition-colors duration-300"
+                            className="font-sans text-flameDark hover:text-ember text-sm sm:text-base font-bold flex items-center gap-2 transition-colors duration-300"
                         >
-                            <ShoppingBag size={20} />
-                            Ordina Asporto
-                            <ExternalLink size={18} />
+                            Apri a schermo intero
+                            <ExternalLink size={15} />
                         </a>
                         <div className="flex items-center gap-2 text-smoke text-xs sm:text-sm font-sans">
                             <Lock size={14} />

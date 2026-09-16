@@ -6,6 +6,7 @@ import { SpeedInsights } from '@vercel/speed-insights/react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CookieBanner from '@/components/CookieBanner';
+import PromoPopup from '@/components/PromoPopup';
 import LenisProvider from '@/components/LenisProvider';
 import NoiseOverlay from '@/components/NoiseOverlay';
 import IdleMount from '@/components/IdleMount';
@@ -153,6 +154,7 @@ export default function RootLayout({ children }) {
                         <Footer />
                         <IdleMount>
                             <CookieBanner />
+                            <PromoPopup />
                         </IdleMount>
                     </div>
                 </LenisProvider>
