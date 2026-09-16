@@ -151,7 +151,9 @@ const PromoPopup = () => {
                         aria-modal="true"
                         aria-labelledby="promo-popup-title"
                         aria-describedby="promo-popup-desc"
-                        className="relative w-full max-w-[460px] md:max-w-[920px] max-h-[94svh] overflow-y-auto overscroll-contain rounded-[2rem] md:rounded-[2.5rem] bg-charcoal text-cream shadow-[0_60px_140px_-40px_rgba(0,0,0,0.95)] ring-1 ring-white/10 grid grid-cols-1 md:grid-cols-[1.05fr_1fr]"
+                        // Desktop (lg+): stesse misure e composizione delle card in /eventi —
+                        // foto a tutta superficie, wordmark in basso a sinistra, testi a destra.
+                        className="relative w-full max-w-[460px] md:max-w-[920px] max-h-[94svh] overflow-y-auto overscroll-contain rounded-[2rem] md:rounded-[2.5rem] bg-charcoal text-cream shadow-[0_60px_140px_-40px_rgba(0,0,0,0.95)] ring-1 ring-white/10 grid grid-cols-1 md:grid-cols-[1.05fr_1fr] lg:block lg:max-w-[min(1600px,calc(100vw-5rem))] lg:h-[calc(100svh-8rem)] lg:min-h-[560px] lg:max-h-[920px] lg:overflow-hidden lg:rounded-[3rem]"
                         data-lenis-prevent
                         initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 60, scale: 0.97 }}
                         animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
@@ -160,7 +162,7 @@ const PromoPopup = () => {
                     >
                         {/* Foto + wordmark */}
                         <motion.div
-                            className="relative h-[30svh] min-h-[210px] md:h-auto md:min-h-[580px] overflow-hidden"
+                            className="relative h-[30svh] min-h-[210px] md:h-auto md:min-h-[580px] lg:absolute lg:inset-0 lg:h-full lg:min-h-0 overflow-hidden"
                             initial={reduceMotion ? false : { clipPath: 'inset(100% 0% 0% 0%)' }}
                             animate={{ clipPath: 'inset(0% 0% 0% 0%)' }}
                             transition={{ duration: 1, ease: EASE, delay: 0.15 }}
@@ -175,7 +177,7 @@ const PromoPopup = () => {
                                     src={promo.image}
                                     alt={promo.imageAlt}
                                     fill
-                                    sizes="(max-width: 768px) 460px, 480px"
+                                    sizes="(min-width: 1024px) 1600px, (min-width: 768px) 480px, 460px"
                                     className="object-cover"
                                     style={{ objectPosition: promo.imagePosition }}
                                 />
@@ -187,8 +189,14 @@ const PromoPopup = () => {
                                     background: `linear-gradient(180deg, rgba(${promo.tint},0.45) 0%, transparent 38%, rgba(12,9,7,0.88) 100%)`,
                                 }}
                             />
-                            <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8" aria-hidden>
-                                <span className="block font-playfair leading-[0.8] tracking-[-0.02em] text-[clamp(3.4rem,15vw,6.2rem)]">
+                            {/* Desktop: scurisce la colonna dei testi a destra, come nelle card */}
+                            <div
+                                aria-hidden
+                                className="absolute inset-0 hidden lg:block"
+                                style={{ background: 'linear-gradient(90deg, rgba(12,9,7,0.5) 0%, transparent 40%, rgba(12,9,7,0.55) 62%, rgba(12,9,7,0.88) 100%)' }}
+                            />
+                            <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8 lg:p-14 lg:right-[500px]" aria-hidden>
+                                <span className="block font-playfair leading-[0.8] tracking-[-0.02em] text-[clamp(3.4rem,15vw,6.2rem)] lg:text-[clamp(6rem,13vw,12.5rem)]">
                                     <motion.span
                                         className="block"
                                         style={{ color: 'transparent', WebkitTextStroke: '1.5px rgba(255,248,240,0.92)' }}
@@ -204,7 +212,7 @@ const PromoPopup = () => {
                         </motion.div>
 
                         {/* Contenuto */}
-                        <div className="relative flex flex-col p-6 sm:p-9 md:p-11">
+                        <div className="relative flex flex-col p-6 sm:p-9 md:p-11 lg:absolute lg:inset-y-0 lg:right-0 lg:w-[500px] lg:p-14 lg:pt-16">
                             <motion.p className="font-caveat text-3xl leading-none" style={{ color: promo.accent }} {...lift(0.35)}>
                                 {settimana.popup.kicker}
                             </motion.p>
@@ -244,7 +252,7 @@ const PromoPopup = () => {
                                 <Link
                                     href="/#prenota"
                                     onClick={close}
-                                    className="magnetic-btn flex-1 inline-flex items-center justify-center rounded-full text-charcoal font-sans font-bold text-[0.95rem] sm:text-base py-4 px-4 sm:px-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream"
+                                    className="magnetic-btn flex-1 whitespace-nowrap inline-flex items-center justify-center rounded-full text-charcoal font-sans font-bold text-[0.95rem] sm:text-base py-4 px-4 sm:px-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream"
                                     style={{ background: promo.accent }}
                                 >
                                     {settimana.ctaPrenota}
@@ -252,7 +260,7 @@ const PromoPopup = () => {
                                 <Link
                                     href={`/eventi#${promo.slug}`}
                                     onClick={close}
-                                    className="magnetic-btn inline-flex items-center justify-center rounded-full border border-white/15 hover:bg-white/[0.06] text-cream font-sans font-medium text-[0.95rem] sm:text-base py-4 px-5 sm:px-6 transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream"
+                                    className="magnetic-btn whitespace-nowrap inline-flex items-center justify-center rounded-full border border-white/15 hover:bg-white/[0.06] text-cream font-sans font-medium text-[0.95rem] sm:text-base py-4 px-5 sm:px-6 transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream"
                                 >
                                     {settimana.popup.ctaEvento}
                                 </Link>
